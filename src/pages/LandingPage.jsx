@@ -1,13 +1,7 @@
 import React from "react";
 
 const LandingPage = () => {
-  return (
-    <React.Fragment>
-      <heeder></heeder>
-      <div>page</div>
-      <header></header>;
-    </React.Fragment>
-  );
+  return <React.Fragment>LandingPage</React.Fragment>;
 };
 
 export default LandingPage;
