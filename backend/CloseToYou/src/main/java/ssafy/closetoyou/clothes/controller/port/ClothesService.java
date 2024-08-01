@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface ClothesService {
     Long addClothes(ClothesRequest clothesRequest);
-    Long updateClothes(Long clothesId, ClothesUpdateRequest clothesUpdateRequest);
-    Long removeClothes(Long clothesId);
+    void updateClothes(Long clothesId, ClothesUpdateRequest clothesUpdateRequest);
+    void removeClothes(Long clothesId);
 
     ClothesResponse findClothes(Long clothesId);
     List<ClothesResponse> findAllClothes();

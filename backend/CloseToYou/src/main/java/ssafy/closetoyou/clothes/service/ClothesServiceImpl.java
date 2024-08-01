@@ -32,18 +32,16 @@ public class ClothesServiceImpl implements ClothesService {
 
     @Transactional
     @Override
-    public Long updateClothes(Long clothesId, ClothesUpdateRequest clothesUpdateRequest) {
+    public void updateClothes(Long clothesId, ClothesUpdateRequest clothesUpdateRequest) {
         Clothes clothes = clothesRepository.findClothes(clothesId);
         clothes.changeClothesInfo(clothesUpdateRequest);
         clothesRepository.saveClothes(clothes);
-        return clothes.getClothesId();
     }
 
     @Transactional
     @Override
-    public Long removeClothes(Long clothesId) {
+    public void removeClothes(Long clothesId) {
         clothesRepository.deleteClothes(clothesId);
-        return clothesId;
     }
 
     @Override

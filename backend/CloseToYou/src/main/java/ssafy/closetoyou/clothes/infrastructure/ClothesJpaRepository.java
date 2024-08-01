@@ -11,11 +11,10 @@ import java.util.Optional;
 
 @Repository
 public interface ClothesJpaRepository extends JpaRepository<ClothesEntity,Integer> {
-    void deleteClothesById(Long clothesId);
+    void deleteClothesByClothesId(Long clothesId);
     boolean existsByClothesId(Long clothesId);
-    boolean existsByClothesNickname(String nickname);
+    boolean existsByNickname(String nickname);
     Optional<ClothesEntity> findClothesByClothesId(Long clothesId);
-    Optional<List<ClothesEntity>> findAllClothes();
 
     @Query("select c from ClothesEntity c where c.pattern = :#{#clothesCondition.pattern} or c.color = :#{#clothesCondition.color} or c.type = :#{#clothesCondition.type}")
     Optional<List<ClothesEntity>> searchClothesByClothesCondition(@Param("clothesCondition") ClothesCondition clothesCondition);

@@ -24,7 +24,7 @@ public class ClothesRepositoryImpl implements ClothesRepository {
 
     @Override
     public void deleteClothes(Long clothesId) {
-        clothesJpaRepository.deleteClothesById(clothesId);
+        clothesJpaRepository.deleteClothesByClothesId(clothesId);
     }
 
     @Override
@@ -33,8 +33,8 @@ public class ClothesRepositoryImpl implements ClothesRepository {
     }
 
     @Override
-    public boolean existClothesNickname(String nickname) {
-        return clothesJpaRepository.existsByClothesNickname(nickname);
+    public boolean existNickname(String nickname) {
+        return clothesJpaRepository.existsByNickname(nickname);
     }
 
     @Override
@@ -46,8 +46,7 @@ public class ClothesRepositoryImpl implements ClothesRepository {
     @Override
     public List<Clothes> findAllClothes() {
         return clothesJpaRepository
-                .findAllClothes()
-                .orElse(Collections.emptyList())
+                .findAll()
                 .stream()
                 .map(ClothesEntity::toModel)
                 .toList();
