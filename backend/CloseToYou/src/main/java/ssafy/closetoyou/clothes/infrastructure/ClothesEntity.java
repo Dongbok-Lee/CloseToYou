@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import ssafy.closetoyou.clothes.domain.Clothes;
 import ssafy.closetoyou.clothes.domain.Color;
@@ -18,6 +20,7 @@ import java.time.LocalDateTime;
 @Table(name = "clothes")
 @Getter @Setter
 @NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class ClothesEntity {
 
     @Id
@@ -33,15 +36,19 @@ public class ClothesEntity {
     private String size;
     private String texture;
     private String memo;
-    private Long wearingCount;
+    private int wearingCount;
     private String location;
     private boolean isDeleted;
+
+    @CreatedDate
     private LocalDateTime createdDateTime;
+
+    @LastModifiedDate
     private LocalDateTime updatedDateTime;
     private LocalDate lastWornDate;
 
     @Builder
-    public ClothesEntity(Long clothesId, Long closetId, String nickname, String type, String pattern, String color, String size, String texture, String memo, Long wearingCount, String location, boolean isDeleted, LocalDateTime createdDateTime, LocalDateTime updatedDateTime, LocalDate lastWornDate) {
+    public ClothesEntity(Long clothesId, Long closetId, String nickname, String type, String pattern, String color, String size, String texture, String memo, int wearingCount, String location, boolean isDeleted, LocalDateTime createdDateTime, LocalDateTime updatedDateTime, LocalDate lastWornDate) {
         this.clothesId = clothesId;
         this.closetId = closetId;
         this.nickname = nickname;
@@ -70,7 +77,7 @@ public class ClothesEntity {
                 .size(clothes.getSize())
                 .texture(clothes.getTexture())
                 .memo(clothes.getMemo())
-                .wearingCount(clothes.getWearingCount())
+                .wearingCount(0)
                 .location(clothes.getLocation())
                 .isDeleted(false)
                 .build();

@@ -1,6 +1,7 @@
 package ssafy.closetoyou.clothes.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ssafy.closetoyou.clothes.controller.port.ClothesService;
@@ -18,6 +19,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Service
+@Slf4j
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class ClothesServiceImpl implements ClothesService {
@@ -27,12 +29,19 @@ public class ClothesServiceImpl implements ClothesService {
     @Transactional
     @Override
     public Long addClothes(ClothesRequest clothesRequest) {
+        if (clothesRepository.existNickname(clothesRequest.getNickname())) {
+            throw new CloseToYouException(ClothesErrorCode.DUPLICATE_CLOTHES_NICKNAME);
+        }
         return clothesRepository.saveClothes(clothesRequest.toModel());
     }
 
     @Transactional
     @Override
     public void updateClothes(Long clothesId, ClothesUpdateRequest clothesUpdateRequest) {
+        if (!clothesRepository.existClothes(clothesId)) {
+            throw new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION);
+        }
+
         Clothes clothes = clothesRepository.findClothes(clothesId);
         clothes.changeClothesInfo(clothesUpdateRequest);
         clothesRepository.saveClothes(clothes);
@@ -41,11 +50,19 @@ public class ClothesServiceImpl implements ClothesService {
     @Transactional
     @Override
     public void removeClothes(Long clothesId) {
+        if (!clothesRepository.existClothes(clothesId)) {
+            throw new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION);
+        }
+
         clothesRepository.deleteClothes(clothesId);
     }
 
     @Override
     public ClothesResponse findClothes(Long clothesId) {
+        if (!clothesRepository.existClothes(clothesId)) {
+            throw new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION);
+        }
+
         Clothes clothes = clothesRepository.findClothes(clothesId);
         return ClothesResponse.fromModel(clothes);
     }

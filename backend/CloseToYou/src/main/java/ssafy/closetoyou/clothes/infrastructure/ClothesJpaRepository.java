@@ -12,13 +12,13 @@ import java.util.Optional;
 @Repository
 public interface ClothesJpaRepository extends JpaRepository<ClothesEntity,Integer> {
     void deleteClothesByClothesId(Long clothesId);
-    boolean existsByClothesId(Long clothesId);
-    boolean existsByNickname(String nickname);
-    Optional<ClothesEntity> findClothesByClothesId(Long clothesId);
+    boolean existsByClothesIdAndIsDeleted(Long clothesId, boolean deleted);
+    boolean existsByNicknameAndIsDeleted(String nickname, boolean deleted);
+    Optional<ClothesEntity> findClothesByClothesIdAndIsDeleted(Long clothesId, boolean deleted);
+    @Query("select c from ClothesEntity c where (c.pattern = :#{#clothesCondition.pattern} or c.color = :#{#clothesCondition.color} or c.type = :#{#clothesCondition.type}) and c.isDeleted = false")
+    Optional<List<ClothesEntity>> searchClothesByClothesConditionAndIsDeleted(@Param("clothesCondition") ClothesCondition clothesCondition);
 
-    @Query("select c from ClothesEntity c where c.pattern = :#{#clothesCondition.pattern} or c.color = :#{#clothesCondition.color} or c.type = :#{#clothesCondition.type}")
-    Optional<List<ClothesEntity>> searchClothesByClothesCondition(@Param("clothesCondition") ClothesCondition clothesCondition);
+    @Query("select c from ClothesEntity c where c.nickname like concat('%', :#{#searchKeyword},'%') and c.isDeleted = false")
+    Optional<List<ClothesEntity>> searchClothesBySearchKeywordAndIsDeleted(@Param("searchKeyword") String searchKeyword);
 
-    @Query("select c from ClothesEntity c where c.nickname like concat('%', :#{#searchKeyword},'%')")
-    Optional<List<ClothesEntity>> searchClothesBySearchKeyword(@Param("searchKeyword") String searchKeyword);
 }

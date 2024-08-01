@@ -16,10 +16,10 @@ public class User {
     private boolean isHighContrast;
     private LocalDateTime createdDateTime;
     private LocalDateTime updatedDateTime;
-    private boolean deleted;
+    private boolean isDeleted;
 
     @Builder
-    public User(Long userId, String nickname, String password, String email, boolean isHighContrast, LocalDateTime createdDateTime, LocalDateTime updatedDateTime, boolean deleted) {
+    public User(Long userId, String nickname, String password, String email, boolean isHighContrast, LocalDateTime createdDateTime, LocalDateTime updatedDateTime, boolean isDeleted) {
         this.userId = userId;
         this.nickname = nickname;
         this.password = password;
@@ -27,7 +27,7 @@ public class User {
         this.isHighContrast = isHighContrast;
         this.createdDateTime = createdDateTime;
         this.updatedDateTime = updatedDateTime;
-        this.deleted = deleted;
+        this.isDeleted = isDeleted;
     }
 
     public void passwordEncode(PasswordEncoder passwordEncoder) {

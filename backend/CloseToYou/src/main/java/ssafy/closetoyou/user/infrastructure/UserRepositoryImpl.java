@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import ssafy.closetoyou.global.error.errorcode.UserErrorCode;
 import ssafy.closetoyou.global.error.exception.CloseToYouException;
-import ssafy.closetoyou.global.error.errorcode.UserErrorCode;
+import ssafy.closetoyou.global.error.errorcode.CommonErrorCode;
 import ssafy.closetoyou.user.domain.User;
 import ssafy.closetoyou.user.service.port.UserRepository;
 
@@ -20,18 +20,18 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     public boolean existsEmail(String email) {
-        return userJpaRepository.existsByEmailAndDeleted(email, false);
+        return userJpaRepository.existsByEmailAndIsDeleted(email, false);
     }
 
     @Override
     public User findById(Long id) {
-        return userJpaRepository.findByUserIdAndDeleted(id, false).orElseThrow(
+        return userJpaRepository.findByUserIdAndIsDeleted(id, false).orElseThrow(
                 () -> new CloseToYouException(UserErrorCode.NOT_EXIST_USER)).toModel();
     }
 
     @Override
     public User findByEmail(String email) {
-        return userJpaRepository.findByEmailAndDeleted(email, false).orElseThrow(
+        return userJpaRepository.findByEmailAndIsDeleted(email, false).orElseThrow(
                 () -> new CloseToYouException(UserErrorCode.NOT_EXIST_USER)).toModel();
     }
 }
