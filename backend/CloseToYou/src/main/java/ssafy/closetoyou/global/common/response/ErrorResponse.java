@@ -1,4 +1,4 @@
-package ssafy.closetoyou.global.error;
+package ssafy.closetoyou.global.common.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
@@ -7,10 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 @RequiredArgsConstructor
 @Getter

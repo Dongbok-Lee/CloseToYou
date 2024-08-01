@@ -5,11 +5,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ssafy.closetoyou.email.service.port.EmailAuthenticationRepository;
+import ssafy.closetoyou.global.error.errorcode.UserErrorCode;
 import ssafy.closetoyou.global.error.exception.CloseToYouException;
-import ssafy.closetoyou.global.error.exception.ErrorCode;
 import ssafy.closetoyou.user.controller.port.UserService;
 import ssafy.closetoyou.user.domain.User;
-import ssafy.closetoyou.user.domain.UserSignUp;
+import ssafy.closetoyou.user.controller.request.UserSignUp;
 import ssafy.closetoyou.user.service.port.UserRepository;
 
 @Service
@@ -25,11 +25,11 @@ public class UserServiceImpl implements UserService {
         User user = userSignUp.toModel();
 
         if (!emailAuthenticationRepository.isEmailAuthenticated(user.getEmail())){
-            throw new CloseToYouException(ErrorCode.NOT_AUTHENTICATED);
+            throw new CloseToYouException(UserErrorCode.NOT_AUTHENTICATED);
         }
 
         if (userRepository.existsEmail(user.getEmail())) {
-            throw new CloseToYouException(ErrorCode.DUPLICATE_EMAIL);
+            throw new CloseToYouException(UserErrorCode.DUPLICATE_EMAIL);
         }
 
         user.passwordEncode(passwordEncoder);

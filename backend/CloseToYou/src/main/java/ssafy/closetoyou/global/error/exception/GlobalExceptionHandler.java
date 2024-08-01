@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import ssafy.closetoyou.global.error.ErrorResponse;
+import ssafy.closetoyou.global.common.response.ErrorResponse;
+import ssafy.closetoyou.global.error.errorcode.CommonErrorCode;
+import ssafy.closetoyou.global.error.errorcode.ErrorCode;
+import ssafy.closetoyou.global.error.errorcode.UserErrorCode;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,14 +34,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleAllException(Exception e) {
         log.warn("handleAllException", e);
-        ErrorCode errorCode = ErrorCode.INTERNAL_SERVER_ERROR;
-        return handleExceptionInternal(errorCode);
+        CommonErrorCode commonErrorCode = CommonErrorCode.INTERNAL_SERVER_ERROR;
+        return handleExceptionInternal(commonErrorCode);
     }
 
     @ExceptionHandler(MailException.class)
     public ResponseEntity<Object> handleMailException(MailException mailException) {
-        ErrorCode errorCode = ErrorCode.MAIL_SEND_FAIL;
-        return handleExceptionInternal(errorCode);
+        UserErrorCode userErrorCode = UserErrorCode.MAIL_SEND_FAIL;
+        return handleExceptionInternal(userErrorCode);
     }
 
     @Override
@@ -48,8 +51,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             HttpStatusCode status,
             WebRequest request) {
         log.warn("handleIllegalArgument", e);
-        ErrorCode errorCode = ErrorCode.INVALID_PARAMETER;
-        return handleExceptionInternal(e, errorCode);
+        CommonErrorCode commonErrorCode = CommonErrorCode.INVALID_PARAMETER;
+        return handleExceptionInternal(e, commonErrorCode);
     }
 
     private ResponseEntity<Object> handleExceptionInternal(ErrorCode errorCode) {
