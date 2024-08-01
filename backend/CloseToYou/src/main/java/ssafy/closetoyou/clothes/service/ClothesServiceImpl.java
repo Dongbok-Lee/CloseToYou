@@ -10,12 +10,10 @@ import ssafy.closetoyou.clothes.controller.response.ClothesResponse;
 import ssafy.closetoyou.clothes.controller.request.ClothesRequest;
 import ssafy.closetoyou.clothes.controller.request.ClothesCondition;
 import ssafy.closetoyou.clothes.domain.Clothes;
-import ssafy.closetoyou.clothes.infrastructure.ClothesEntity;
 import ssafy.closetoyou.clothes.service.port.ClothesRepository;
 import ssafy.closetoyou.global.error.errorcode.ClothesErrorCode;
 import ssafy.closetoyou.global.error.exception.CloseToYouException;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -32,7 +30,7 @@ public class ClothesServiceImpl implements ClothesService {
         if (clothesRepository.existNickname(clothesRequest.getNickname())) {
             throw new CloseToYouException(ClothesErrorCode.DUPLICATE_CLOTHES_NICKNAME);
         }
-        return clothesRepository.saveClothes(clothesRequest.toModel());
+        return clothesRepository.saveClothes(clothesRequest.toModel()).getClothesId();
     }
 
     @Transactional
@@ -41,7 +39,6 @@ public class ClothesServiceImpl implements ClothesService {
         if (!clothesRepository.existClothes(clothesId)) {
             throw new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION);
         }
-
         Clothes clothes = clothesRepository.findClothes(clothesId);
         clothes.changeClothesInfo(clothesUpdateRequest);
         clothesRepository.saveClothes(clothes);
@@ -53,7 +50,6 @@ public class ClothesServiceImpl implements ClothesService {
         if (!clothesRepository.existClothes(clothesId)) {
             throw new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION);
         }
-
         clothesRepository.deleteClothes(clothesId);
     }
 
@@ -62,7 +58,6 @@ public class ClothesServiceImpl implements ClothesService {
         if (!clothesRepository.existClothes(clothesId)) {
             throw new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION);
         }
-
         Clothes clothes = clothesRepository.findClothes(clothesId);
         return ClothesResponse.fromModel(clothes);
     }

@@ -6,7 +6,7 @@ import ssafy.closetoyou.clothes.domain.Clothes;
 import java.util.List;
 
 public interface ClothesRepository {
-    Long saveClothes(Clothes clothes);
+    Clothes saveClothes(Clothes clothes);
     void deleteClothes(Long clothesId);
 
     boolean existClothes(Long clothesId);
