@@ -31,7 +31,7 @@ public class UserEntity {
 
     private boolean isHighContrast;
 
-    private boolean deleted;
+    private boolean isDeleted;
 
     @CreatedDate
     private LocalDateTime createdDateTime;
@@ -40,13 +40,13 @@ public class UserEntity {
     private LocalDateTime updatedDateTime;
 
     @Builder
-    public UserEntity(Long userId, String nickname, String password, String email, boolean isHighContrast, boolean deleted) {
+    public UserEntity(Long userId, String nickname, String password, String email, boolean isHighContrast, boolean isDeleted) {
         this.userId = userId;
         this.nickname = nickname;
         this.password = password;
         this.email = email;
         this.isHighContrast = isHighContrast;
-        this.deleted = deleted;
+        this.isDeleted = isDeleted;
     }
 
 
@@ -57,7 +57,7 @@ public class UserEntity {
                 .password(user.getPassword())
                 .email(user.getEmail())
                 .isHighContrast(user.isHighContrast())
-                .deleted(user.isDeleted())
+                .isDeleted(user.isDeleted())
                 .build();
     }
 
@@ -70,7 +70,7 @@ public class UserEntity {
                 .isHighContrast(isHighContrast)
                 .createdDateTime(createdDateTime)
                 .updatedDateTime(updatedDateTime)
-                .deleted(deleted)
+                .isDeleted(isDeleted)
                 .build();
     }
 }

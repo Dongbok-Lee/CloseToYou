@@ -2,11 +2,14 @@ package ssafy.closetoyou.clothes.domain;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 import ssafy.closetoyou.clothes.controller.request.ClothesUpdateRequest;
+import ssafy.closetoyou.global.error.errorcode.ClothesErrorCode;
+import ssafy.closetoyou.global.error.exception.CloseToYouException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
+@ToString
 @Getter
 public class Clothes {
     private Long clothesId;
@@ -17,7 +20,7 @@ public class Clothes {
     private String size;
     private String texture;
     private String memo;
-    private Long wearingCount;
+    private int wearingCount;
     private String location;
     private Long closetId;
     private LocalDateTime createdDateTime;
@@ -25,7 +28,7 @@ public class Clothes {
     private LocalDate lastWornDate;
 
     @Builder
-    public Clothes(Long clothesId, String nickname, Type type, Pattern pattern, Color color, String size, String texture, String memo, Long wearingCount, String location, Long closetId, LocalDateTime createdDateTime, LocalDateTime updatedDateTime, LocalDate lastWornDate) {
+    public Clothes(Long clothesId, String nickname, Type type, Pattern pattern, Color color, String size, String texture, String memo, int wearingCount, String location, Long closetId, LocalDateTime createdDateTime, LocalDateTime updatedDateTime, LocalDate lastWornDate) {
         this.clothesId = clothesId;
         this.nickname = nickname;
         this.type = type;
@@ -43,10 +46,18 @@ public class Clothes {
     }
 
     public void changeClothesInfo(ClothesUpdateRequest clothesUpdateRequest) {
-        this.nickname = clothesUpdateRequest.getNickname();
-        this.type = Type.valueOf(clothesUpdateRequest.getType());
-        this.pattern = Pattern.valueOf(clothesUpdateRequest.getPattern());
-        this.color = Color.valueOf(clothesUpdateRequest.getColor());
-        this.memo = clothesUpdateRequest.getMemo();
+        if (clothesUpdateRequest.getNickname() != null) this.nickname = clothesUpdateRequest.getNickname();
+        if (clothesUpdateRequest.getType() != null) this.type = validateEnum(Type.class, clothesUpdateRequest.getType());
+        if (clothesUpdateRequest.getPattern() != null) this.pattern = validateEnum(Pattern.class, clothesUpdateRequest.getPattern());
+        if (clothesUpdateRequest.getColor() != null) this.color = validateEnum(Color.class, clothesUpdateRequest.getColor());
+        if (clothesUpdateRequest.getMemo() != null) this.memo = clothesUpdateRequest.getMemo();
+    }
+
+    public <E extends Enum<E>> E validateEnum(Class<E> enumClass, String value) {
+        try {
+            return Enum.valueOf(enumClass, value);
+        } catch (IllegalArgumentException e) {
+            throw new CloseToYouException(ClothesErrorCode.NO_ENUM_TYPE_EXCEPTION);
+        }
     }
 }

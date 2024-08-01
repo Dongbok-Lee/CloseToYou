@@ -24,42 +24,43 @@ public class ClothesController {
     private final ClothesService clothesService;
 
     @PostMapping
-    ResponseEntity<SuccessResponse<Long>> addClothes(@Valid @RequestBody ClothesRequest clothesRequest) {
+    public ResponseEntity<SuccessResponse<Long>> addClothes(@Valid @RequestBody ClothesRequest clothesRequest) {
         Long clothesId = clothesService.addClothes(clothesRequest);
         return ResponseEntity.status(201)
                 .body(new SuccessResponse<>("옷 생성 성공", clothesId));
     }
 
     @PatchMapping("/{clothesId}")
-    ResponseEntity<SuccessResponse<Long>> updateClothes(@Valid @RequestBody ClothesUpdateRequest clothesUpdateRequest, @PathVariable Long clothesId) {
+    public ResponseEntity<SuccessResponse<Long>> updateClothes(@Valid @RequestBody ClothesUpdateRequest clothesUpdateRequest, @PathVariable Long clothesId) {
         clothesService.updateClothes(clothesId, clothesUpdateRequest);
         return ResponseEntity.ok()
                 .body(new SuccessResponse<>("옷 수정 성공", clothesId));
     }
 
     @DeleteMapping("/{clothesId}")
-    ResponseEntity<SuccessResponse<Long>> removeClothes(@PathVariable Long clothesId) {
+    public ResponseEntity<SuccessResponse<Long>> removeClothes(@PathVariable Long clothesId) {
         clothesService.removeClothes(clothesId);
         return ResponseEntity.ok()
                 .body(new SuccessResponse<>("옷 수정 성공", clothesId));
     }
 
     @GetMapping("/{clothesId}")
-    ResponseEntity<SuccessResponse<ClothesResponse>> findClothes(@PathVariable Long clothesId) {
+    public ResponseEntity<SuccessResponse<ClothesResponse>> findClothes(@PathVariable Long clothesId) {
         ClothesResponse clothesResponse = clothesService.findClothes(clothesId);
         return ResponseEntity.ok()
                 .body((new SuccessResponse<>("옷 상세 정보 조회 성공", clothesResponse)));
     }
 
     @GetMapping
-    ResponseEntity<SuccessResponse<List<ClothesResponse>>> findAllClothes() {
+    public ResponseEntity<SuccessResponse<List<ClothesResponse>>> findAllClothes() {
         List<ClothesResponse> clothesResponses = clothesService.findAllClothes();
+        log.info("clothesResponses: {}", clothesResponses);
         return ResponseEntity.ok()
-                .body(new SuccessResponse<>("옷 전체 조회 성공", clothesResponses));
+                .body((new SuccessResponse<>("옷 전체 조회 성공", clothesResponses)));
     }
 
     @GetMapping("/search/{keyword}")
-    ResponseEntity<SuccessResponse<List<ClothesResponse>>> searchClothesBySearchKeyword(@PathVariable String keyword) {
+    public ResponseEntity<SuccessResponse<List<ClothesResponse>>> searchClothesBySearchKeyword(@PathVariable String keyword) {
         List<ClothesResponse> clothesResponses = clothesService.searchClothesBySearchKeyword(keyword);
         return ResponseEntity.ok()
                 .body(new SuccessResponse<>("키워드 기반 옷 검색 성공", clothesResponses));
@@ -67,7 +68,7 @@ public class ClothesController {
     }
 
     @GetMapping("/filter")
-    ResponseEntity<SuccessResponse<List<ClothesResponse>>> searchClothesBySearchFilter(@RequestBody ClothesCondition clothesCondition) {
+    public ResponseEntity<SuccessResponse<List<ClothesResponse>>> searchClothesBySearchFilter(@RequestBody ClothesCondition clothesCondition) {
         List<ClothesResponse> clothesResponses = clothesService.searchClothesByClothesCondition(clothesCondition);
         return ResponseEntity.ok()
                 .body(new SuccessResponse<>("필터 기반 옷 검색 성공", clothesResponses));

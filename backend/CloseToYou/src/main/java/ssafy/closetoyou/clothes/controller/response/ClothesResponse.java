@@ -1,11 +1,15 @@
 package ssafy.closetoyou.clothes.controller.response;
 
 import lombok.Builder;
+import lombok.Getter;
+import lombok.ToString;
 import ssafy.closetoyou.clothes.domain.Clothes;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+@ToString
+@Getter
 public class ClothesResponse {
     private Long clothesId;
     private String nickname;
@@ -14,15 +18,15 @@ public class ClothesResponse {
     private String color;
     private String size;
     private String memo;
-    private Long wearingCount;
+    private int wearingCount;
     private String location;
-    private Boolean deleted;
+    private Boolean isDeleted;
     private LocalDateTime registTime;
     private LocalDateTime updateTime;
     private LocalDate lastWornDate;
 
     @Builder
-    public ClothesResponse(Long clothesId, String nickname, String type, String pattern, String color, String size, String memo, Long wearingCount, String location, Boolean deleted, LocalDateTime registTime, LocalDateTime updateTime, LocalDate lastWornDate) {
+    public ClothesResponse(Long clothesId, String nickname, String type, String pattern, String color, String size, String memo, int wearingCount, String location, Boolean isDeleted, LocalDateTime registTime, LocalDateTime updateTime, LocalDate lastWornDate) {
         this.clothesId = clothesId;
         this.nickname = nickname;
         this.type = type;
@@ -32,7 +36,7 @@ public class ClothesResponse {
         this.memo = memo;
         this.wearingCount = wearingCount;
         this.location = location;
-        this.deleted = deleted;
+        this.isDeleted = isDeleted;
         this.registTime = registTime;
         this.updateTime = updateTime;
         this.lastWornDate = lastWornDate;
@@ -48,7 +52,7 @@ public class ClothesResponse {
                 .size(clothes.getSize())
                 .wearingCount(clothes.getWearingCount())
                 .location(clothes.getLocation())
-                .deleted(true)
+                .isDeleted(false)
                 .registTime(clothes.getCreatedDateTime())
                 .updateTime(clothes.getUpdatedDateTime())
                 .lastWornDate(clothes.getLastWornDate())
