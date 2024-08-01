@@ -41,7 +41,7 @@ public class ClothesController {
     public ResponseEntity<SuccessResponse<Long>> removeClothes(@PathVariable Long clothesId) {
         clothesService.removeClothes(clothesId);
         return ResponseEntity.ok()
-                .body(new SuccessResponse<>("옷 수정 성공", clothesId));
+                .body(new SuccessResponse<>("옷 삭제 성공", clothesId));
     }
 
     @GetMapping("/{clothesId}")
