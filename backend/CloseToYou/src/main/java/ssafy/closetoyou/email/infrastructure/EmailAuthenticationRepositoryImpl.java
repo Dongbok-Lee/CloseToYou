@@ -3,8 +3,9 @@ package ssafy.closetoyou.email.infrastructure;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import ssafy.closetoyou.global.error.errorcode.UserErrorCode;
 import ssafy.closetoyou.global.error.exception.CloseToYouException;
-import ssafy.closetoyou.global.error.exception.ErrorCode;
+import ssafy.closetoyou.global.error.errorcode.CommonErrorCode;
 import ssafy.closetoyou.email.domain.EmailAuthentication;
 import ssafy.closetoyou.email.service.port.EmailAuthenticationRepository;
 
@@ -22,7 +23,7 @@ public class EmailAuthenticationRepositoryImpl implements EmailAuthenticationRep
     @Override
     public EmailAuthentication findEmailAuthenticationCode(String email) {
         return emailAuthenticationJpaRepository.findByEmail(email)
-                .orElseThrow(() -> new CloseToYouException(ErrorCode.NOT_FOUND_MAIL_CODE))
+                .orElseThrow(() -> new CloseToYouException(UserErrorCode.NOT_FOUND_MAIL_CODE))
                 .toModel();
     }
 

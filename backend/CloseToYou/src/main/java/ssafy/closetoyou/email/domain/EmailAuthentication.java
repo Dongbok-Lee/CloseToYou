@@ -8,8 +8,9 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import ssafy.closetoyou.global.common.util.RandomHolder;
+import ssafy.closetoyou.global.error.errorcode.UserErrorCode;
 import ssafy.closetoyou.global.error.exception.CloseToYouException;
-import ssafy.closetoyou.global.error.exception.ErrorCode;
+import ssafy.closetoyou.global.error.errorcode.CommonErrorCode;
 
 import java.time.LocalDateTime;
 
@@ -48,7 +49,7 @@ public class EmailAuthentication {
 
     public void verifyCode(int code) {
         if(authenticationCode != code) {
-            throw new CloseToYouException(ErrorCode.MAIL_CHECK_FAIL);
+            throw new CloseToYouException(UserErrorCode.MAIL_CHECK_FAIL);
         }
 
         this.isVerified = true;
