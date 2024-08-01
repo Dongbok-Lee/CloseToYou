@@ -6,7 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-import ssafy.closetoyou.global.common.response.SuccessIdResponse;
 import ssafy.closetoyou.global.security.login.userdetail.CustomUserDetail;
 import ssafy.closetoyou.user.controller.port.UserService;
 import ssafy.closetoyou.user.domain.User;
@@ -32,9 +31,9 @@ public class UserController {
 
 
     @PostMapping
-    public ResponseEntity<SuccessIdResponse> userSignUp(@Valid @RequestBody UserSignUp userSignUp) {
+    public ResponseEntity<SuccessResponse<Long>> userSignUp(@Valid @RequestBody UserSignUp userSignUp) {
         Long userId = userService.signUp(userSignUp);
         return ResponseEntity.ok(
-                new SuccessIdResponse("일반 이용자 회원가입 성공", userId));
+                new SuccessResponse<>("일반 이용자 회원가입 성공", userId));
     }
 }
