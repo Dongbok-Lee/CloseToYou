@@ -11,8 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import ssafy.closetoyou.global.error.errorcode.UserErrorCode;
 import ssafy.closetoyou.global.error.exception.CloseToYouException;
-import ssafy.closetoyou.global.error.exception.ErrorCode;
+import ssafy.closetoyou.global.error.errorcode.CommonErrorCode;
 
 import java.util.Date;
 import java.util.Optional;
@@ -175,7 +176,7 @@ public class JwtService {
      */
     public Optional<Long> extractUserId(String accessToken) {
         if (accessToken==null){
-            throw new CloseToYouException(ErrorCode.EXPIRED_TOKEN);
+            throw new CloseToYouException(UserErrorCode.EXPIRED_TOKEN);
         }
         try {
             // 토큰 유효성 검사하는 데에 사용할 알고리즘이 있는 JWT verifier builder 반환
