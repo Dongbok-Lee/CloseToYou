@@ -18,8 +18,8 @@ public class ClothesRepositoryImpl implements ClothesRepository {
     private final ClothesJpaRepository clothesJpaRepository;
 
     @Override
-    public Long saveClothes(Clothes clothes) {
-        return clothesJpaRepository.save(ClothesEntity.fromModel(clothes)).toModel().getClothesId();
+    public Clothes saveClothes(Clothes clothes) {
+        return clothesJpaRepository.save(ClothesEntity.fromModel(clothes)).toModel();
     }
 
     @Override
