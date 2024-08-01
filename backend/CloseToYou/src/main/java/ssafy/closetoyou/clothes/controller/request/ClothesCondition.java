@@ -1,4 +1,4 @@
-package ssafy.closetoyou.clothes.domain;
+package ssafy.closetoyou.clothes.controller.request;
 
 import lombok.Builder;
 import lombok.Getter;
