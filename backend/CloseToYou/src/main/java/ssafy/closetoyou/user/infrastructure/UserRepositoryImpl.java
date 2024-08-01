@@ -2,8 +2,9 @@ package ssafy.closetoyou.user.infrastructure;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import ssafy.closetoyou.global.error.errorcode.UserErrorCode;
 import ssafy.closetoyou.global.error.exception.CloseToYouException;
-import ssafy.closetoyou.global.error.exception.ErrorCode;
+import ssafy.closetoyou.global.error.errorcode.CommonErrorCode;
 import ssafy.closetoyou.user.domain.User;
 import ssafy.closetoyou.user.service.port.UserRepository;
 
@@ -25,12 +26,12 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User findById(Long id) {
         return userJpaRepository.findByUserIdAndDeleted(id, false).orElseThrow(
-                () -> new CloseToYouException(ErrorCode.NOT_EXIST_USER)).toModel();
+                () -> new CloseToYouException(UserErrorCode.NOT_EXIST_USER)).toModel();
     }
 
     @Override
     public User findByEmail(String email) {
         return userJpaRepository.findByEmailAndDeleted(email, false).orElseThrow(
-                () -> new CloseToYouException(ErrorCode.NOT_EXIST_USER)).toModel();
+                () -> new CloseToYouException(UserErrorCode.NOT_EXIST_USER)).toModel();
     }
 }
