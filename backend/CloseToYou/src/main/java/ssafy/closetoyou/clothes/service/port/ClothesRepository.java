@@ -10,7 +10,7 @@ public interface ClothesRepository {
     void deleteClothes(Long clothesId);
 
     boolean existClothes(Long clothesId);
-    boolean existClothesNickname(String nickname);
+    boolean existNickname(String nickname);
 
     Clothes findClothes(Long clothesId);
     List<Clothes> findAllClothes();
