@@ -27,18 +27,13 @@ public class ClothesServiceImpl implements ClothesService {
     @Transactional
     @Override
     public Long addClothes(ClothesRequest clothesRequest) {
-        if (clothesRepository.existClothesNickname(clothesRequest.getNickname())) {
-            throw new CloseToYouException(ClothesErrorCode.DUPLICATE_CLOTHES_NICKNAME);
-        }
-        Clothes clothes = clothesRequest.toModel();
-        clothesRepository.saveClothes(clothes);
-        return clothes.getClothesId();
+        return clothesRepository.saveClothes(clothesRequest.toModel());
     }
 
     @Transactional
     @Override
     public Long updateClothes(Long clothesId, ClothesUpdateRequest clothesUpdateRequest) {
-        Clothes clothes = findClothesByClothesId(clothesId);
+        Clothes clothes = clothesRepository.findClothes(clothesId);
         clothes.changeClothesInfo(clothesUpdateRequest);
         clothesRepository.saveClothes(clothes);
         return clothes.getClothesId();
@@ -47,24 +42,19 @@ public class ClothesServiceImpl implements ClothesService {
     @Transactional
     @Override
     public Long removeClothes(Long clothesId) {
-        if (!clothesRepository.existClothes(clothesId)) {
-            throw new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION);
-        }
         clothesRepository.deleteClothes(clothesId);
         return clothesId;
     }
 
     @Override
     public ClothesResponse findClothes(Long clothesId) {
-        Clothes clothes = clothesRepository.findClothes(clothesId)
-                .orElseThrow(() -> new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION));
+        Clothes clothes = clothesRepository.findClothes(clothesId);
         return ClothesResponse.fromModel(clothes);
     }
 
     @Override
     public List<ClothesResponse> findAllClothes() {
         return clothesRepository.findAllClothes()
-                .orElse(Collections.emptyList())
                 .stream()
                 .map(ClothesResponse::fromModel)
                 .toList();
@@ -73,7 +63,6 @@ public class ClothesServiceImpl implements ClothesService {
     @Override
     public List<ClothesResponse> searchClothesByClothesCondition(ClothesCondition clothesCondition) {
         return clothesRepository.searchClothesByClothesCondition(clothesCondition)
-                .orElse(Collections.emptyList())
                 .stream()
                 .map(ClothesResponse::fromModel)
                 .toList();
@@ -82,13 +71,8 @@ public class ClothesServiceImpl implements ClothesService {
     @Override
     public List<ClothesResponse> searchClothesBySearchKeyword(String searchKeyword) {
         return clothesRepository.searchClothesBySearchKeyword(searchKeyword)
-                .orElse(Collections.emptyList())
                 .stream()
                 .map(ClothesResponse::fromModel)
                 .toList();
-    }
-
-    private Clothes findClothesByClothesId(Long clothesId) {
-        return clothesRepository.findClothes(clothesId).orElseThrow(() -> new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION));
     }
 }
