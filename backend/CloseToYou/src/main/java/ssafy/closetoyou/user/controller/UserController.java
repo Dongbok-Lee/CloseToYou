@@ -10,7 +10,7 @@ import ssafy.closetoyou.global.common.response.SuccessIdResponse;
 import ssafy.closetoyou.global.security.login.userdetail.CustomUserDetail;
 import ssafy.closetoyou.user.controller.port.UserService;
 import ssafy.closetoyou.user.domain.User;
-import ssafy.closetoyou.user.domain.UserSignUp;
+import ssafy.closetoyou.user.controller.request.UserSignUp;
 import ssafy.closetoyou.user.controller.response.UserResponse;
 import ssafy.closetoyou.global.common.response.SuccessResponse;
 

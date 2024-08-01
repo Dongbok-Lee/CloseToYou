@@ -1,6 +1,6 @@
 package ssafy.closetoyou.clothes.domain;
 
-public class ClothesRequestDto {
+public class ClothesRequest {
     private Long clothesId;
     private String nickname;
     private String type;
