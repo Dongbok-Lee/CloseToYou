@@ -8,6 +8,7 @@ import ssafy.closetoyou.clothes.domain.Clothes;
 import ssafy.closetoyou.clothes.domain.Color;
 import ssafy.closetoyou.clothes.domain.Pattern;
 import ssafy.closetoyou.clothes.domain.Type;
+import ssafy.closetoyou.global.common.util.ValidEnum;
 import ssafy.closetoyou.global.error.errorcode.ClothesErrorCode;
 import ssafy.closetoyou.global.error.exception.CloseToYouException;
 
@@ -17,10 +18,13 @@ public class ClothesRequest {
     @NotBlank
     private String nickname;
     @NotBlank
+    @ValidEnum(enumClass = Type.class)
     private String type;
     @NotBlank
+    @ValidEnum(enumClass = Pattern.class)
     private String pattern;
     @NotBlank
+    @ValidEnum(enumClass = Color.class)
     private String color;
     private String location;
     private Long closetId;
@@ -28,20 +32,13 @@ public class ClothesRequest {
     public Clothes toModel() {
         return Clothes.builder()
                 .nickname(nickname)
-                .type(validateEnum(Type.class, type))
-                .pattern(validateEnum(Pattern.class, pattern))
-                .color(validateEnum(Color.class, color))
+                .type(Type.valueOf(type))
+                .pattern(Pattern.valueOf(pattern))
+                .color(Color.valueOf(color))
                 .location(location)
                 .closetId(closetId)
                 .build();
     }
 
-    public <E extends Enum<E>> E validateEnum(Class<E> enumClass, String value) {
-        try {
-            return Enum.valueOf(enumClass, value);
-        } catch (IllegalArgumentException e) {
-            throw new CloseToYouException(ClothesErrorCode.NO_ENUM_TYPE_EXCEPTION);
-        }
-    }
 
 }
