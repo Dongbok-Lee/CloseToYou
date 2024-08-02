@@ -40,7 +40,7 @@ const SearchBox = ({ value = '', onSearch }) => {
         onFocus={handleFocus}
         onBlur={handleBlur}
       />
-      <div className="IconContainer" onClick={handleClickSearch}>
+      <div className="IconContainer" onTouchStart={handleClickSearch}>
         <img src={SearchBoxIcon} alt="검색 아이콘" className="icon" />
       </div>
     </SearchBoxContainer>
