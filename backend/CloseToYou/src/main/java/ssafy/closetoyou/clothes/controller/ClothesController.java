@@ -68,7 +68,7 @@ public class ClothesController {
     }
 
     @GetMapping("/filter")
-    public ResponseEntity<SuccessResponse<List<ClothesResponse>>> searchClothesBySearchFilter(@RequestBody ClothesCondition clothesCondition) {
+    public ResponseEntity<SuccessResponse<List<ClothesResponse>>> searchClothesBySearchFilter(@Valid @RequestBody ClothesCondition clothesCondition) {
         List<ClothesResponse> clothesResponses = clothesService.searchClothesByClothesCondition(clothesCondition);
         return ResponseEntity.ok()
                 .body(new SuccessResponse<>("필터 기반 옷 검색 성공", clothesResponses));

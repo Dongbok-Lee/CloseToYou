@@ -16,9 +16,9 @@ public interface ClothesJpaRepository extends JpaRepository<ClothesEntity,Intege
     boolean existsByNicknameAndIsDeleted(String nickname, boolean deleted);
     Optional<ClothesEntity> findClothesByClothesIdAndIsDeleted(Long clothesId, boolean deleted);
     @Query("select c from ClothesEntity c " +
-            "where (c.pattern = :#{#clothesCondition.pattern} " +
-            "and c.color = :#{#clothesCondition.color} " +
-            "and c.type = :#{#clothesCondition.type}) " +
+            "where (:#{#clothesCondition.pattern} is null or c.pattern = :#{#clothesCondition.pattern}) " +
+            "and (:#{#clothesCondition.color} is null or :#{#clothesCondition.color} = '' or c.color = :#{#clothesCondition.color}) " +
+            "and (:#{#clothesCondition.type} is null or c.type = :#{#clothesCondition.type}) " +
             "and c.isDeleted = false")
     Optional<List<ClothesEntity>> searchClothesByClothesConditionAndIsDeleted(@Param("clothesCondition") ClothesCondition clothesCondition);
 
