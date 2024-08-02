@@ -29,7 +29,7 @@ import java.util.Optional;
 @Component
 public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
 
-    private static final String NO_CHECK_URL = "/api/login"; // "/api/login"으로 들어오는 요청은 Filter 작동 X
+    private static final String NO_CHECK_URL = "/api/users/login"; // "/api/login"으로 들어오는 요청은 Filter 작동 X
 
     private final JwtService jwtService;
     private final UserRepository userRepository;
