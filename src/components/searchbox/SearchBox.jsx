@@ -1,23 +1,23 @@
 /** @jsxImportSource @emotion/react */
 import { useState } from 'react';
 import { SearchBoxContainer } from './SearchBoxStyle';
-import SearchboxIcon from '../../assets/icons/etc/searchbox.svg';
+import SearchBoxIcon from '../../assets/icons/etc/searchbox.svg';
 
 const SearchBox = ({ value = '', onSearch }) => {
   const [inputValue, setInputValue] = useState(value);
   const [isFocused, setIsFocused] = useState(false);
 
-  const handleInputChange = (e) => {
+  const handleChangeInput = (e) => {
     setInputValue(e.target.value);
   };
 
-  const handleSearch = () => {
+  const handleClickSearch = () => {
     onSearch(inputValue);
   };
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      handleSearch();
+      handleClickSearch();
     }
   };
 
@@ -35,13 +35,13 @@ const SearchBox = ({ value = '', onSearch }) => {
         className="input"
         type="text"
         value={inputValue}
-        onChange={handleInputChange}
+        onChange={handleChangeInput}
         onKeyDown={handleKeyDown}
         onFocus={handleFocus}
         onBlur={handleBlur}
       />
-      <div className="IconContainer" onClick={handleSearch}>
-        <img src={SearchboxIcon} alt="검색 아이콘" className="icon" />
+      <div className="IconContainer" onClick={handleClickSearch}>
+        <img src={SearchBoxIcon} alt="검색 아이콘" className="icon" />
       </div>
     </SearchBoxContainer>
   );
