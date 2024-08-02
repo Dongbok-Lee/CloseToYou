@@ -8,7 +8,7 @@ const Textarea = ({ textareaPlaceholder }) => {
         textarea.style.height = textarea.scrollHeight + 'px';
       }
 
-    const handleTextLength = (e) => {
+    const handleChangeTextLength = (e) => {
         const text = e.target;
         const textLength = text.value.length;
         
@@ -18,7 +18,7 @@ const Textarea = ({ textareaPlaceholder }) => {
     }
 
     return(
-        <TextareaStyle placeholder={ textareaPlaceholder } onChange={ handleTextLength } onKeyUp={ handleResize } onKeyDown={ handleResize } rows="3"></TextareaStyle>
+        <TextareaStyle placeholder={ textareaPlaceholder } onChange={ handleChangeTextLength } onKeyUp={ handleResize } onKeyDown={ handleResize } rows="3"></TextareaStyle>
     );
 }
 
