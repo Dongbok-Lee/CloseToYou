@@ -15,6 +15,7 @@ import static lombok.AccessLevel.PROTECTED;
 @Getter
 @NoArgsConstructor(access = PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
+@ToString
 public class EmailAuthenticationEntity {
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -54,5 +55,9 @@ public class EmailAuthenticationEntity {
                 .isVerified(isVerified)
                 .createdDateTime(createdDateTime)
                 .build();
+    }
+
+    public void setVerified() {
+        isVerified = true;
     }
 }
