@@ -13,15 +13,13 @@ import ssafy.closetoyou.user.service.port.UserRepository;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-@Component
 public class LoginService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String email) {
-        User user = userRepository.findByEmail(email);
+    public UserDetails loadUserByUsername(String userEmail) {
+        User user = userRepository.findByUserEmail(userEmail);
         return new CustomUserDetail(user);
     }
-
 }

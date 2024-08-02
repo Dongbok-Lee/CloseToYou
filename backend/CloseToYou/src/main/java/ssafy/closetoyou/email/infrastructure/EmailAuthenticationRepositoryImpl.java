@@ -22,8 +22,10 @@ public class EmailAuthenticationRepositoryImpl implements EmailAuthenticationRep
 
     @Override
     public void setVerifiedAndSave(EmailAuthentication emailAuthentication) {
-        EmailAuthenticationEntity emailAuthenticationEntity = EmailAuthenticationEntity.fromModel(emailAuthentication);
-        emailAuthenticationEntity.setVerified();
+        Long emailId = emailAuthentication.getEmailAuthenticationId();
+        EmailAuthenticationEntity emailAuthenticationEntity = emailAuthenticationJpaRepository.findById(emailId)
+                .orElseThrow(() -> new CloseToYouException(UserErrorCode.NOT_FOUND_MAIL_CODE));
+        emailAuthenticationEntity.setVerified(true);
         emailAuthenticationJpaRepository.save(emailAuthenticationEntity);
     }
 
