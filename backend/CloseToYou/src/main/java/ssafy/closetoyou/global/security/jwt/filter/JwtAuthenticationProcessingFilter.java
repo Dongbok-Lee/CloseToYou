@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import ssafy.closetoyou.global.security.jwt.service.JwtService;
+import ssafy.closetoyou.global.security.login.userdetail.CustomUserDetail;
 import ssafy.closetoyou.refreshtoken.domain.RefreshToken;
 import ssafy.closetoyou.refreshtoken.repository.RefreshTokenRepository;
 import ssafy.closetoyou.user.domain.User;
@@ -61,7 +62,7 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
     public void checkRefreshTokenAndReIssueAccessToken(HttpServletResponse response, String refreshToken) {
         refreshTokenRepository.findUserIdByRefreshToken(refreshToken)
                 .ifPresent(id -> {
-                    User user = userRepository.findById(id);
+                    User user = userRepository.findByUserId(id);
                     String reIssuedRefreshToken = reIssueRefreshToken(user);
                     String reIssuedAccessToken = jwtService.createAccessToken(user.getEmail(), user.getUserId());
                     jwtService.sendAccessAndRefreshToken(response, reIssuedAccessToken, reIssuedRefreshToken);
@@ -88,7 +89,7 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
                 Optional<Long> idOptional = jwtService.extractUserId(accessToken);
                 if (idOptional.isPresent()) {
                     Long id = idOptional.get();
-                    User user = userRepository.findById(id);
+                    User user = userRepository.findByUserId(id);
                     if (user != null) {
                         saveAuthentication(user);
                     }
@@ -104,15 +105,10 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
             password = PasswordUtil.generateRandomPassword();
         }
 
-        UserDetails userDetailsUser = org.springframework.security.core.userdetails.User.builder()
-                .username(user.getEmail())
-                .password(password)
-                .roles("USER")
-                .build();
-
+        CustomUserDetail userDetails = new CustomUserDetail(user);
         Authentication authentication =
-                new UsernamePasswordAuthenticationToken(userDetailsUser, null,
-                        authoritiesMapper.mapAuthorities(userDetailsUser.getAuthorities()));
+                new UsernamePasswordAuthenticationToken(userDetails, null,
+                        authoritiesMapper.mapAuthorities(userDetails.getAuthorities()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
