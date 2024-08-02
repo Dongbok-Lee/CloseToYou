@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ssafy.closetoyou.email.domain.EmailAuthentication;
 import ssafy.closetoyou.email.service.port.EmailAuthenticationRepository;
 import ssafy.closetoyou.global.error.errorcode.UserErrorCode;
 import ssafy.closetoyou.global.error.exception.CloseToYouException;
@@ -19,6 +20,10 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final EmailAuthenticationRepository emailAuthenticationRepository;
     private final PasswordEncoder passwordEncoder;
+
+    public boolean checkEmailDuplicated(String email) {
+        return emailAuthenticationRepository.existsEmailAuthenticationCode(email);
+    }
 
     public Long signUp(UserSignUp userSignUp) {
 

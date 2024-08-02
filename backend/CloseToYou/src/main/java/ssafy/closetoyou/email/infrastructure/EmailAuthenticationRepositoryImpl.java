@@ -21,6 +21,13 @@ public class EmailAuthenticationRepositoryImpl implements EmailAuthenticationRep
     }
 
     @Override
+    public void setVerifiedAndSave(EmailAuthentication emailAuthentication) {
+        EmailAuthenticationEntity emailAuthenticationEntity = EmailAuthenticationEntity.fromModel(emailAuthentication);
+        emailAuthenticationEntity.setVerified();
+        emailAuthenticationJpaRepository.save(emailAuthenticationEntity);
+    }
+
+    @Override
     public EmailAuthentication findEmailAuthenticationCode(String email) {
         return emailAuthenticationJpaRepository.findByEmail(email)
                 .orElseThrow(() -> new CloseToYouException(UserErrorCode.NOT_FOUND_MAIL_CODE))
@@ -36,4 +43,5 @@ public class EmailAuthenticationRepositoryImpl implements EmailAuthenticationRep
     public boolean isEmailAuthenticated(String email) {
         return emailAuthenticationJpaRepository.existsByEmailAndAndIsVerified(email, true);
     }
+
 }

@@ -29,7 +29,6 @@ public class UserController {
                 new SuccessResponse<>("유저 조회에 성공하였습니다.", userResponse));
     }
 
-
     @PostMapping
     public ResponseEntity<SuccessResponse<Long>> userSignUp(@Valid @RequestBody UserSignUp userSignUp) {
         Long userId = userService.signUp(userSignUp);
