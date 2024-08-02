@@ -1,6 +1,6 @@
 import SocialButtonStyle from './SocialButtonStyle';
 
-const SocialButton = ({ socialBtnType }) => {
+const SocialButton = ({ socialBtnType, onTouchStart }) => {
     
     const handleClick = () => {
         document.getElementById("social-button").focus();
@@ -8,7 +8,7 @@ const SocialButton = ({ socialBtnType }) => {
       }
 
     return(
-        <SocialButtonStyle id="social-button" tabIndex={0} socialBtnType={ socialBtnType } onClick={ handleClick }></SocialButtonStyle>
+        <SocialButtonStyle id="social-button" socialBtnType={ socialBtnType } onTouchStart={ onTouchStart } tabIndex={0}></SocialButtonStyle>
     );
 }
 
