@@ -24,7 +24,10 @@ public class ClothesRepositoryImpl implements ClothesRepository {
 
     @Override
     public void deleteClothes(Long clothesId) {
-        clothesJpaRepository.deleteClothesByClothesId(clothesId);
+        ClothesEntity clothesEntity = clothesJpaRepository.findClothesByClothesIdAndIsDeleted(clothesId, false)
+                .orElseThrow(() -> new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION));
+        clothesEntity.setDeleted(true);
+        clothesJpaRepository.save(clothesEntity);
     }
 
     @Override
