@@ -20,15 +20,15 @@ def text_to_speech(text, lang='ko'):
     # 임시 파일 삭제
     os.remove(filename)
 
-if __name__ == "__main__":
-    try:
-        while True:
-            text = input("Enter text to speak (or 'exit' to quit): ")
-            if text.lower() == 'exit':
-                break
-            text_to_speech(text)
-    except KeyboardInterrupt:
-        print("Program terminated by user")
-    except Exception as e:
-        print(f"An unexpected error occurred: {e}")
+#if __name__ == "__main__":
+#    try:
+#        while True:
+#            text = input("Enter text to speak (or 'exit' to quit): ")
+#            if text.lower() == 'exit':
+#                break
+#            text_to_speech(text)
+#    except KeyboardInterrupt:
+#        print("Program terminated by user")
+#    except Exception as e:
+#        print(f"An unexpected error occurred: {e}")
 
