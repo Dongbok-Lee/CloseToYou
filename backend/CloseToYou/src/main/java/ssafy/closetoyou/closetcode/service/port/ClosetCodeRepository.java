@@ -1,6 +1,6 @@
-package ssafy.closetoyou.closet.service.port;
+package ssafy.closetoyou.closetcode.service.port;
 
-import ssafy.closetoyou.closet.domain.ClosetCode;
+import ssafy.closetoyou.closetcode.domain.ClosetCode;
 
 public interface ClosetCodeRepository {
     boolean existsByClosetCode(String closetCode);

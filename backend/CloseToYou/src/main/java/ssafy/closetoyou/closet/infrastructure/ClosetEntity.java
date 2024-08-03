@@ -1,4 +1,4 @@
-package ssafy.closetoyou.closet.infrastructure.closet;
+package ssafy.closetoyou.closet.infrastructure;
 
 import jakarta.persistence.*;
 import lombok.*;

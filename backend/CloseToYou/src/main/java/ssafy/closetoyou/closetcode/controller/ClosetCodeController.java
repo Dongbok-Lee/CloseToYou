@@ -1,11 +1,11 @@
-package ssafy.closetoyou.closet.controller;
+package ssafy.closetoyou.closetcode.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ssafy.closetoyou.closet.controller.port.ClosetCodeService;
+import ssafy.closetoyou.closetcode.controller.port.ClosetCodeService;
 import ssafy.closetoyou.global.common.response.SuccessResponse;
 
 @RestController

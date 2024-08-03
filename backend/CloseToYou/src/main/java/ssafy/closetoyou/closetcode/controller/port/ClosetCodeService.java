@@ -1,4 +1,4 @@
-package ssafy.closetoyou.closet.controller.port;
+package ssafy.closetoyou.closetcode.controller.port;
 
 public interface ClosetCodeService {
     boolean isValidClosetCode(String closetCode);

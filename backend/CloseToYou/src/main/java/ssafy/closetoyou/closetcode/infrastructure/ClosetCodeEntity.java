@@ -1,4 +1,4 @@
-package ssafy.closetoyou.closet.infrastructure.closetcode;
+package ssafy.closetoyou.closetcode.infrastructure;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,8 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import ssafy.closetoyou.closet.domain.Closet;
-import ssafy.closetoyou.closet.domain.ClosetCode;
+import ssafy.closetoyou.closetcode.domain.ClosetCode;
 
 @Entity(name = "closet_codes")
 @Getter @Setter @ToString
