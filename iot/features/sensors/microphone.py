@@ -13,13 +13,16 @@ def recognize_speech_from_mic():
         while True:
             try:
                 # 음성 입력 받기
-                audio = recognizer.listen(source)
+                audio = recognizer.listen(source,timeout=5)
                 print("Recognizing...")
 
                 # Google Web Speech API로 음성 인식
                 text = recognizer.recognize_google(audio, language="ko-KR")
                 print(f"Recognized: {text}")
 
+            except sr.WaitTimeoutError:
+                print("마이크를 종료합니다.")
+                break
             except sr.UnknownValueError:
                 print("Google Speech Recognition could not understand audio")
             except sr.RequestError as e:
@@ -27,11 +30,12 @@ def recognize_speech_from_mic():
             except Exception as e:
                 print(f"An error occurred: {e}")
 
-if __name__ == "__main__":
-    try:
-        recognize_speech_from_mic()
-    except KeyboardInterrupt:
-        print("Program terminated by user")
-    except Exception as e:
-        print(f"An unexpected error occurred: {e}")
+# 사용 예시
+#if __name__ == "__main__":
+#    try:
+#        recognize_speech_from_mic()
+#    except KeyboardInterrupt:
+#        print("Program terminated by user")
+#    except Exception as e:
+#        print(f"An unexpected error occurred: {e}")
 
