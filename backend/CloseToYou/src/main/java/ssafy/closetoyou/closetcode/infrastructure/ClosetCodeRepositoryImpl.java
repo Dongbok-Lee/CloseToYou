@@ -1,9 +1,9 @@
-package ssafy.closetoyou.closet.infrastructure.closetcode;
+package ssafy.closetoyou.closetcode.infrastructure;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import ssafy.closetoyou.closet.domain.ClosetCode;
-import ssafy.closetoyou.closet.service.port.ClosetCodeRepository;
+import ssafy.closetoyou.closetcode.domain.ClosetCode;
+import ssafy.closetoyou.closetcode.service.port.ClosetCodeRepository;
 import ssafy.closetoyou.global.error.errorcode.ClosetErrorCode;
 import ssafy.closetoyou.global.error.exception.CloseToYouException;
 

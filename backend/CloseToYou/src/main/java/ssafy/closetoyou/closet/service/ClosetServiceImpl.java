@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ssafy.closetoyou.closet.controller.port.ClosetCodeService;
+import ssafy.closetoyou.closetcode.controller.port.ClosetCodeService;
 import ssafy.closetoyou.closet.controller.port.ClosetService;
 import ssafy.closetoyou.closet.controller.request.ClosetRequest;
 import ssafy.closetoyou.closet.controller.response.ClosetResponse;

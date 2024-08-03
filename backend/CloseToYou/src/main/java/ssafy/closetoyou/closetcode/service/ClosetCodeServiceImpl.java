@@ -1,10 +1,10 @@
-package ssafy.closetoyou.closet.service;
+package ssafy.closetoyou.closetcode.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ssafy.closetoyou.closet.controller.port.ClosetCodeService;
-import ssafy.closetoyou.closet.domain.ClosetCode;
-import ssafy.closetoyou.closet.service.port.ClosetCodeRepository;
+import ssafy.closetoyou.closetcode.controller.port.ClosetCodeService;
+import ssafy.closetoyou.closetcode.domain.ClosetCode;
+import ssafy.closetoyou.closetcode.service.port.ClosetCodeRepository;
 import ssafy.closetoyou.global.common.util.RandomHolder;
 import ssafy.closetoyou.global.error.errorcode.ClosetErrorCode;
 import ssafy.closetoyou.global.error.exception.CloseToYouException;

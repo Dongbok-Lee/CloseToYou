@@ -1,8 +1,7 @@
-package ssafy.closetoyou.closet.infrastructure.closet;
+package ssafy.closetoyou.closet.infrastructure;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import ssafy.closetoyou.closet.controller.response.ClosetResponse;
 import ssafy.closetoyou.closet.domain.Closet;
 import ssafy.closetoyou.closet.service.port.ClosetRepository;
 import ssafy.closetoyou.global.error.errorcode.ClosetErrorCode;

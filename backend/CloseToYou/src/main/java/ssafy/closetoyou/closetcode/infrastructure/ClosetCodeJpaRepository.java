@@ -1,4 +1,4 @@
-package ssafy.closetoyou.closet.infrastructure.closetcode;
+package ssafy.closetoyou.closetcode.infrastructure;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

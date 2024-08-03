@@ -1,6 +1,5 @@
-package ssafy.closetoyou.closet.domain;
+package ssafy.closetoyou.closetcode.domain;
 
-import lombok.Builder;
 import lombok.Getter;
 import ssafy.closetoyou.global.common.util.RandomHolder;
 
