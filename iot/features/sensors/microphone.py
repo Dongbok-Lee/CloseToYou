@@ -19,10 +19,11 @@ def recognize_speech_from_mic():
                 # Google Web Speech API로 음성 인식
                 text = recognizer.recognize_google(audio, language="ko-KR")
                 print(f"Recognized: {text}")
+                return text
 
             except sr.WaitTimeoutError:
                 print("마이크를 종료합니다.")
-                break
+                return None
             except sr.UnknownValueError:
                 print("Google Speech Recognition could not understand audio")
             except sr.RequestError as e:
