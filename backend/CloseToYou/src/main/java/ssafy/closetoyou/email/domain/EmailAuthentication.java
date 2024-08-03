@@ -51,7 +51,6 @@ public class EmailAuthentication {
         if(authenticationCode != code) {
             throw new CloseToYouException(UserErrorCode.MAIL_CHECK_FAIL);
         }
-
         this.isVerified = true;
     }
 
