@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import ssafy.closetoyou.clothes.domain.Clothes;
 import ssafy.closetoyou.clothes.domain.Color;
 import ssafy.closetoyou.clothes.domain.Pattern;
@@ -13,19 +14,24 @@ import ssafy.closetoyou.global.error.errorcode.ClothesErrorCode;
 import ssafy.closetoyou.global.error.exception.CloseToYouException;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Getter
+@Getter @Setter
 public class ClothesRequest {
+
     @NotBlank
     private String nickname;
+
     @NotBlank
     @ValidEnum(enumClass = Type.class)
     private String type;
+
     @NotBlank
     @ValidEnum(enumClass = Pattern.class)
     private String pattern;
+
     @NotBlank
     @ValidEnum(enumClass = Color.class)
     private String color;
+
     private String location;
     private Long closetId;
 
