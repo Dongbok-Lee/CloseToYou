@@ -23,12 +23,19 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
             ErrorCode errorCode;
 
             log.debug(" log: exception: {}", exception);
-
         /*
         토큰 없는 경우
         */
-            if (authException == null) {
+            if (exception == null) {
                 errorCode = UserErrorCode.NO_TOKEN_EXCEPTION;
+                setResponse(response, errorCode);
+                return;
+            }
+        /*
+        해당하는 토큰 없는 경우
+        */
+            if (authException == null) {
+                errorCode = UserErrorCode.NO_MATCH_TOKEN_EXCEPTION;
                 setResponse(response, errorCode);
                 return;
             }
