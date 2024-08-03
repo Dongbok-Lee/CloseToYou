@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ssafy.closetoyou.closet.controller.port.ClosetService;
 import ssafy.closetoyou.clothes.controller.port.ClothesService;
 import ssafy.closetoyou.clothes.controller.request.ClothesUpdateRequest;
 import ssafy.closetoyou.clothes.controller.response.ClothesResponse;
@@ -23,13 +24,16 @@ import java.util.List;
 public class ClothesServiceImpl implements ClothesService {
 
     private final ClothesRepository clothesRepository;
+    private final ClosetService closetService;
 
     @Transactional
     @Override
-    public Long addClothes(ClothesRequest clothesRequest) {
+    public Long addClothes(Long userId, ClothesRequest clothesRequest) {
         if (clothesRepository.existClothesByClothesNickname(clothesRequest.getNickname())) {
             throw new CloseToYouException(ClothesErrorCode.DUPLICATE_CLOTHES_NICKNAME);
         }
+        Long closetId = closetService.getClosetIdByUserId(userId);
+        clothesRequest.setClosetId(closetId);
         return clothesRepository.saveClothes(clothesRequest.toModel()).getClothesId();
     }
 

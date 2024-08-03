@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import ssafy.closetoyou.clothes.controller.port.ClothesService;
 import ssafy.closetoyou.clothes.controller.request.ClothesCondition;
@@ -12,6 +13,7 @@ import ssafy.closetoyou.clothes.controller.request.ClothesRequest;
 import ssafy.closetoyou.clothes.controller.request.ClothesUpdateRequest;
 import ssafy.closetoyou.clothes.controller.response.ClothesResponse;
 import ssafy.closetoyou.global.common.response.SuccessResponse;
+import ssafy.closetoyou.global.security.login.userdetail.CustomUserDetail;
 
 import java.util.List;
 
@@ -24,8 +26,10 @@ public class ClothesController {
     private final ClothesService clothesService;
 
     @PostMapping
-    public ResponseEntity<SuccessResponse<Long>> addClothes(@Valid @RequestBody ClothesRequest clothesRequest) {
-        Long clothesId = clothesService.addClothes(clothesRequest);
+    public ResponseEntity<SuccessResponse<Long>> addClothes(Authentication authentication,
+                                                            @Valid @RequestBody ClothesRequest clothesRequest) {
+        Long userId = ((CustomUserDetail) authentication.getPrincipal()).getUser().getUserId();
+        Long clothesId = clothesService.addClothes(userId, clothesRequest);
         return ResponseEntity.status(201)
                 .body(new SuccessResponse<>("옷 생성 성공", clothesId));
     }

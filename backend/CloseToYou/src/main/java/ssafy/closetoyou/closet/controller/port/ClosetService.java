@@ -10,4 +10,5 @@ public interface ClosetService {
     void changeClosetInfo(Long userId, Long closetId, String nickname);
     void deleteCloset(Long userId, Long closetId);
     List<ClosetResponse> getUserClosets(Long userId);
+    Long getClosetIdByUserId(Long userId);
 }
