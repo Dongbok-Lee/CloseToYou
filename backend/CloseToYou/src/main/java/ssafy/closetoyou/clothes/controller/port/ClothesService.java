@@ -7,7 +7,7 @@ import ssafy.closetoyou.clothes.controller.request.ClothesCondition;
 import java.util.List;
 
 public interface ClothesService {
-    Long addClothes(ClothesRequest clothesRequest);
+    Long addClothes(Long userId, ClothesRequest clothesRequest);
     void updateClothes(Long clothesId, ClothesUpdateRequest clothesUpdateRequest);
     void removeClothes(Long clothesId);
 
