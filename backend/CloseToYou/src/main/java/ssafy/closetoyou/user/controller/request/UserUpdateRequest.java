@@ -8,5 +8,4 @@ import lombok.ToString;
 public class UserUpdateRequest {
     private String nickname;
     private Boolean isHighContrast;
-
 }

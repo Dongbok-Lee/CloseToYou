@@ -2,7 +2,6 @@ package ssafy.closetoyou.user.infrastructure;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import ssafy.closetoyou.email.service.port.EmailAuthenticationRepository;
 import ssafy.closetoyou.global.error.errorcode.UserErrorCode;
 import ssafy.closetoyou.global.error.exception.CloseToYouException;
 import ssafy.closetoyou.user.controller.request.UserUpdateRequest;
@@ -30,43 +29,42 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User findByUserId(Long userId) {
+    public User findUserByUserId(Long userId) {
         return userJpaRepository.findByUserIdAndIsDeleted(userId, false).orElseThrow(
                 () -> new CloseToYouException(UserErrorCode.NOT_EXIST_USER)).toModel();
     }
 
     @Override
-    public User findByUserEmail(String userEmail) {
+    public User findUserByUserEmail(String userEmail) {
         return userJpaRepository.findByEmailAndIsDeleted(userEmail, false).orElseThrow(
                 () -> new CloseToYouException(UserErrorCode.NOT_EXIST_USER)).toModel();
     }
 
     @Override
     public void deleteUser(Long userId) {
-        UserEntity userEntity = userJpaRepository.findByUserIdAndIsDeleted(userId, false).orElseThrow(
-                () -> new CloseToYouException(UserErrorCode.NOT_EXIST_USER)
-        );
-        userEntity.setDeleted(true);
+        UserEntity userEntity = findUserEntityByUserIdAndIsDeleted(userId);
+        userEntity.setIsDeleted(true);
         userJpaRepository.save(userEntity);
     }
 
     @Override
     public void changeUserPassword(Long userId, String newPassword) {
-        UserEntity userEntity = userJpaRepository.findByUserIdAndIsDeleted(userId, false).orElseThrow(
-                () -> new CloseToYouException(UserErrorCode.NOT_EXIST_USER)
-        );
+        UserEntity userEntity = findUserEntityByUserIdAndIsDeleted(userId);
         userEntity.setPassword(newPassword);
         userJpaRepository.save(userEntity);;
     }
 
     @Override
     public void changeUser(Long userId, UserUpdateRequest userUpdateRequest) {
-        UserEntity userEntity = userJpaRepository.findByUserIdAndIsDeleted(userId, false).orElseThrow(
-                () -> new CloseToYouException(UserErrorCode.NOT_EXIST_USER)
-        );
+        UserEntity userEntity = findUserEntityByUserIdAndIsDeleted(userId);
         userEntity.setNickname(userUpdateRequest.getNickname());
         userEntity.setIsHighContrast(userUpdateRequest.getIsHighContrast());
         userJpaRepository.save(userEntity);
     }
 
+    public UserEntity findUserEntityByUserIdAndIsDeleted(Long userId) {
+        return userJpaRepository.findByUserIdAndIsDeleted(userId, false).orElseThrow(
+                () -> new CloseToYouException(UserErrorCode.NOT_EXIST_USER)
+        );
+    }
 }

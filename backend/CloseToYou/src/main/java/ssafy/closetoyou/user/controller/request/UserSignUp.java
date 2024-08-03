@@ -14,8 +14,10 @@ public class UserSignUp {
 
     @NotBlank
     private String nickname;
+
     @NotBlank
     private String password;
+
     @Email
     @NotBlank
     private String email;

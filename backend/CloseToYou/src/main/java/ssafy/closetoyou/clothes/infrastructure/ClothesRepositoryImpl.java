@@ -31,12 +31,12 @@ public class ClothesRepositoryImpl implements ClothesRepository {
     }
 
     @Override
-    public boolean existClothes(Long clothesId) {
+    public boolean existClothesByClothesId(Long clothesId) {
         return clothesJpaRepository.existsByClothesIdAndIsDeleted(clothesId, false);
     }
 
     @Override
-    public boolean existNickname(String nickname) {
+    public boolean existClothesByClothesNickname(String nickname) {
         return clothesJpaRepository.existsByNicknameAndIsDeleted(nickname, false);
     }
 
