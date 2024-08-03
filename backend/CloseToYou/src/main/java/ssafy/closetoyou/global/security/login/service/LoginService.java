@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import ssafy.closetoyou.global.security.login.userdetail.CustomUserDetail;
 import ssafy.closetoyou.user.domain.User;
@@ -19,7 +18,7 @@ public class LoginService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userEmail) {
-        User user = userRepository.findByUserEmail(userEmail);
+        User user = userRepository.findUserByUserEmail(userEmail);
         return new CustomUserDetail(user);
     }
 }

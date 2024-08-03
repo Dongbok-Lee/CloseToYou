@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 import static jakarta.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
-@Entity(name = "user")
+@Entity(name = "users")
 @Getter @Setter
 @NoArgsConstructor(access = PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
@@ -34,8 +34,7 @@ public class UserEntity {
     private String email;
 
     private Boolean isHighContrast;
-
-    private boolean isDeleted;
+    private Boolean isDeleted;
 
     @CreatedDate
     private LocalDateTime createdDateTime;
@@ -44,7 +43,7 @@ public class UserEntity {
     private LocalDateTime updatedDateTime;
 
     @Builder
-    public UserEntity(Long userId, String nickname, String password, String email, boolean isHighContrast, boolean isDeleted) {
+    public UserEntity(Long userId, String nickname, String password, String email, Boolean isHighContrast, Boolean isDeleted) {
         this.userId = userId;
         this.nickname = nickname;
         this.password = password;
@@ -53,13 +52,13 @@ public class UserEntity {
         this.isDeleted = isDeleted;
     }
 
-    public static UserEntity fromModel(User user){
+    public static UserEntity fromModel(User user) {
         return builder()
                 .nickname(user.getNickname())
                 .password(user.getPassword())
                 .email(user.getEmail())
-                .isHighContrast(user.isHighContrast())
-                .isDeleted(user.isDeleted())
+                .isHighContrast(false)
+                .isDeleted(false)
                 .build();
     }
 
@@ -75,4 +74,5 @@ public class UserEntity {
                 .isDeleted(isDeleted)
                 .build();
     }
+
 }

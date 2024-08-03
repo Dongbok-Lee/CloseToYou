@@ -27,7 +27,7 @@ public class ClothesServiceImpl implements ClothesService {
     @Transactional
     @Override
     public Long addClothes(ClothesRequest clothesRequest) {
-        if (clothesRepository.existNickname(clothesRequest.getNickname())) {
+        if (clothesRepository.existClothesByClothesNickname(clothesRequest.getNickname())) {
             throw new CloseToYouException(ClothesErrorCode.DUPLICATE_CLOTHES_NICKNAME);
         }
         return clothesRepository.saveClothes(clothesRequest.toModel()).getClothesId();
@@ -36,7 +36,7 @@ public class ClothesServiceImpl implements ClothesService {
     @Transactional
     @Override
     public void updateClothes(Long clothesId, ClothesUpdateRequest clothesUpdateRequest) {
-        if (!clothesRepository.existClothes(clothesId)) {
+        if (!clothesRepository.existClothesByClothesId(clothesId)) {
             throw new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION);
         }
         Clothes clothes = clothesRepository.findClothes(clothesId);
@@ -47,7 +47,7 @@ public class ClothesServiceImpl implements ClothesService {
     @Transactional
     @Override
     public void removeClothes(Long clothesId) {
-        if (!clothesRepository.existClothes(clothesId)) {
+        if (!clothesRepository.existClothesByClothesId(clothesId)) {
             throw new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION);
         }
         clothesRepository.deleteClothes(clothesId);
@@ -55,7 +55,7 @@ public class ClothesServiceImpl implements ClothesService {
 
     @Override
     public ClothesResponse findClothes(Long clothesId) {
-        if (!clothesRepository.existClothes(clothesId)) {
+        if (!clothesRepository.existClothesByClothesId(clothesId)) {
             throw new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION);
         }
         Clothes clothes = clothesRepository.findClothes(clothesId);

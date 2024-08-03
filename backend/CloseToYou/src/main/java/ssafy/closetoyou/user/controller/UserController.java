@@ -1,17 +1,11 @@
 package ssafy.closetoyou.user.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.eclipse.angus.mail.iap.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-import ssafy.closetoyou.global.error.errorcode.UserErrorCode;
-import ssafy.closetoyou.global.error.exception.CloseToYouException;
-import ssafy.closetoyou.global.security.jwt.service.JwtService;
 import ssafy.closetoyou.global.security.login.userdetail.CustomUserDetail;
 import ssafy.closetoyou.user.controller.port.UserService;
 import ssafy.closetoyou.user.controller.request.UserPasswordUpdateRequest;
@@ -38,7 +32,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<SuccessResponse<Long>> userSignUp(@Valid @RequestBody UserSignUp userSignUp) {
+    public ResponseEntity<SuccessResponse<Long>> SignUpUser (@Valid @RequestBody UserSignUp userSignUp) {
         Long userId = userService.signUp(userSignUp);
 
         return ResponseEntity.ok(
@@ -46,9 +40,9 @@ public class UserController {
     }
 
     @DeleteMapping
-    public ResponseEntity<SuccessResponse<Long>> userDelete(Authentication authentication) {
+    public ResponseEntity<SuccessResponse<Long>> deleteUser(Authentication authentication) {
         Long userId = ((CustomUserDetail) authentication.getPrincipal()).getUser().getUserId();
-        userService.deleteUser(userId);
+        userService.removeUser(userId);
 
         return ResponseEntity.ok(
                 new SuccessResponse<>("유저 탈퇴 성공", userId)
@@ -70,7 +64,6 @@ public class UserController {
     @PatchMapping
     public ResponseEntity<SuccessResponse<Long>> changeUserInfo(Authentication authentication, @Valid @RequestBody UserUpdateRequest userUpdateRequest) {
         User user = ((CustomUserDetail) authentication.getPrincipal()).getUser();
-        System.out.println("userUpdateRequest = " + userUpdateRequest);
         userService.updateUser(user.getUserId(), userUpdateRequest);
 
         return ResponseEntity.ok(

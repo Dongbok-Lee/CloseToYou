@@ -11,7 +11,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
 import org.springframework.security.core.authority.mapping.NullAuthoritiesMapper;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import ssafy.closetoyou.global.security.jwt.service.JwtService;
@@ -62,7 +61,7 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
     public void checkRefreshTokenAndReIssueAccessToken(HttpServletResponse response, String refreshToken) {
         refreshTokenRepository.findUserIdByRefreshToken(refreshToken)
                 .ifPresent(id -> {
-                    User user = userRepository.findByUserId(id);
+                    User user = userRepository.findUserByUserId(id);
                     String reIssuedRefreshToken = reIssueRefreshToken(user);
                     String reIssuedAccessToken = jwtService.createAccessToken(user.getEmail(), user.getUserId());
                     jwtService.sendAccessAndRefreshToken(response, reIssuedAccessToken, reIssuedRefreshToken);
@@ -89,7 +88,7 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
                 Optional<Long> idOptional = jwtService.extractUserId(accessToken);
                 if (idOptional.isPresent()) {
                     Long id = idOptional.get();
-                    User user = userRepository.findByUserId(id);
+                    User user = userRepository.findUserByUserId(id);
                     if (user != null) {
                         saveAuthentication(user);
                     }

@@ -7,8 +7,8 @@ public interface UserRepository {
     User saveUser(User user);
     boolean existsUserByUserEmail(String userEmail);
     boolean existsUserByUserId(Long userId);
-    User findByUserId(Long userId);
-    User findByUserEmail(String userEmail);
+    User findUserByUserId(Long userId);
+    User findUserByUserEmail(String userEmail);
     void deleteUser(Long userId);
     void changeUserPassword(Long userId, String newPassword);
     void changeUser(Long userId, UserUpdateRequest userUpdateRequest);

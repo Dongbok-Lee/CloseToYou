@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ssafy.closetoyou.email.controller.port.EmailAuthenticationService;
 import ssafy.closetoyou.email.domain.EmailAuthentication;
 import ssafy.closetoyou.email.service.port.EmailAuthenticationRepository;
 import ssafy.closetoyou.global.error.errorcode.UserErrorCode;
@@ -23,50 +24,40 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final EmailAuthenticationRepository emailAuthenticationRepository;
+    private final EmailAuthenticationService emailAuthenticationService;
 
     public Long signUp(UserSignUp userSignUp) {
-
-        if (!emailAuthenticationRepository.isEmailAuthenticated(userSignUp.getEmail())){
-            throw new CloseToYouException(UserErrorCode.NOT_AUTHENTICATED);
-        }
-
-        if (userRepository.existsUserByUserEmail(userSignUp.getEmail())) {
-            throw new CloseToYouException(UserErrorCode.DUPLICATE_EMAIL);
-        }
-
+        validateSignUpEmail(userSignUp.getEmail());
         User user = userSignUp.toModel();
         user.passwordEncode(passwordEncoder);
         return userRepository.saveUser(user).getUserId();
     }
 
     @Override
-    public void deleteUser(Long userId) {
-
-        if (!userRepository.existsUserByUserId(userId)) {
-            throw new CloseToYouException(UserErrorCode.USER_NOT_FOUND);
-        }
-
+    public void removeUser(Long userId) {
         userRepository.deleteUser(userId);
     }
 
     @Override
     public void changeUserPassword(User user, String oldPassword, String newPassword) {
 
-        // oldPassword와 현재 DB에 있는 비밀번호랑 비교
-        boolean isPasswordMatching = passwordEncoder.matches(oldPassword, user.getPassword());
-
-        // 다를 경우 throw Exception
-        if (!isPasswordMatching) {
+        if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
             throw new CloseToYouException(UserErrorCode.USER_NOT_FOUND);
         }
 
-        // 같을 경우, newPassword로 수정한 후 save
         userRepository.changeUserPassword(user.getUserId(), passwordEncoder.encode(newPassword));
     }
 
     @Override
     public void updateUser(Long userId, UserUpdateRequest userUpdateRequest) {
         userRepository.changeUser(userId, userUpdateRequest);
+    }
+
+    public void validateSignUpEmail(String email) {
+        emailAuthenticationService.checkEmailAuthenticated(email);
+
+        if (userRepository.existsUserByUserEmail(email)) {
+            throw new CloseToYouException(UserErrorCode.DUPLICATE_EMAIL);
+        }
     }
 }

@@ -27,7 +27,7 @@ public class UserResponse {
         return builder()
                 .email(user.getEmail())
                 .nickname(user.getNickname())
-                .isHighContrast(user.isHighContrast())
+                .isHighContrast(user.getIsHighContrast())
                 .createdDateTime(user.getCreatedDateTime())
                 .updatedDateTime(user.getUpdatedDateTime())
                 .build();
