@@ -6,8 +6,8 @@ import ssafy.closetoyou.closet.controller.response.ClosetResponse;
 import java.util.List;
 
 public interface ClosetService {
-    Long createCloset(ClosetRequest closetRequest);
-    List<ClosetResponse> findAllCloset(Long userId);
-    void changeClosetInfo(String nickname);
-    void deleteCloset(Long closetId, Long userId);
+    Long addCloset(Long userId, ClosetRequest closetRequest);
+    void changeClosetInfo(Long userId, Long closetId, String nickname);
+    void deleteCloset(Long userId, Long closetId);
+    List<ClosetResponse> getUserClosets(Long userId);
 }
