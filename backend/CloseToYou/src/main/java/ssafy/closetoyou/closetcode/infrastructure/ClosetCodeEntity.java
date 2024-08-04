@@ -2,6 +2,7 @@ package ssafy.closetoyou.closetcode.infrastructure;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,7 +14,7 @@ import ssafy.closetoyou.closetcode.domain.ClosetCode;
 @Getter @Setter @ToString
 public class ClosetCodeEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long closetCodeId;
     private String closetCode;
     private Boolean isUsed;

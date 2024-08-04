@@ -24,7 +24,7 @@ import java.time.LocalDateTime;
 public class ClothesEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long clothesId;
     private Long closetId;
 

@@ -9,11 +9,11 @@ public interface ClothesRepository {
     Clothes saveClothes(Clothes clothes);
     void deleteClothes(Long clothesId);
 
-    boolean existClothesByClothesId(Long clothesId);
-    boolean existClothesByClothesNickname(String clothesNickname);
+    boolean existClothesByClosetIdAndClothesId(Long closetId, Long clothesId);
+    boolean existClothesByClosetIdAndClothesNickname(Long closetId, String clothesNickname);
 
-    Clothes findClothes(Long clothesId);
-    List<Clothes> findAllClothes();
-    List<Clothes> searchClothesByClothesCondition(ClothesCondition clothesCondition);
-    List<Clothes> searchClothesBySearchKeyword(String searchKeyword);
+    Clothes findClothes(Long closetId, Long clothesId);
+    List<Clothes> findAllClothes(Long closetId);
+    List<Clothes> searchClothesByClosetIdAndClothesCondition(Long closetId, ClothesCondition clothesCondition);
+    List<Clothes> searchClothesByClosetIdAndSearchKeyword(Long closetId, String searchKeyword);
 }

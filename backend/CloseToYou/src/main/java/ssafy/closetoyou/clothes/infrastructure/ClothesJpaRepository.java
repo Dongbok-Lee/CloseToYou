@@ -12,17 +12,25 @@ import java.util.Optional;
 @Repository
 public interface ClothesJpaRepository extends JpaRepository<ClothesEntity,Integer> {
     void deleteClothesByClothesId(Long clothesId);
-    boolean existsByClothesIdAndIsDeleted(Long clothesId, boolean deleted);
-    boolean existsByNicknameAndIsDeleted(String nickname, boolean deleted);
-    Optional<ClothesEntity> findClothesByClothesIdAndIsDeleted(Long clothesId, boolean deleted);
+    boolean existsByClosetIdAndClothesIdAndIsDeleted(Long closetId, Long clothesId, boolean deleted);
+    boolean existsByClosetIdAndNicknameAndIsDeleted(Long closetId, String nickname, boolean deleted);
+    Optional<ClothesEntity> findClothesByClosetIdAndClothesIdAndIsDeleted(Long closetId, Long clothesId, boolean deleted);
+    Optional<List<ClothesEntity>> findAllByClosetIdAndIsDeleted(Long closetId, boolean deleted);
+
     @Query("select c from ClothesEntity c " +
             "where (:#{#clothesCondition.pattern} is null or c.pattern = :#{#clothesCondition.pattern}) " +
             "and (:#{#clothesCondition.color} is null or :#{#clothesCondition.color} = '' or c.color = :#{#clothesCondition.color}) " +
             "and (:#{#clothesCondition.type} is null or c.type = :#{#clothesCondition.type}) " +
-            "and c.isDeleted = false")
-    Optional<List<ClothesEntity>> searchClothesByClothesConditionAndIsDeleted(@Param("clothesCondition") ClothesCondition clothesCondition);
+            "and c.isDeleted = false " +
+            "and c.closetId = :#{#closetId}")
+    Optional<List<ClothesEntity>> searchClothesByClosetIdAndClothesConditionAndIsDeleted(@Param("closetId") Long closetId,
+                                                                              @Param("clothesCondition") ClothesCondition clothesCondition);
 
-    @Query("select c from ClothesEntity c where c.nickname like concat('%', :#{#searchKeyword},'%') and c.isDeleted = false")
-    Optional<List<ClothesEntity>> searchClothesBySearchKeywordAndIsDeleted(@Param("searchKeyword") String searchKeyword);
+
+    @Query("select c from ClothesEntity c where c.nickname like concat('%', :#{#searchKeyword},'%') " +
+            "and c.isDeleted = false " +
+            "and c.closetId = :#{#closetId}")
+    Optional<List<ClothesEntity>> searchClothesByClosetIdAndSearchKeywordAndIsDeleted(@Param("closetId") Long closetId,
+                                                                                      @Param("searchKeyword") String searchKeyword);
 
 }
