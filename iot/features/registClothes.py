@@ -28,13 +28,18 @@ def registClothes(pn532):
         text_to_speech(voice)
         return
 
+    print(uid)
     # else:
 
 
 if __name__ == "__main__":
+    print("########################################1")
     i2c = busio.I2C(board.SCL, board.SDA)
+    print("#######################################2")
     pn532 = PN532_I2C(i2c, debug=False)
+    print("#######################################3")
     ic, ver, rev, support = pn532.firmware_version
     pn532.SAM_configuration()
+    print("#######################################4")
     registClothes(pn532)
 
