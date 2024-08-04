@@ -20,14 +20,15 @@ class CompletionExecutor:
         with requests.post(self._host + '/testapp/v1/chat-completions/HCX-003',
                            headers=headers, json=completion_request, stream=True) as r:
 
-            print(r.json().get('result').get("message").get('content'))
+            data = r.json().get('result').get("message").get('content')
+            return data
 
 
 def request_find_clothes(question):
     completion_executor = CompletionExecutor(
         host='https://clovastudio.apigw.ntruss.com',
-        api_key='NTA0MjU2MWZlZTcxNDJiY620pTf5Anb8ensXdkrfOoi4MPjYpmDvpExa7YAK/vlp',
-        api_key_primary_val='xc8l7SqVmE98fw3DTXBDvRjvxKN8WGwtsaSp2fdl',
+        api_key='',
+        api_key_primary_val='',
         request_id='28016d47-a6f9-47b7-8dd6-f5106628d625'
     )
 
@@ -46,7 +47,7 @@ def request_find_clothes(question):
     }
 
     print(preset_text)
-    completion_executor.execute(request_data)
+    return completion_executor.execute(request_data)
 
-data = "[{'clothes_id': 1, 'nickname': '빨간 티셔츠', 'type': '티셔츠', 'location': 'a4', 'pattern': '없음', 'color': '빨강'}, {'clothes_id': 2, 'nickname': '이쁜이', 'type': '코트', 'location': 'a3', 'pattern': '없음', 'color': '파랑'}, {'clothes_id': 3, 'nickname': '노랑 티셔츠', 'type': '티셔츠', 'location': 'a2', 'pattern': '없음', 'color': '노랑'}, {'clothes_id': 4, 'nickname': '이동복', 'type': '바지', 'location': 'a2', 'pattern': '없음', 'color': '하양'}] 상의의 위치만 단독으로 출력해줘"
-request_find_clothes(data)
+# data = "[{'clothes_id': 1, 'nickname': '빨간 티셔츠', 'type': '티셔츠', 'location': 'a4', 'pattern': '없음', 'color': '빨강'}, {'clothes_id': 2, 'nickname': '이쁜이', 'type': '코트', 'location': 'a3', 'pattern': '없음', 'color': '파랑'}, {'clothes_id': 3, 'nickname': '노랑 티셔츠', 'type': '티셔츠', 'location': 'a2', 'pattern': '없음', 'color': '노랑'}, {'clothes_id': 4, 'nickname': '이동복', 'type': '바지', 'location': 'a2', 'pattern': '없음', 'color': '하양'}] 상의의 위치만 단독으로 출력해줘"
+# request_find_clothes(data)
