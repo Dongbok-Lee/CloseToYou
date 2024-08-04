@@ -4,7 +4,7 @@ from mysql.connector import Error
 import yaml
 import os
 
-def read_db_config(filename='../../config.yaml'):
+def read_db_config(filename='config.yaml'):
     """ YAML 설정 파일에서 DB 접속 정보를 읽어오는 함수 """
     # 상대 경로를 절대 경로로 변환
     base_path = os.path.abspath(os.path.dirname(__file__))
@@ -21,10 +21,6 @@ class MySQLDatabase:
         self.user = config.get('user')
         self.password = config.get('password')
         self.connection = None
-        print(self.host)
-        print(self.database)
-        print(self.user)
-        print(self.password)
 
     def connect(self):
         """ 데이터베이스에 연결 """
