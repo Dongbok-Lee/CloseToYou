@@ -23,7 +23,7 @@ def recognize_speech_from_mic():
                 # 띄어쓰기 단위로 문자열을 나누어 배열로 반환
                 words = text.split()
                 print(words)
-                return words
+                return text
 
             except sr.WaitTimeoutError:
                 print("마이크를 종료합니다.")
@@ -35,7 +35,6 @@ def recognize_speech_from_mic():
             except Exception as e:
                 print(f"An error occurred: {e}")
 
-recognize_speech_from_mic()
 
 # 사용 예시
 #if __name__ == "__main__":

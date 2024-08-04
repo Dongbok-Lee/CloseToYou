@@ -6,18 +6,16 @@ from speaker import text_to_speech
 
 def searchClothes():
     while True:
-        words = recognize_speech_from_mic()
-        if(words is None):
+        text = recognize_speech_from_mic()
+        if(text is None):
             voice="띠링"
             text_to_speech(voice)
             return
 
-        text = wordsToText(words)
         if(text=="옷 찾아 줘"):
             voice="어떤 옷을 찾아 드릴까요?"
             text_to_speech(voice)
-            words = recognize_speech_from_mic()
-            text=wordsToText(words)
+            text = recognize_speech_from_mic()
             voice=text+"는 A-3 에 위치해 있습니다."
             text_to_speech(voice)
 
