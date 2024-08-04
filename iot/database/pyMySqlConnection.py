@@ -24,5 +24,5 @@ def execute_query(query):
         connection.close()
     return result
 
-print(execute_query("insert into clothes(nickname, type, pattern, color, location) values ('하양 티셔츠', '티셔츠', '없음', '하양', 'a9')"))
-print(execute_query("select * from clothes"))
+# print(execute_query("insert into clothes(nickname, type, pattern, color, location) values ('하양 티셔츠', '티셔츠', '없음', '하양', 'a9')"))
+# print(execute_query("select * from clothes"))
