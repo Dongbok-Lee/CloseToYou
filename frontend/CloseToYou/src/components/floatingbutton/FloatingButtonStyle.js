@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
 export const ButtonContainer = styled.div`
   border-radius: 50%;
@@ -8,8 +8,8 @@ export const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${props => (props.isAddType ? '#FFFFFF' : '#FF6969')};
-  border: 1px solid #AAAAAA;
+  background-color: ${props => (props.isAddType ? "#FFFFFF" : "#FF6969")};
+  border: 1px solid #aaaaaa;
   cursor: pointer;
   position: relative;
   z-index: 1000;
@@ -17,7 +17,7 @@ export const ButtonContainer = styled.div`
 
   &:focus {
     outline: none;
-    border: 1px solid #AAAAAA;
+    border: 1px solid #aaaaaa;
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
 `;

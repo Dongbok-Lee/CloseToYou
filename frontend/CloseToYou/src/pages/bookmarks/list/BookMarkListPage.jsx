@@ -1,4 +1,3 @@
-
 import { BookMarkListPageContainer } from "./BookMarkListPageStyle";
 
 const BookMarkListPage = () => {

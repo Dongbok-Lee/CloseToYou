@@ -1,24 +1,26 @@
 import styled from "@emotion/styled";
 
-const TextInputStyle = styled.input`
+const TextareaStyle = styled.textarea`
   box-sizing: border-box;
 
   border-radius: 0.3125rem;
   border: 0.5px solid rgba(0, 0, 0, 1);
 
-  width: 18.75rem;
-  height: 3.125rem;
+  width: 17.8125rem;
+  min-height: 6.25rem;
 
   background-color: rgba(255, 255, 255, 1);
 
-  padding-left: 1.25rem;
+  padding: 0.94rem;
 
   color: rgba(0, 0, 0, 1);
 
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 400;
 
-  cursor: pointer;
+  overflow: hidden;
+
+  resize: none;
 
   &::placeholder {
     color: rgba(170, 170, 170, 1);
@@ -28,19 +30,6 @@ const TextInputStyle = styled.input`
     border: 3px solid rgba(255, 105, 105, 1);
     outline: none;
   }
-
-  ${({ textInputSize }) =>
-    textInputSize === "small" &&
-    `
-		width: 8.125rem;
-		height: 2.5rem;
-	`}
-
-  ${({ textInputSize }) =>
-    textInputSize === "medium" &&
-    `
-		width: 12.5rem;
-	`}
 `;
 
-export default TextInputStyle;
+export default TextareaStyle;
