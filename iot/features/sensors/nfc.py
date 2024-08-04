@@ -18,15 +18,16 @@ def set_nfc():
     pn532.SAM_configuration()
 
 
-def read_nfc():
+def read_nfc(pn532):
     print("Waiting for RFID/NFC card...")
     while True:
         # Check if a card is available to read
-        uid = pn532.read_passive_target(timeout=0.5)
+        uid = pn532.read_passive_target(timeout=5)
         print(".", end="")
         # Try again if no card is available.
         if uid is None:
-            continue
+            return None
 
         print("Found card with UID:", [hex(i) for i in uid])
         return uid
+
