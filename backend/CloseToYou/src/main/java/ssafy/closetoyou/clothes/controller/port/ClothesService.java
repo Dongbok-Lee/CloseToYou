@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface ClothesService {
     Long addClothes(Long userId, ClothesRequest clothesRequest);
-    void updateClothes(Long clothesId, ClothesUpdateRequest clothesUpdateRequest);
-    void removeClothes(Long clothesId);
+    void updateClothes(Long userId, Long clothesId, ClothesUpdateRequest clothesUpdateRequest);
+    void removeClothes(Long userId, Long clothesId);
 
-    ClothesResponse findClothes(Long clothesId);
-    List<ClothesResponse> findAllClothes();
-    List<ClothesResponse> searchClothesByClothesCondition(ClothesCondition clothesCondition);
-    List<ClothesResponse> searchClothesBySearchKeyword(String searchKeyword);
+    ClothesResponse findClothes(Long userId, Long clothesId);
+    List<ClothesResponse> findAllClothes(Long userId);
+    List<ClothesResponse> searchClothesByClothesCondition(Long userId, ClothesCondition clothesCondition);
+    List<ClothesResponse> searchClothesBySearchKeyword(Long userId, String searchKeyword);
 }
