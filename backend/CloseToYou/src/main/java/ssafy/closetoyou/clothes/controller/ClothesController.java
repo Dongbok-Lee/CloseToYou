@@ -36,7 +36,8 @@ public class ClothesController {
 
     @PatchMapping("/{clothesId}")
     public ResponseEntity<SuccessResponse<Long>> updateClothes(Authentication authentication,
-                                                               @Valid @RequestBody ClothesUpdateRequest clothesUpdateRequest, @PathVariable Long clothesId) {
+                                                               @Valid @RequestBody ClothesUpdateRequest clothesUpdateRequest,
+                                                               @PathVariable Long clothesId) {
         Long userId = ((CustomUserDetail) authentication.getPrincipal()).getUser().getUserId();
         clothesService.updateClothes(userId, clothesId, clothesUpdateRequest);
         return ResponseEntity.ok()
