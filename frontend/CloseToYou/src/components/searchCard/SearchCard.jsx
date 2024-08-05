@@ -1,8 +1,13 @@
 import SearchCardStyle from './SearchCardStyle';
 
-const SearchCard = ({ searchCardName, searchCardLocation, onTouchStart }) => {
+const SearchCard = ({ searchCardName, searchCardLocation }) => {
+
+    const handleTouchSearchCard = () => {
+
+    }
+
     return(
-        <SearchCardStyle onTouchStart={ onTouchStart } tabIndex={0}>
+        <SearchCardStyle onTouchStart={ handleTouchSearchCard } tabIndex={0}>
             <div className="search-card-left-box">
                 <div className="search-card-icon-box">
                     <div className="search-card-icon"></div>
