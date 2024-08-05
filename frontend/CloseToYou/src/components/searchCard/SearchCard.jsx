@@ -1,10 +1,6 @@
 import SearchCardStyle from './SearchCardStyle';
 
-const SearchCard = ({ searchCardName, searchCardLocation }) => {
-
-    const handleTouchSearchCard = () => {
-
-    }
+const SearchCard = ({ searchCardName, searchCardLocation, handleTouchSearchCard }) => {
 
     return(
         <SearchCardStyle onTouchStart={ handleTouchSearchCard } tabIndex={0}>
