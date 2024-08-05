@@ -7,7 +7,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
-import ssafy.closetoyou.global.error.exception.ErrorCode;
+import ssafy.closetoyou.global.error.errorcode.CommonErrorCode;
+import ssafy.closetoyou.global.error.errorcode.ErrorCode;
+import ssafy.closetoyou.global.error.errorcode.UserErrorCode;
 
 import java.io.IOException;
 
@@ -21,12 +23,19 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
             ErrorCode errorCode;
 
             log.debug(" log: exception: {}", exception);
-
         /*
         토큰 없는 경우
         */
+            if (exception == null) {
+                errorCode = UserErrorCode.NO_TOKEN_EXCEPTION;
+                setResponse(response, errorCode);
+                return;
+            }
+        /*
+        해당하는 토큰 없는 경우
+        */
             if (authException == null) {
-                errorCode = ErrorCode.NO_TOKEN_EXCEPTION;
+                errorCode = UserErrorCode.NO_MATCH_TOKEN_EXCEPTION;
                 setResponse(response, errorCode);
                 return;
             }
@@ -34,8 +43,8 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
         /*
         토큰이 이상한 경우
         */
-            if (exception.equals(ErrorCode.INVALID_TOKEN.name())) {
-                errorCode = ErrorCode.INVALID_TOKEN;
+            if (exception.equals(UserErrorCode.INVALID_TOKEN.name())) {
+                errorCode = UserErrorCode.INVALID_TOKEN;
                 setResponse(response, errorCode);
                 return;
             }
@@ -43,8 +52,8 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
         /*
         토큰이 만료된 경우
         */
-            if (exception.equals(ErrorCode.EXPIRED_TOKEN_EXCEPTION.name())) {
-                errorCode = ErrorCode.EXPIRED_TOKEN_EXCEPTION;
+            if (exception.equals(UserErrorCode.EXPIRED_TOKEN_EXCEPTION.name())) {
+                errorCode = UserErrorCode.EXPIRED_TOKEN_EXCEPTION;
                 setResponse(response, errorCode);
             }
         }

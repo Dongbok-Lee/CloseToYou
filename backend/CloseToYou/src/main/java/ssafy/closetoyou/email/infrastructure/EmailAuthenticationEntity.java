@@ -11,10 +11,11 @@ import java.time.LocalDateTime;
 import static jakarta.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
-@Entity(name="emailAuthentication")
-@Getter
+@Entity(name="emailAuthentications")
+@Getter @Setter
 @NoArgsConstructor(access = PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
+@ToString
 public class EmailAuthenticationEntity {
     @Id
     @GeneratedValue(strategy = IDENTITY)

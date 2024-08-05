@@ -1,9 +1,10 @@
-package ssafy.closetoyou.user.domain;
+package ssafy.closetoyou.user.controller.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import ssafy.closetoyou.user.domain.User;
 
 import static lombok.AccessLevel.PROTECTED;
 
@@ -13,8 +14,10 @@ public class UserSignUp {
 
     @NotBlank
     private String nickname;
+
     @NotBlank
     private String password;
+
     @Email
     @NotBlank
     private String email;

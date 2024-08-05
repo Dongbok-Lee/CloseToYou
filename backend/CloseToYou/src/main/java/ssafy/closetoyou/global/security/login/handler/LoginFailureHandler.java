@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
-import ssafy.closetoyou.global.error.ErrorResponse;
+import ssafy.closetoyou.global.common.response.ErrorResponse;
 
 import java.io.IOException;
 
