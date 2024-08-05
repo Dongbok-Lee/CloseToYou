@@ -1,8 +1,13 @@
 import ClothesCardStyle from './ClothesCardStyle';
 
-const ClothesCard = ({ onTouchStart }) => {
+const ClothesCard = () => {
+
+    const handleTouchClothesCard = () => {
+        
+    }
+
     return(
-        <ClothesCardStyle onTouchStart={ onTouchStart }>
+        <ClothesCardStyle onTouchStart={ handleTouchClothesCard }>
             <div className="clothes-card-icon-box" tabIndex={0}>
                 <div className="clothes-card-icon"></div>
             </div>
