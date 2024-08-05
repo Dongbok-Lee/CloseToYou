@@ -8,10 +8,7 @@ import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import ssafy.closetoyou.clothes.domain.Clothes;
-import ssafy.closetoyou.clothes.domain.Color;
-import ssafy.closetoyou.clothes.domain.Pattern;
-import ssafy.closetoyou.clothes.domain.Type;
+import ssafy.closetoyou.clothes.domain.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -27,17 +24,17 @@ public class ClothesEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long clothesId;
     private Long closetId;
-
-    @Column(unique = true)
+    private Long nfcId;
+    private String location;
     private String nickname;
     private String type;
     private String pattern;
     private String color;
     private String size;
-    private String texture;
+    private String season;
     private String memo;
+
     private int wearingCount;
-    private String location;
     private boolean isDeleted;
 
     @CreatedDate
@@ -47,58 +44,71 @@ public class ClothesEntity {
     private LocalDateTime updatedDateTime;
     private LocalDate lastWornDate;
 
+    private String imageUrl;
+
     @Builder
-    public ClothesEntity(Long clothesId, Long closetId, String nickname, String type, String pattern, String color, String size, String texture, String memo, int wearingCount, String location, boolean isDeleted, LocalDateTime createdDateTime, LocalDateTime updatedDateTime, LocalDate lastWornDate) {
+    public ClothesEntity(Long clothesId, Long closetId, Long nfcId, String location, String nickname, String type, String pattern, String color, String size, String season, String memo, int wearingCount, boolean isDeleted, LocalDateTime createdDateTime, LocalDateTime updatedDateTime, LocalDate lastWornDate, String imageUrl) {
         this.clothesId = clothesId;
         this.closetId = closetId;
+        this.nfcId = nfcId;
+        this.location = location;
         this.nickname = nickname;
         this.type = type;
         this.pattern = pattern;
         this.color = color;
         this.size = size;
-        this.texture = texture;
+        this.season = season;
         this.memo = memo;
-        this.wearingCount = wearingCount;
-        this.location = location;
-        this.isDeleted = isDeleted;
+        this.wearingCount = 0;
+        this.isDeleted = false;
         this.createdDateTime = createdDateTime;
         this.updatedDateTime = updatedDateTime;
         this.lastWornDate = lastWornDate;
+        this.imageUrl = imageUrl;
     }
+
 
     public static ClothesEntity fromModel(Clothes clothes) {
         return ClothesEntity.builder()
                 .clothesId(clothes.getClothesId())
                 .closetId(clothes.getClosetId())
+                .nfcId(clothes.getNfcId())
+                .location(clothes.getLocation())
                 .nickname(clothes.getNickname())
                 .type(String.valueOf(clothes.getType()))
                 .pattern(String.valueOf(clothes.getPattern()))
                 .color(String.valueOf(clothes.getColor()))
                 .size(clothes.getSize())
-                .texture(clothes.getTexture())
+                .season(String.valueOf(clothes.getSeason()))
                 .memo(clothes.getMemo())
-                .wearingCount(0)
-                .location(clothes.getLocation())
-                .isDeleted(false)
+                .wearingCount(clothes.getWearingCount())
+                .isDeleted(clothes.getIsDeleted())
+                .createdDateTime(clothes.getCreatedDateTime())
+                .updatedDateTime(clothes.getUpdatedDateTime())
+                .lastWornDate(clothes.getLastWornDate())
+                .imageUrl(clothes.getImageUrl())
                 .build();
     }
 
     public Clothes toModel() {
         return Clothes.builder()
-                .clothesId(this.getClothesId())
-                .closetId(this.getClosetId())
-                .nickname(this.getNickname())
-                .type(Type.valueOf(this.getType()))
-                .pattern(Pattern.valueOf(this.getPattern()))
-                .color(Color.valueOf(this.getColor()))
-                .size(this.getSize())
-                .texture(this.getTexture())
-                .memo(this.getMemo())
-                .wearingCount(this.getWearingCount())
-                .location(this.getLocation())
-                .createdDateTime(this.getCreatedDateTime())
-                .updatedDateTime(this.getUpdatedDateTime())
-                .lastWornDate(this.getLastWornDate())
+                .clothesId(clothesId)
+                .closetId(closetId)
+                .nfcId(nfcId)
+                .nickname(nickname)
+                .type(Type.valueOf(type))
+                .pattern(Pattern.valueOf(pattern))
+                .color(Color.valueOf(color))
+                .season(Season.valueOf(season))
+                .size(size)
+                .memo(memo)
+                .wearingCount(wearingCount)
+                .location(location)
+                .isDeleted(isDeleted)
+                .createdDateTime(createdDateTime)
+                .updatedDateTime(updatedDateTime)
+                .lastWornDate(lastWornDate)
+                .imageUrl(imageUrl)
                 .build();
     }
 }
