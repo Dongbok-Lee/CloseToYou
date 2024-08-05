@@ -1,10 +1,6 @@
 import ClothesCardStyle from './ClothesCardStyle';
 
-const ClothesCard = () => {
-
-    const handleTouchClothesCard = () => {
-        
-    }
+const ClothesCard = ( handleTouchClothesCard ) => {
 
     return(
         <ClothesCardStyle onTouchStart={ handleTouchClothesCard }>
