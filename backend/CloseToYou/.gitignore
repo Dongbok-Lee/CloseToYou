@@ -298,6 +298,8 @@ gradle-app.setting
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,java,intellij,macos,git,gradle,maven
 
+.idea/**
+
 # jwt
 application-jwt.yml
 application-oauth.yml
