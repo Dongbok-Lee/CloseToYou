@@ -39,7 +39,7 @@ const SelectStyle = styled.div`
             outline: none;
 
             .select-up-icon {
-                background: url(src/assets/icons/up-arrow.svg) center no-repeat;
+                background: url(src/assets/icons/etc/up-arrow.svg) center no-repeat;
             }
         }
     }   
@@ -48,7 +48,7 @@ const SelectStyle = styled.div`
         width: 2.31388rem;
         height: 100%;
 
-        background: url(src/assets/icons/down-arrow.svg) center no-repeat;
+        background: url(src/assets/icons/etc/down-arrow.svg) center no-repeat;
     }
 
    .select-list {
