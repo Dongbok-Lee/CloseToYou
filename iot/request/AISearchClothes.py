@@ -1,5 +1,6 @@
 import requests
-
+import os
+from dotenv import load_dotenv
 
 class CompletionExecutor:
     def __init__(self, host, api_key, api_key_primary_val, request_id):
@@ -25,11 +26,12 @@ class CompletionExecutor:
 
 
 def request_find_clothes(question):
+    load_dotenv('../env/data.env')
     completion_executor = CompletionExecutor(
-        host='https://clovastudio.apigw.ntruss.com',
-        api_key='',
-        api_key_primary_val='',
-        request_id='28016d47-a6f9-47b7-8dd6-f5106628d625'
+        host=os.getenv('aihost'),
+        api_key=os.getenv('api_key'),
+        api_key_primary_val=os.getenv('api_key_primary_val'),
+        request_id=os.getenv('request_id')
     )
 
     preset_text = [{"role":"system","content":""},{"role":"user","content":question}]
@@ -43,11 +45,10 @@ def request_find_clothes(question):
         'repeatPenalty': 5.0,
         'stopBefore': [],
         'includeAiFilters': True,
-        'seed': 0
+        'seed': 1 
     }
 
     print(preset_text)
     return completion_executor.execute(request_data)
 
 # data = "[{'clothes_id': 1, 'nickname': '빨간 티셔츠', 'type': '티셔츠', 'location': 'a4', 'pattern': '없음', 'color': '빨강'}, {'clothes_id': 2, 'nickname': '이쁜이', 'type': '코트', 'location': 'a3', 'pattern': '없음', 'color': '파랑'}, {'clothes_id': 3, 'nickname': '노랑 티셔츠', 'type': '티셔츠', 'location': 'a2', 'pattern': '없음', 'color': '노랑'}, {'clothes_id': 4, 'nickname': '이동복', 'type': '바지', 'location': 'a2', 'pattern': '없음', 'color': '하양'}] 상의의 위치만 단독으로 출력해줘"
-# request_find_clothes(data)

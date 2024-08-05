@@ -1,14 +1,17 @@
 import pymysql.cursors
+import os
+from dotenv import load_dotenv
 
 # 데이터베이스 연결 정보 설정
 
 
 def execute_query(query):
+    load_dotenv('../env/data.env')
     connection = pymysql.connect(
-        host='127.0.0.1',       # 데이터베이스 호스트 이름 또는 IP 주소
-        user='root',   # 데이터베이스 사용자 이름
-        password='typoon0820', # 데이터베이스 사용자 비밀번호
-        database='ctytest', # 연결할 데이터베이스 이름
+        host=os.getenv('dbhost'),  # 데이터베이스 호스트 이름 또는 IP 주소
+        user=os.getenv('user'),   # 데이터베이스 사용자 이름
+        password=os.getenv('password'), # 데이터베이스 사용자 비밀번호
+        database=os.getenv('database'), # 연결할 데이터베이스 이름
         cursorclass=pymysql.cursors.DictCursor
     )
     result = ""
