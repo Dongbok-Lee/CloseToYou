@@ -4,9 +4,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import ssafy.closetoyou.email.infrastructure.EmailAuthenticationEntity;
 import ssafy.closetoyou.global.common.util.RandomHolder;
+import ssafy.closetoyou.global.error.errorcode.UserErrorCode;
 import ssafy.closetoyou.global.error.exception.CloseToYouException;
-import ssafy.closetoyou.global.error.exception.ErrorCode;
+import ssafy.closetoyou.global.error.errorcode.CommonErrorCode;
 import ssafy.closetoyou.email.controller.port.EmailAuthenticationService;
 import ssafy.closetoyou.email.domain.EmailAuthentication;
 import ssafy.closetoyou.email.domain.EmailAuthenticationCheck;
@@ -28,7 +30,7 @@ public class EmailAuthenticationServiceImpl implements EmailAuthenticationServic
             emailAuthentication = emailAuthenticationRepository.findEmailAuthenticationCode(email);
 
             if(emailAuthentication.isVerified()) {
-                throw new CloseToYouException(ErrorCode.ALREADY_AUTHENTICATED_CODE);
+                throw new CloseToYouException(UserErrorCode.ALREADY_AUTHENTICATED_CODE);
             }
         }
 
@@ -37,18 +39,24 @@ public class EmailAuthenticationServiceImpl implements EmailAuthenticationServic
     }
 
     @Override
+    public void checkEmailAuthenticated(String email) {
+        if (!emailAuthenticationRepository.isEmailAuthenticated(email)) {
+            throw new CloseToYouException(UserErrorCode.NOT_AUTHENTICATED);
+        }
+    }
+
+    @Override
     public void checkAuthenticationCode(EmailAuthenticationCheck emailAuthenticationCheck) {
 
         int authenticationCode = emailAuthenticationCheck.getCode();
         String email = emailAuthenticationCheck.getEmail();
-
         EmailAuthentication emailAuthentication = findEmailAuthentication(email);
+
         emailAuthentication.verifyCode(authenticationCode);
-        emailAuthenticationRepository.save(emailAuthentication);
-        throw new CloseToYouException(ErrorCode.INVALID_CERTIFICATION_NUMBER);
+        emailAuthenticationRepository.setVerifiedAndSave(emailAuthentication);
     }
 
-    private EmailAuthentication findEmailAuthentication(String email){
+    private EmailAuthentication findEmailAuthentication(String email) {
         return emailAuthenticationRepository.findEmailAuthenticationCode(email);
     }
 }
