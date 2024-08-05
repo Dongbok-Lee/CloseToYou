@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
 export const SearchBoxContainer = styled.div`
   width: 80%;
@@ -6,8 +6,8 @@ export const SearchBoxContainer = styled.div`
   display: flex;
   align-items: center;
   border-radius: 0.625rem;
-  border: ${(props) => (props.isFocused ? '3px solid #FF6969' : '2px solid #FF6969')};
-  background: #FFF;
+  border: ${props => (props.isFocused ? "3px solid #FF6969" : "2px solid #FF6969")};
+  background: #fff;
   padding: 0 1rem;
   margin: 0 auto;
 
@@ -21,13 +21,15 @@ export const SearchBoxContainer = styled.div`
   }
 
   .IconContainer {
-    width: ${(props) => (props.isFocused ? '35px' : '30px')};
-    height: ${(props) => (props.isFocused ? '35px' : '30px')};
+    width: ${props => (props.isFocused ? "35px" : "30px")};
+    height: ${props => (props.isFocused ? "35px" : "30px")};
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: width 0.3s, height 0.3s;
+    transition:
+      width 0.3s,
+      height 0.3s;
   }
 
   .icon {

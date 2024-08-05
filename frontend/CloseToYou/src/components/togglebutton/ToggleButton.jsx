@@ -1,5 +1,5 @@
-import  { useState } from 'react';
-import { ToggleContainer, ToggleCircle } from './ToggleButtonStyle';
+import { useState } from "react";
+import { ToggleContainer, ToggleCircle } from "./ToggleButtonStyle";
 
 const ToggleButton = () => {
   const [isOn, setIsOn] = useState(false);
