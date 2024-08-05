@@ -1,10 +1,7 @@
 package ssafy.closetoyou.bookmark.infrastructure.bookmarkinformation;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -16,6 +13,7 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @EntityListeners(AuditingEntityListener.class)
+@RequiredArgsConstructor
 public class BookmarkInformationEntity {
 
     @Id

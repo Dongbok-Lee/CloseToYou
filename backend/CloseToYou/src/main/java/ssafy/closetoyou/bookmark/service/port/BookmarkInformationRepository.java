@@ -4,4 +4,5 @@ import ssafy.closetoyou.bookmark.infrastructure.bookmarkinformation.BookmarkInfo
 
 public interface BookmarkInformationRepository {
     BookmarkInformationEntity saveBookmarkInformation(BookmarkInformationEntity bookmarkInformationEntity);
+    void deleteBookmarkInformation(Long bookmarkId, Long clothesId);
 }

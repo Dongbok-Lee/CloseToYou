@@ -15,4 +15,9 @@ public class BookmarkInformationRepositoryImpl implements BookmarkInformationRep
     public BookmarkInformationEntity saveBookmarkInformation(BookmarkInformationEntity bookmarkInformationEntity) {
         return bookmarkInformationJpaRepository.save(bookmarkInformationEntity);
     }
+
+    @Override
+    public void deleteBookmarkInformation(Long bookmarkId, Long clothesId) {
+        bookmarkInformationJpaRepository.deleteByBookmarkIdAndClothesId(bookmarkId, clothesId);
+    }
 }
