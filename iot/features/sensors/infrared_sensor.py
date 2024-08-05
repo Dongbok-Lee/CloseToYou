@@ -1,23 +1,33 @@
-from RPi import GPIO
+import time
+import board
+import digitalio
 
 
-def set_infrared_sensor(pin_number):
-	GPIO.setmode(GPIO.BCM)
+sensor1 = digitalio.DigitalInOut(board.D4)
+sensor2 = digitalio.DigitalInOut(board.D17)
+sensor3 = digitalio.DigitalInOut(board.D18)
+sensor4 = digitalio.DigitalInOut(board.D22)
+sensor5 = digitalio.DigitalInOut(board.D23)
+sensor1.direction = digitalio.Direction.INPUT
+sensor2.direction = digitalio.Direction.INPUT
+sensor3.direction = digitalio.Direction.INPUT
+sensor4.direction = digitalio.Direction.INPUT
+sensor5.direction = digitalio.Direction.INPUT
 
-	sensor = pin_number
 
-	GPIO.setup(sensor, GPIO.IN)
-
-
-def check_infrared_sensor(pin_number):
-	return GPIO.input(pin_number)
+def get_all_value():
+    return [sensor1.value, sensor2.value, sensor3.value, sensor4.value, sensor5.value]
 
 
-def get_all_not_active_sensor(pin_numbers):
-	
-	infrared_sensor = []
-	for i in pin_numbers:
-		if GPIO.input(i) == 0:
-			infrared_sensor.append(i)
+def get_inactive_value():
+    values = get_all_value()
+    result = []
+    for i in range(1, 6): 
+        if values[i - 1]:
+            result.append(i - 1)
+    return result
 
-	return infrared_sensor
+
+def get_value(sensor_num):
+    return get_all_value()[sensor_num]
+
