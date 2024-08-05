@@ -2,16 +2,22 @@ package ssafy.closetoyou.bookmark.domain;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Getter
 public class Bookmark {
     private Long bookmarkId;
+    @Setter
     private String nickname;
     private Long userId;
+
+    @Setter
     private Boolean isDeleted;
     private LocalDateTime createdDateTime;
+
+    @Setter
     private LocalDateTime updateDateTime;
 
     public void setUpdateDateTime() {

@@ -6,12 +6,22 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ssafy.closetoyou.bookmark.controller.port.BookmarkService;
 import ssafy.closetoyou.bookmark.controller.request.BookmarkRequest;
+import ssafy.closetoyou.bookmark.controller.response.BookmarkResponse;
 import ssafy.closetoyou.bookmark.domain.Bookmark;
 import ssafy.closetoyou.bookmark.infrastructure.bookmarkinformation.BookmarkInformationEntity;
 import ssafy.closetoyou.bookmark.service.port.BookmarkInformationRepository;
 import ssafy.closetoyou.bookmark.service.port.BookmarkRepository;
+import ssafy.closetoyou.closet.controller.port.ClosetService;
+import ssafy.closetoyou.closet.service.ClosetServiceImpl;
+import ssafy.closetoyou.closet.service.port.ClosetRepository;
+import ssafy.closetoyou.clothes.controller.response.ClothesResponse;
+import ssafy.closetoyou.clothes.service.port.ClothesRepository;
 import ssafy.closetoyou.global.error.errorcode.BookmarkErrorCode;
+import ssafy.closetoyou.global.error.errorcode.ClothesErrorCode;
 import ssafy.closetoyou.global.error.exception.CloseToYouException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -21,26 +31,26 @@ public class BookmarkServiceImpl implements BookmarkService {
 
     private final BookmarkRepository bookmarkRepository;
     private final BookmarkInformationRepository bookmarkInformationRepository;
+    private final ClothesRepository clothesRepository;
+    private final ClosetService closetService;
 
     @Override
     public Long addBookmark(Long userId, BookmarkRequest bookmarkRequest) {
 
-        if (bookmarkRepository.existsNicknameByUserIdAndNickname(userId, bookmarkRequest.getNickname())) {
-            throw new CloseToYouException(BookmarkErrorCode.DUPLICATED_BOOKMARK_NICKNAME);
-        }
+        checkNicknameDuplicate(userId, bookmarkRequest.getNickname());
+        checkAllClothesExists(userId, bookmarkRequest.getClothesIds());
 
         Bookmark bookmark = Bookmark.builder()
                 .nickname(bookmarkRequest.getNickname())
                 .userId(userId)
                 .build();
 
-        Long bookmarkId = bookmarkRepository.saveBookmark(bookmark).getBookmarkId();
+        bookmark = bookmarkRepository.saveBookmark(bookmark);
+        log.info("bookmark id: {}", bookmark.getBookmarkId());
+        Long bookmarkId = bookmark.getBookmarkId();
 
         for (Long clothesId : bookmarkRequest.getClothesIds()) {
-            BookmarkInformationEntity bookmarkInformationEntity = BookmarkInformationEntity.builder()
-                    .bookmarkId(bookmarkId)
-                    .clothesId(clothesId)
-                    .build();
+            BookmarkInformationEntity bookmarkInformationEntity = getBookmarkInformationEntity(clothesId, bookmarkId);
             bookmarkInformationRepository.saveBookmarkInformation(bookmarkInformationEntity);
         }
 
@@ -48,49 +58,118 @@ public class BookmarkServiceImpl implements BookmarkService {
     }
 
     @Override
-    public Long addBookmarkInformation(Long userId, Long bookmarkId, Long clothesId) {
+    public void addBookmarkInformation(Long userId, Long bookmarkId, Long clothesId) {
 
-        log.info("user: {}, bookmarkId: {}, clothesId: {}", userId, bookmarkId, clothesId);
+        checkBookmarkExists(userId, bookmarkId);
 
-        if (!bookmarkRepository.existsBookmarkByUserIdAndBookmarkId(userId, bookmarkId)) {
-            throw new CloseToYouException(BookmarkErrorCode.NO_BOOKMARK_EXCEPTION);
-        }
+        setUpdateTime(userId, bookmarkId);
 
-        log.info("업데이트 시간을 변경합니다.");
-
-        // 업데이트 시간 변경
-        Bookmark bookmark = bookmarkRepository.findBookmarkByUserIdAndBookmarkId(userId, bookmarkId);
-        bookmark.setUpdateDateTime();
-        bookmarkRepository.saveBookmark(bookmark);
-
-
-        // bookmarkInformation 생성
-        BookmarkInformationEntity bookmarkInformationEntity = BookmarkInformationEntity.builder()
-                .bookmarkId(bookmarkId)
-                .clothesId(clothesId)
-                .build();
+        BookmarkInformationEntity bookmarkInformationEntity = getBookmarkInformationEntity(clothesId, bookmarkId);
 
         bookmarkInformationRepository.saveBookmarkInformation(bookmarkInformationEntity);
+    }
 
-        return bookmark.getBookmarkId();
+
+    @Override
+    public void deleteBookmarkInformation(Long userId, Long bookmarkId, Long clothesId) {
+
+        checkBookmarkExists(userId, bookmarkId);
+
+        setUpdateTime(userId, bookmarkId);
+
+        bookmarkInformationRepository.deleteBookmarkInformationByBookmarkIdAndClothesId(bookmarkId, clothesId);
     }
 
     @Override
-    public Long deleteBookmarkInformation(Long userId, Long bookmarkId, Long clothesId) {
+    public void updateBookmarkNickname(Long userId, Long bookmarkId, String nickname) {
 
-        log.info("user: {}, bookmarkId: {}, clothesId: {}", userId, bookmarkId, clothesId);
+        checkNicknameDuplicate(userId, nickname);
+        checkBookmarkExists(userId, bookmarkId);
 
+        Bookmark bookmark = bookmarkRepository.findBookmarkByUserIdAndBookmarkId(userId, bookmarkId);
+        bookmark.setNickname(nickname);
+        bookmarkRepository.saveBookmark(bookmark);
+    }
+
+    @Override
+    public void deleteBookmark(Long userId, Long bookmarkId) {
+
+        checkBookmarkExists(userId, bookmarkId);
+
+        Bookmark bookmark = bookmarkRepository.findBookmarkByUserIdAndBookmarkId(userId, bookmarkId);
+        bookmark.setIsDeleted(true);
+        bookmarkRepository.saveBookmark(bookmark);
+
+        bookmarkInformationRepository.deleteBookmarkInformationByBookmarkId(bookmarkId);
+    }
+
+    @Override
+    public BookmarkResponse findBookmark(Long userId, Long bookmarkId) {
+
+        checkBookmarkExists(userId, bookmarkId);
+
+        Bookmark bookmark = bookmarkRepository.findBookmarkByUserIdAndBookmarkId(userId, bookmarkId);
+
+        List<ClothesResponse> clothesResponseList = new ArrayList<>();
+
+        List<Long> clothesIds = bookmarkInformationRepository.findClothesIdsByBookmarkId(bookmarkId);
+        for (Long clothesId: clothesIds) {
+            clothesResponseList.add(ClothesResponse.fromModel(clothesRepository.findClothes(closetService.getClosetIdByUserId(userId), clothesId)));
+        }
+
+        return BookmarkResponse.builder()
+                .bookmarkId(bookmarkId)
+                .nickname(bookmark.getNickname())
+                .userId(userId)
+                .isDeleted(bookmark.getIsDeleted())
+                .createDateTime(bookmark.getCreatedDateTime())
+                .updateDateTime(bookmark.getUpdateDateTime())
+                .clothes(clothesResponseList)
+                .build();
+    }
+
+    @Override
+    public List<BookmarkResponse> findAllBookmarks(Long userId) {
+        List<Bookmark> bookmarks = bookmarkRepository.findBookmarksByUserId(userId);
+        List<BookmarkResponse> bookmarkResponseList = new ArrayList<>();
+        for (Bookmark bookmark : bookmarks) {
+            log.info("bookmark id: {}", bookmark.getBookmarkId());
+            bookmarkResponseList.add(findBookmark(userId, bookmark.getBookmarkId()));
+        }
+        return bookmarkResponseList;
+    }
+
+    private void checkAllClothesExists(Long userId, List<Long> clothesIds) {
+        for (Long clothesId : clothesIds) {
+            if (!clothesRepository.existClothesByClosetIdAndClothesId(closetService.getClosetIdByUserId(userId), clothesId)) {
+                throw new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION);
+            }
+        }
+    }
+
+    public void checkBookmarkExists(Long userId, Long bookmarkId) {
         if (!bookmarkRepository.existsBookmarkByUserIdAndBookmarkId(userId, bookmarkId)) {
             throw new CloseToYouException(BookmarkErrorCode.NO_BOOKMARK_EXCEPTION);
         }
+    }
 
-        // 업데이트 시간 변경
+    public void checkNicknameDuplicate(Long userId, String nickname) {
+        if (bookmarkRepository.existsNicknameByUserIdAndNickname(userId, nickname)) {
+            throw new CloseToYouException(BookmarkErrorCode.DUPLICATED_BOOKMARK_NICKNAME);
+        }
+    }
+
+    private void setUpdateTime(Long userId, Long bookmarkId) {
         Bookmark bookmark = bookmarkRepository.findBookmarkByUserIdAndBookmarkId(userId, bookmarkId);
         bookmark.setUpdateDateTime();
         bookmarkRepository.saveBookmark(bookmark);
-
-        bookmarkInformationRepository.deleteBookmarkInformation(bookmarkId, clothesId);
-
-        return bookmark.getBookmarkId();
     }
+
+    private static BookmarkInformationEntity getBookmarkInformationEntity(Long clothesId, Long bookmarkId) {
+        return BookmarkInformationEntity.builder()
+                .bookmarkId(bookmarkId)
+                .clothesId(clothesId)
+                .build();
+    }
+
 }

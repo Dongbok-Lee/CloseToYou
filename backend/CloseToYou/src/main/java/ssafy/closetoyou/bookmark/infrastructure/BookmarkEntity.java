@@ -35,7 +35,7 @@ public class BookmarkEntity {
         this.bookmarkId = bookmarkId;
         this.nickname = nickname;
         this.userId = userId;
-        this.isDeleted = false;
+        this.isDeleted = isDeleted;
         this.createdDateTime = createdDateTime;
         this.updateDateTime = updateDateTime;
     }
