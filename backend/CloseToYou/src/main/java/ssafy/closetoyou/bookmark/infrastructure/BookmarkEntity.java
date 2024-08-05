@@ -1,10 +1,7 @@
 package ssafy.closetoyou.bookmark.infrastructure;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -18,12 +15,12 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @EntityListeners(AuditingEntityListener.class)
+@NoArgsConstructor
 public class BookmarkEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bookmarkId;
     private String nickname;
-    private BookmarkCategory category;
     private Long userId;
     private Boolean isDeleted = false;
 
@@ -34,12 +31,11 @@ public class BookmarkEntity {
     private LocalDateTime updateDateTime;
 
     @Builder
-    public BookmarkEntity(Long bookmarkId, String nickname, BookmarkCategory category, Long userId, Boolean isDeleted, LocalDateTime createdDateTime, LocalDateTime updateDateTime) {
+    public BookmarkEntity(Long bookmarkId, String nickname, Long userId, Boolean isDeleted, LocalDateTime createdDateTime, LocalDateTime updateDateTime) {
         this.bookmarkId = bookmarkId;
         this.nickname = nickname;
-        this.category = category;
         this.userId = userId;
-        this.isDeleted = isDeleted;
+        this.isDeleted = false;
         this.createdDateTime = createdDateTime;
         this.updateDateTime = updateDateTime;
     }
@@ -48,9 +44,8 @@ public class BookmarkEntity {
         return BookmarkEntity.builder()
                 .bookmarkId(bookmark.getBookmarkId())
                 .nickname(bookmark.getNickname())
-                .category(bookmark.getCategory())
                 .userId(bookmark.getUserId())
-                .isDeleted(false)
+                .isDeleted(bookmark.getIsDeleted())
                 .createdDateTime(bookmark.getCreatedDateTime())
                 .updateDateTime(bookmark.getUpdateDateTime())
                 .build();
@@ -60,7 +55,6 @@ public class BookmarkEntity {
         return Bookmark.builder()
                 .bookmarkId(bookmarkId)
                 .nickname(nickname)
-                .category(category)
                 .userId(userId)
                 .isDeleted(isDeleted)
                 .createdDateTime(createdDateTime)
