@@ -82,7 +82,7 @@ public class ClothesEntity {
                 .season(String.valueOf(clothes.getSeason()))
                 .memo(clothes.getMemo())
                 .wearingCount(clothes.getWearingCount())
-                .isDeleted(clothes.getIsDeleted())
+                .isDeleted(clothes.getIsDeleted() != null ? clothes.getIsDeleted().booleanValue() : false)
                 .createdDateTime(clothes.getCreatedDateTime())
                 .updatedDateTime(clothes.getUpdatedDateTime())
                 .lastWornDate(clothes.getLastWornDate())

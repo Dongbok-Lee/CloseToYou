@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import ssafy.closetoyou.bookmark.service.port.BookmarkInformationRepository;
 
+import java.util.List;
+
 @Repository
 @RequiredArgsConstructor
 public class BookmarkInformationRepositoryImpl implements BookmarkInformationRepository {
@@ -17,7 +19,20 @@ public class BookmarkInformationRepositoryImpl implements BookmarkInformationRep
     }
 
     @Override
-    public void deleteBookmarkInformation(Long bookmarkId, Long clothesId) {
-        bookmarkInformationJpaRepository.deleteByBookmarkIdAndClothesId(bookmarkId, clothesId);
+    public void deleteBookmarkInformationByBookmarkIdAndClothesId(Long bookmarkId, Long clothesId) {
+        bookmarkInformationJpaRepository.deleteBookmarkInformationByBookmarkIdAndClothesId(bookmarkId, clothesId);
+    }
+
+    @Override
+    public void deleteBookmarkInformationByBookmarkId(Long bookmarkId) {
+        bookmarkInformationJpaRepository.deleteBookmarkInformationByBookmarkId(bookmarkId);
+    }
+
+    @Override
+    public List<Long> findClothesIdsByBookmarkId(Long bookmarkId) {
+        return bookmarkInformationJpaRepository.findBookmarkInformationsByBookmarkId(bookmarkId)
+                .stream()
+                .map(BookmarkInformationEntity::getClothesId)
+                .toList();
     }
 }

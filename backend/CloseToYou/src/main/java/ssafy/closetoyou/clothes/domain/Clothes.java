@@ -40,7 +40,7 @@ public class Clothes {
         this.type = type;
         this.pattern = pattern;
         this.color = color;
-        this.season = season;
+        this.season = Season.DEFAULT;
         this.size = size;
         this.memo = memo;
         this.wearingCount = wearingCount;
@@ -50,7 +50,6 @@ public class Clothes {
         this.updatedDateTime = updatedDateTime;
         this.lastWornDate = lastWornDate;
     }
-
 
     public void changeClothesInfo(ClothesUpdateRequest clothesUpdateRequest) {
         this.nickname = clothesUpdateRequest.getNickname();
