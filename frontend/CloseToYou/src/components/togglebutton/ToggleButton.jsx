@@ -9,7 +9,7 @@ const ToggleButton = () => {
   };
 
   return (
-    <ToggleContainer onClick={handleToggle} isOn={isOn}>
+    <ToggleContainer onTouchStart={handleToggle} isOn={isOn}>
       <ToggleCircle isOn={isOn} />
     </ToggleContainer>
   );

@@ -11,7 +11,7 @@ const icons = {
 
 const FloatingButton = ({ type, handleClick }) => {
   return (
-    <ButtonContainer onClick={() => handleClick()} isAddType={type === "add"} tabIndex={0}>
+    <ButtonContainer onTouchStart={() => handleClick()} isAddType={type === "add"} tabIndex={0}>
       <img src={icons[type]} alt={`${type} icon`} style={{ width: "2rem", height: "2rem" }} />
     </ButtonContainer>
   );

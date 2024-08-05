@@ -1,9 +1,10 @@
 import React from "react";
+import Header from "../header/Header.jsx";
 
 const PageLayout = ({ page }) => {
   return (
     <React.Fragment>
-      <header></header>
+      <Header />
       {page}
       <footer></footer>
     </React.Fragment>

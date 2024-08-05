@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
 const HeaderContainer = styled.header`
   width: 100%;
@@ -7,7 +7,7 @@ const HeaderContainer = styled.header`
   top: 0;
   display: flex;
   align-items: center;
-  background: #FF6969;
+  background: #ff6969;
 
   .header-content {
     width: 95%;
@@ -33,7 +33,7 @@ const HeaderContainer = styled.header`
   }
 
   .Title {
-    color: #FFF;
+    color: #fff;
     text-align: center;
     font-family: "KoddiUD OnGothic";
     font-size: 1.5rem;
