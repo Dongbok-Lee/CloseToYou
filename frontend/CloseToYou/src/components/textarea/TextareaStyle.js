@@ -6,16 +6,16 @@ const TextareaStyle = styled.textarea`
   border-radius: 0.3125rem;
   border: 0.5px solid rgba(0, 0, 0, 1);
 
-  width: 17.8125rem;
+  width: 100%;
   min-height: 6.25rem;
 
   background-color: rgba(255, 255, 255, 1);
 
-  padding: 0.94rem;
+  padding: 1rem;
 
   color: rgba(0, 0, 0, 1);
 
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 400;
 
   overflow: hidden;
