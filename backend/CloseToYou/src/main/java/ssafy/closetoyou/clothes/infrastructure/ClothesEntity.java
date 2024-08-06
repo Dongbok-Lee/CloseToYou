@@ -23,6 +23,7 @@ public class ClothesEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long clothesId;
+
     private Long closetId;
     private Long nfcId;
     private String location;

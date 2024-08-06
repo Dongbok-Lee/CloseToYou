@@ -11,11 +11,27 @@ import java.util.Optional;
 
 @Repository
 public interface ClothesJpaRepository extends JpaRepository<ClothesEntity,Integer> {
-    void deleteClothesByClothesId(Long clothesId);
-    boolean existsByClosetIdAndClothesIdAndIsDeleted(Long closetId, Long clothesId, boolean deleted);
-    boolean existsByClosetIdAndNicknameAndIsDeleted(Long closetId, String nickname, boolean deleted);
-    Optional<ClothesEntity> findClothesByClosetIdAndClothesIdAndIsDeleted(Long closetId, Long clothesId, boolean deleted);
-    Optional<List<ClothesEntity>> findAllByClosetIdAndIsDeleted(Long closetId, boolean deleted);
+    boolean existsByClothesIdAndIsDeleted(Long clothesId, boolean deleted);
+    @Query("SELECT EXISTS (" +
+            "SELECT 1 " +
+            "FROM ClothesEntity c " +
+            "JOIN ClosetEntity cl ON c.closetId = cl.closetId " +
+            "WHERE cl.userId = :userId " +
+            "AND c.nickname = :nickname " +
+            "AND c.isDeleted = :isDeleted )")
+    boolean existsByUserIdAndNicknameAndIsDeleted(@Param("userId") Long userId,
+                                                  @Param("nickname") String nickname,
+                                                  @Param("isDeleted") boolean isDeleted);
+
+    Optional<ClothesEntity> findClothesByClothesIdAndIsDeleted(Long clothesId, boolean deleted);
+
+    @Query("SELECT c " +
+            "FROM ClothesEntity c " +
+            "JOIN ClosetEntity cl ON c.closetId = cl.closetId " +
+            "WHERE cl.userId = :userId " +
+            "AND c.isDeleted = :isDeleted ")
+    List<ClothesEntity> findAllByUserIdAndIsDeleted(@Param("userId") Long userId,
+                                                    @Param("isDeleted") boolean isDeleted);
 
     @Query("select c from ClothesEntity c " +
             "where (:#{#clothesCondition.pattern} is null or c.pattern = :#{#clothesCondition.pattern}) " +
@@ -23,7 +39,7 @@ public interface ClothesJpaRepository extends JpaRepository<ClothesEntity,Intege
             "and (:#{#clothesCondition.type} is null or c.type = :#{#clothesCondition.type}) " +
             "and c.isDeleted = false " +
             "and c.closetId = :#{#closetId}")
-    Optional<List<ClothesEntity>> searchClothesByClosetIdAndClothesConditionAndIsDeleted(@Param("closetId") Long closetId,
+    List<ClothesEntity> searchClothesByClosetIdAndClothesConditionAndIsDeleted(@Param("closetId") Long closetId,
                                                                               @Param("clothesCondition") ClothesCondition clothesCondition);
 
 

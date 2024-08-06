@@ -2,10 +2,9 @@ package ssafy.closetoyou.clothes.domain;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import ssafy.closetoyou.clothes.controller.request.ClothesUpdateRequest;
-import ssafy.closetoyou.global.error.errorcode.ClothesErrorCode;
-import ssafy.closetoyou.global.error.exception.CloseToYouException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -24,6 +23,8 @@ public class Clothes {
     private String size;
     private String memo;
     private int wearingCount;
+
+    @Setter
     private Boolean isDeleted;
     private String imageUrl;
     private LocalDateTime createdDateTime;
@@ -52,12 +53,12 @@ public class Clothes {
     }
 
     public void changeClothesInfo(ClothesUpdateRequest clothesUpdateRequest) {
-        this.nickname = clothesUpdateRequest.getNickname();
-        this.type = Type.valueOf(clothesUpdateRequest.getType());
-        this.pattern = Pattern.valueOf(clothesUpdateRequest.getPattern());
-        this.color = Color.valueOf(clothesUpdateRequest.getColor());
-        this.memo = clothesUpdateRequest.getMemo();
-        this.season = clothesUpdateRequest.getSeason();
-        this.size = clothesUpdateRequest.getSize();
+        if (clothesUpdateRequest.getNickname() != null) this.nickname = clothesUpdateRequest.getNickname();
+        if (clothesUpdateRequest.getType() != null) this.type = Type.valueOf(clothesUpdateRequest.getType());
+        if (clothesUpdateRequest.getPattern() != null) this.pattern = Pattern.valueOf(clothesUpdateRequest.getPattern());
+        if (clothesUpdateRequest.getColor() != null) this.color = Color.valueOf(clothesUpdateRequest.getColor());
+        if (clothesUpdateRequest.getMemo() != null) this.memo = clothesUpdateRequest.getMemo();
+        if (clothesUpdateRequest.getSeason() != null) this.season = Season.valueOf(clothesUpdateRequest.getSeason());
+        if (clothesUpdateRequest.getSize() != null) this.size = clothesUpdateRequest.getSize();
     }
 }
