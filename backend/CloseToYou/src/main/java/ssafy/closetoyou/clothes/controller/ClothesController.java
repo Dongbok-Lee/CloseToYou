@@ -1,5 +1,7 @@
 package ssafy.closetoyou.clothes.controller;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -26,29 +28,26 @@ public class ClothesController {
     private final ClothesService clothesService;
 
     @PostMapping
-    public ResponseEntity<SuccessResponse<Long>> addClothes(Authentication authentication,
+    public ResponseEntity<SuccessResponse<Long>> addClothes(@CookieValue(name = "closetId") Long closetId,
                                                             @Valid @RequestBody ClothesRequest clothesRequest) {
-        Long userId = ((CustomUserDetail) authentication.getPrincipal()).getUser().getUserId();
-        Long clothesId = clothesService.addClothes(userId, clothesRequest);
+        Long clothesId = clothesService.addClothes(closetId, clothesRequest);
         return ResponseEntity.status(201)
                 .body(new SuccessResponse<>("옷 생성 성공", clothesId));
     }
 
     @PatchMapping("/{clothesId}")
-    public ResponseEntity<SuccessResponse<Long>> updateClothes(Authentication authentication,
+    public ResponseEntity<SuccessResponse<Long>> updateClothes(@CookieValue(name = "closetId") Long closetId,
                                                                @Valid @RequestBody ClothesUpdateRequest clothesUpdateRequest,
                                                                @PathVariable Long clothesId) {
-        Long userId = ((CustomUserDetail) authentication.getPrincipal()).getUser().getUserId();
-        clothesService.updateClothes(userId, clothesId, clothesUpdateRequest);
+        clothesService.updateClothes(closetId, clothesId, clothesUpdateRequest);
         return ResponseEntity.ok()
                 .body(new SuccessResponse<>("옷 수정 성공", clothesId));
     }
 
     @DeleteMapping("/{clothesId}")
-    public ResponseEntity<SuccessResponse<Long>> removeClothes(Authentication authentication,
+    public ResponseEntity<SuccessResponse<Long>> removeClothes(@CookieValue(name = "closetId") Long closetId,
                                                                @PathVariable Long clothesId) {
-        Long userId = ((CustomUserDetail) authentication.getPrincipal()).getUser().getUserId();
-        clothesService.removeClothes(userId, clothesId);
+        clothesService.removeClothes(closetId, clothesId);
         return ResponseEntity.ok()
                 .body(new SuccessResponse<>("옷 삭제 성공", clothesId));
     }

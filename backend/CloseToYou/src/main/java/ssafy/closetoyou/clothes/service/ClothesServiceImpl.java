@@ -28,8 +28,7 @@ public class ClothesServiceImpl implements ClothesService {
 
     @Transactional
     @Override
-    public Long addClothes(Long userId, ClothesRequest clothesRequest) {
-        Long closetId = closetService.getClosetIdByUserId(userId);
+    public Long addClothes(Long closetId, ClothesRequest clothesRequest) {
 
         if (clothesRepository.existClothesByClosetIdAndClothesNickname(closetId, clothesRequest.getNickname())) {
             throw new CloseToYouException(ClothesErrorCode.DUPLICATE_CLOTHES_NICKNAME);
@@ -42,8 +41,7 @@ public class ClothesServiceImpl implements ClothesService {
 
     @Transactional
     @Override
-    public void updateClothes(Long userId, Long clothesId, ClothesUpdateRequest clothesUpdateRequest) {
-        Long closetId = closetService.getClosetIdByUserId(userId);
+    public void updateClothes(Long closetId, Long clothesId, ClothesUpdateRequest clothesUpdateRequest) {
 
         if (!clothesRepository.existClothesByClosetIdAndClothesId(closetId, clothesId)) {
             throw new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION);
@@ -55,8 +53,7 @@ public class ClothesServiceImpl implements ClothesService {
 
     @Transactional
     @Override
-    public void removeClothes(Long userId, Long clothesId) {
-        Long closetId = closetService.getClosetIdByUserId(userId);
+    public void removeClothes(Long closetId, Long clothesId) {
 
         if (!clothesRepository.existClothesByClosetIdAndClothesId(closetId, clothesId)) {
             throw new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION);
