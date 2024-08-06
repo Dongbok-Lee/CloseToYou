@@ -1,10 +1,10 @@
 import {
-  ButtonText,
-  ChangeBox,
-  HighContrastContainer,
-  UserInfoContainer,
-  UserPageContainer,
-  WelcomeContainer,
+    ButtonText,
+    ChangeWrapper,
+    HighContrastWrapper, SubText, TitleText,
+    UserInfoWrapper,
+    UserPageContainer,
+    WelcomeWrapper,
 } from "./UserPageStyle";
 import { ToggleContainer } from "../../../components/togglebutton/ToggleButtonStyle.js";
 import { useEffect, useState } from "react";
@@ -24,6 +24,7 @@ const UserPage = () => {
   const [isToggle, setIsToggle] = useState(false);
 
   const navigate = useNavigate();
+
   useEffect(() => {
     setIsToggle(user.isHighContrast);
   }, []);
@@ -42,30 +43,30 @@ const UserPage = () => {
 
   return (
     <UserPageContainer className="page">
-      <HighContrastContainer>
+      <HighContrastWrapper>
         <span>고대비 모드</span>
         <ToggleButton isOn={isToggle} setIsOn={setIsToggle} />
-      </HighContrastContainer>
-      <WelcomeContainer>
-        <span className="title-text">{user.nickname}</span>
-        <span className="sub-text">님, 안녕하세요!</span>
-      </WelcomeContainer>
-      <UserInfoContainer>
-        <p className="title-text">이메일</p>
-        <p className="sub-text">{user.email}</p>
-      </UserInfoContainer>
-      <UserInfoContainer>
-        <p className="title-text">닉네임</p>
-        <ChangeBox onTouchStart={handleTouchChangeNickname}>
-          <p className="sub-text">{user.nickname}</p>
-          <ButtonText>변경</ButtonText>
-        </ChangeBox>
-      </UserInfoContainer>
-      <ChangeBox>
-        <p className="sub-text">비밀 번호</p>
-        <ButtonText onTouchStart={handleTouchChangePassword}>변경</ButtonText>
-      </ChangeBox>
-      <ButtonText onTouchStart={handleTouchLogout}>로그아웃</ButtonText>
+      </HighContrastWrapper>
+      <WelcomeWrapper tabIndex={0} title={`${user.nickname}님, 안녕하세요.`}>
+        <TitleText>{user.nickname}</TitleText>
+        <SubText>님, 안녕하세요!</SubText>
+      </WelcomeWrapper>
+      <UserInfoWrapper>
+        <TitleText tabIndex={0}>이메일</TitleText>
+        <SubText tabIndex={0}>{user.email}</SubText>
+      </UserInfoWrapper>
+      <UserInfoWrapper>
+        <TitleText tabIndex={0}>닉네임</TitleText>
+        <ChangeWrapper >
+            <SubText tabIndex={0}>{user.nickname}</SubText>
+          <ButtonText onTouchStart={handleTouchChangeNickname} tabIndex={0}>변경</ButtonText>
+        </ChangeWrapper>
+      </UserInfoWrapper>
+      <ChangeWrapper>
+        <SubText tabIndex={0}>비밀 번호</SubText>
+        <ButtonText tabIndex={0} onTouchStart={handleTouchChangePassword}>변경</ButtonText>
+      </ChangeWrapper>
+      <ButtonText tabIndex={0} onTouchStart={handleTouchLogout}>로그아웃</ButtonText>
     </UserPageContainer>
   );
 };
