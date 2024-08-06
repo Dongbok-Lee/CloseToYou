@@ -8,7 +8,9 @@ import java.time.LocalDateTime;
 
 @Getter
 public class Bookmark {
+
     private Long bookmarkId;
+
     @Setter
     private String nickname;
     private Long userId;
