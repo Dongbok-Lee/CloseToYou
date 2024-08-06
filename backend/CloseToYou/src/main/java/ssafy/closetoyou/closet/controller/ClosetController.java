@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import ssafy.closetoyou.closet.controller.port.ClosetService;
 import ssafy.closetoyou.closet.controller.request.ClosetRequest;
 import ssafy.closetoyou.closet.controller.response.ClosetResponse;
-import ssafy.closetoyou.clothes.controller.response.ClothesResponse;
 import ssafy.closetoyou.global.common.response.SuccessResponse;
 import ssafy.closetoyou.global.security.login.userdetail.CustomUserDetail;
 

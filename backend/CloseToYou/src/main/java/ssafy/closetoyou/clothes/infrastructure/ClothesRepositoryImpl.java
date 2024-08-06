@@ -65,9 +65,9 @@ public class ClothesRepositoryImpl implements ClothesRepository {
     }
 
     @Override
-    public List<Clothes> searchClothesByClosetIdAndSearchKeyword(Long closetId, String searchKeyword) {
+    public List<Clothes> searchClothesByUserIdAndSearchKeyword(Long userId, String searchKeyword) {
         return clothesJpaRepository
-                .searchClothesByClosetIdAndSearchKeywordAndIsDeleted(closetId, searchKeyword)
+                .searchClothesByUserIdAndSearchKeywordAndIsDeleted(userId, searchKeyword)
                 .orElse(Collections.emptyList())
                 .stream()
                 .map(ClothesEntity::toModel)

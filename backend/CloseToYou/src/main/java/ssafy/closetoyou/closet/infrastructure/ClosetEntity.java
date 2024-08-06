@@ -9,10 +9,13 @@ import ssafy.closetoyou.closet.domain.Closet;
 
 import java.time.LocalDateTime;
 
-@Entity(name = "closets")
-@Getter @Setter @ToString
+@Getter
+@Setter
+@ToString
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
+@Entity
+@Table(name = "closets")
 public class ClosetEntity {
 
     @Id
