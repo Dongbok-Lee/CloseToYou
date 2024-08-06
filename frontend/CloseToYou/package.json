@@ -9,7 +9,7 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "format": "prettier --cache --write .",
     "preview": "vite preview",
-    "start": "vite preview"
+    "start": "vite preview --host"
   },
   "dependencies": {
     "@emotion/css": "^11.13.0",
