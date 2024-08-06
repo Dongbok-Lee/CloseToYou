@@ -29,62 +29,77 @@ public class ClothesServiceImpl implements ClothesService {
     @Transactional
     @Override
     public Long addClothes(Long userId, ClothesRequest clothesRequest) {
-        if (clothesRepository.existClothesByClothesNickname(clothesRequest.getNickname())) {
+        Long closetId = closetService.getClosetIdByUserId(userId);
+
+        if (clothesRepository.existClothesByClosetIdAndClothesNickname(closetId, clothesRequest.getNickname())) {
             throw new CloseToYouException(ClothesErrorCode.DUPLICATE_CLOTHES_NICKNAME);
         }
-        Long closetId = closetService.getClosetIdByUserId(userId);
+
         clothesRequest.setClosetId(closetId);
-        return clothesRepository.saveClothes(clothesRequest.toModel()).getClothesId();
+        Clothes clothes = clothesRequest.toModel();
+        return clothesRepository.saveClothes(clothes).getClothesId();
     }
 
     @Transactional
     @Override
-    public void updateClothes(Long clothesId, ClothesUpdateRequest clothesUpdateRequest) {
-        if (!clothesRepository.existClothesByClothesId(clothesId)) {
+    public void updateClothes(Long userId, Long clothesId, ClothesUpdateRequest clothesUpdateRequest) {
+        Long closetId = closetService.getClosetIdByUserId(userId);
+
+        if (!clothesRepository.existClothesByClosetIdAndClothesId(closetId, clothesId)) {
             throw new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION);
         }
-        Clothes clothes = clothesRepository.findClothes(clothesId);
+        Clothes clothes = clothesRepository.findClothes(closetId, clothesId);
         clothes.changeClothesInfo(clothesUpdateRequest);
         clothesRepository.saveClothes(clothes);
     }
 
     @Transactional
     @Override
-    public void removeClothes(Long clothesId) {
-        if (!clothesRepository.existClothesByClothesId(clothesId)) {
+    public void removeClothes(Long userId, Long clothesId) {
+        Long closetId = closetService.getClosetIdByUserId(userId);
+
+        if (!clothesRepository.existClothesByClosetIdAndClothesId(closetId, clothesId)) {
             throw new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION);
         }
         clothesRepository.deleteClothes(clothesId);
     }
 
     @Override
-    public ClothesResponse findClothes(Long clothesId) {
-        if (!clothesRepository.existClothesByClothesId(clothesId)) {
+    public ClothesResponse findClothes(Long userId, Long clothesId) {
+        Long closetId = closetService.getClosetIdByUserId(userId);
+
+        if (!clothesRepository.existClothesByClosetIdAndClothesId(closetId, clothesId)) {
             throw new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION);
         }
-        Clothes clothes = clothesRepository.findClothes(clothesId);
+        Clothes clothes = clothesRepository.findClothes(closetId, clothesId);
         return ClothesResponse.fromModel(clothes);
     }
 
     @Override
-    public List<ClothesResponse> findAllClothes() {
-        return clothesRepository.findAllClothes()
+    public List<ClothesResponse> findAllClothes(Long userId) {
+        Long closetId = closetService.getClosetIdByUserId(userId);
+
+        return clothesRepository.findAllClothes(closetId)
                 .stream()
                 .map(ClothesResponse::fromModel)
                 .toList();
     }
 
     @Override
-    public List<ClothesResponse> searchClothesByClothesCondition(ClothesCondition clothesCondition) {
-        return clothesRepository.searchClothesByClothesCondition(clothesCondition)
+    public List<ClothesResponse> searchClothesByClothesCondition(Long userId, ClothesCondition clothesCondition) {
+        Long closetId = closetService.getClosetIdByUserId(userId);
+
+        return clothesRepository.searchClothesByClosetIdAndClothesCondition(closetId, clothesCondition)
                 .stream()
                 .map(ClothesResponse::fromModel)
                 .toList();
     }
 
     @Override
-    public List<ClothesResponse> searchClothesBySearchKeyword(String searchKeyword) {
-        return clothesRepository.searchClothesBySearchKeyword(searchKeyword)
+    public List<ClothesResponse> searchClothesBySearchKeyword(Long userId, String searchKeyword) {
+        Long closetId = closetService.getClosetIdByUserId(userId);
+
+        return clothesRepository.searchClothesByClosetIdAndSearchKeyword(closetId, searchKeyword)
                 .stream()
                 .map(ClothesResponse::fromModel)
                 .toList();

@@ -34,7 +34,6 @@ public class ClosetCodeServiceImpl implements ClosetCodeService {
         if (closetCodeRepository.existsByClosetCode(randomCode)) {
             throw new CloseToYouException(ClosetErrorCode.DUPLICATE_CLOSET_CODE);
         }
-
         return closetCodeRepository.saveClosetCode(closetCode);
     }
 
