@@ -10,15 +10,16 @@ import ssafy.closetoyou.global.common.util.ValidEnum;
 
 @Getter
 public class ClothesCondition {
+
     @NotNull
+    private String closetId;
+
     @ValidEnum(enumClass = Color.class)
     private String color;
 
-    @NotNull
     @ValidEnum(enumClass = Type.class)
     private String type;
 
-    @NotNull
     @ValidEnum(enumClass = Pattern.class)
     private String pattern;
 }

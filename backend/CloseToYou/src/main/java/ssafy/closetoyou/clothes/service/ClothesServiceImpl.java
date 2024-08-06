@@ -7,9 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 import ssafy.closetoyou.closet.controller.port.ClosetService;
 import ssafy.closetoyou.clothes.controller.port.ClothesService;
 import ssafy.closetoyou.clothes.controller.request.ClothesUpdateRequest;
-import ssafy.closetoyou.clothes.controller.response.ClothesResponse;
-import ssafy.closetoyou.clothes.controller.request.ClothesRequest;
+import ssafy.closetoyou.clothes.controller.response.ClothesDetail;
 import ssafy.closetoyou.clothes.controller.request.ClothesCondition;
+import ssafy.closetoyou.clothes.controller.response.ClothesSummary;
 import ssafy.closetoyou.clothes.domain.Clothes;
 import ssafy.closetoyou.clothes.service.port.ClothesRepository;
 import ssafy.closetoyou.global.error.errorcode.ClothesErrorCode;
@@ -28,77 +28,75 @@ public class ClothesServiceImpl implements ClothesService {
 
     @Transactional
     @Override
-    public Long addClothes(Long closetId, ClothesRequest clothesRequest) {
+    public void updateClothes(Long userId,
+                              Long clothesId,
+                              ClothesUpdateRequest clothesUpdateRequest) {
 
-        if (clothesRepository.existClothesByClosetIdAndClothesNickname(closetId, clothesRequest.getNickname())) {
+        String nickname = clothesUpdateRequest.getNickname();
+        if (!clothesRepository.existClothesByClothesId(clothesId)) {
+            throw new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION);
+        }
+
+        if (nickname != null && clothesRepository.existClothesByUserIdAndClothesNickname(userId, nickname)) {
             throw new CloseToYouException(ClothesErrorCode.DUPLICATE_CLOTHES_NICKNAME);
         }
 
-        clothesRequest.setClosetId(closetId);
-        Clothes clothes = clothesRequest.toModel();
-        return clothesRepository.saveClothes(clothes).getClothesId();
-    }
-
-    @Transactional
-    @Override
-    public void updateClothes(Long closetId, Long clothesId, ClothesUpdateRequest clothesUpdateRequest) {
-
-        if (!clothesRepository.existClothesByClosetIdAndClothesId(closetId, clothesId)) {
-            throw new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION);
-        }
-        Clothes clothes = clothesRepository.findClothes(closetId, clothesId);
+        Clothes clothes = clothesRepository.findClothes(clothesId);
         clothes.changeClothesInfo(clothesUpdateRequest);
         clothesRepository.saveClothes(clothes);
     }
 
     @Transactional
     @Override
-    public void removeClothes(Long closetId, Long clothesId) {
+    public void removeClothes(Long clothesId) {
 
-        if (!clothesRepository.existClothesByClosetIdAndClothesId(closetId, clothesId)) {
+        if (!clothesRepository.existClothesByClothesId(clothesId)) {
             throw new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION);
         }
-        clothesRepository.deleteClothes(clothesId);
+
+        Clothes clothes = clothesRepository.deleteClothes(clothesId);
+        clothes.setIsDeleted(true);
+        clothesRepository.saveClothes(clothes);
     }
 
     @Override
-    public ClothesResponse findClothes(Long userId, Long clothesId) {
-        Long closetId = closetService.getClosetIdByUserId(userId);
+    public ClothesDetail findClothes(Long clothesId) {
 
-        if (!clothesRepository.existClothesByClosetIdAndClothesId(closetId, clothesId)) {
+        if (!clothesRepository.existClothesByClothesId(clothesId)) {
             throw new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION);
         }
-        Clothes clothes = clothesRepository.findClothes(closetId, clothesId);
-        return ClothesResponse.fromModel(clothes);
+
+        Clothes clothes = clothesRepository.findClothes(clothesId);
+        return ClothesDetail.fromModel(clothes, closetService.getClosetNicknameByClosetId(clothes.getClosetId()));
     }
 
     @Override
-    public List<ClothesResponse> findAllClothes(Long userId) {
+    public List<ClothesSummary> findAllClothes(Long userId) {
         Long closetId = closetService.getClosetIdByUserId(userId);
 
         return clothesRepository.findAllClothes(closetId)
                 .stream()
-                .map(ClothesResponse::fromModel)
+                .map((clothes) -> ClothesSummary.fromModel(clothes, closetService.getClosetNicknameByClosetId(clothes.getClosetId())))
                 .toList();
     }
 
     @Override
-    public List<ClothesResponse> searchClothesByClothesCondition(Long userId, ClothesCondition clothesCondition) {
+    public List<ClothesSummary> searchClothesByClothesCondition(Long userId, ClothesCondition clothesCondition) {
         Long closetId = closetService.getClosetIdByUserId(userId);
 
         return clothesRepository.searchClothesByClosetIdAndClothesCondition(closetId, clothesCondition)
                 .stream()
-                .map(ClothesResponse::fromModel)
+                .map((clothes) -> ClothesSummary.fromModel(clothes, closetService.getClosetNicknameByClosetId(clothes.getClosetId())))
                 .toList();
     }
 
     @Override
-    public List<ClothesResponse> searchClothesBySearchKeyword(Long userId, String searchKeyword) {
+    public List<ClothesSummary> searchClothesBySearchKeyword(Long userId, String searchKeyword) {
         Long closetId = closetService.getClosetIdByUserId(userId);
 
         return clothesRepository.searchClothesByClosetIdAndSearchKeyword(closetId, searchKeyword)
                 .stream()
-                .map(ClothesResponse::fromModel)
+                .map((clothes) -> ClothesSummary.fromModel(clothes, closetService.getClosetNicknameByClosetId(clothes.getClosetId())))
                 .toList();
     }
 }

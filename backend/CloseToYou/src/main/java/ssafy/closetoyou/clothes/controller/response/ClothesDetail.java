@@ -6,11 +6,10 @@ import lombok.ToString;
 import ssafy.closetoyou.clothes.domain.Clothes;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @ToString
 @Getter
-public class ClothesResponse {
+public class ClothesDetail {
     private Long clothesId;
     private String nickname;
     private String closetNickname;
@@ -25,7 +24,7 @@ public class ClothesResponse {
     private LocalDate lastWornDate;
 
     @Builder
-    public ClothesResponse(Long clothesId, String nickname, String closetNickname, String color, String type, String pattern, String season, String size, String memo, String location, String imageUrl, LocalDate lastWornDate) {
+    public ClothesDetail(Long clothesId, String nickname, String closetNickname, String color, String type, String pattern, String season, String size, String memo, String location, String imageUrl, LocalDate lastWornDate) {
         this.clothesId = clothesId;
         this.nickname = nickname;
         this.closetNickname = closetNickname;
@@ -40,8 +39,8 @@ public class ClothesResponse {
         this.lastWornDate = lastWornDate;
     }
 
-    public static ClothesResponse fromModel(Clothes clothes, String closetNickname) {
-        return ClothesResponse.builder()
+    public static ClothesDetail fromModel(Clothes clothes, String closetNickname) {
+        return ClothesDetail.builder()
                 .clothesId(clothes.getClothesId())
                 .nickname(clothes.getNickname())
                 .closetNickname(closetNickname)
