@@ -1,5 +1,7 @@
 package ssafy.closetoyou.bookmark.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +21,12 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/bookmarks")
 @RequiredArgsConstructor
+@Tag(name = "북마크 API", description = "북마크 API")
 public class BookmarkController {
 
     private final BookmarkService bookmarkService;
 
+    @Operation(summary = "북마크 생성 api")
     @PostMapping
     public ResponseEntity<SuccessResponse<Long>> addBookmark(Authentication authentication,
                                                              @Valid @RequestBody BookmarkRequest bookmarkRequest) {
@@ -32,6 +36,7 @@ public class BookmarkController {
                 .body(new SuccessResponse<>("북마크 생성에 성공했습니다.", bookmarkId));
     }
 
+    @Operation(summary = "북마크 옷 구성 추가 api")
     @PatchMapping("/{bookmarkId}/add/{clothesId}")
     public ResponseEntity<SuccessResponse<Long>> addBookmarkInformation(Authentication authentication,
                                                                         @PathVariable Long bookmarkId,
@@ -43,6 +48,7 @@ public class BookmarkController {
         );
     }
 
+    @Operation(summary = "북마크 옷 구성 삭제 api")
     @PatchMapping("/{bookmarkId}/delete/{clothesId}")
     public ResponseEntity<SuccessResponse<Long>> deleteBookmarkInformation(Authentication authentication,
                                                                            @PathVariable Long bookmarkId,
@@ -54,6 +60,7 @@ public class BookmarkController {
         );
     }
 
+    @Operation(summary = "북마크 닉네임 변경 api")
     @PatchMapping("/{bookmarkId}/nickname")
     public ResponseEntity<SuccessResponse<Long>> updateBookmarkNickname(Authentication authentication,
                                                                         @PathVariable Long bookmarkId,
@@ -66,6 +73,7 @@ public class BookmarkController {
         );
     }
 
+    @Operation(summary=  "북마크 삭제 api")
     @DeleteMapping("/{bookmarkId}")
     public ResponseEntity<SuccessResponse<Long>> deleteBookmark(Authentication authentication,
                                                                 @PathVariable Long bookmarkId) {
@@ -76,6 +84,7 @@ public class BookmarkController {
         );
     }
 
+    @Operation(summary = "북마크 상세 조회 api")
     @GetMapping("/{bookmarkId}")
     public ResponseEntity<SuccessResponse<BookmarkResponse>> findBookmark(Authentication authentication,
                                                                                @PathVariable Long bookmarkId) {
@@ -85,6 +94,8 @@ public class BookmarkController {
                 new SuccessResponse<>("북마크 상세 조회에 성공했습니다.", bookmark)
         );
     }
+
+    @Operation(summary = "북마크 전체 조회 api")
     @GetMapping
     public ResponseEntity<SuccessResponse<List<BookmarkResponse>>> findBookmarks(Authentication authentication) {
         Long userId = ((CustomUserDetail) authentication.getPrincipal()).getUser().getUserId();
