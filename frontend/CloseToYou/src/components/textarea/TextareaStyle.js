@@ -12,6 +12,7 @@ const TextareaStyle = styled.textarea`
   background-color: rgba(255, 255, 255, 1);
 
   padding: 1rem;
+  margin: 20px auto;
 
   color: rgba(0, 0, 0, 1);
 

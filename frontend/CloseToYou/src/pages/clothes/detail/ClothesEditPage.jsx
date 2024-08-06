@@ -40,14 +40,16 @@ const ClothesEditPage = () => {
 
   return (
     <ClothesEditPageContainer className="page">
-      <ClothesName>{nickname}</ClothesName>
+      <ClothesName>
+      <TextInput textInputPlaceholder={nickname} textInputSize="small" />
+      </ClothesName>
       <ImageContainer>
         <img src={tempImage} alt="Clothes" />
       </ImageContainer>
       <LocationInputContainer>
         <TextInputStyled
           textInputPlaceholder={location}
-          textInputSize="large"
+          textInputSize="smaller"
           style={{ textAlign: 'center' }}
         />
       </LocationInputContainer>
@@ -105,15 +107,20 @@ const ClothesEditPage = () => {
         <Tab>추가 정보</Tab>
         <DetailItem>
           <DetailTitle>사이즈</DetailTitle>
-          <TextInput textInputPlaceholder={size} textInputSize="medium" />
+          <TextInput textInputPlaceholder={size} textInputSize="small" />
         </DetailItem>
         <DetailItem>
           <DetailTitle>재질</DetailTitle>
-          <TextInput textInputPlaceholder={texture} textInputSize="medium" />
+          <TextInput textInputPlaceholder={texture} textInputSize="small" />
         </DetailItem>
         <DetailItem>
           <DetailTitle>계절감</DetailTitle>
-          <TextInput textInputPlaceholder={seasonFeeling} textInputSize="medium" />
+          <select>
+            <option value="spring">봄</option>
+            <option value="summer">여름</option>
+            <option value="autumn">가을</option>
+            <option value="winter">겨울</option>
+          </select>
         </DetailItem>
       </DetailContainer>
       <DetailContainer>
@@ -124,7 +131,7 @@ const ClothesEditPage = () => {
       </DetailContainer>
       <ButtonWrapper>
         <Button btnSize="large" btnColor="primary" onClick={handleSave}>
-          수정완료
+          수정 완료
         </Button>
       </ButtonWrapper>
     </ClothesEditPageContainer>
