@@ -1,5 +1,17 @@
 import styled from "@emotion/styled";
 
+
+export const TitleText = styled.p`
+    font-weight: 700;
+    font-size: 1.5rem;
+    tab-index: 0;
+`
+
+export const SubText = styled.p`
+    font-weight: 400;
+    font-size: 1.25rem;
+`
+
 export const UserPageContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -10,19 +22,9 @@ export const UserPageContainer = styled.div`
   p {
     margin: 0;
   }
-
-  .title-text {
-    font-weight: 700;
-    font-size: 1.5rem;
-  }
-
-  .sub-text {
-    font-weight: 400;
-    font-size: 1.25rem;
-  }
 `;
 
-export const HighContrastContainer = styled.div`
+export const HighContrastWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -33,18 +35,18 @@ export const HighContrastContainer = styled.div`
   }
 `;
 
-export const WelcomeContainer = styled.div`
+export const WelcomeWrapper = styled.div`
   display: flex;
   align-items: flex-end;
 `;
 
-export const UserInfoContainer = styled.div`
+export const UserInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 `;
 
-export const ChangeBox = styled.div`
+export const ChangeWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
