@@ -13,48 +13,46 @@ import java.time.LocalDateTime;
 public class ClothesResponse {
     private Long clothesId;
     private String nickname;
+    private String closetNickname;
+    private String color;
     private String type;
     private String pattern;
-    private String color;
+    private String season;
     private String size;
     private String memo;
-    private int wearingCount;
     private String location;
-    private Boolean isDeleted;
-    private LocalDateTime registTime;
-    private LocalDateTime updateTime;
+    private String imageUrl;
     private LocalDate lastWornDate;
 
     @Builder
-    public ClothesResponse(Long clothesId, String nickname, String type, String pattern, String color, String size, String memo, int wearingCount, String location, Boolean isDeleted, LocalDateTime registTime, LocalDateTime updateTime, LocalDate lastWornDate) {
+    public ClothesResponse(Long clothesId, String nickname, String closetNickname, String color, String type, String pattern, String season, String size, String memo, String location, String imageUrl, LocalDate lastWornDate) {
         this.clothesId = clothesId;
         this.nickname = nickname;
+        this.closetNickname = closetNickname;
+        this.color = color;
         this.type = type;
         this.pattern = pattern;
-        this.color = color;
+        this.season = season;
         this.size = size;
         this.memo = memo;
-        this.wearingCount = wearingCount;
         this.location = location;
-        this.isDeleted = isDeleted;
-        this.registTime = registTime;
-        this.updateTime = updateTime;
+        this.imageUrl = imageUrl;
         this.lastWornDate = lastWornDate;
     }
 
-    public static ClothesResponse fromModel(Clothes clothes) {
+    public static ClothesResponse fromModel(Clothes clothes, String closetNickname) {
         return ClothesResponse.builder()
                 .clothesId(clothes.getClothesId())
                 .nickname(clothes.getNickname())
-                .type(clothes.getType().name())
-                .pattern(clothes.getPattern().name())
-                .color(clothes.getColor().name())
+                .closetNickname(closetNickname)
+                .color(String.valueOf(clothes.getColor()))
+                .type(String.valueOf(clothes.getType()))
+                .pattern(String.valueOf(clothes.getPattern()))
+                .season(String.valueOf(clothes.getSeason()))
                 .size(clothes.getSize())
-                .wearingCount(clothes.getWearingCount())
+                .memo(clothes.getMemo())
                 .location(clothes.getLocation())
-                .isDeleted(false)
-                .registTime(clothes.getCreatedDateTime())
-                .updateTime(clothes.getUpdatedDateTime())
+                .imageUrl(clothes.getImageUrl())
                 .lastWornDate(clothes.getLastWornDate())
                 .build();
     }
