@@ -8,10 +8,6 @@ import {
   DetailItem,
   DetailTitle,
   ButtonWrapper,
-  SkipContainer,
-  NfcIcon,
-  NfcText,
-  SkipButton,
   ImageContainer,
   LocationInputContainer,
   TextInputStyled,
@@ -20,7 +16,6 @@ import TextArea from '../../../components/textarea/Textarea';
 import TextInput from '../../../components/textinput/TextInput';
 import Button from '../../../components/button/Button';
 import tempImage from '../../../assets/icons/temp-image.png';
-import NFCIcon from '../../../assets/icons/nfc.png';
 
 const ClothesEditPage = () => {
   const [nickname, setNickname] = useState('산뜻 노랑');
@@ -32,7 +27,7 @@ const ClothesEditPage = () => {
   const [seasonFeeling, setSeasonFeeling] = useState('봄, 가을');
   const [memo, setMemo] = useState('산뜻한 봄에 피크닉 가고 싶을 때 입을 티셔츠');
   const [location, setLocation] = useState('A-14');
-  const [showContent, setShowContent] = useState(false);
+
 
   const navigate = useNavigate();
   const { id = 0 } = useParams();
@@ -41,19 +36,7 @@ const ClothesEditPage = () => {
     navigate(`/clothes/${id}`);
   };
 
-  const handleSkip = () => {
-    setShowContent(true);
-  };
-
-  if (!showContent) {
-    return (
-      <SkipContainer>
-        <NfcIcon src={NFCIcon} alt="NFC Icon" />
-        <NfcText>옷장의 리더기에<br />NFC 태그를 찍어주세요</NfcText>
-        <SkipButton onTouchStart={handleSkip}>Skip</SkipButton>
-      </SkipContainer>
-    );
-  }
+  
 
   return (
     <ClothesEditPageContainer className="page">
@@ -110,16 +93,11 @@ const ClothesEditPage = () => {
         <DetailItem>
           <DetailTitle>패턴</DetailTitle>
           <select>
-            <option value="animal">동물</option>
-            <option value="artifact">인공물</option>
+            <option value="stripe">스트라이프</option>
             <option value="check">체크무늬</option>
             <option value="dot">도트무늬</option>
-            <option value="etc">기타</option>
-            <option value="etcnature">자연</option>
-            <option value="geometric">기하학적</option>
             <option value="plants">식물</option>
-            <option value="stripe">스트라이프</option>
-            <option value="symbol">심볼</option>
+            <option value="etc">기타</option>
           </select>
         </DetailItem>
       </DetailContainer>
