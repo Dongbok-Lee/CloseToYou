@@ -9,7 +9,12 @@ import {
   DetailTitle,
   DetailInfo,
   LocationInfo,
+  SkipContainer,
+  NfcImg,
+  NfcText,
+  SkipButton
 } from './ClothesDetailPageStyle';
+import NFCImg from '../../../assets/icons/nfc.png';
 import FloatingButton from '../../../components/floatingbutton/FloatingButton';
 import tempImage from '../../../assets/icons/temp-image.png';
 
@@ -28,6 +33,22 @@ const ClothesDetailPage = () => {
 
   const navigate = useNavigate();
   const { id = 0 } = useParams();
+
+  const [showContent, setShowContent] = useState(false);
+
+  const handleSkip = () => {
+    setShowContent(true);
+  };
+
+  if (!showContent) {
+    return (
+      <SkipContainer>
+        <NfcImg src={NFCImg} alt="NFC Img" />
+        <NfcText>옷장의 리더기에<br />NFC 태그를 찍어주세요</NfcText>
+        <SkipButton onTouchStart={handleSkip}>Skip</SkipButton>
+      </SkipContainer>
+    );
+  }
 
   const handleEditClick = () => {
     navigate(`/clothes/edit/${id}`);

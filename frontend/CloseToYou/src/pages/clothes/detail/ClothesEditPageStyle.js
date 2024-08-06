@@ -74,7 +74,7 @@ export const SkipContainer = styled.div`
   position: relative;
 `;
 
-export const NfcIcon = styled.img`
+export const NfcImg = styled.img`
   margin-bottom: 20px;
 `;
 
