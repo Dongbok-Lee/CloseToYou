@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ssafy.closetoyou.closet.controller.port.ClosetService;
+import ssafy.closetoyou.closet.controller.response.ClosetResponse;
 import ssafy.closetoyou.clothes.controller.port.ClothesService;
 import ssafy.closetoyou.clothes.controller.request.ClothesUpdateRequest;
 import ssafy.closetoyou.clothes.controller.response.ClothesDetail;
@@ -15,6 +16,7 @@ import ssafy.closetoyou.clothes.service.port.ClothesRepository;
 import ssafy.closetoyou.global.error.errorcode.ClothesErrorCode;
 import ssafy.closetoyou.global.error.exception.CloseToYouException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -72,18 +74,23 @@ public class ClothesServiceImpl implements ClothesService {
 
     @Override
     public List<ClothesSummary> findAllClothes(Long userId) {
-        Long closetId = closetService.getClosetIdByUserId(userId);
+        List<ClosetResponse> closetIds = closetService.getUserClosets(userId);
+        List<ClothesSummary> clothesSummaries = new ArrayList<>();
 
-        return clothesRepository.findAllClothes(closetId)
-                .stream()
-                .map((clothes) -> ClothesSummary.fromModel(clothes, closetService.getClosetNicknameByClosetId(clothes.getClosetId())))
-                .toList();
+        for (Long closetId: closetIds.stream().map(ClosetResponse::getClosetId).toList()) {
+            clothesSummaries.addAll(
+                    clothesRepository.findAllClothes(closetId)
+                            .stream()
+                            .map((clothes) -> ClothesSummary.fromModel(clothes, closetService.getClosetNicknameByClosetId(clothes.getClosetId())))
+                            .toList()
+            );
+        }
+        return clothesSummaries;
     }
 
     @Override
     public List<ClothesSummary> searchClothesByClothesCondition(Long userId, ClothesCondition clothesCondition) {
-        Long closetId = closetService.getClosetIdByUserId(userId);
-
+        Long closetId = clothesCondition.getClosetId();
         return clothesRepository.searchClothesByClosetIdAndClothesCondition(closetId, clothesCondition)
                 .stream()
                 .map((clothes) -> ClothesSummary.fromModel(clothes, closetService.getClosetNicknameByClosetId(clothes.getClosetId())))
@@ -92,9 +99,8 @@ public class ClothesServiceImpl implements ClothesService {
 
     @Override
     public List<ClothesSummary> searchClothesBySearchKeyword(Long userId, String searchKeyword) {
-        Long closetId = closetService.getClosetIdByUserId(userId);
 
-        return clothesRepository.searchClothesByClosetIdAndSearchKeyword(closetId, searchKeyword)
+        return clothesRepository.searchClothesByUserIdAndSearchKeyword(userId, searchKeyword)
                 .stream()
                 .map((clothes) -> ClothesSummary.fromModel(clothes, closetService.getClosetNicknameByClosetId(clothes.getClosetId())))
                 .toList();

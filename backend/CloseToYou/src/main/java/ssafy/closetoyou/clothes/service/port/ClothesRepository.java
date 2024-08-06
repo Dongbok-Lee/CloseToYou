@@ -15,5 +15,5 @@ public interface ClothesRepository {
     Clothes findClothes(Long clothesId);
     List<Clothes> findAllClothes(Long userId);
     List<Clothes> searchClothesByClosetIdAndClothesCondition(Long closetId, ClothesCondition clothesCondition);
-    List<Clothes> searchClothesByClosetIdAndSearchKeyword(Long closetId, String searchKeyword);
+    List<Clothes> searchClothesByUserIdAndSearchKeyword(Long closetId, String searchKeyword);
 }

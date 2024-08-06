@@ -11,4 +11,5 @@ public interface ClosetRepository {
     void updateCloset(Long userId, Long closetId, String nickname);
     void deleteCloset(Long closetId, Long userId);
     List<Closet> getUserClosets(Long userId);
+    Closet getClosetByClosetId(Long closetId);
 }

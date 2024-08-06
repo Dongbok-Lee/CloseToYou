@@ -2,6 +2,7 @@ package ssafy.closetoyou.closet.domain;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
@@ -16,8 +17,11 @@ public class Closet {
     private LocalDateTime createdDateTime;
     private LocalDateTime updateDateTime;
 
+    @Setter
+    private int clothesCount;
+
     @Builder
-    public Closet(Long closetId, String nickname, Long userId, String closetCode, Boolean isDeleted, LocalDateTime createdDateTime, LocalDateTime updateDateTime) {
+    public Closet(Long closetId, String nickname, Long userId, String closetCode, Boolean isDeleted, LocalDateTime createdDateTime, LocalDateTime updateDateTime, int clothesCount) {
         this.closetId = closetId;
         this.nickname = nickname;
         this.userId = userId;
@@ -25,5 +29,6 @@ public class Closet {
         this.isDeleted = isDeleted;
         this.createdDateTime = createdDateTime;
         this.updateDateTime = updateDateTime;
+        this.clothesCount = clothesCount;
     }
 }

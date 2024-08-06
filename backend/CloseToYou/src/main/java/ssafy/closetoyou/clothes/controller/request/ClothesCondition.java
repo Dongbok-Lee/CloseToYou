@@ -12,7 +12,7 @@ import ssafy.closetoyou.global.common.util.ValidEnum;
 public class ClothesCondition {
 
     @NotNull
-    private String closetId;
+    private Long closetId;
 
     @ValidEnum(enumClass = Color.class)
     private String color;
