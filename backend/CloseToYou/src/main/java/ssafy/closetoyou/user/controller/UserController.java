@@ -1,5 +1,7 @@
 package ssafy.closetoyou.user.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,10 +21,12 @@ import ssafy.closetoyou.user.domain.User;
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/api/users")
+@Tag(name = "유저 API")
 public class UserController {
 
     private final UserService userService;
 
+    @Operation(summary = "내 정보 조회 api")
     @GetMapping
     public ResponseEntity<SuccessResponse<UserResponse>> getUserInformation(Authentication authentication) {
         User user = ((CustomUserDetail) authentication.getPrincipal()).getUser();
@@ -31,6 +35,7 @@ public class UserController {
                 new SuccessResponse<>("유저 조회에 성공하였습니다.", userResponse));
     }
 
+    @Operation(summary = "일반 가입자 회원가입 api")
     @PostMapping
     public ResponseEntity<SuccessResponse<Long>> SignUpUser (@Valid @RequestBody UserSignUp userSignUp) {
         Long userId = userService.signUp(userSignUp);
@@ -39,6 +44,7 @@ public class UserController {
                 new SuccessResponse<>("일반 이용자 회원가입 성공", userId));
     }
 
+    @Operation(summary = "유저 탈퇴 api")
     @DeleteMapping
     public ResponseEntity<SuccessResponse<Long>> deleteUser(Authentication authentication) {
         Long userId = ((CustomUserDetail) authentication.getPrincipal()).getUser().getUserId();
@@ -49,6 +55,7 @@ public class UserController {
         );
     }
 
+    @Operation(summary = "유저 비밀번호 변경 api")
     @PatchMapping("/password")
     public ResponseEntity<SuccessResponse<Long>> changeUserPassword(Authentication authentication, @Valid @RequestBody UserPasswordUpdateRequest userPasswordUpdateRequest) {
         User user = ((CustomUserDetail) authentication.getPrincipal()).getUser();
@@ -61,6 +68,7 @@ public class UserController {
         );
     }
 
+    @Operation(summary = "유저 정보 변경 api")
     @PatchMapping
     public ResponseEntity<SuccessResponse<Long>> changeUserInfo(Authentication authentication, @Valid @RequestBody UserUpdateRequest userUpdateRequest) {
         User user = ((CustomUserDetail) authentication.getPrincipal()).getUser();
