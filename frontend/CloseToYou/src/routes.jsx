@@ -15,10 +15,7 @@ import PasswordPage from "./pages/user/password/PasswordPage";
 import NicknamePage from "./pages/user/nickname/NicknamePage";
 
 const AppRoutes = () => {
-  return (
-    <Routes>
-    </Routes>
-  );
+  return <Routes></Routes>;
 };
 
 export default AppRoutes;

@@ -1,47 +1,46 @@
-import styled from '@emotion/styled'
+import styled from "@emotion/styled";
 
 const ClothesCardStyle = styled.div`
+  box-sizing: border-box;
 
-    box-sizing: border-box;
+  display: flex;
 
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 1.25rem;
+
+  -webkit-tap-highlight-color: transparent;
+
+  .clothes-card-icon-box {
     display: flex;
-
-    flex-direction: column;
 
     justify-content: center;
     align-items: center;
 
-    gap: 1.25rem;
+    border-radius: 0.625rem;
+    border: 1px solid rgba(255, 105, 105, 1);
 
-    -webkit-tap-highlight-color: transparent;
+    width: 16.25rem;
+    height: 16.25rem;
 
-    .clothes-card-icon-box {
-        display: flex;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
-        justify-content: center;
-        align-items: center;
+    &:focus {
+      border: 3px solid rgba(255, 105, 105, 1);
 
-        border-radius: 0.625rem;
-        border: 1px solid rgba(255, 105, 105, 1);
-
-        width: 16.25rem;
-        height: 16.25rem;
-        
-        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-
-        &:focus {
-            border: 3px solid rgba(255, 105, 105, 1);
-
-            outline: none;
-        }
+      outline: none;
     }
+  }
 
-    .clothes-card-icon { 
-        width: 14rem;
-        height: 14rem;
+  .clothes-card-icon {
+    width: 14rem;
+    height: 14rem;
 
-        background: url(src/assets/icons/etc/yellow-tshirt.svg) center no-repeat;
-    }
-`
+    background: url(src/assets/icons/etc/yellow-tshirt.svg) center no-repeat;
+  }
+`;
 
 export default ClothesCardStyle;
