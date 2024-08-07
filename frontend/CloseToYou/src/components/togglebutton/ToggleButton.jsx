@@ -1,9 +1,6 @@
-import { useState } from "react";
 import { ToggleContainer, ToggleCircleIcon } from "./ToggleButtonStyle";
 
-const ToggleButton = () => {
-  const [isOn, setIsOn] = useState(false);
-
+const ToggleButton = ({ isOn, setIsOn }) => {
   const handleToggle = () => {
     setIsOn(!isOn);
   };
