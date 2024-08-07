@@ -1,106 +1,106 @@
-import styled from '@emotion/styled'
+import styled from "@emotion/styled";
 
 const SelectStyle = styled.div`
+  box-sizing: border-box;
 
-    box-sizing: border-box;
+  display: flex;
 
+  flex-direction: column;
+
+  width: 7.5rem;
+
+  color: rgba(0, 0, 0, 1);
+
+  font-size: 1.25rem;
+  font-weight: 400;
+
+  gap: 0.31rem;
+
+  .select-up-box {
     display: flex;
 
-    flex-direction: column;
+    justify-content: space-between;
 
-    width: 7.5rem;
+    border-radius: 0.3125rem;
+    border: 1px solid rgba(169, 169, 169, 1);
 
-    color: rgba(0, 0, 0, 1);
+    height: 2.5rem;
 
-    font-size: 1.25rem;
-    font-weight: 400;
+    line-height: 2.5rem;
 
-    gap: 0.31rem;
+    padding-left: 0.63rem;
 
-    .select-up-box {
-        display: flex;
+    &:focus {
+      border: 1px solid rgba(255, 105, 105, 1);
 
-        justify-content: space-between;
+      color: rgba(255, 105, 105, 1);
 
-        border-radius: 0.3125rem;
-        border: 1px solid rgba(169, 169, 169, 1);
+      outline: none;
 
-        height: 2.5rem;
+      .select-up-icon {
+        background: url(src/assets/icons/etc/up-arrow.svg) center no-repeat;
+      }
+    }
+  }
 
-        line-height: 2.5rem;
+  .select-up-icon {
+    width: 2.31388rem;
+    height: 100%;
 
-        padding-left: 0.63rem;
+    background: url(src/assets/icons/etc/down-arrow.svg) center no-repeat;
+  }
 
-        &:focus {
-            border: 1px solid rgba(255, 105, 105, 1);
+  .select-list {
+    overflow-y: auto;
 
-            color: rgba(255, 105, 105, 1);
+    border-radius: 0.3125rem;
+    border: 1px solid rgba(169, 169, 169, 1);
 
-            outline: none;
+    height: 11rem;
 
-            .select-up-icon {
-                background: url(src/assets/icons/etc/up-arrow.svg) center no-repeat;
-            }
-        }
-    }   
+    padding-left: 0.63rem;
+    padding-right: 0.5rem;
 
-    .select-up-icon {
-        width: 2.31388rem;
-        height: 100%;
-
-        background: url(src/assets/icons/etc/down-arrow.svg) center no-repeat;
+    &::-webkit-scrollbar {
+      width: 1rem;
     }
 
-   .select-list {
-        overflow-y: auto;
+    &::-webkit-scrollbar-thumb {
+      border-radius: 0.625rem;
+      border: 5px solid rgba(255, 255, 255, 1);
 
-        border-radius: 0.3125rem;
-        border: 1px solid rgba(169, 169, 169, 1);
-        
-        height: 11rem;
-        
-        padding-left: 0.63rem;
-        padding-right: 0.5rem;
-
-        &::-webkit-scrollbar {
-            width: 1rem;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            border-radius: 0.625rem;
-            border: 5px solid rgba(255, 255, 255, 1);
-
-            background-color: rgba(169, 169, 169, 1);
-        }
-
-        &::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0);
-        }
-
-        &::-webkit-scrollbar-button {
-            display: none;
-        }
+      background-color: rgba(169, 169, 169, 1);
     }
 
-    .select-list-item {
-        list-style: none;
-
-        margin: 1rem 0;
-
-        &:focus {
-            color: rgba(255, 105, 105, 1);
-
-            outline: none;
-
-            .select-down-box {
-                border: 1px solid rgba(255, 105, 105, 1);
-            }
-        }
+    &::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0);
     }
 
-    li:first-of-type, li:last-of-type {
-        margin: 0.62rem 0;
+    &::-webkit-scrollbar-button {
+      display: none;
     }
+  }
+
+  .select-list-item {
+    list-style: none;
+
+    margin: 1rem 0;
+
+    &:focus {
+      color: rgba(255, 105, 105, 1);
+
+      outline: none;
+
+      .select-down-box {
+        border: 1px solid rgba(255, 105, 105, 1);
+      }
+    }
+  }
+
+  li:first-of-type,
+  li:last-of-type {
+    margin: 0.62rem 0;
+  }
 `;
 
 export default SelectStyle;
