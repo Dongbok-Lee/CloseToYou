@@ -10,7 +10,7 @@ import ClothesDetailPage from "./pages/clothes/detail/ClothesDetailPage";
 import SearchPage from "./pages/search/SearchPage";
 import BookMarkListPage from "./pages/bookmarks/list/BookMarkListPage";
 import BookMarkDetailPage from "./pages/bookmarks/detail/BookMarkDetailPage";
-import UserPage from "./pages/user/view/UserPage";
+import UserViewPage from "./pages/user/view/UserViewPage.jsx";
 import PasswordPage from "./pages/user/password/PasswordPage";
 import NicknamePage from "./pages/user/nickname/NicknamePage";
 
@@ -25,7 +25,7 @@ const AppRoutes = () => {
     <Route path="/search" element={<PageLayout page={<SearchPage />} />} />
     <Route path="/bookmarks" element={<PageLayout page={<BookMarkListPage />} />} />
     <Route path="/bookmarks/:id" element={<PageLayout page={<BookMarkDetailPage />} />} />
-    <Route path="/user" element={<PageLayout page={<UserPage />} />} />
+    <Route path="/user" element={<PageLayout page={<UserViewPage />} />} />
     <Route path="/nickname" element={<PageLayout page={<NicknamePage />} />} />
     <Route path="/password" element={<PageLayout page={<PasswordPage />} />} />
   </Routes>;

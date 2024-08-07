@@ -5,7 +5,7 @@ import {
     UserInfoWrapper,
     UserPageContainer,
     WelcomeWrapper,
-} from "./UserPageStyle";
+} from "./UserViewPageStyle.js";
 import { ToggleContainer } from "../../../components/togglebutton/ToggleButtonStyle.js";
 import { useEffect, useState } from "react";
 import ToggleButton from "../../../components/togglebutton/ToggleButton.jsx";
@@ -20,7 +20,7 @@ const user = {
   isHighContrast: false,
 };
 
-const UserPage = () => {
+const UserViewPage = () => {
   const [isToggle, setIsToggle] = useState(false);
 
   const navigate = useNavigate();
@@ -71,4 +71,4 @@ const UserPage = () => {
   );
 };
 
-export default UserPage;
+export default UserViewPage;
