@@ -76,12 +76,12 @@ public class SecurityConfig {
                 oauth2Login(oauth2 ->
                         oauth2.userInfoEndpoint(userInfoEndpoint -> userInfoEndpoint.userService(customOAuth2UserService))  // 회원 정보 처리
                                 .successHandler(oAuth2LoginSuccessHandler)
-                                .failureHandler(oAuth2LoginFailureHandler))
-                .authorizationEndpoint()
-                .baseUri("/api/oauth2/authorization")
-                .and()
-                .redirectionEndpoint()
-                .baseUri("/api/login/oauth2/code/*");
+                                .failureHandler(oAuth2LoginFailureHandler)
+                                .authorizationEndpoint()
+                                    .baseUri("/api/oauth2/authorization")
+                                .and()
+                                .redirectionEndpoint()
+                                    .baseUri("/api/login/oauth2/code/*"));
 
         //exception handling
         http.exceptionHandling(handling ->
