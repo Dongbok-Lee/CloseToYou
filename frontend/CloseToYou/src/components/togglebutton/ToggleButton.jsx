@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ToggleContainer, ToggleCircle } from "./ToggleButtonStyle";
+import { ToggleContainer, ToggleCircleIcon } from "./ToggleButtonStyle";
 
 const ToggleButton = () => {
   const [isOn, setIsOn] = useState(false);
@@ -10,7 +10,7 @@ const ToggleButton = () => {
 
   return (
     <ToggleContainer onTouchStart={handleToggle} isOn={isOn}>
-      <ToggleCircle isOn={isOn} />
+      <ToggleCircleIcon isOn={isOn} />
     </ToggleContainer>
   );
 };
