@@ -14,7 +14,7 @@ const toggleOff = keyframes`
 export const ToggleContainer = styled.div`
   width: 4rem;
   height: 1.6rem;
-  background: ${props => (props.isOn ? "#FF6969" : "#FFF")};
+  background: ${props => props.isOn ? "#FF6969" : "#FFF"};
   border: 2px solid ${props => (props.isOn ? "#FFF" : "#FF6969")};
   border-radius: 2rem;
   display: flex;
