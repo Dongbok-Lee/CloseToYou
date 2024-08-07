@@ -1,16 +1,15 @@
 import styled from "@emotion/styled";
 
-
 export const TitleText = styled.p`
-    font-weight: 700;
-    font-size: 1.5rem;
-    tab-index: 0;
-`
+  font-weight: 700;
+  font-size: 1.5rem;
+  tab-index: 0;
+`;
 
 export const SubText = styled.p`
-    font-weight: 400;
-    font-size: 1.25rem;
-`
+  font-weight: 400;
+  font-size: 1.25rem;
+`;
 
 export const UserPageContainer = styled.div`
   display: flex;
@@ -56,7 +55,7 @@ export const ChangeWrapper = styled.div`
 export const ButtonText = styled.p`
   font-weight: 700;
   font-size: 1.5rem;
-  color: #ff6969;
+  color: ${props => props.theme.colors.point[0]};
   text-align: center;
   cursor: pointer;
 
