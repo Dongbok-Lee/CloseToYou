@@ -67,9 +67,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authorization) -> authorization
                         .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
                         .requestMatchers("/api/email/authentication/**").permitAll()
-                        .anyRequest().authenticated()
-                );
-
+                        .requestMatchers("/swagger-ui/**").permitAll()
+                        .requestMatchers("/v3/api-docs/**").permitAll()
+                        .anyRequest().authenticated());
         //oauth2Login
         http.
                 oauth2Login(oauth2 ->

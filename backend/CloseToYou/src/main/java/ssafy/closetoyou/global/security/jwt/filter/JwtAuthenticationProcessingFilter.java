@@ -60,7 +60,8 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        String[] excludePath = {"/swagger-ui/index.html",
+        String[] excludePath = {
+                "/swagger-ui/index.html",
                 "/swagger-ui/swagger-ui-standalone-preset.js",
                 "/swagger-ui/swagger-initializer.js",
                 "/swagger-ui/swagger-ui-bundle.js",
@@ -69,7 +70,8 @@ public class JwtAuthenticationProcessingFilter extends OncePerRequestFilter {
                 "/swagger-ui/favicon-32x32.png",
                 "/swagger-ui/favicon-16x16.png",
                 "/api-docs/json/swagger-config",
-                "/api-docs/json"};
+                "/api-docs/json"
+        };
         String path = request.getRequestURI();
         return Arrays.stream(excludePath).anyMatch(path::startsWith);
     }
