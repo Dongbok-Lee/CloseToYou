@@ -16,8 +16,9 @@
     "@emotion/styled": "^11.13.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "zustand": "^4.5.4",
-    "react-router-dom": "^6.25.1"
+    "react-router-dom": "^6.25.1",
+    "react-swipeable": "^7.0.1",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
     "@swc/cli": "^0.4.0",

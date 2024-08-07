@@ -10,7 +10,7 @@ const HeaderContainer = styled.header`
   background: #ff6969;
 
   .header-content {
-    width: 95%;
+    width: 90%;
     margin: auto;
     display: flex;
     justify-content: space-between;
