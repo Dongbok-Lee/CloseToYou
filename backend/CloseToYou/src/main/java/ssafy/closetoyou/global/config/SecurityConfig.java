@@ -67,15 +67,21 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authorization) -> authorization
                         .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
                         .requestMatchers("/api/email/authentication/**").permitAll()
-                        .requestMatchers("/swagger-ui/**").permitAll()
-                        .requestMatchers("/v3/api-docs/**").permitAll()
-                        .anyRequest().authenticated());
+                        .requestMatchers("/api/oauth2/**").permitAll()
+                        .anyRequest().authenticated()
+                );
+
         //oauth2Login
         http.
                 oauth2Login(oauth2 ->
                         oauth2.userInfoEndpoint(userInfoEndpoint -> userInfoEndpoint.userService(customOAuth2UserService))  // 회원 정보 처리
-                        .successHandler(oAuth2LoginSuccessHandler)
-                        .failureHandler(oAuth2LoginFailureHandler));
+                                .successHandler(oAuth2LoginSuccessHandler)
+                                .failureHandler(oAuth2LoginFailureHandler)
+                                .authorizationEndpoint()
+                                .baseUri("/api/oauth2/authorization")
+                                .and()
+                                .redirectionEndpoint()
+                                .baseUri("/api/login/oauth2/code/*"));
 
         //exception handling
         http.exceptionHandling(handling ->
