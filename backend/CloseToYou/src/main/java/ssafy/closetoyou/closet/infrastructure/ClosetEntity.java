@@ -9,16 +9,17 @@ import ssafy.closetoyou.closet.domain.Closet;
 
 import java.time.LocalDateTime;
 
-@Entity(name = "closets")
-@Getter @Setter @ToString
+@Getter
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
+@Entity
+@Table(name = "closets")
 public class ClosetEntity {
 
     @Id
+    @Column(name = "closet_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long closetId;
-
     private Long userId;
     private String closetCode;
     private String nickname;

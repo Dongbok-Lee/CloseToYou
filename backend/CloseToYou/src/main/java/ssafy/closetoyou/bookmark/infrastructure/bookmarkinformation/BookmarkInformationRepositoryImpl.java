@@ -29,6 +29,11 @@ public class BookmarkInformationRepositoryImpl implements BookmarkInformationRep
     }
 
     @Override
+    public boolean existsBookmarkByBookmarkIdAndClothesId(Long bookmarkId, Long clothesId) {
+        return bookmarkInformationJpaRepository.existsBookmarkByBookmarkIdAndClothesId(bookmarkId, clothesId);
+    }
+
+    @Override
     public List<Long> findClothesIdsByBookmarkId(Long bookmarkId) {
         return bookmarkInformationJpaRepository.findBookmarkInformationsByBookmarkId(bookmarkId)
                 .stream()

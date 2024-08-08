@@ -22,7 +22,7 @@ public class ClosetCodeServiceImpl implements ClosetCodeService {
     }
 
     @Override
-    public void setClosetCodeIsUsed(String closetCode, boolean isUsed) {
+    public void updateClosetCodeIsUsed(String closetCode, boolean isUsed) {
         closetCodeRepository.setClosetCodeIsUsed(closetCode, isUsed);
     }
 

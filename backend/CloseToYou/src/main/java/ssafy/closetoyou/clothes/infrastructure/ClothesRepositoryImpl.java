@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 import ssafy.closetoyou.clothes.controller.request.ClothesCondition;
 import ssafy.closetoyou.clothes.domain.Clothes;
 import ssafy.closetoyou.clothes.service.port.ClothesRepository;
-import ssafy.closetoyou.global.error.errorcode.ClosetErrorCode;
 import ssafy.closetoyou.global.error.errorcode.ClothesErrorCode;
 import ssafy.closetoyou.global.error.exception.CloseToYouException;
 
@@ -24,52 +23,44 @@ public class ClothesRepositoryImpl implements ClothesRepository {
     }
 
     @Override
-    public void deleteClothes(Long clothesId) {
-        ClothesEntity clothesEntity = clothesJpaRepository.findClothesByClosetIdAndClothesIdAndIsDeleted(clothesId, clothesId, false)
-                .orElseThrow(() -> new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION));
-        clothesEntity.setDeleted(true);
-        clothesJpaRepository.save(clothesEntity);
+    public boolean existClothesByClothesId(Long clothesId) {
+        return clothesJpaRepository.existsByClothesIdAndIsDeleted(clothesId, false);
     }
 
     @Override
-    public boolean existClothesByClosetIdAndClothesId(Long closetId, Long clothesId) {
-        return clothesJpaRepository.existsByClosetIdAndClothesIdAndIsDeleted(closetId, clothesId, false);
+    public boolean existClothesByUserIdAndClothesNickname(Long userId, String clothesNickname) {
+        return clothesJpaRepository.existsByUserIdAndNicknameAndIsDeleted(userId, clothesNickname, false);
     }
 
-    public boolean existClothesByClosetIdAndClothesNickname(Long closetId, String nickname) {
-        return clothesJpaRepository.existsByClosetIdAndNicknameAndIsDeleted(closetId, nickname, false);
-    }
 
     @Override
-    public Clothes findClothes(Long closetId, Long clothesId) {
-        return clothesJpaRepository.findClothesByClosetIdAndClothesIdAndIsDeleted(closetId, clothesId, false).orElseThrow(
+    public Clothes findClothes(Long clothesId) {
+        return clothesJpaRepository.findClothesByClothesIdAndIsDeleted(clothesId, false).orElseThrow(
                 () -> new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION)).toModel();
     }
 
     @Override
-    public List<Clothes> findAllClothes(Long closetId) {
+    public List<Clothes> findAllClothes(Long userId) {
         return clothesJpaRepository
-                .findAllByClosetIdAndIsDeleted(closetId, false)
-                .orElseThrow(() -> new CloseToYouException(ClosetErrorCode.NO_CLOSET_EXCEPTION))
+                .findAllByUserIdAndIsDeleted(userId, false)
                 .stream()
                 .map(ClothesEntity::toModel)
                 .toList();
     }
 
     @Override
-    public List<Clothes> searchClothesByClosetIdAndClothesCondition(Long closetId, ClothesCondition clothesCondition) {
+    public List<Clothes> searchClothesByClothesCondition(ClothesCondition clothesCondition) {
         return clothesJpaRepository
-                .searchClothesByClosetIdAndClothesConditionAndIsDeleted(closetId, clothesCondition)
-                .orElse(Collections.emptyList())
+                .searchClothesByClosetIdAndClothesConditionAndIsDeleted(clothesCondition, false)
                 .stream()
                 .map(ClothesEntity::toModel)
                 .toList();
     }
 
     @Override
-    public List<Clothes> searchClothesByClosetIdAndSearchKeyword(Long closetId, String searchKeyword) {
+    public List<Clothes> searchClothesBySearchKeyword(String searchKeyword) {
         return clothesJpaRepository
-                .searchClothesByClosetIdAndSearchKeywordAndIsDeleted(closetId, searchKeyword)
+                .searchClothesByUserIdAndSearchKeywordAndIsDeleted(searchKeyword, false)
                 .orElse(Collections.emptyList())
                 .stream()
                 .map(ClothesEntity::toModel)

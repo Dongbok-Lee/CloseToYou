@@ -2,18 +2,15 @@ package ssafy.closetoyou.clothes.domain;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.ToString;
+import ssafy.closetoyou.closet.domain.Closet;
 import ssafy.closetoyou.clothes.controller.request.ClothesUpdateRequest;
-import ssafy.closetoyou.global.error.errorcode.ClothesErrorCode;
-import ssafy.closetoyou.global.error.exception.CloseToYouException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-@ToString
 @Getter
 public class Clothes {
     private Long clothesId;
-    private Long closetId;
+    private Closet closet;
     private Long nfcId;
     private String location;
     private String nickname;
@@ -24,16 +21,20 @@ public class Clothes {
     private String size;
     private String memo;
     private int wearingCount;
+
     private Boolean isDeleted;
     private String imageUrl;
     private LocalDateTime createdDateTime;
     private LocalDateTime updatedDateTime;
     private LocalDate lastWornDate;
 
+    public void delete() {
+        this.isDeleted = true;
+    }
     @Builder
-    public Clothes(Long clothesId, Long closetId, Long nfcId, String location, String nickname, Type type, Pattern pattern, Color color, Season season, String size, String memo, int wearingCount, Boolean isDeleted, String imageUrl, LocalDateTime createdDateTime, LocalDateTime updatedDateTime, LocalDate lastWornDate) {
+    public Clothes(Long clothesId, Closet closet, Long nfcId, String location, String nickname, Type type, Pattern pattern, Color color, Season season, String size, String memo, int wearingCount, Boolean isDeleted, String imageUrl, LocalDateTime createdDateTime, LocalDateTime updatedDateTime, LocalDate lastWornDate) {
         this.clothesId = clothesId;
-        this.closetId = closetId;
+        this.closet = closet;
         this.nfcId = nfcId;
         this.location = location;
         this.nickname = nickname;
@@ -52,12 +53,12 @@ public class Clothes {
     }
 
     public void changeClothesInfo(ClothesUpdateRequest clothesUpdateRequest) {
-        this.nickname = clothesUpdateRequest.getNickname();
-        this.type = Type.valueOf(clothesUpdateRequest.getType());
-        this.pattern = Pattern.valueOf(clothesUpdateRequest.getPattern());
-        this.color = Color.valueOf(clothesUpdateRequest.getColor());
-        this.memo = clothesUpdateRequest.getMemo();
-        this.season = clothesUpdateRequest.getSeason();
-        this.size = clothesUpdateRequest.getSize();
+        if (clothesUpdateRequest.getNickname() != null) this.nickname = clothesUpdateRequest.getNickname();
+        if (clothesUpdateRequest.getType() != null) this.type = Type.valueOf(clothesUpdateRequest.getType());
+        if (clothesUpdateRequest.getPattern() != null) this.pattern = Pattern.valueOf(clothesUpdateRequest.getPattern());
+        if (clothesUpdateRequest.getColor() != null) this.color = Color.valueOf(clothesUpdateRequest.getColor());
+        if (clothesUpdateRequest.getMemo() != null) this.memo = clothesUpdateRequest.getMemo();
+        if (clothesUpdateRequest.getSeason() != null) this.season = Season.valueOf(clothesUpdateRequest.getSeason());
+        if (clothesUpdateRequest.getSize() != null) this.size = clothesUpdateRequest.getSize();
     }
 }
