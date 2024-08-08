@@ -2,53 +2,37 @@ import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   ClothesDetailPageContainer,
-  ClothesName,
-  Tab,
+  ClothesNameText,
+  TabText,
   DetailContainer,
   DetailItem,
-  DetailTitle,
-  DetailInfo,
-  LocationInfo,
-  SkipContainer,
-  NfcImg,
-  NfcText,
-  SkipButton
+  DetailTitleText,
+  DetailInfoText,
+  LocationInfoText,
+  ImageContainer,
+  LastWornDateText
 } from './ClothesDetailPageStyle';
-import NFCImg from '../../../assets/icons/nfc.png';
 import FloatingButton from '../../../components/floatingbutton/FloatingButton';
 import tempImage from '../../../assets/icons/temp-image.png';
 
 const ClothesDetailPage = () => {
   const [details, setDetails] = useState({
+    clothesId: '',
     nickname: '산뜻 노랑',
-    color: '노랑',
-    type: '셔츠',
+    closetNickname: '',
+    color: 'yellow',
+    type: 'shirt',
     pattern: '무지',
+    season: '봄, 가을',
     size: 'L',
-    texture: '면',
-    seasonFeeling: '봄, 가을',
     memo: '산뜻한 봄에 피크닉 가고 싶을 때 입을 티셔츠',
     location: 'A-14',
+    imageUrl: tempImage,
+    lastWornDate: '2023-08-01'
   });
 
   const navigate = useNavigate();
-  const { id = 0 } = useParams();
-
-  const [showContent, setShowContent] = useState(false);
-
-  const handleSkip = () => {
-    setShowContent(true);
-  };
-
-  if (!showContent) {
-    return (
-      <SkipContainer>
-        <NfcImg src={NFCImg} alt="NFC Img" />
-        <NfcText>옷장의 리더기에<br />NFC 태그를 찍어주세요</NfcText>
-        <SkipButton onTouchStart={handleSkip}>Skip</SkipButton>
-      </SkipContainer>
-    );
-  }
+  const { id } = useParams();
 
   const handleEditClick = () => {
     navigate(`/clothes/edit/${id}`);
@@ -56,60 +40,49 @@ const ClothesDetailPage = () => {
 
   return (
     <ClothesDetailPageContainer className="page">
-      <ClothesName>{details.nickname}</ClothesName>
-      <div
-        style={{
-          border: '1px solid #FF6969',
-          height: '15.6rem',
-          width: '15.6rem',
-          flexShrink: '0',
-          borderRadius: '0.625rem',
-          background: '#FFF',
-          margin: '0 auto',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <img src={tempImage} alt="Clothes" />
-      </div>
-      <LocationInfo>{details.location}</LocationInfo>
+      <ClothesNameText aria-label="옷 별명">{details.nickname}</ClothesNameText>
+      <ImageContainer>
+        <img src={details.imageUrl} alt="옷 이미지" />
+      </ImageContainer>
+      <LocationInfoText aria-label="위치 정보">{details.location}</LocationInfoText>
 
       <DetailContainer>
-        <Tab>기본 정보</Tab>
+        <TabText aria-label="기본 정보">기본 정보</TabText>
         {[
           { title: '색상', info: details.color },
           { title: '종류', info: details.type },
           { title: '패턴', info: details.pattern },
         ].map((item, index) => (
           <DetailItem key={index}>
-            <DetailTitle>{item.title}</DetailTitle>
-            <DetailInfo>{item.info}</DetailInfo>
+            <DetailTitleText aria-label={item.title}>{item.title}</DetailTitleText>
+            <DetailInfoText>{item.info}</DetailInfoText>
           </DetailItem>
         ))}
       </DetailContainer>
 
       <DetailContainer>
-        <Tab>추가 정보</Tab>
+        <TabText aria-label="추가 정보">추가 정보</TabText>
         {[
           { title: '사이즈', info: details.size },
-          { title: '계절감', info: details.seasonFeeling },
+          { title: '계절감', info: details.season },
         ].map((item, index) => (
           <DetailItem key={index}>
-            <DetailTitle>{item.title}</DetailTitle>
-            <DetailInfo>{item.info}</DetailInfo>
+            <DetailTitleText aria-label={item.title}>{item.title}</DetailTitleText>
+            <DetailInfoText>{item.info}</DetailInfoText>
           </DetailItem>
         ))}
       </DetailContainer>
 
       <DetailContainer>
-        <Tab>메모</Tab>
+        <TabText aria-label="메모">메모</TabText>
         <DetailItem>
-          <DetailInfo>{details.memo}</DetailInfo>
+          <DetailInfoText>{details.memo}</DetailInfoText>
         </DetailItem>
       </DetailContainer>
 
-      <FloatingButton type="edit" onTouchStart={handleEditClick} />
+      <LastWornDateText aria-label="최근 입은 날짜">최근 입은 날짜: {details.lastWornDate}</LastWornDateText>
+
+      <FloatingButton type="edit" onTouchStart={handleEditClick} aria-label="편집 버튼" />
     </ClothesDetailPageContainer>
   );
 };
