@@ -2,41 +2,7 @@ import styled from '@emotion/styled';
 
 export const ClothesDetailPageContainer = styled.div``;
 
-export const SkipContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  position: relative;
-`;
-
-export const NfcImg = styled.img`
-  margin-bottom: 20px;
-`;
-
-export const NfcText = styled.span`
-  text-align: center;
-  font-family: "KoddiUD OnGothic";
-  font-size: 2rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-`;
-
-export const SkipButton = styled.p`
-  padding: 10px 20px;
-  font-size: 1.25rem;
-  border-radius: 5px;
-  border: none;
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  text-decoration: underline;
-
-`;
-
-export const ClothesName = styled.h1`
+export const ClothesNameText = styled.h1`
   margin: 40px;
   color: #FF6969;
   font-family: "KoddiUD OnGothic";
@@ -44,14 +10,14 @@ export const ClothesName = styled.h1`
   font-weight: 700;
 `;
 
-export const LocationInfo = styled.h1`
+export const LocationInfoText = styled.h1`
   font-family: "KoddiUD OnGothic";
   font-size: 1.5rem;
   font-weight: 700;
   text-align: center;
 `;
 
-export const Tab = styled.div`
+export const TabText = styled.div`
   width: 9.375rem;
   height: 2.5rem;
   flex-shrink: 0;
@@ -83,7 +49,7 @@ export const DetailItem = styled.div`
   margin-bottom: 10px;
 `;
 
-export const DetailTitle = styled.h2`
+export const DetailTitleText = styled.h2`
   color: #000;
   text-align: left;
   font-family: "KoddiUD OnGothic";
@@ -91,12 +57,33 @@ export const DetailTitle = styled.h2`
   font-weight: 700;
 `;
 
-export const DetailInfo = styled.p`
+export const DetailInfoText = styled.p`
   color: #000;
   text-align: ${({ alignRight }) => (alignRight ? 'right' : 'left')};
   font-family: "KoddiUD OnGothic";
   font-size: 1.25rem;
   font-weight: 400;
+`;
+
+export const ImageContainer = styled.div`
+  border: 1px solid #FF6969;
+  height: 15.6rem;
+  width: 15.6rem;
+  flex-shrink: 0;
+  border-radius: 0.625rem;
+  background: #FFF;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const LastWornDateText = styled.div`
+  margin-left: 20px;
+  padding-left: 20px;
+  font-family: "KoddiUD OnGothic";
+  font-size: 1rem;
+  color: gray;
 `;
 
 export default ClothesDetailPageContainer;
