@@ -10,6 +10,7 @@ const SearchCardStyle = styled.div`
   padding: 1rem;
   border: 1px solid rgba(255, 105, 105, 1);
   border-radius: 0.625rem;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   -webkit-tap-highlight-color: transparent;
 
   .left-box {

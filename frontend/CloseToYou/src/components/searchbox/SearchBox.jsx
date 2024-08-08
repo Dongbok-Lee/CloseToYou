@@ -10,7 +10,7 @@ const SearchBox = ({ value = "", onSearch }) => {
   const handleChangeInput = (e) => {
     const newValue = e.target.value;
     setInputValue(newValue);
-    onSearch(newValue); // 검색어 변경 시 바로 onSearch 호출
+    onSearch(newValue);
   };
 
   const handleTouchSearch = () => {
@@ -34,6 +34,7 @@ const SearchBox = ({ value = "", onSearch }) => {
   return (
     <SearchBoxContainer isFocused={isFocused}>
       <input
+        aria-label="검색어 입력"
         className="input"
         type="text"
         value={inputValue}

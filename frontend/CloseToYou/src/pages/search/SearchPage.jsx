@@ -45,13 +45,14 @@ const SearchPage = () => {
       ) : (
         <>
           <ResultCount>
-            검색 결과: <span>{searchResults.length}</span>
+            검색 결과: <span>{searchResults.length}</span>개
           </ResultCount>
           {searchResults.map((result) => (
             <SearchCard
               key={result.id}
               searchCardName={result.nickname}
               searchCardLocation={`${result.closet_nickname} ${result.location}`}
+              clothesId={result.id}
               handleTouchSearchCard={() => console.log(result.id)}
             />
           ))}
