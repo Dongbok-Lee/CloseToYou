@@ -22,40 +22,40 @@ const ClothesListPage = () => {
       id: 0,
       nickname: '산뜻 노랑',
       imageUrl: 'https://via.placeholder.com/150',
-      color: '노랑',
-      type: '셔츠',
+      color: 'yellow',
+      type: 'shirt',
       pattern: '무지',
     },
     {
       id: 1,
       nickname: '시원한 블루',
       imageUrl: 'https://via.placeholder.com/150',
-      color: '파랑',
-      type: '셔츠',
+      color: 'blue',
+      type: 'shirt',
       pattern: '체크',
     },
     {
       id: 2,
       nickname: '따뜻한 레드',
       imageUrl: 'https://via.placeholder.com/150',
-      color: '빨강',
-      type: '코트',
+      color: 'red',
+      type: 'coat',
       pattern: '무지',
     },
     {
       id: 3,
       nickname: '부드러운 그린',
       imageUrl: 'https://via.placeholder.com/150',
-      color: '초록',
-      type: '카디건',
+      color: 'green',
+      type: 'cardigan',
       pattern: '무지',
     },
     {
       id: 4,
       nickname: '클래식 블랙',
       imageUrl: 'https://via.placeholder.com/150',
-      color: '검정',
-      type: '재킷',
+      color: 'black',
+      type: 'jacket',
       pattern: '무지',
     },
   ]);
@@ -201,7 +201,11 @@ const ClothesListPage = () => {
           >
             {clothes.map((clothing, index) => (
               <ClothesCardWrapper key={index} isActive={index === activeIndex}>
-                <ClothesCard handleTouchClothesCard={() => handleTouchClothesCard(clothing.id, index)} />
+                <ClothesCard
+                  handleTouchClothesCard={() => handleTouchClothesCard(clothing.id, index)}
+                  type={clothing.type}
+                  color={clothing.color}
+                />
                 <Nickname isActive={index === activeIndex}>{clothing.nickname}</Nickname>
               </ClothesCardWrapper>
             ))}
