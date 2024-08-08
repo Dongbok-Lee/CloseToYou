@@ -78,10 +78,10 @@ public class SecurityConfig {
                                 .successHandler(oAuth2LoginSuccessHandler)
                                 .failureHandler(oAuth2LoginFailureHandler)
                                 .authorizationEndpoint()
-                                .baseUri("/api/oauth2/authorization")
+                                    .baseUri("/api/oauth2/authorization")
                                 .and()
                                 .redirectionEndpoint()
-                                .baseUri("/api/login/oauth2/code/*"));
+                                    .baseUri("/api/login/oauth2/code/*"));
 
         //exception handling
         http.exceptionHandling(handling ->
