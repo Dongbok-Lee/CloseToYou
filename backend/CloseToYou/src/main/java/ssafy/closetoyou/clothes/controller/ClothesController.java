@@ -65,10 +65,8 @@ public class ClothesController {
 
     @Operation(summary = "키워드 기반 옷 검색 api")
     @GetMapping("/search/{keyword}")
-    public ResponseEntity<SuccessResponse<List<ClothesSummary>>> searchClothesBySearchKeyword(Authentication authentication,
-                                                                                             @PathVariable String keyword) {
-        Long userId = ((CustomUserDetail) authentication.getPrincipal()).getUser().getUserId();
-        List<ClothesSummary> clothesRespons = clothesService.searchClothesBySearchKeyword(userId, keyword);
+    public ResponseEntity<SuccessResponse<List<ClothesSummary>>> searchClothesBySearchKeyword(@PathVariable String keyword) {
+        List<ClothesSummary> clothesRespons = clothesService.searchClothesBySearchKeyword(keyword);
         return ResponseEntity.ok()
                 .body(new SuccessResponse<>("키워드 기반 옷 검색 성공", clothesRespons));
 
@@ -76,10 +74,8 @@ public class ClothesController {
 
     @Operation(summary = "옷장 및 필터 기반 옷 검색 api")
     @GetMapping("/filter")
-    public ResponseEntity<SuccessResponse<List<ClothesSummary>>> searchClothesBySearchFilter(Authentication authentication,
-                                                                                             @Valid @RequestBody ClothesCondition clothesCondition) {
-        Long userId = ((CustomUserDetail) authentication.getPrincipal()).getUser().getUserId();
-        List<ClothesSummary> clothesRespons = clothesService.searchClothesByClothesCondition(userId, clothesCondition);
+    public ResponseEntity<SuccessResponse<List<ClothesSummary>>> searchClothesBySearchFilter(@Valid @RequestBody ClothesCondition clothesCondition) {
+        List<ClothesSummary> clothesRespons = clothesService.searchClothesByClothesCondition(clothesCondition);
         return ResponseEntity.ok()
                 .body(new SuccessResponse<>("필터 기반 옷 검색 성공", clothesRespons));
 

@@ -12,6 +12,6 @@ public interface ClothesService {
 
     ClothesDetail findClothes(Long clothesId);
     List<ClothesSummary> findAllClothes(Long userId);
-    List<ClothesSummary> searchClothesByClothesCondition(Long userId, ClothesCondition clothesCondition);
-    List<ClothesSummary> searchClothesBySearchKeyword(Long userId, String searchKeyword);
+    List<ClothesSummary> searchClothesByClothesCondition(ClothesCondition clothesCondition);
+    List<ClothesSummary> searchClothesBySearchKeyword(String searchKeyword);
 }

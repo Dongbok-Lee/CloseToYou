@@ -22,4 +22,12 @@ public class ClothesCondition {
 
     @ValidEnum(enumClass = Pattern.class)
     private String pattern;
+
+    @Builder
+    public ClothesCondition(Long closetId, String color, String type, String pattern) {
+        this.closetId = closetId;
+        this.color = color;
+        this.type = type;
+        this.pattern = pattern;
+    }
 }

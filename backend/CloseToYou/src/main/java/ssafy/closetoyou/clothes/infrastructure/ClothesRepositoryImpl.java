@@ -23,13 +23,6 @@ public class ClothesRepositoryImpl implements ClothesRepository {
     }
 
     @Override
-    public Clothes deleteClothes(Long clothesId) {
-        return clothesJpaRepository.findClothesByClothesIdAndIsDeleted(clothesId, false)
-                .orElseThrow(() -> new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION))
-                .toModel();
-    }
-
-    @Override
     public boolean existClothesByClothesId(Long clothesId) {
         return clothesJpaRepository.existsByClothesIdAndIsDeleted(clothesId, false);
     }
@@ -56,18 +49,18 @@ public class ClothesRepositoryImpl implements ClothesRepository {
     }
 
     @Override
-    public List<Clothes> searchClothesByClosetIdAndClothesCondition(Long closetId, ClothesCondition clothesCondition) {
+    public List<Clothes> searchClothesByClothesCondition(ClothesCondition clothesCondition) {
         return clothesJpaRepository
-                .searchClothesByClosetIdAndClothesConditionAndIsDeleted(closetId, clothesCondition)
+                .searchClothesByClosetIdAndClothesConditionAndIsDeleted(clothesCondition, false)
                 .stream()
                 .map(ClothesEntity::toModel)
                 .toList();
     }
 
     @Override
-    public List<Clothes> searchClothesByUserIdAndSearchKeyword(Long userId, String searchKeyword) {
+    public List<Clothes> searchClothesBySearchKeyword(String searchKeyword) {
         return clothesJpaRepository
-                .searchClothesByUserIdAndSearchKeywordAndIsDeleted(userId, searchKeyword)
+                .searchClothesByUserIdAndSearchKeywordAndIsDeleted(searchKeyword, false)
                 .orElse(Collections.emptyList())
                 .stream()
                 .map(ClothesEntity::toModel)
