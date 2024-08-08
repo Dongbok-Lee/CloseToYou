@@ -16,34 +16,20 @@ public class ClosetRepositoryImpl implements ClosetRepository {
 
     private final ClosetJpaRepository closetJpaRepository;
     private final ClothesJpaRepository clothesJpaRepository;
+
     @Override
-    public Closet createCloset(Closet closet) {
-        if (closetJpaRepository.existsByNickname(closet.getNickname())) {
-            throw new CloseToYouException(ClosetErrorCode.DUPLICATE_CLOSET_NICKNAME);
-        }
+    public Closet saveCloset(Closet closet) {
         return closetJpaRepository.save(ClosetEntity.fromModel(closet)).toModel();
     }
 
     @Override
-    public boolean existsClosetByClosetNickname(String closetNickname) {
-        return closetJpaRepository.existsByNickname(closetNickname);
+    public boolean existsClosetByClosetNickname(Long userId, String closetNickname) {
+        return closetJpaRepository.existsByNicknameIsDeleted(userId, closetNickname, false);
     }
 
     @Override
-    public void updateCloset(Long userId, Long closetId, String nickname) {
-        ClosetEntity closetEntity = closetJpaRepository.findByUserIdAndClosetIdAndIsDeleted(userId, closetId, false)
-                .orElseThrow(() -> new CloseToYouException(ClosetErrorCode.NO_CLOSET_EXCEPTION));
-        closetEntity.setNickname(nickname);
-        closetJpaRepository.save(closetEntity);
-    }
-
-    @Override
-    public void deleteCloset(Long userId, Long closetId) {
-        ClosetEntity closetEntity = closetJpaRepository.findByUserIdAndClosetIdAndIsDeleted(userId, closetId, false)
-                .orElseThrow(() -> new CloseToYouException(ClosetErrorCode.NO_CLOSET_EXCEPTION));
-
-        closetEntity.setIsDeleted(true);
-        closetJpaRepository.save(closetEntity);
+    public boolean existsClosetByClosetId(Long closetId) {
+        return closetJpaRepository.existsByClosetIdAndIsDeleted(closetId, false);
     }
 
     @Override
@@ -53,7 +39,7 @@ public class ClosetRepositoryImpl implements ClosetRepository {
                 .stream()
                 .map(closetEntity -> {
                     Closet closet = closetEntity.toModel();
-                    closet.setClothesCount(clothesJpaRepository.countClothesByClosetIdAndIsDeleted(closet.getClosetId(), false));
+                    closet.updateClothesCount(clothesJpaRepository.countClothesByClosetIdAndIsDeleted(closet.getClosetId(), false));
                     return closet;
                 })
                 .toList();
@@ -61,7 +47,7 @@ public class ClosetRepositoryImpl implements ClosetRepository {
 
     @Override
     public Closet getClosetByClosetId(Long closetId) {
-        return closetJpaRepository.findClosetByClosetId(closetId)
+        return closetJpaRepository.findClosetByClosetIdAndIsDeleted(closetId, false)
                 .orElseThrow(() -> new CloseToYouException(ClosetErrorCode.NO_CLOSET_CODE_EXCEPTION))
                 .toModel();
     }

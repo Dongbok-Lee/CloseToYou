@@ -44,7 +44,7 @@ public class ClosetController {
                                                                       @PathVariable Long closetId,
                                                                       @NotNull @RequestBody Map<String, String> newNickname) {
         Long userId = ((CustomUserDetail) authentication.getPrincipal()).getUser().getUserId();
-        closetService.changeClosetInfo(userId, closetId, newNickname.get("nickname"));
+        closetService.changeClosetNickname(userId, closetId, newNickname.get("nickname"));
         return ResponseEntity.ok(
                 new SuccessResponse<>("옷장 정보 수정에 성공했습니다", closetId)
         );
