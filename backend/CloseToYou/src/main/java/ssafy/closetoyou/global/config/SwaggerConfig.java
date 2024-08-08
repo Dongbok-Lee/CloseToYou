@@ -7,9 +7,11 @@ import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class SwaggerConfig {
+public class SwaggerConfig implements WebMvcConfigurer {
 
     private static final String SERVICE_NAME = "Close To You";
     private static final String API_VERSION = "1.0.0";
