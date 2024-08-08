@@ -1,5 +1,7 @@
 package ssafy.closetoyou.email.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,15 +20,18 @@ import ssafy.closetoyou.global.common.response.SuccessResponse;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/email/authentication")
+@Tag(name = "이메일 API")
 public class EmailAuthenticationController {
     private final EmailAuthenticationService emailAuthenticationService;
 
+    @Operation(summary = "이메일 전송 api")
     @PostMapping("/send")
     public ResponseEntity<SuccessResponse<Object>> sendEmail(@Valid @RequestBody SendEmail sendEmail) {
         emailAuthenticationService.sendEmail(sendEmail.getEmail());
         return ResponseEntity.ok().body(new SuccessResponse<>("이메일 전송에 성공하였습니다."));
     }
 
+    @Operation(summary = "이메일 코드 인증 api")
     @PostMapping("/check")
     public ResponseEntity<SuccessResponse<Object>> checkEmailAuthenticationCode(
             @Valid @RequestBody EmailAuthenticationCheck emailAuthenticationCheck) {

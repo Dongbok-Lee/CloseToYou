@@ -8,6 +8,7 @@ spring:
       - server
       - database
       - variable
+      - swagger
   datasource:
     url: ${DATABASE_URL}
     username: ${DATABASE_ID}

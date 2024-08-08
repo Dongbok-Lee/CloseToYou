@@ -5,7 +5,6 @@ import jakarta.validation.constraints.Email;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -17,7 +16,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
 @Entity(name = "users")
-@Getter @Setter
+@Getter
 @NoArgsConstructor(access = PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
 public class UserEntity {
@@ -33,7 +32,6 @@ public class UserEntity {
     @Column(unique = true)
     private String email;
 
-    private Boolean isHighContrast;
     private Boolean isDeleted;
 
     @CreatedDate
@@ -43,12 +41,11 @@ public class UserEntity {
     private LocalDateTime updatedDateTime;
 
     @Builder
-    public UserEntity(Long userId, String nickname, String password, String email, Boolean isHighContrast, Boolean isDeleted) {
+    public UserEntity(Long userId, String nickname, String password, String email, Boolean isDeleted) {
         this.userId = userId;
         this.nickname = nickname;
         this.password = password;
         this.email = email;
-        this.isHighContrast = isHighContrast;
         this.isDeleted = isDeleted;
     }
 
@@ -57,7 +54,6 @@ public class UserEntity {
                 .nickname(user.getNickname())
                 .password(user.getPassword())
                 .email(user.getEmail())
-                .isHighContrast(false)
                 .isDeleted(false)
                 .build();
     }
@@ -68,7 +64,6 @@ public class UserEntity {
                 .nickname(nickname)
                 .password(password)
                 .email(email)
-                .isHighContrast(isHighContrast)
                 .createdDateTime(createdDateTime)
                 .updatedDateTime(updatedDateTime)
                 .isDeleted(isDeleted)

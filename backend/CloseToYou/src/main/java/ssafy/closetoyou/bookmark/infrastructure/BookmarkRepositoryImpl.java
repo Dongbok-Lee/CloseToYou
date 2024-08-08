@@ -15,6 +15,7 @@ import java.util.List;
 public class BookmarkRepositoryImpl implements BookmarkRepository {
 
     private final BookmarkJpaRepository bookmarkJpaRepository;
+
     @Override
     public boolean existsNicknameByUserIdAndNickname(Long userId, String nickname) {
         return bookmarkJpaRepository.existsNicknameByUserIdAndNicknameAndIsDeleted(userId, nickname, false);

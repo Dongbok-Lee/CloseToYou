@@ -11,10 +11,8 @@ import ssafy.closetoyou.bookmark.domain.Bookmark;
 import ssafy.closetoyou.bookmark.infrastructure.bookmarkinformation.BookmarkInformationEntity;
 import ssafy.closetoyou.bookmark.service.port.BookmarkInformationRepository;
 import ssafy.closetoyou.bookmark.service.port.BookmarkRepository;
-import ssafy.closetoyou.closet.controller.port.ClosetService;
-import ssafy.closetoyou.closet.service.ClosetServiceImpl;
-import ssafy.closetoyou.closet.service.port.ClosetRepository;
-import ssafy.closetoyou.clothes.controller.response.ClothesResponse;
+import ssafy.closetoyou.clothes.controller.response.ClothesDetail;
+import ssafy.closetoyou.clothes.domain.Clothes;
 import ssafy.closetoyou.clothes.service.port.ClothesRepository;
 import ssafy.closetoyou.global.error.errorcode.BookmarkErrorCode;
 import ssafy.closetoyou.global.error.errorcode.ClothesErrorCode;
@@ -32,7 +30,6 @@ public class BookmarkServiceImpl implements BookmarkService {
     private final BookmarkRepository bookmarkRepository;
     private final BookmarkInformationRepository bookmarkInformationRepository;
     private final ClothesRepository clothesRepository;
-    private final ClosetService closetService;
 
     @Override
     public Long addBookmark(Long userId, BookmarkRequest bookmarkRequest) {
@@ -46,7 +43,7 @@ public class BookmarkServiceImpl implements BookmarkService {
                 .build();
 
         bookmark = bookmarkRepository.saveBookmark(bookmark);
-        log.info("bookmark id: {}", bookmark.getBookmarkId());
+
         Long bookmarkId = bookmark.getBookmarkId();
 
         for (Long clothesId : bookmarkRequest.getClothesIds()) {
@@ -61,7 +58,7 @@ public class BookmarkServiceImpl implements BookmarkService {
     public void addBookmarkInformation(Long userId, Long bookmarkId, Long clothesId) {
 
         checkBookmarkExists(userId, bookmarkId);
-
+        checkClothesDuplicate(bookmarkId, clothesId);
         setUpdateTime(userId, bookmarkId);
 
         BookmarkInformationEntity bookmarkInformationEntity = getBookmarkInformationEntity(clothesId, bookmarkId);
@@ -87,7 +84,7 @@ public class BookmarkServiceImpl implements BookmarkService {
         checkBookmarkExists(userId, bookmarkId);
 
         Bookmark bookmark = bookmarkRepository.findBookmarkByUserIdAndBookmarkId(userId, bookmarkId);
-        bookmark.setNickname(nickname);
+        bookmark.updateNickname(nickname);
         bookmarkRepository.saveBookmark(bookmark);
     }
 
@@ -97,7 +94,7 @@ public class BookmarkServiceImpl implements BookmarkService {
         checkBookmarkExists(userId, bookmarkId);
 
         Bookmark bookmark = bookmarkRepository.findBookmarkByUserIdAndBookmarkId(userId, bookmarkId);
-        bookmark.setIsDeleted(true);
+        bookmark.delete();
         bookmarkRepository.saveBookmark(bookmark);
 
         bookmarkInformationRepository.deleteBookmarkInformationByBookmarkId(bookmarkId);
@@ -110,11 +107,12 @@ public class BookmarkServiceImpl implements BookmarkService {
 
         Bookmark bookmark = bookmarkRepository.findBookmarkByUserIdAndBookmarkId(userId, bookmarkId);
 
-        List<ClothesResponse> clothesResponseList = new ArrayList<>();
+        List<ClothesDetail> clothesDetailList = new ArrayList<>();
 
         List<Long> clothesIds = bookmarkInformationRepository.findClothesIdsByBookmarkId(bookmarkId);
         for (Long clothesId: clothesIds) {
-            clothesResponseList.add(ClothesResponse.fromModel(clothesRepository.findClothes(closetService.getClosetIdByUserId(userId), clothesId)));
+            Clothes clothes = clothesRepository.findClothes(clothesId);
+            clothesDetailList.add(ClothesDetail.fromModel(clothes));
         }
 
         return BookmarkResponse.builder()
@@ -124,7 +122,7 @@ public class BookmarkServiceImpl implements BookmarkService {
                 .isDeleted(bookmark.getIsDeleted())
                 .createDateTime(bookmark.getCreatedDateTime())
                 .updateDateTime(bookmark.getUpdateDateTime())
-                .clothes(clothesResponseList)
+                .clothes(clothesDetailList)
                 .build();
     }
 
@@ -141,7 +139,7 @@ public class BookmarkServiceImpl implements BookmarkService {
 
     private void checkAllClothesExists(Long userId, List<Long> clothesIds) {
         for (Long clothesId : clothesIds) {
-            if (!clothesRepository.existClothesByClosetIdAndClothesId(closetService.getClosetIdByUserId(userId), clothesId)) {
+            if (!clothesRepository.existClothesByClothesId(clothesId)) {
                 throw new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION);
             }
         }
@@ -161,7 +159,7 @@ public class BookmarkServiceImpl implements BookmarkService {
 
     private void setUpdateTime(Long userId, Long bookmarkId) {
         Bookmark bookmark = bookmarkRepository.findBookmarkByUserIdAndBookmarkId(userId, bookmarkId);
-        bookmark.setUpdateDateTime();
+        bookmark.updateUpdateDateTime();
         bookmarkRepository.saveBookmark(bookmark);
     }
 
@@ -171,5 +169,9 @@ public class BookmarkServiceImpl implements BookmarkService {
                 .clothesId(clothesId)
                 .build();
     }
-
+    private void checkClothesDuplicate(Long bookmarkId, Long clothesId) {
+        if (bookmarkInformationRepository.existsBookmarkByBookmarkIdAndClothesId(bookmarkId, clothesId)) {
+            throw new CloseToYouException(BookmarkErrorCode.DUPLICATED_BOOKMARK_CLOTHES);
+        }
+    }
 }

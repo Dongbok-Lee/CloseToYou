@@ -9,16 +9,14 @@ import java.time.LocalDateTime;
 public class UserResponse {
     private String email;
     private String nickname;
-    private boolean isHighContrast;
     private LocalDateTime createdDateTime;
     private LocalDateTime updatedDateTime;
 
 
     @Builder
-    public UserResponse(String email, String nickname, boolean isHighContrast, LocalDateTime createdDateTime, LocalDateTime updatedDateTime) {
+    public UserResponse(String email, String nickname, LocalDateTime createdDateTime, LocalDateTime updatedDateTime) {
         this.email = email;
         this.nickname = nickname;
-        this.isHighContrast = isHighContrast;
         this.createdDateTime = createdDateTime;
         this.updatedDateTime = updatedDateTime;
     }
@@ -27,7 +25,6 @@ public class UserResponse {
         return builder()
                 .email(user.getEmail())
                 .nickname(user.getNickname())
-                .isHighContrast(user.getIsHighContrast())
                 .createdDateTime(user.getCreatedDateTime())
                 .updatedDateTime(user.getUpdatedDateTime())
                 .build();
