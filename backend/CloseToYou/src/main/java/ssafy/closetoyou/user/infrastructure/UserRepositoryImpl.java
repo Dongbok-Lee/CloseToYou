@@ -39,32 +39,4 @@ public class UserRepositoryImpl implements UserRepository {
         return userJpaRepository.findByEmailAndIsDeleted(userEmail, false).orElseThrow(
                 () -> new CloseToYouException(UserErrorCode.NOT_EXIST_USER)).toModel();
     }
-
-    @Override
-    public void deleteUser(Long userId) {
-        UserEntity userEntity = findUserEntityByUserIdAndIsDeleted(userId);
-        userEntity.setIsDeleted(true);
-        userJpaRepository.save(userEntity);
-    }
-
-    @Override
-    public void changeUserPassword(Long userId, String newPassword) {
-        UserEntity userEntity = findUserEntityByUserIdAndIsDeleted(userId);
-        userEntity.setPassword(newPassword);
-        userJpaRepository.save(userEntity);;
-    }
-
-    @Override
-    public void changeUser(Long userId, UserUpdateRequest userUpdateRequest) {
-        UserEntity userEntity = findUserEntityByUserIdAndIsDeleted(userId);
-        userEntity.setNickname(userUpdateRequest.getNickname());
-        userEntity.setIsHighContrast(userUpdateRequest.getIsHighContrast());
-        userJpaRepository.save(userEntity);
-    }
-
-    public UserEntity findUserEntityByUserIdAndIsDeleted(Long userId) {
-        return userJpaRepository.findByUserIdAndIsDeleted(userId, false).orElseThrow(
-                () -> new CloseToYouException(UserErrorCode.NOT_EXIST_USER)
-        );
-    }
 }

@@ -12,10 +12,9 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PROTECTED;
 
 @Entity(name="emailAuthentications")
-@Getter @Setter
+@Getter
 @NoArgsConstructor(access = PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
-@ToString
 public class EmailAuthenticationEntity {
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -30,6 +29,9 @@ public class EmailAuthenticationEntity {
     @CreatedDate
     private LocalDateTime createdDateTime;
 
+    public void verify() {
+        this.isVerified = true;
+    }
     @Builder
     public EmailAuthenticationEntity(Long emailAuthenticationId, String email, int authenticationCode, boolean isVerified, LocalDateTime createdDateTime) {
         this.emailAuthenticationId = emailAuthenticationId;

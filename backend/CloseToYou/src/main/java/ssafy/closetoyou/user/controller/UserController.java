@@ -58,19 +58,19 @@ public class UserController {
     @Operation(summary = "유저 비밀번호 변경 api")
     @PatchMapping("/password")
     public ResponseEntity<SuccessResponse<Long>> changeUserPassword(Authentication authentication, @Valid @RequestBody UserPasswordUpdateRequest userPasswordUpdateRequest) {
-        User user = ((CustomUserDetail) authentication.getPrincipal()).getUser();
+        Long userId = ((CustomUserDetail) authentication.getPrincipal()).getUser().getUserId();
         String oldPassword = userPasswordUpdateRequest.getOldPassword();
         String newPassword = userPasswordUpdateRequest.getNewPassword();
-        userService.changeUserPassword(user, oldPassword, newPassword);
+        userService.changeUserPassword(userId, oldPassword, newPassword);
 
         return ResponseEntity.ok(
-                new SuccessResponse<>("유저 비밀번호 변경 성공", user.getUserId())
+                new SuccessResponse<>("유저 비밀번호 변경 성공", userId)
         );
     }
 
-    @Operation(summary = "유저 정보 변경 api")
+    @Operation(summary = "유저 닉네임 변경 api")
     @PatchMapping
-    public ResponseEntity<SuccessResponse<Long>> changeUserInfo(Authentication authentication, @Valid @RequestBody UserUpdateRequest userUpdateRequest) {
+    public ResponseEntity<SuccessResponse<Long>> changeNickname(Authentication authentication, @Valid @RequestBody UserUpdateRequest userUpdateRequest) {
         User user = ((CustomUserDetail) authentication.getPrincipal()).getUser();
         userService.updateUser(user.getUserId(), userUpdateRequest);
 

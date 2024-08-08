@@ -9,7 +9,4 @@ public interface UserRepository {
     boolean existsUserByUserId(Long userId);
     User findUserByUserId(Long userId);
     User findUserByUserEmail(String userEmail);
-    void deleteUser(Long userId);
-    void changeUserPassword(Long userId, String newPassword);
-    void changeUser(Long userId, UserUpdateRequest userUpdateRequest);
 }

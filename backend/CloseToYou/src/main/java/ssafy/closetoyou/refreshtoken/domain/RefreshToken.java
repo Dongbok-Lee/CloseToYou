@@ -14,7 +14,6 @@ import static lombok.AccessLevel.PROTECTED;
 
 @Entity
 @Getter
-@ToString
 @NoArgsConstructor(access = PROTECTED)
 public class RefreshToken {
     @Id
