@@ -3,14 +3,14 @@ import SearchCardStyle from "./SearchCardStyle";
 const SearchCard = ({ searchCardName, searchCardLocation, handleTouchSearchCard }) => {
   return (
     <SearchCardStyle onTouchStart={handleTouchSearchCard} tabIndex={0}>
-      <div className="search-card-left-box">
-        <div className="search-card-icon-box">
-          <div className="search-card-icon"></div>
+      <div className="left-box">
+        <div className="icon-box">
+          <div className="icon"></div>
         </div>
       </div>
-      <div className="search-card-right-box">
-        <div className="search-card-name">{searchCardName}</div>
-        <div className="search-card-location">{searchCardLocation}</div>
+      <div className="right-box">
+        <div className="name">{searchCardName}</div>
+        <div className="location">{searchCardLocation}</div>
       </div>
     </SearchCardStyle>
   );
