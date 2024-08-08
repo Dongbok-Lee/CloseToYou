@@ -68,8 +68,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
                         .requestMatchers("/api/email/authentication/**").permitAll()
                         .requestMatchers("/api/oauth2/**").permitAll()
-                        .requestMatchers("/swagger-ui/**").permitAll()
-                        .requestMatchers("/v3/api-docs/**").permitAll()
+                        .requestMatchers("/api/swagger-ui/**").permitAll()
+                        .requestMatchers("/api/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated()
                 );
 

@@ -32,6 +32,12 @@ public class SwaggerConfig {
                 .components(components);
     }
 
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addRedirectViewController("/api/swagger-ui", "/api/swagger-ui.html");
+        registry.addRedirectViewController("/api/swagger-ui/", "/api/swagger-ui.html");
+    }
+
     private Info apiInfo() {
         return new Info()
                 .version(API_VERSION)
