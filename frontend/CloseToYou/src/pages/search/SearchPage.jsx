@@ -4,11 +4,11 @@ import SearchBox from "../../components/searchbox/SearchBox";
 import SearchCard from "../../components/searchCard/SearchCard";
 
 const clothes = [
-  { id: 1, nickname: "산뜻 노랑", location: "A-14", closet_id: 1 },
-  { id: 2, nickname: "시원한 블루", location: "B-22", closet_id: 2 },
-  { id: 3, nickname: "따뜻한 레드", location: "C-10", closet_id: 1 },
-  { id: 4, nickname: "부드러운 그린", location: "D-5", closet_id: 3 },
-  { id: 5, nickname: "클래식 블랙", location: "E-8", closet_id: 2 },
+  { id: 1, nickname: "산뜻 노랑", location: "A-14", closet_id: 1, type: "blouse", color: "yellow" },
+  { id: 2, nickname: "시원한 블루", location: "B-22", closet_id: 2, type: "t-shirt", color: "blue" },
+  { id: 3, nickname: "따뜻한 레드", location: "C-10", closet_id: 1, type: "shirt", color: "red" },
+  { id: 4, nickname: "부드러운 그린", location: "D-5", closet_id: 3, type: "skirt", color: "green" },
+  { id: 5, nickname: "클래식 블랙", location: "E-8", closet_id: 2, type: "dress", color: "black" },
 ];
 
 const closets = [
@@ -53,6 +53,8 @@ const SearchPage = () => {
               searchCardName={result.nickname}
               searchCardLocation={`${result.closet_nickname} ${result.location}`}
               clothesId={result.id}
+              clothesType={result.type}
+              clothesColor={result.color}
               handleTouchSearchCard={() => console.log(result.id)}
             />
           ))}
