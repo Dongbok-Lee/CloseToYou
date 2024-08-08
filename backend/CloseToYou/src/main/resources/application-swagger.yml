@@ -1,8 +1,0 @@
-springdoc:
-  swagger-ui:
-    path: /api/swagger-ui.html
-    groups-order: DESC
-    tags-sorter: alpha
-    operations-sorter: method
-  paths-to-match:
-    - /api/**

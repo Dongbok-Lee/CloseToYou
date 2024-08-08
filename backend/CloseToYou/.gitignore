@@ -306,3 +306,4 @@ application-oauth.yml
 application-server.yml
 application-database.yml
 application-variable.yml
+application-swagger.yml
