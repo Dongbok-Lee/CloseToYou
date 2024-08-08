@@ -4,8 +4,8 @@ const SearchCardStyle = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  height: 10rem;
+  max-width: 100%;
+  height: 5rem;
   margin-bottom: 1rem;
   padding: 1rem;
   border: 1px solid rgba(255, 105, 105, 1);
@@ -14,19 +14,13 @@ const SearchCardStyle = styled.div`
   -webkit-tap-highlight-color: transparent;
 
   .left-box {
-    margin-left: 2rem;
-
-    .icon-box {
-      width: 5rem;
-      height: 5rem;
-
-      .icon {
-        width: 100%;
-        height: 100%;
-        background: url(src/assets/icons/etc/yellow-tshirt.svg) center no-repeat;
-        background-size: cover;
-      }
-    }
+    width: 5rem;
+    height: 5rem;
+    background: center no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .right-box {
@@ -34,8 +28,8 @@ const SearchCardStyle = styled.div`
     flex-direction: column;
     justify-content: center;
     flex: 1;
-    margin-right: 2rem;
     text-align: left;
+    padding: 1rem;
 
     .name {
       font-size: 1.25rem;

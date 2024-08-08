@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import SearchCardStyle from "./SearchCardStyle";
 
-const SearchCard = ({ searchCardName, searchCardLocation, clothesId, handleTouchSearchCard }) => {
+const SearchCard = ({ searchCardName, searchCardLocation, clothesId, clothesType, clothesColor, handleTouchSearchCard }) => {
   const navigate = useNavigate();
+  const iconUrl = `/src/assets/icons/clothes/${clothesType}/${clothesColor}.png`;
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
@@ -17,11 +18,7 @@ const SearchCard = ({ searchCardName, searchCardLocation, clothesId, handleTouch
       tabIndex={0}
       aria-label={`옷 이름: ${searchCardName}, 위치: ${searchCardLocation}`}
     >
-      <div className="left-box">
-        <div className="icon-box">
-          <div className="icon"></div>
-        </div>
-      </div>
+      <div className="left-box" style={{ backgroundImage: `url(${iconUrl})` }}></div>
       <div className="right-box">
         <div className="name">{searchCardName}</div>
         <div className="location">{searchCardLocation}</div>
