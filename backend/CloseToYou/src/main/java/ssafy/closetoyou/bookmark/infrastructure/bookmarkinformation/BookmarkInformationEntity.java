@@ -10,8 +10,6 @@ import java.time.LocalDateTime;
 
 @Entity(name = "bookmark_informations")
 @Getter
-@Setter
-@ToString
 @EntityListeners(AuditingEntityListener.class)
 @RequiredArgsConstructor
 public class BookmarkInformationEntity {
