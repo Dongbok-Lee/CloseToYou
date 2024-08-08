@@ -2,17 +2,15 @@ package ssafy.closetoyou.clothes.domain;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import ssafy.closetoyou.closet.domain.Closet;
 import ssafy.closetoyou.clothes.controller.request.ClothesUpdateRequest;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-@ToString
 @Getter
 public class Clothes {
     private Long clothesId;
-    private Long closetId;
+    private Closet closet;
     private Long nfcId;
     private String location;
     private String nickname;
@@ -24,17 +22,19 @@ public class Clothes {
     private String memo;
     private int wearingCount;
 
-    @Setter
     private Boolean isDeleted;
     private String imageUrl;
     private LocalDateTime createdDateTime;
     private LocalDateTime updatedDateTime;
     private LocalDate lastWornDate;
 
+    public void delete() {
+        this.isDeleted = true;
+    }
     @Builder
-    public Clothes(Long clothesId, Long closetId, Long nfcId, String location, String nickname, Type type, Pattern pattern, Color color, Season season, String size, String memo, int wearingCount, Boolean isDeleted, String imageUrl, LocalDateTime createdDateTime, LocalDateTime updatedDateTime, LocalDate lastWornDate) {
+    public Clothes(Long clothesId, Closet closet, Long nfcId, String location, String nickname, Type type, Pattern pattern, Color color, Season season, String size, String memo, int wearingCount, Boolean isDeleted, String imageUrl, LocalDateTime createdDateTime, LocalDateTime updatedDateTime, LocalDate lastWornDate) {
         this.clothesId = clothesId;
-        this.closetId = closetId;
+        this.closet = closet;
         this.nfcId = nfcId;
         this.location = location;
         this.nickname = nickname;

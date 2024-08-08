@@ -1,12 +1,9 @@
 package ssafy.closetoyou.clothes.controller.response;
 
-import com.nimbusds.jose.crypto.impl.PRFParams;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.ToString;
 import ssafy.closetoyou.clothes.domain.Clothes;
 
-@ToString
 @Getter
 public class ClothesSummary {
     private Long clothesId;
@@ -28,7 +25,7 @@ public class ClothesSummary {
         this.closetNickname = closetNickname;
     }
 
-    public static ClothesSummary fromModel(Clothes clothes, String closetNickname) {
+    public static ClothesSummary fromModel(Clothes clothes) {
         return ClothesSummary.builder()
                 .clothesId(clothes.getClothesId())
                 .nickname(clothes.getNickname())
@@ -36,7 +33,7 @@ public class ClothesSummary {
                 .pattern(String.valueOf(clothes.getPattern()))
                 .color(String.valueOf(clothes.getColor()))
                 .location(clothes.getLocation())
-                .closetNickname(closetNickname)
+                .closetNickname(clothes.getCloset().getNickname())
                 .build();
     }
 }

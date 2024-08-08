@@ -7,7 +7,6 @@ import ssafy.closetoyou.clothes.domain.Clothes;
 
 import java.time.LocalDate;
 
-@ToString
 @Getter
 public class ClothesDetail {
     private Long clothesId;
@@ -39,11 +38,11 @@ public class ClothesDetail {
         this.lastWornDate = lastWornDate;
     }
 
-    public static ClothesDetail fromModel(Clothes clothes, String closetNickname) {
+    public static ClothesDetail fromModel(Clothes clothes) {
         return ClothesDetail.builder()
                 .clothesId(clothes.getClothesId())
                 .nickname(clothes.getNickname())
-                .closetNickname(closetNickname)
+                .closetNickname(clothes.getCloset().getNickname())
                 .color(String.valueOf(clothes.getColor()))
                 .type(String.valueOf(clothes.getType()))
                 .pattern(String.valueOf(clothes.getPattern()))
@@ -54,5 +53,6 @@ public class ClothesDetail {
                 .imageUrl(clothes.getImageUrl())
                 .lastWornDate(clothes.getLastWornDate())
                 .build();
+
     }
 }

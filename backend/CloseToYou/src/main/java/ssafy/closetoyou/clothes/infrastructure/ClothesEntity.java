@@ -4,10 +4,10 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import ssafy.closetoyou.closet.infrastructure.ClosetEntity;
 import ssafy.closetoyou.clothes.domain.*;
 
 import java.time.LocalDate;
@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "clothes")
-@Getter @Setter
+@Getter
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 public class ClothesEntity {
@@ -24,7 +24,9 @@ public class ClothesEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long clothesId;
 
-    private Long closetId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "closet_id")
+    private ClosetEntity closet;
     private Long nfcId;
     private String location;
     private String nickname;
@@ -48,9 +50,9 @@ public class ClothesEntity {
     private String imageUrl;
 
     @Builder
-    public ClothesEntity(Long clothesId, Long closetId, Long nfcId, String location, String nickname, String type, String pattern, String color, String size, String season, String memo, int wearingCount, boolean isDeleted, LocalDateTime createdDateTime, LocalDateTime updatedDateTime, LocalDate lastWornDate, String imageUrl) {
+    public ClothesEntity(Long clothesId, ClosetEntity closet, Long nfcId, String location, String nickname, String type, String pattern, String color, String size, String season, String memo, int wearingCount, boolean isDeleted, LocalDateTime createdDateTime, LocalDateTime updatedDateTime, LocalDate lastWornDate, String imageUrl) {
         this.clothesId = clothesId;
-        this.closetId = closetId;
+        this.closet = closet;
         this.nfcId = nfcId;
         this.location = location;
         this.nickname = nickname;
@@ -72,7 +74,7 @@ public class ClothesEntity {
     public static ClothesEntity fromModel(Clothes clothes) {
         return ClothesEntity.builder()
                 .clothesId(clothes.getClothesId())
-                .closetId(clothes.getClosetId())
+                .closet(ClosetEntity.fromModel(clothes.getCloset()))
                 .nfcId(clothes.getNfcId())
                 .location(clothes.getLocation())
                 .nickname(clothes.getNickname())
@@ -83,7 +85,7 @@ public class ClothesEntity {
                 .season(String.valueOf(clothes.getSeason()))
                 .memo(clothes.getMemo())
                 .wearingCount(clothes.getWearingCount())
-                .isDeleted(clothes.getIsDeleted() != null ? clothes.getIsDeleted().booleanValue() : false)
+                .isDeleted(clothes.getIsDeleted())
                 .createdDateTime(clothes.getCreatedDateTime())
                 .updatedDateTime(clothes.getUpdatedDateTime())
                 .lastWornDate(clothes.getLastWornDate())
@@ -94,7 +96,7 @@ public class ClothesEntity {
     public Clothes toModel() {
         return Clothes.builder()
                 .clothesId(clothesId)
-                .closetId(closetId)
+                .closet(closet.toModel())
                 .nfcId(nfcId)
                 .nickname(nickname)
                 .type(Type.valueOf(type))
