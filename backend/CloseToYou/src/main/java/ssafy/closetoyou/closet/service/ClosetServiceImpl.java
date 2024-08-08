@@ -24,26 +24,14 @@ public class ClosetServiceImpl implements ClosetService {
     private final ClosetCodeService closetCodeService;
     private final ClosetRepository closetRepository;
 
-    /*
-    옷장을 등록하는 메서드
-    1. 해당 옷장 코드가 존재하지 않거나 사용 중일 경우, 예외 처리
-    2. 이미 한 개의 옷장을 등록하였는데, 또 등록하는 경우 예외 처리
-    이 후, 옷장을 등록하기 전에 옷장 코드에 isUsed = true로 설정
-     */
     @Override
     public Long addCloset(Long userId, ClosetRequest closetRequest) {
 
         String closetCode = closetRequest.getClosetCode();
+        checkClosetCodeValid(closetCode);
+        closetCodeService.updateClosetCodeIsUsed(closetCode, true);
 
-        if (!closetCodeService.isValidClosetCode(closetCode)) {
-            throw new CloseToYouException(ClosetErrorCode.NO_CLOSET_CODE_EXCEPTION);
-        }
-
-        if (!getUserClosets(userId).isEmpty()) {
-            throw new CloseToYouException(ClosetErrorCode.CLOSET_ALREADY_REGISTERED);
-        }
-
-        closetCodeService.setClosetCodeIsUsed(closetCode, true);
+        checkClosetNicknameDuplicate(userId, closetRequest.getNickname());
 
         Closet closet = Closet.builder()
                 .userId(userId)
@@ -51,22 +39,28 @@ public class ClosetServiceImpl implements ClosetService {
                 .nickname(closetRequest.getNickname())
                 .build();
 
-        return closetRepository.createCloset(closet).getClosetId();
+        return closetRepository.saveCloset(closet).getClosetId();
     }
 
     @Override
-    public void changeClosetInfo(Long userId, Long closetId, String nickname) {
+    public void changeClosetNickname(Long userId, Long closetId, String nickname) {
 
-        if (closetRepository.existsClosetByClosetNickname(nickname)) {
-            throw new CloseToYouException(ClosetErrorCode.DUPLICATE_CLOSET_NICKNAME);
-        }
+        checkClosetNicknameDuplicate(userId, nickname);
+        checkClosetExists(closetId);
 
-        closetRepository.updateCloset(userId, closetId, nickname);
+        Closet closet = closetRepository.getClosetByClosetId(closetId);
+        closet.updateNickname(nickname);
+        closetRepository.saveCloset(closet);
     }
 
     @Override
     public void deleteCloset(Long userId, Long closetId) {
-        closetRepository.deleteCloset(userId, closetId);
+
+        checkClosetExists(closetId);
+
+        Closet closet = closetRepository.getClosetByClosetId(closetId);
+        closet.delete();
+        closetRepository.saveCloset(closet);
     }
 
     @Override
@@ -78,15 +72,25 @@ public class ClosetServiceImpl implements ClosetService {
     }
 
     @Override
-    public Long getClosetIdByUserId(Long userId) {
-        List<Closet> closetList =  closetRepository.getUserClosets(userId);
-        if (closetList.isEmpty()) {
+    public String getClosetNicknameByClosetId(Long closetId) {
+        return closetRepository.getClosetByClosetId(closetId).getNickname();
+    }
+
+    private void checkClosetNicknameDuplicate(Long userId, String nickname) {
+        if (closetRepository.existsClosetByClosetNickname(userId, nickname)) {
+            throw new CloseToYouException(ClosetErrorCode.DUPLICATE_CLOSET_NICKNAME);
+        }
+    }
+
+    private void checkClosetExists(Long closetId) {
+        if (!closetRepository.existsClosetByClosetId(closetId)) {
             throw new CloseToYouException(ClosetErrorCode.NO_CLOSET_EXCEPTION);
         }
-        /*
-        현재는 유저가 하나의 옷장만 가지고 있다고 가정하지만,
-        추후에 선택된 옷장의 옷장 아이디를 가져올 수 있음.
-         */
-        return closetList.get(0).getClosetId();
+    }
+
+    private void checkClosetCodeValid(String closetCode) {
+        if (!closetCodeService.isValidClosetCode(closetCode)) {
+            throw new CloseToYouException(ClosetErrorCode.NO_CLOSET_CODE_EXCEPTION);
+        }
     }
 }

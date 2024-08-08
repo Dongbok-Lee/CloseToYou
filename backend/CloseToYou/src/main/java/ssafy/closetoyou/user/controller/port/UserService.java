@@ -7,6 +7,6 @@ import ssafy.closetoyou.user.domain.User;
 public interface UserService {
     Long signUp(UserSignUp userSignUp);
     void removeUser(Long userId);
-    void changeUserPassword(User user, String oldPassword, String newPassword);
+    void changeUserPassword(Long userId, String oldPassword, String newPassword);
     void updateUser(Long userId, UserUpdateRequest userUpdateRequest);
 }

@@ -25,7 +25,7 @@ public class EmailAuthenticationRepositoryImpl implements EmailAuthenticationRep
         Long emailId = emailAuthentication.getEmailAuthenticationId();
         EmailAuthenticationEntity emailAuthenticationEntity = emailAuthenticationJpaRepository.findById(emailId)
                 .orElseThrow(() -> new CloseToYouException(UserErrorCode.NOT_FOUND_MAIL_CODE));
-        emailAuthenticationEntity.setVerified(true);
+        emailAuthenticationEntity.verify();
         emailAuthenticationJpaRepository.save(emailAuthenticationEntity);
     }
 
