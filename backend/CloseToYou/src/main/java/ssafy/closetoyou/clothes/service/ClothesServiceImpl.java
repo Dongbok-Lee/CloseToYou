@@ -5,16 +5,20 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ssafy.closetoyou.closet.controller.port.ClosetService;
+import ssafy.closetoyou.closet.controller.response.ClosetResponse;
+import ssafy.closetoyou.closet.domain.Closet;
+import ssafy.closetoyou.closet.service.port.ClosetRepository;
 import ssafy.closetoyou.clothes.controller.port.ClothesService;
 import ssafy.closetoyou.clothes.controller.request.ClothesUpdateRequest;
-import ssafy.closetoyou.clothes.controller.response.ClothesResponse;
-import ssafy.closetoyou.clothes.controller.request.ClothesRequest;
+import ssafy.closetoyou.clothes.controller.response.ClothesDetail;
 import ssafy.closetoyou.clothes.controller.request.ClothesCondition;
+import ssafy.closetoyou.clothes.controller.response.ClothesSummary;
 import ssafy.closetoyou.clothes.domain.Clothes;
 import ssafy.closetoyou.clothes.service.port.ClothesRepository;
 import ssafy.closetoyou.global.error.errorcode.ClothesErrorCode;
 import ssafy.closetoyou.global.error.exception.CloseToYouException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,24 +28,20 @@ import java.util.List;
 public class ClothesServiceImpl implements ClothesService {
 
     private final ClothesRepository clothesRepository;
-    private final ClosetService closetService;
 
     @Transactional
     @Override
-    public Long addClothes(Long userId, ClothesRequest clothesRequest) {
-        if (clothesRepository.existClothesByClothesNickname(clothesRequest.getNickname())) {
-            throw new CloseToYouException(ClothesErrorCode.DUPLICATE_CLOTHES_NICKNAME);
-        }
-        Long closetId = closetService.getClosetIdByUserId(userId);
-        clothesRequest.setClosetId(closetId);
-        return clothesRepository.saveClothes(clothesRequest.toModel()).getClothesId();
-    }
+    public void updateClothes(Long userId,
+                              Long clothesId,
+                              ClothesUpdateRequest clothesUpdateRequest) {
 
-    @Transactional
-    @Override
-    public void updateClothes(Long clothesId, ClothesUpdateRequest clothesUpdateRequest) {
+        String nickname = clothesUpdateRequest.getNickname();
         if (!clothesRepository.existClothesByClothesId(clothesId)) {
             throw new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION);
+        }
+
+        if (nickname != null && clothesRepository.existClothesByUserIdAndClothesNickname(userId, nickname)) {
+            throw new CloseToYouException(ClothesErrorCode.DUPLICATE_CLOTHES_NICKNAME);
         }
         Clothes clothes = clothesRepository.findClothes(clothesId);
         clothes.changeClothesInfo(clothesUpdateRequest);
@@ -51,42 +51,48 @@ public class ClothesServiceImpl implements ClothesService {
     @Transactional
     @Override
     public void removeClothes(Long clothesId) {
-        if (!clothesRepository.existClothesByClothesId(clothesId)) {
-            throw new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION);
-        }
-        clothesRepository.deleteClothes(clothesId);
-    }
 
-    @Override
-    public ClothesResponse findClothes(Long clothesId) {
         if (!clothesRepository.existClothesByClothesId(clothesId)) {
             throw new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION);
         }
         Clothes clothes = clothesRepository.findClothes(clothesId);
-        return ClothesResponse.fromModel(clothes);
+        clothes.delete();
+        clothesRepository.saveClothes(clothes);
     }
 
     @Override
-    public List<ClothesResponse> findAllClothes() {
-        return clothesRepository.findAllClothes()
+    public ClothesDetail findClothes(Long clothesId) {
+
+        if (!clothesRepository.existClothesByClothesId(clothesId)) {
+            throw new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION);
+        }
+
+        Clothes clothes = clothesRepository.findClothes(clothesId);
+        return ClothesDetail.fromModel(clothes);
+    }
+
+    @Override
+    public List<ClothesSummary> findAllClothes(Long userId) {
+        return clothesRepository.findAllClothes(userId)
                 .stream()
-                .map(ClothesResponse::fromModel)
+                .map(ClothesSummary::fromModel)
                 .toList();
     }
 
     @Override
-    public List<ClothesResponse> searchClothesByClothesCondition(ClothesCondition clothesCondition) {
+    public List<ClothesSummary> searchClothesByClothesCondition(ClothesCondition clothesCondition) {
         return clothesRepository.searchClothesByClothesCondition(clothesCondition)
                 .stream()
-                .map(ClothesResponse::fromModel)
+                .map(ClothesSummary::fromModel)
                 .toList();
     }
 
     @Override
-    public List<ClothesResponse> searchClothesBySearchKeyword(String searchKeyword) {
+    public List<ClothesSummary> searchClothesBySearchKeyword(String searchKeyword) {
+
         return clothesRepository.searchClothesBySearchKeyword(searchKeyword)
                 .stream()
-                .map(ClothesResponse::fromModel)
+                .map(ClothesSummary::fromModel)
                 .toList();
     }
 }

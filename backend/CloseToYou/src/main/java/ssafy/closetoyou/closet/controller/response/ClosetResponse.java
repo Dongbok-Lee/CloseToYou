@@ -14,15 +14,17 @@ public class ClosetResponse {
     private String closetCode;
     private LocalDateTime createdDateTime;
     private LocalDateTime updateDateTime;
+    private int clothesCount;
 
     @Builder
-    public ClosetResponse(Long closetId, String nickname, Long userId, String closetCode, LocalDateTime createdDateTime, LocalDateTime updateDateTime) {
+    public ClosetResponse(Long closetId, String nickname, Long userId, String closetCode, LocalDateTime createdDateTime, LocalDateTime updateDateTime, int clothesCount) {
         this.closetId = closetId;
         this.nickname = nickname;
         this.userId = userId;
         this.closetCode = closetCode;
         this.createdDateTime = createdDateTime;
         this.updateDateTime = updateDateTime;
+        this.clothesCount = clothesCount;
     }
 
 
@@ -34,6 +36,7 @@ public class ClosetResponse {
                 .closetCode(closet.getClosetCode())
                 .createdDateTime(closet.getCreatedDateTime())
                 .updateDateTime(closet.getUpdateDateTime())
+                .clothesCount(closet.getClothesCount())
                 .build();
     }
 }

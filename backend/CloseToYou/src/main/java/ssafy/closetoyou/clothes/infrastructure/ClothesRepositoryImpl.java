@@ -23,22 +23,15 @@ public class ClothesRepositoryImpl implements ClothesRepository {
     }
 
     @Override
-    public void deleteClothes(Long clothesId) {
-        ClothesEntity clothesEntity = clothesJpaRepository.findClothesByClothesIdAndIsDeleted(clothesId, false)
-                .orElseThrow(() -> new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION));
-        clothesEntity.setDeleted(true);
-        clothesJpaRepository.save(clothesEntity);
-    }
-
-    @Override
     public boolean existClothesByClothesId(Long clothesId) {
         return clothesJpaRepository.existsByClothesIdAndIsDeleted(clothesId, false);
     }
 
     @Override
-    public boolean existClothesByClothesNickname(String nickname) {
-        return clothesJpaRepository.existsByNicknameAndIsDeleted(nickname, false);
+    public boolean existClothesByUserIdAndClothesNickname(Long userId, String clothesNickname) {
+        return clothesJpaRepository.existsByUserIdAndNicknameAndIsDeleted(userId, clothesNickname, false);
     }
+
 
     @Override
     public Clothes findClothes(Long clothesId) {
@@ -47,9 +40,9 @@ public class ClothesRepositoryImpl implements ClothesRepository {
     }
 
     @Override
-    public List<Clothes> findAllClothes() {
+    public List<Clothes> findAllClothes(Long userId) {
         return clothesJpaRepository
-                .findAll()
+                .findAllByUserIdAndIsDeleted(userId, false)
                 .stream()
                 .map(ClothesEntity::toModel)
                 .toList();
@@ -58,8 +51,7 @@ public class ClothesRepositoryImpl implements ClothesRepository {
     @Override
     public List<Clothes> searchClothesByClothesCondition(ClothesCondition clothesCondition) {
         return clothesJpaRepository
-                .searchClothesByClothesConditionAndIsDeleted(clothesCondition)
-                .orElse(Collections.emptyList())
+                .searchClothesByClosetIdAndClothesConditionAndIsDeleted(clothesCondition, false)
                 .stream()
                 .map(ClothesEntity::toModel)
                 .toList();
@@ -68,7 +60,7 @@ public class ClothesRepositoryImpl implements ClothesRepository {
     @Override
     public List<Clothes> searchClothesBySearchKeyword(String searchKeyword) {
         return clothesJpaRepository
-                .searchClothesBySearchKeywordAndIsDeleted(searchKeyword)
+                .searchClothesByUserIdAndSearchKeywordAndIsDeleted(searchKeyword, false)
                 .orElse(Collections.emptyList())
                 .stream()
                 .map(ClothesEntity::toModel)

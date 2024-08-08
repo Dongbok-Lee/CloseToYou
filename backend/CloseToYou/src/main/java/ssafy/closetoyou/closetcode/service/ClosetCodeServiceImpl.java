@@ -22,7 +22,7 @@ public class ClosetCodeServiceImpl implements ClosetCodeService {
     }
 
     @Override
-    public void setClosetCodeIsUsed(String closetCode, boolean isUsed) {
+    public void updateClosetCodeIsUsed(String closetCode, boolean isUsed) {
         closetCodeRepository.setClosetCodeIsUsed(closetCode, isUsed);
     }
 
@@ -34,7 +34,6 @@ public class ClosetCodeServiceImpl implements ClosetCodeService {
         if (closetCodeRepository.existsByClosetCode(randomCode)) {
             throw new CloseToYouException(ClosetErrorCode.DUPLICATE_CLOSET_CODE);
         }
-
         return closetCodeRepository.saveClosetCode(closetCode);
     }
 

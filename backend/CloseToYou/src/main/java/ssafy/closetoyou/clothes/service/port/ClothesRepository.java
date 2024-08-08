@@ -7,13 +7,12 @@ import java.util.List;
 
 public interface ClothesRepository {
     Clothes saveClothes(Clothes clothes);
-    void deleteClothes(Long clothesId);
 
     boolean existClothesByClothesId(Long clothesId);
-    boolean existClothesByClothesNickname(String clothesNickname);
+    boolean existClothesByUserIdAndClothesNickname(Long userId, String clothesNickname);
 
     Clothes findClothes(Long clothesId);
-    List<Clothes> findAllClothes();
+    List<Clothes> findAllClothes(Long closetId);
     List<Clothes> searchClothesByClothesCondition(ClothesCondition clothesCondition);
     List<Clothes> searchClothesBySearchKeyword(String searchKeyword);
 }
