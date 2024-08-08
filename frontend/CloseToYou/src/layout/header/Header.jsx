@@ -17,42 +17,45 @@ const Header = () => {
   useEffect(() => {
     const path = location.pathname;
 
-    switch (path) {
-      case "/signin":
+    switch (true) {
+      case path === "/signin":
         setTitle("로그인");
         break;
-      case "/signup":
+      case path === "/signup":
         setTitle("회원가입");
         break;
-      case "/closets":
+      case path === "/closets":
         setTitle("옷장 선택");
         break;
-      case "/clothes":
+      case path === "/clothes":
         setTitle("옷 선택");
         break;
-      case path.match(/^\/clothes\/\d+$/)?.input:
-        setTitle("옷 상세");
+      case /^\/clothes\/\d+$/.test(path):
+        setTitle("상세보기");
         break;
-      case path.match(/^\/clothes\/edit\/\d+$/)?.input:
-        setTitle("옷 상세 수정");
+      case /^\/clothes\/edit\/\d+$/.test(path):
+        setTitle("수정하기");
         break;
-      case "/search":
+      case path === "/search":
         setTitle("검색");
         break;
-      case "/bookmarks":
+      case path === "/bookmarks":
         setTitle("코디");
         break;
-      case path.match(/^\/bookmarks\/\d+$/)?.input:
+      case /^\/bookmarks\/\d+$/.test(path):
         setTitle("코디 상세");
         break;
-      case "/user":
+      case path === "/user":
         setTitle("마이페이지");
         break;
-      case "/nickname":
+      case path === "/nickname":
         setTitle("닉네임 변경");
         break;
-      case "/password":
+      case path === "/password":
         setTitle("비밀번호 변경");
+        break;
+      case /^\/clothes\/nfc\/\d+$/.test(path):
+        setTitle("NFC 태그");
         break;
       default:
         setTitle("default");
@@ -68,6 +71,8 @@ const Header = () => {
     navigate("/search");
   };
 
+  const isSearchPage = location.pathname === "/search";
+
   return (
     <HeaderContainer>
       <div style={{ width: "95%", margin: "auto", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -77,7 +82,9 @@ const Header = () => {
         <span className="Title">{title}</span>
         <div className="IconContainer">
           <button className="Button" onTouchStart={handleTouchSearchIcon} aria-label="검색">
-            <img src={icons.search} alt="검색" style={{ width: '25px', height: '25px', verticalAlign: 'middle' }} />
+            {!isSearchPage && (
+              <img src={icons.search} alt="검색" style={{ width: '25px', height: '25px', verticalAlign: 'middle' }} />
+            )}
           </button>
         </div>
       </div>
