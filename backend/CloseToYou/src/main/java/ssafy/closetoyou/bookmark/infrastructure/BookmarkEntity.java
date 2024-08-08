@@ -12,8 +12,6 @@ import java.time.LocalDateTime;
 
 @Entity(name = "bookmarks")
 @Getter
-@Setter
-@ToString
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
 public class BookmarkEntity {

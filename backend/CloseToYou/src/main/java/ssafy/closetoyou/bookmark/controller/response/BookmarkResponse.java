@@ -3,14 +3,12 @@ package ssafy.closetoyou.bookmark.controller.response;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import ssafy.closetoyou.clothes.controller.response.ClothesDetail;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
-@Setter
 @NoArgsConstructor
 public class BookmarkResponse {
     private Long bookmarkId;
