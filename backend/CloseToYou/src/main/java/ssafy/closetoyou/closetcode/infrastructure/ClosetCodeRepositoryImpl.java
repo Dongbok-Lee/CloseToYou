@@ -27,7 +27,7 @@ public class ClosetCodeRepositoryImpl implements ClosetCodeRepository {
     public void setClosetCodeIsUsed(String closetCode, boolean isUsed) {
         ClosetCodeEntity closetCodeEntity = closetCodeJpaRepository.findByClosetCode(closetCode)
                 .orElseThrow(() -> new CloseToYouException(ClosetErrorCode.NO_CLOSET_CODE_EXCEPTION));
-        closetCodeEntity.setIsUsed(isUsed);
+        closetCodeEntity.use();
         closetCodeJpaRepository.save(closetCodeEntity);
     }
 

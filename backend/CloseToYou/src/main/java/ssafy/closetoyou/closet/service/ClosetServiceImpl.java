@@ -28,12 +28,10 @@ public class ClosetServiceImpl implements ClosetService {
     public Long addCloset(Long userId, ClosetRequest closetRequest) {
 
         String closetCode = closetRequest.getClosetCode();
+        checkClosetCodeValid(closetCode);
+        closetCodeService.updateClosetCodeIsUsed(closetCode, true);
 
-        if (!closetCodeService.isValidClosetCode(closetCode)) {
-            throw new CloseToYouException(ClosetErrorCode.NO_CLOSET_CODE_EXCEPTION);
-        }
-
-        closetCodeService.setClosetCodeIsUsed(closetCode, true);
+        checkClosetNicknameDuplicate(userId, closetRequest.getNickname());
 
         Closet closet = Closet.builder()
                 .userId(userId)
@@ -41,22 +39,28 @@ public class ClosetServiceImpl implements ClosetService {
                 .nickname(closetRequest.getNickname())
                 .build();
 
-        return closetRepository.createCloset(closet).getClosetId();
+        return closetRepository.saveCloset(closet).getClosetId();
     }
 
     @Override
-    public void changeClosetInfo(Long userId, Long closetId, String nickname) {
+    public void changeClosetNickname(Long userId, Long closetId, String nickname) {
 
-        if (closetRepository.existsClosetByClosetNickname(nickname)) {
-            throw new CloseToYouException(ClosetErrorCode.DUPLICATE_CLOSET_NICKNAME);
-        }
+        checkClosetNicknameDuplicate(userId, nickname);
+        checkClosetExists(closetId);
 
-        closetRepository.updateCloset(userId, closetId, nickname);
+        Closet closet = closetRepository.getClosetByClosetId(closetId);
+        closet.updateNickname(nickname);
+        closetRepository.saveCloset(closet);
     }
 
     @Override
     public void deleteCloset(Long userId, Long closetId) {
-        closetRepository.deleteCloset(userId, closetId);
+
+        checkClosetExists(closetId);
+
+        Closet closet = closetRepository.getClosetByClosetId(closetId);
+        closet.delete();
+        closetRepository.saveCloset(closet);
     }
 
     @Override
@@ -70,5 +74,23 @@ public class ClosetServiceImpl implements ClosetService {
     @Override
     public String getClosetNicknameByClosetId(Long closetId) {
         return closetRepository.getClosetByClosetId(closetId).getNickname();
+    }
+
+    private void checkClosetNicknameDuplicate(Long userId, String nickname) {
+        if (closetRepository.existsClosetByClosetNickname(userId, nickname)) {
+            throw new CloseToYouException(ClosetErrorCode.DUPLICATE_CLOSET_NICKNAME);
+        }
+    }
+
+    private void checkClosetExists(Long closetId) {
+        if (!closetRepository.existsClosetByClosetId(closetId)) {
+            throw new CloseToYouException(ClosetErrorCode.NO_CLOSET_EXCEPTION);
+        }
+    }
+
+    private void checkClosetCodeValid(String closetCode) {
+        if (!closetCodeService.isValidClosetCode(closetCode)) {
+            throw new CloseToYouException(ClosetErrorCode.NO_CLOSET_CODE_EXCEPTION);
+        }
     }
 }
