@@ -1,5 +1,6 @@
 package ssafy.closetoyou.clothes.service.port;
 
+import org.springframework.stereotype.Repository;
 import ssafy.closetoyou.clothes.controller.request.ClothesCondition;
 import ssafy.closetoyou.clothes.domain.Clothes;
 

@@ -6,7 +6,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import ssafy.closetoyou.bookmark.domain.Bookmark;
-import ssafy.closetoyou.bookmark.domain.BookmarkCategory;
 
 import java.time.LocalDateTime;
 

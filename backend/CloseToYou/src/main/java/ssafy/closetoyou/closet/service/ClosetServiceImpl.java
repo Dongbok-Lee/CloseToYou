@@ -59,6 +59,8 @@ public class ClosetServiceImpl implements ClosetService {
         checkClosetExists(closetId);
 
         Closet closet = closetRepository.getClosetByClosetId(closetId);
+
+        closetCodeService.updateClosetCodeIsUsed(closet.getClosetCode(), false);
         closet.delete();
         closetRepository.saveCloset(closet);
     }

@@ -2,6 +2,7 @@ package ssafy.closetoyou.clothes.domain;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 import ssafy.closetoyou.closet.domain.Closet;
 import ssafy.closetoyou.clothes.controller.request.ClothesUpdateRequest;
 
