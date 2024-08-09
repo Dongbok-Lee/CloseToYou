@@ -18,18 +18,6 @@ public class ClosetCodeServiceImpl implements ClosetCodeService {
     private final RandomHolder randomHolder;
 
     @Override
-    public boolean isValidClosetCode(String closetCode) {
-        return closetCodeRepository.isValidClosetCode(closetCode);
-    }
-
-    @Override
-    public void updateClosetCodeIsUsed(String closetCode, boolean isUsed) {
-        ClosetCode closetcode = closetCodeRepository.findClosetCodeByClosetCode(closetCode);
-        closetcode.use();
-        closetCodeRepository.saveClosetCode(closetcode);
-    }
-
-    @Override
     public Long makeRandomClosetCodeAndSave() {
         ClosetCode closetCode = new ClosetCode();
         String randomCode = closetCode.makeRandomCode(randomHolder);
