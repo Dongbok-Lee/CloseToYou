@@ -127,8 +127,8 @@ const ClothesListPage = () => {
     console.log(`Active card ID: ${clothes[activeIndex]?.id}`);
   }, [activeIndex, clothes]);
 
-  const handleAdd = () => {
-    navigate(`/clothes/${clothes[activeIndex]?.id}`);
+  const handleNfc = () => {
+    navigate(`/clothes/nfc`);
   };
 
   const handleTouchClothesCard = (id, index) => {
@@ -212,10 +212,10 @@ const ClothesListPage = () => {
           </SwipeContainer>
         )}
         <FixedContainer>
-          <FloatingButton type="delete" handleClick={handleDelete}>
+          <FloatingButton type="delete" onTouchStart={handleDelete}>
             Delete
           </FloatingButton>
-          <FloatingButton type="nfc" handleClick={handleAdd}>
+          <FloatingButton type="nfc" onTouchStart={handleNfc}>
             NFC
           </FloatingButton>
         </FixedContainer>
