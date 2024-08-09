@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 import HeaderContainer from './HeaderStyle';
 import BackIcon from '../../assets/icons/etc/back.svg';
 import SearchIcon from '../../assets/icons/etc/search.svg';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 const icons = {
   back: BackIcon,
@@ -25,10 +25,10 @@ const Header = () => {
         setTitle("회원가입");
         break;
       case path === "/closets":
-        setTitle("옷장 선택");
+        setTitle("나의 옷장");
         break;
       case path === "/clothes":
-        setTitle("옷 선택");
+        setTitle("나의 옷");
         break;
       case /^\/clothes\/\d+$/.test(path):
         setTitle("상세보기");
@@ -40,10 +40,10 @@ const Header = () => {
         setTitle("검색");
         break;
       case path === "/bookmarks":
-        setTitle("코디");
+        setTitle("나의 코디");
         break;
       case /^\/bookmarks\/\d+$/.test(path):
-        setTitle("코디 상세");
+        setTitle("나의 코디");
         break;
       case path === "/user":
         setTitle("마이페이지");
@@ -75,14 +75,16 @@ const Header = () => {
 
   return (
     <HeaderContainer>
-      <div className='header-content'>
+      <div style={{ width: "95%", margin: "auto", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <button className="Button" onTouchStart={handleTouchBackIcon} aria-label="뒤로가기">
-          <img src={icons.back} alt="뒤로가기" className="icon" />
+          <img src={icons.back} alt="뒤로가기" style={{ width: '25px', height: '25px', verticalAlign: 'middle' }} />
         </button>
         <span className="Title">{title}</span>
         <div className="IconContainer">
           <button className="Button" onTouchStart={handleTouchSearchIcon} aria-label="검색">
-            <img src={icons.search} alt="검색" className="icon" />
+            {!isSearchPage && (
+              <img src={icons.search} alt="검색" style={{ width: '25px', height: '25px', verticalAlign: 'middle' }} />
+            )}
           </button>
         </div>
       </div>
