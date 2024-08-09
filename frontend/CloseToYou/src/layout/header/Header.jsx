@@ -1,8 +1,8 @@
-import HeaderContainer from "./HeaderStyle";
-import BackIcon from "../../assets/icons/etc/back.svg";
-import SearchIcon from "../../assets/icons/etc/search.svg";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import HeaderContainer from './HeaderStyle';
+import BackIcon from '../../assets/icons/etc/back.svg';
+import SearchIcon from '../../assets/icons/etc/search.svg';
 
 const icons = {
   back: BackIcon,
@@ -75,28 +75,14 @@ const Header = () => {
 
   return (
     <HeaderContainer>
-      <div
-        style={{
-          width: "95%",
-          margin: "auto",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
+      <div className='header-content'>
         <button className="Button" onTouchStart={handleTouchBackIcon} aria-label="뒤로가기">
-          <img
-            src={icons.back}
-            alt="뒤로가기"
-            style={{ width: "25px", height: "25px", verticalAlign: "middle" }}
-          />
+          <img src={icons.back} alt="뒤로가기" className="icon" />
         </button>
         <span className="Title">{title}</span>
         <div className="IconContainer">
           <button className="Button" onTouchStart={handleTouchSearchIcon} aria-label="검색">
-            {!isSearchPage && (
-              <img src={icons.search} alt="검색" style={{ width: '25px', height: '25px', verticalAlign: 'middle' }} />
-            )}
+            <img src={icons.search} alt="검색" className="icon" />
           </button>
         </div>
       </div>
