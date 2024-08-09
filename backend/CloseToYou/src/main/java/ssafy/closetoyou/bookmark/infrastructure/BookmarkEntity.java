@@ -42,7 +42,7 @@ public class BookmarkEntity {
                 .bookmarkId(bookmark.getBookmarkId())
                 .nickname(bookmark.getNickname())
                 .userId(bookmark.getUserId())
-                .isDeleted(bookmark.getIsDeleted())
+                .isDeleted(bookmark.getIsDeleted() != null && bookmark.getIsDeleted())
                 .createdDateTime(bookmark.getCreatedDateTime())
                 .updateDateTime(bookmark.getUpdateDateTime())
                 .build();

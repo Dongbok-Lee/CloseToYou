@@ -55,7 +55,7 @@ public class UserEntity {
                 .nickname(user.getNickname())
                 .password(user.getPassword())
                 .email(user.getEmail())
-                .isDeleted(false)
+                .isDeleted(user.getIsDeleted() != null && user.getIsDeleted())
                 .build();
     }
 

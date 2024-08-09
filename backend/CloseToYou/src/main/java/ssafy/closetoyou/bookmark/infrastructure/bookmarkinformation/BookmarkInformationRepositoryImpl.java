@@ -19,8 +19,8 @@ public class BookmarkInformationRepositoryImpl implements BookmarkInformationRep
     }
 
     @Override
-    public void deleteBookmarkInformationByBookmarkIdAndClothesId(Long bookmarkId, Long clothesId) {
-        bookmarkInformationJpaRepository.deleteBookmarkInformationByBookmarkIdAndClothesId(bookmarkId, clothesId);
+    public void deleteBookmarkInformationByClothesId(Long clothesId) {
+        bookmarkInformationJpaRepository.deleteBookmarkInformationByClothesId(clothesId);
     }
 
     @Override

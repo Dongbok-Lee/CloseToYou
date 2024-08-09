@@ -74,7 +74,7 @@ public class BookmarkServiceImpl implements BookmarkService {
 
         setUpdateTime(userId, bookmarkId);
 
-        bookmarkInformationRepository.deleteBookmarkInformationByBookmarkIdAndClothesId(bookmarkId, clothesId);
+        bookmarkInformationRepository.deleteBookmarkInformationByClothesId(clothesId);
     }
 
     @Override

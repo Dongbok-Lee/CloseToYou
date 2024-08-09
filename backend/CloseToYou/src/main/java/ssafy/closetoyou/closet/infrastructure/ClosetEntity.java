@@ -48,7 +48,7 @@ public class ClosetEntity {
                 .userId(closet.getUserId())
                 .closetCode(closet.getClosetCode())
                 .nickname(closet.getNickname())
-                .isDeleted(false)
+                .isDeleted(closet.getIsDeleted() != null && closet.getIsDeleted())
                 .build();
     }
 

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ssafy.closetoyou.bookmark.service.port.BookmarkInformationRepository;
 import ssafy.closetoyou.clothes.controller.port.ClothesService;
 import ssafy.closetoyou.clothes.controller.request.ClothesRequest;
 import ssafy.closetoyou.clothes.controller.request.ClothesUpdateRequest;
@@ -23,6 +24,8 @@ import java.util.List;
 public class ClothesServiceImpl implements ClothesService {
 
     private final ClothesRepository clothesRepository;
+    private final BookmarkInformationRepository bookmarkInformationRepository;
+
 
     @Transactional
     @Override
@@ -61,6 +64,8 @@ public class ClothesServiceImpl implements ClothesService {
         Clothes clothes = clothesRepository.findClothesByClothesId(clothesId);
         clothes.delete();
         clothesRepository.saveClothes(clothes);
+
+        bookmarkInformationRepository.deleteBookmarkInformationByClothesId(clothesId);
     }
 
     @Override

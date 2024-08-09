@@ -24,6 +24,10 @@ public class ClosetCode {
         this.isUsed = true;
     }
 
+    public void disUse() {
+        this.isUsed = false;
+    }
+
     @Builder
     public ClosetCode(Long closetCodeId, String closetCode, Boolean isUsed) {
         this.closetCodeId = closetCodeId;
