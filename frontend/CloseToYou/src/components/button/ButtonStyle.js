@@ -6,8 +6,8 @@ const ButtonStyle = styled.button`
   border-radius: 0.625rem;
   border-color: rgba(255, 255, 255, 0);
 
-  width: 18.75rem;
-  min-height: 3.75rem;
+  width: 100%;
+  height: 3.75rem;
 
   background-color: rgba(255, 105, 105, 1);
 
@@ -25,7 +25,16 @@ const ButtonStyle = styled.button`
   }
 
   ${({ btnSize }) =>
-    btnSize === "small" &&
+    btnSize === 'small' &&
+    `
+    width: 5rem;
+    height: 3.125rem;
+
+    font-size: 1.3rem;
+  `}
+
+  ${({ btnSize }) =>
+    btnSize === "medium" &&
     `
     width: 12.5rem;
     height: 3.125rem;
