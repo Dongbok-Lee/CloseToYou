@@ -11,6 +11,7 @@ import ssafy.closetoyou.user.controller.port.UserService;
 import ssafy.closetoyou.user.controller.request.UserUpdateRequest;
 import ssafy.closetoyou.user.domain.User;
 import ssafy.closetoyou.user.controller.request.UserSignUp;
+import ssafy.closetoyou.user.infrastructure.UserEntity;
 import ssafy.closetoyou.user.service.port.UserRepository;
 
 @Service
@@ -44,12 +45,10 @@ public class UserServiceImpl implements UserService {
 
         checkUserExists(userId);
         User user = userRepository.findUserByUserId(userId);
-
         checkPasswordMatch(oldPassword, user.getPassword());
         user.passwordEncode(passwordEncoder, newPassword);
 
         userRepository.saveUser(user);
-
     }
 
     @Override
@@ -61,7 +60,6 @@ public class UserServiceImpl implements UserService {
 
         user.updateUserInfo(userUpdateRequest);
         userRepository.saveUser(user);
-
     }
 
     private void checkPasswordMatch(CharSequence oldPassword, String newPassword) {

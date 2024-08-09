@@ -5,11 +5,13 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import ssafy.closetoyou.clothes.controller.port.ClothesService;
 import ssafy.closetoyou.clothes.controller.request.ClothesCondition;
+import ssafy.closetoyou.clothes.controller.request.ClothesRequest;
 import ssafy.closetoyou.clothes.controller.request.ClothesUpdateRequest;
 import ssafy.closetoyou.clothes.controller.response.ClothesDetail;
 import ssafy.closetoyou.clothes.controller.response.ClothesSummary;
@@ -27,8 +29,18 @@ public class ClothesController {
 
     private final ClothesService clothesService;
 
+    @Operation(summary = "옷 생성 api")
+    @PostMapping
+    public ResponseEntity<SuccessResponse<Long>> addClothes(@Valid @RequestBody ClothesRequest clothesRequest) {
+        Long clothesId = clothesService.addClothes(clothesRequest);
+        return ResponseEntity.status(201)
+                .body(new SuccessResponse<>("옷 생성 성공", clothesId));
+    }
+
+
     @Operation(summary = "옷 정보 수정 api")
     @PatchMapping("/{clothesId}")
+
     public ResponseEntity<SuccessResponse<Long>> updateClothes(Authentication authentication,
                                                                @Valid @RequestBody ClothesUpdateRequest clothesUpdateRequest,
                                                                @PathVariable Long clothesId) {

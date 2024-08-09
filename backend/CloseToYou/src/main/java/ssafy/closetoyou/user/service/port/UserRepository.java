@@ -1,7 +1,7 @@
 package ssafy.closetoyou.user.service.port;
 
-import ssafy.closetoyou.user.controller.request.UserUpdateRequest;
 import ssafy.closetoyou.user.domain.User;
+import ssafy.closetoyou.user.infrastructure.UserEntity;
 
 public interface UserRepository {
     User saveUser(User user);
