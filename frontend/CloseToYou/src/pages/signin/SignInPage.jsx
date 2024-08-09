@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   SignInPageContainer,
   SignInTitle,
@@ -14,11 +15,22 @@ import Button from "../../components/button/Button";
 import SocialButton from "../../components/socialbutton/SocialButton";
 
 const SignInPage = () => {
+
+  const nav = useNavigate();
+  
   const emailPlaceholder = "이메일을 입력해주세요.";
   const passwordPlaceholder = "비밀번호를 입력해주세요.";
   const infoErrorMessage = "이메일과 비밀번호를 확인해주세요.";
 
   const [isInfoError, setIsInfoError] = useState(false);
+
+  const handleTouchSignInButton = () => {
+    nav("/closets");
+  }
+
+  const handleTouchButton = () => {
+    nav("/signup");
+  }
 
   return (
   <SignInPageContainer className="page">
@@ -33,8 +45,8 @@ const SignInPage = () => {
         {isInfoError ? <ErrorText>{infoErrorMessage}</ErrorText> : <span></span>}
       </UserInfoInputWrapper>
       <SignInUpButtonWrapper>
-        <Button>로그인</Button>
-        <Button btnColor="white">회원가입</Button>
+        <Button handleTouchButton={handleTouchSignInButton}>로그인</Button>
+        <Button btnColor="white" handleTouchButton={handleTouchButton}>회원가입</Button>
       </SignInUpButtonWrapper>
       <SNSButtonWrapper>
         <SocialButton socialBtnType="kakao"></SocialButton>

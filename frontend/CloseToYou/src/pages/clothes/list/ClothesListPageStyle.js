@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import FloatingButton from '../../../components/floatingbutton/FloatingButton';
 
 export const ClothesListPageContainer = styled.div`
-  width: 85%;
+  width: 100%;
 `;
 
 export const PageContainer = styled.div`
@@ -13,6 +13,7 @@ export const Title = styled.h1`
   font-size: 1.25rem;
   margin-bottom: 20px;
   text-align: right;
+  padding-right: 20px;
 
   span {
     color: #FF6969;
@@ -22,13 +23,13 @@ export const Title = styled.h1`
 export const Filters = styled.div`
   display: flex;
   gap: 10px;
-  margin-bottom: 20px;
+  margin: 30px;
 `;
 
 export const FilterSelect = styled.select`
   padding: 10px;
   font-size: 1rem;
-  max-width: 25%;
+  width: 30%;
 `;
 
 export const SwipeContainer = styled.div`
@@ -37,11 +38,11 @@ export const SwipeContainer = styled.div`
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   max-width: 95%;
-  min-height: 330px;
+  min-height: 350px;
   -webkit-overflow-scrolling: touch;
   position: relative;
-  padding-left: calc(50% - 125px); /* 반절 보이도록 설정 (카드 너비의 절반) */
-  padding-right: calc(50% - 125px); /* 반절 보이도록 설정 (카드 너비의 절반) */
+  padding-left: calc(50% - 125px);
+  padding-right: calc(50% - 125px);
 
   &::-webkit-scrollbar {
     display: none;
@@ -57,8 +58,9 @@ export const SwipeContainer = styled.div`
 
 export const ClothesCardWrapper = styled.div`
   margin-right: 20px;
-  transform: ${props => props.isActive ? 'translate(0, 20px)' : 'translate(0, 0)'};
+  transform: ${props => props.isActive ? 'translate(0, 40px) scale(1.1)' : 'translate(0, 0)'};
   transition: transform 0.2s ease-in-out;
+  
 `;
 
 export const ClothesCard = styled.div`
@@ -71,7 +73,9 @@ export const ClothesCard = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  opacity: ${(props) => (props.isActive ? 1 : 0.5)};
+  opacity: ${(props) => (props.isActive ? 1 : 0.2)};
+  filter: ${(props) => (props.isActive ? 'none' : 'blur(4px)')};
+
 `;
 
 export const Image = styled.img`
