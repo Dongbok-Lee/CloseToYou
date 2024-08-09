@@ -29,7 +29,7 @@ export const SubText = styled.p`
   margin: 0;
 `;
 
-// TODO: color: ${props => props.theme.colors.point[0]};
+//      TODO: color: ${props => props.theme.colors.point[0]};
 export const PointText = styled.span`
   color: #ff6969;
 `;
