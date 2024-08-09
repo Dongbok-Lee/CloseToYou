@@ -6,7 +6,7 @@ const TextInputStyle = styled.input`
   border-radius: 0.3125rem;
   border: 0.5px solid rgba(0, 0, 0, 1);
 
-  width: 18.75rem;
+  width: 100%;
   height: 3.125rem;
 
   background-color: rgba(255, 255, 255, 1);
@@ -30,13 +30,6 @@ const TextInputStyle = styled.input`
   }
 
   ${({ textInputSize }) =>
-    textInputSize === "smaller" &&
-    `
-		width: 5.125rem;
-		height: 2.5rem;
-	`}
-
-  ${({ textInputSize }) =>
     textInputSize === "small" &&
     `
 		width: 8.125rem;
@@ -47,12 +40,6 @@ const TextInputStyle = styled.input`
     textInputSize === "medium" &&
     `
 		width: 12.5rem;
-	`}
-
-    ${({ textInputSize }) =>
-    textInputSize === "large" &&
-    `
-		width: 100%;
 	`}
 `;
 
