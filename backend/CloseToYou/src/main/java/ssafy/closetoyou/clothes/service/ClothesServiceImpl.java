@@ -9,6 +9,7 @@ import ssafy.closetoyou.closet.controller.response.ClosetResponse;
 import ssafy.closetoyou.closet.domain.Closet;
 import ssafy.closetoyou.closet.service.port.ClosetRepository;
 import ssafy.closetoyou.clothes.controller.port.ClothesService;
+import ssafy.closetoyou.clothes.controller.request.ClothesRequest;
 import ssafy.closetoyou.clothes.controller.request.ClothesUpdateRequest;
 import ssafy.closetoyou.clothes.controller.response.ClothesDetail;
 import ssafy.closetoyou.clothes.controller.request.ClothesCondition;
@@ -23,11 +24,17 @@ import java.util.List;
 
 @Service
 @Slf4j
-@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class ClothesServiceImpl implements ClothesService {
 
     private final ClothesRepository clothesRepository;
+
+    @Transactional
+    @Override
+    public Long addClothes(ClothesRequest clothesRequest) {
+        return clothesRepository.saveClothes(clothesRequest.toModel()).getClothesId();
+    }
+
 
     @Transactional
     @Override
@@ -55,7 +62,9 @@ public class ClothesServiceImpl implements ClothesService {
         if (!clothesRepository.existClothesByClothesId(clothesId)) {
             throw new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION);
         }
+
         Clothes clothes = clothesRepository.findClothes(clothesId);
+        log.info("clothes id:{}", clothes.getClothesId());
         clothes.delete();
         clothesRepository.saveClothes(clothes);
     }

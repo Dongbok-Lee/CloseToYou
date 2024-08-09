@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import ssafy.closetoyou.global.error.errorcode.UserErrorCode;
 import ssafy.closetoyou.global.error.exception.CloseToYouException;
-import ssafy.closetoyou.user.controller.request.UserUpdateRequest;
 import ssafy.closetoyou.user.domain.User;
 import ssafy.closetoyou.user.service.port.UserRepository;
 
