@@ -1,16 +1,15 @@
 import styled from "@emotion/styled";
 
-
 export const TitleText = styled.p`
-    font-weight: 700;
-    font-size: 1.5rem;
-    tab-index: 0;
-`
+  font-weight: 700;
+  font-size: 1.5rem;
+  tab-index: 0;
+`;
 
 export const SubText = styled.p`
-    font-weight: 400;
-    font-size: 1.25rem;
-`
+  font-weight: 400;
+  font-size: 1.25rem;
+`;
 
 export const UserPageContainer = styled.div`
   display: flex;

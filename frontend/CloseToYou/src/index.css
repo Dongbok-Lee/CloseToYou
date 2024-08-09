@@ -3,6 +3,7 @@ body {
   padding: 0;
   min-width: 320px;
   min-height: 100vh;
+  font-family: "KoddiUD OnGothic";
 }
 
 #root {
@@ -15,4 +16,8 @@ body {
   margin: auto;
   padding-top: 3.125rem;
   padding-bottom: 5rem;
+}
+
+input::placeholder {
+  font-family: "KoddiUD OnGothic";
 }
