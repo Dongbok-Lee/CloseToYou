@@ -111,7 +111,7 @@ public class BookmarkServiceImpl implements BookmarkService {
 
         List<Long> clothesIds = bookmarkInformationRepository.findClothesIdsByBookmarkId(bookmarkId);
         for (Long clothesId: clothesIds) {
-            Clothes clothes = clothesRepository.findClothes(clothesId);
+            Clothes clothes = clothesRepository.findClothesByClothesId(clothesId);
             clothesDetailList.add(ClothesDetail.fromModel(clothes));
         }
 

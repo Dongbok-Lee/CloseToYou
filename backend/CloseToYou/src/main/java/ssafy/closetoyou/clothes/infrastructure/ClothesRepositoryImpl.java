@@ -34,7 +34,7 @@ public class ClothesRepositoryImpl implements ClothesRepository {
 
 
     @Override
-    public Clothes findClothes(Long clothesId) {
+    public Clothes findClothesByClothesId(Long clothesId) {
         return clothesJpaRepository.findClothesByClothesIdAndIsDeleted(clothesId, false).orElseThrow(
                 () -> new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION)).toModel();
     }
