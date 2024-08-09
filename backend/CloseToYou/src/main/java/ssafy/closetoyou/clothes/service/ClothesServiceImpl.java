@@ -4,10 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ssafy.closetoyou.closet.controller.port.ClosetService;
-import ssafy.closetoyou.closet.controller.response.ClosetResponse;
-import ssafy.closetoyou.closet.domain.Closet;
-import ssafy.closetoyou.closet.service.port.ClosetRepository;
 import ssafy.closetoyou.clothes.controller.port.ClothesService;
 import ssafy.closetoyou.clothes.controller.request.ClothesRequest;
 import ssafy.closetoyou.clothes.controller.request.ClothesUpdateRequest;
@@ -19,7 +15,6 @@ import ssafy.closetoyou.clothes.service.port.ClothesRepository;
 import ssafy.closetoyou.global.error.errorcode.ClothesErrorCode;
 import ssafy.closetoyou.global.error.exception.CloseToYouException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -38,11 +33,10 @@ public class ClothesServiceImpl implements ClothesService {
 
     @Transactional
     @Override
-    public void updateClothes(Long userId,
-                              Long clothesId,
-                              ClothesUpdateRequest clothesUpdateRequest) {
+    public void updateClothes(Long userId, Long clothesId, ClothesUpdateRequest clothesUpdateRequest) {
 
         String nickname = clothesUpdateRequest.getNickname();
+
         if (!clothesRepository.existClothesByClothesId(clothesId)) {
             throw new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION);
         }
@@ -50,7 +44,8 @@ public class ClothesServiceImpl implements ClothesService {
         if (nickname != null && clothesRepository.existClothesByUserIdAndClothesNickname(userId, nickname)) {
             throw new CloseToYouException(ClothesErrorCode.DUPLICATE_CLOTHES_NICKNAME);
         }
-        Clothes clothes = clothesRepository.findClothes(clothesId);
+
+        Clothes clothes = clothesRepository.findClothesByClothesId(clothesId);
         clothes.changeClothesInfo(clothesUpdateRequest);
         clothesRepository.saveClothes(clothes);
     }
@@ -63,8 +58,7 @@ public class ClothesServiceImpl implements ClothesService {
             throw new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION);
         }
 
-        Clothes clothes = clothesRepository.findClothes(clothesId);
-        log.info("clothes id:{}", clothes.getClothesId());
+        Clothes clothes = clothesRepository.findClothesByClothesId(clothesId);
         clothes.delete();
         clothesRepository.saveClothes(clothes);
     }
@@ -76,7 +70,7 @@ public class ClothesServiceImpl implements ClothesService {
             throw new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION);
         }
 
-        Clothes clothes = clothesRepository.findClothes(clothesId);
+        Clothes clothes = clothesRepository.findClothesByClothesId(clothesId);
         return ClothesDetail.fromModel(clothes);
     }
 

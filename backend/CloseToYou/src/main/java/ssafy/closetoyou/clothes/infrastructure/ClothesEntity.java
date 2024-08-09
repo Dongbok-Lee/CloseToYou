@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -38,7 +39,7 @@ public class ClothesEntity {
     private String memo;
 
     private int wearingCount;
-    private boolean isDeleted;
+    private Boolean isDeleted;
 
     @CreatedDate
     private LocalDateTime createdDateTime;
@@ -50,7 +51,7 @@ public class ClothesEntity {
     private String imageUrl;
 
     @Builder
-    public ClothesEntity(Long clothesId, ClosetEntity closet, Long nfcId, String location, String nickname, String type, String pattern, String color, String size, String season, String memo, int wearingCount, boolean isDeleted, LocalDateTime createdDateTime, LocalDateTime updatedDateTime, LocalDate lastWornDate, String imageUrl) {
+    public ClothesEntity(Long clothesId, ClosetEntity closet, Long nfcId, String location, String nickname, String type, String pattern, String color, String size, String season, String memo, int wearingCount, Boolean isDeleted, LocalDateTime createdDateTime, LocalDateTime updatedDateTime, LocalDate lastWornDate, String imageUrl) {
         this.clothesId = clothesId;
         this.closet = closet;
         this.nfcId = nfcId;
@@ -62,8 +63,8 @@ public class ClothesEntity {
         this.size = size;
         this.season = season;
         this.memo = memo;
-        this.wearingCount = 0;
-        this.isDeleted = false;
+        this.wearingCount = wearingCount;
+        this.isDeleted = isDeleted;
         this.createdDateTime = createdDateTime;
         this.updatedDateTime = updatedDateTime;
         this.lastWornDate = lastWornDate;

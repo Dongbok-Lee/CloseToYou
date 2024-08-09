@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ssafy.closetoyou.closetcode.controller.port.ClosetCodeService;
 import ssafy.closetoyou.closetcode.domain.ClosetCode;
+import ssafy.closetoyou.closetcode.infrastructure.ClosetCodeEntity;
 import ssafy.closetoyou.closetcode.service.port.ClosetCodeRepository;
 import ssafy.closetoyou.global.common.util.RandomHolder;
 import ssafy.closetoyou.global.error.errorcode.ClosetErrorCode;
@@ -23,7 +24,9 @@ public class ClosetCodeServiceImpl implements ClosetCodeService {
 
     @Override
     public void updateClosetCodeIsUsed(String closetCode, boolean isUsed) {
-        closetCodeRepository.setClosetCodeIsUsed(closetCode, isUsed);
+        ClosetCode closetcode = closetCodeRepository.findClosetCodeByClosetCode(closetCode);
+        closetcode.use();
+        closetCodeRepository.saveClosetCode(closetcode);
     }
 
     @Override
