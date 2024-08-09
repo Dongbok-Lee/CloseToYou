@@ -1,20 +1,17 @@
 import styled from '@emotion/styled';
+import TextInput from '../../../components/textinput/TextInput';
 
-export const ClothesDetailPageContainer = styled.div``;
+export const ClothesEditPageContainer = styled.div`
+`;
 
 export const ClothesNameText = styled.h1`
   margin: 40px;
   color: #FF6969;
   font-family: "KoddiUD OnGothic";
   font-size: 1.5rem;
+  font-style: normal;
   font-weight: 700;
-`;
-
-export const LocationInfoText = styled.h1`
-  font-family: "KoddiUD OnGothic";
-  font-size: 1.5rem;
-  font-weight: 700;
-  text-align: center;
+  line-height: normal;
 `;
 
 export const TabText = styled.div`
@@ -23,13 +20,14 @@ export const TabText = styled.div`
   flex-shrink: 0;
   border-radius: 2.5rem;
   background: #FF6969;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #FFF;
   font-family: "KoddiUD OnGothic";
   font-size: 1.25rem;
+  font-style: normal;
   font-weight: 700;
 `;
 
@@ -54,6 +52,7 @@ export const DetailTitleText = styled.h2`
   text-align: left;
   font-family: "KoddiUD OnGothic";
   font-size: 1.25rem;
+  font-style: normal;
   font-weight: 700;
 `;
 
@@ -62,6 +61,7 @@ export const DetailInfoText = styled.p`
   text-align: ${({ alignRight }) => (alignRight ? 'right' : 'left')};
   font-family: "KoddiUD OnGothic";
   font-size: 1.25rem;
+  font-style: normal;
   font-weight: 400;
 `;
 
@@ -78,12 +78,20 @@ export const ImageContainer = styled.div`
   align-items: center;
 `;
 
-export const LastWornDateText = styled.div`
-  margin-left: 20px;
-  padding-left: 20px;
-  font-family: "KoddiUD OnGothic";
-  font-size: 1rem;
-  color: gray;
+export const LocationInputContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
 `;
 
-export default ClothesDetailPageContainer;
+export const TextInputStyled = styled(TextInput)`
+  text-align: center;
+`;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+`;
+
+export default ClothesEditPageContainer;

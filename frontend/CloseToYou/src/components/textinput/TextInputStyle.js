@@ -30,6 +30,13 @@ const TextInputStyle = styled.input`
   }
 
   ${({ textInputSize }) =>
+    textInputSize === "smaller" &&
+    `
+		width: 5.125rem;
+		height: 2.5rem;
+	`}
+
+  ${({ textInputSize }) =>
     textInputSize === "small" &&
     `
 		width: 8.125rem;
@@ -40,6 +47,12 @@ const TextInputStyle = styled.input`
     textInputSize === "medium" &&
     `
 		width: 12.5rem;
+	`}
+
+    ${({ textInputSize }) =>
+    textInputSize === "large" &&
+    `
+		width: 100%;
 	`}
 `;
 
