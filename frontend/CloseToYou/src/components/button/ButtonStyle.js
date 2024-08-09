@@ -6,7 +6,7 @@ const ButtonStyle = styled.button`
   border-radius: 0.625rem;
   border-color: rgba(255, 255, 255, 0);
 
-  width: 18.75rem;
+  width: 100%;
   height: 3.75rem;
 
   background-color: rgba(255, 105, 105, 1);
