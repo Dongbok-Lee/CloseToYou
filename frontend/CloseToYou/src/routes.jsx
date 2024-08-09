@@ -7,6 +7,8 @@ import SignUpPage from "./pages/signup/SignUpPage";
 import ClosetsPage from "./pages/closets/ClosetsPage";
 import ClothesListPage from "./pages/clothes/list/ClothesListPage";
 import ClothesDetailPage from "./pages/clothes/detail/ClothesDetailPage";
+import ClothesNfcPage from "./pages/clothes/nfc/ClothesNfcPage";
+import ClothesEditPage from "./pages/clothes/edit/ClothesEditPage";
 import SearchPage from "./pages/search/SearchPage";
 import BookMarkListPage from "./pages/bookmarks/list/BookMarkListPage";
 import BookMarkDetailPage from "./pages/bookmarks/detail/BookMarkDetailPage";
