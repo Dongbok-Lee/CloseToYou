@@ -12,12 +12,12 @@ import java.util.Optional;
 @Repository
 public interface ClothesJpaRepository extends JpaRepository<ClothesEntity,Integer> {
     boolean existsByClothesIdAndIsDeleted(Long clothesId, boolean deleted);
-    @Query("SELECT EXISTS (" +
+    @Query(" SELECT COUNT(c) > 0 " +
             "FROM ClothesEntity c " +
             "JOIN ClosetEntity cl ON c.closet.closetId = cl.closetId " +
             "WHERE cl.userId = :userId " +
             "AND c.nickname = :nickname " +
-            "AND c.isDeleted = :isDeleted )")
+            "AND c.isDeleted = :isDeleted")
     boolean existsByUserIdAndNicknameAndIsDeleted(@Param("userId") Long userId,
                                                   @Param("nickname") String nickname,
                                                   @Param("isDeleted") boolean isDeleted);
@@ -46,8 +46,7 @@ public interface ClothesJpaRepository extends JpaRepository<ClothesEntity,Intege
     @Query("SELECT c " +
             "FROM ClothesEntity c " +
             "JOIN ClosetEntity cl ON c.closet.closetId = cl.closetId " +
-            "WHERE cl.userId = :userId " +
-            "AND ( c.nickname LIKE concat('%', :searchKeyword,'%') " +
+            "WHERE ( c.nickname LIKE concat('%', :searchKeyword,'%') " +
             "OR c.color LIKE concat('%', :searchKeyword,'%') " +
             "OR c.type LIKE concat('%', :searchKeyword,'%') " +
             "OR c.pattern LIKE concat('%', :searchKeyword,'%') )" +
