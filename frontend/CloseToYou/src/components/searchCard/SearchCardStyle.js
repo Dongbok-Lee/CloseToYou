@@ -1,74 +1,56 @@
-import styled from '@emotion/styled'
+import styled from "@emotion/styled";
 
 const SearchCardStyle = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 100%;
+  height: 5rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border: 1px solid rgba(255, 105, 105, 1);
+  border-radius: 0.625rem;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  -webkit-tap-highlight-color: transparent;
 
-    box-sizing: border-box;
-
+  .left-box {
+    width: 5rem;
+    height: 5rem;
+    background: center no-repeat;
+    background-size: cover;
     display: flex;
-
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+  }
 
-    gap: 2.5rem;
+  .right-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    text-align: left;
+    padding: 1rem;
 
-    border-radius: 0.625rem;
-    border: 1px solid rgba(255, 105, 105, 1);
-
-    width: 22rem;
-    height: 10rem;
-
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-
-    -webkit-tap-highlight-color: transparent;
-
-    .search-card-left-box {
-        margin-left: 2rem;
+    .name {
+      font-size: 1.25rem;
+      font-weight: 400;
     }
 
-    .search-card-icon-box {
-        width: 5rem;
-        height: 5rem;
+    .location {
+      font-size: 1.25rem;
+      color: gray;
     }
+  }
 
-    .search-card-icon {
-        width: 100%;
-        height: 100%;
+  &:focus {
+    border: 3px solid rgba(255, 105, 105, 1);
+    outline: none;
 
-        background: url(src/assets/icons/etc/yellow-tshirt.svg) center no-repeat;
-
-        background-size: 100% 100%;
+    .location {
+      color: rgba(255, 105, 105, 1);
+      font-weight: 600;
     }
-
-    .search-card-right-box {
-        display: flex;
-
-        flex-direction: column;
-
-        justify-content: center;
-
-        flex: 1;
-
-        width: 5rem;
-        height: 5rem;
-
-        text-align: left;
-        font-size: 1.5rem;
-        font-weight: 400;
-
-        margin-right: 2rem;
-    }
-
-    &:focus {
-        border: 3px solid rgba(255, 105, 105, 1);
-
-        outline: none;
-
-        .search-card-location {
-            color: rgba(255, 105, 105, 1);
-
-            font-weight: 600;
-        }
-    }
-`
+  }
+`;
 
 export default SearchCardStyle;
