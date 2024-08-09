@@ -1,11 +1,13 @@
 import TextInputStyle from "./TextInputStyle";
 
-const TextInput = ({ textInputType, textInputSize, textInputPlaceholder }) => {
+const TextInput = ({ textInputType, textInputValue, textInputSize, textInputPlaceholder, handleChangeTextInput }) => {
   return (
     <TextInputStyle
-      textInputType={textInputType}
+      type={textInputType}
+      value={textInputValue}
       textInputSize={textInputSize}
       placeholder={textInputPlaceholder}
+      onChange={handleChangeTextInput}
     ></TextInputStyle>
   );
 };

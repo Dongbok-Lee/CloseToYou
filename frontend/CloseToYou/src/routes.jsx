@@ -24,6 +24,8 @@ const AppRoutes = () => {
       <Route path="/closets" element={<PageLayout page={<ClosetsPage />} />} />
       <Route path="/clothes" element={<PageLayout page={<ClothesListPage />} />} />
       <Route path="/clothes/:id" element={<PageLayout page={<ClothesDetailPage />} />} />
+      <Route path="/clothes/edit/:id" element={<PageLayout page={<ClothesEditPage />} />} />
+      <Route path="/clothes/nfc" element={<PageLayout page={<ClothesNfcPage />} />} />
       <Route path="/search" element={<PageLayout page={<SearchPage />} />} />
       <Route path="/bookmarks" element={<PageLayout page={<BookMarkListPage />} />} />
       <Route path="/bookmarks/:id" element={<PageLayout page={<BookMarkDetailPage />} />} />

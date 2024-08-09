@@ -52,8 +52,12 @@ export const UserInfoInputWrapper = styled.div`
   justify-content: center;
   align-items: center;
 
+  width: 100%;
+
   gap: 0.8rem;
-`;
+
+  margin-top: 1.5rem;
+  `;
 
 export const ErrorText = styled.p`
   box-sizing: border-box;
@@ -74,6 +78,8 @@ export const SignInUpButtonWrapper = styled.div`
   display: flex;
 
   flex-direction: column;
+
+  width: 100%;
 
   gap: 0.8rem;
 `;

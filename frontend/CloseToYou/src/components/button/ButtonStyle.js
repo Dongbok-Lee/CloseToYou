@@ -6,8 +6,8 @@ const ButtonStyle = styled.button`
   border-radius: 0.625rem;
   border-color: rgba(255, 255, 255, 0);
 
-  width: 18.75rem;
-  min-height: 3.75rem;
+  width: 100%;
+  height: 3.75rem;
 
   background-color: rgba(255, 105, 105, 1);
 
@@ -19,13 +19,24 @@ const ButtonStyle = styled.button`
 
   cursor: pointer;
 
+  -webkit-tap-highlight-color: transparent;
+
   &:focus {
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.4) inset;
     outline: none;
   }
 
   ${({ btnSize }) =>
-    btnSize === "small" &&
+    btnSize === 'small' &&
+    `
+    width: 5rem;
+    height: 3.125rem;
+
+    font-size: 1.3rem;
+  `}
+
+  ${({ btnSize }) =>
+    btnSize === "medium" &&
     `
     width: 12.5rem;
     height: 3.125rem;

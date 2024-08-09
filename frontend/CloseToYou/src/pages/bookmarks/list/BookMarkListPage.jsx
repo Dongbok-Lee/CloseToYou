@@ -14,23 +14,22 @@ import { useState, useEffect, useCallback } from "react";
 import Card from "../../../components/card/Card.jsx";
 import FloatingButton from "../../../components/floatingbutton/FloatingButton.jsx";
 import { useNavigate } from "react-router-dom";
-
-const DOUBLE_TOUCH_DELAY = 300;
+import { useDoubleClick } from "../../../hooks/useDoubleClick.js";
 
 const BookMarkListPage = () => {
   const [bookMarkIndex, setBookMarkIndex] = useState(-1);
-  const [lastTouchTime, setLastTouchTime] = useState(0); // 마지막 터치 시간을 기록
+  const [isDoubleClick, updateTouchTime] = useDoubleClick();
 
   const navigate = useNavigate();
 
   const handleTouchCard = id => {
-    const currentTime = new Date().getTime();
-    if (currentTime - lastTouchTime < DOUBLE_TOUCH_DELAY) {
+    updateTouchTime();
+
+    if (isDoubleClick()) {
       handleDoubleClick();
     } else {
       setBookMarkIndex(id);
     }
-    setLastTouchTime(currentTime);
   };
 
   const handleDoubleClick = () => {

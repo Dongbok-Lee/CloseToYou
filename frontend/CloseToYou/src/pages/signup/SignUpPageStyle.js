@@ -15,17 +15,8 @@ export const SignUpPageContainer = styled.div`
 
     padding: 2rem 0;
 
-    TEXTINPUT {
-        margin:0.2rem 0 0.2rem 0;
-    }
-
-    BUTTON {
-        margin-top: 0.2rem;
-        padding: 0.5rem;
-    }
-
     span {
-        height: 1.2rem;
+        height: 1.7rem;
     }
 
     p {
@@ -51,6 +42,7 @@ export const SignUpLogoImg = styled.img`
 `;
 
 export const SignUpTitle = styled.p`
+
     color: rgba(255, 255, 255, 1);
 
     text-align: center;
@@ -78,14 +70,16 @@ export const SingUpInfoWrapper = styled.div`
     box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.25);
 `;
 
-export const SignUpInfoTitle = styled.p`
+export const SignUpInfoTitle = styled.div`
     color: rgba(255, 105, 105, 1);
 
     text-align: center;
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: 800;
 
     padding: 0.5rem;
+
+    margin-bottom: 2rem;
 `;
 
 export const SignUpInfoNickname = styled.div`
@@ -95,6 +89,8 @@ export const SignUpInfoNickname = styled.div`
 
     justify-content: center;
     align-items: center;
+
+    width: 90%;
 `;
 
 export const AuthWrapper = styled.div`
@@ -104,6 +100,8 @@ export const AuthWrapper = styled.div`
 
     justify-conten: center;
     align-items: center;
+
+    width: 90%;
 `;
 
 export const AuthCodeWrapper = styled.div`
@@ -124,4 +122,12 @@ export const PasswordWrapper = styled.div`
 
     justify-content: center;
     align-items: center;
+
+    width: 90%;
 `;
+
+export const SignUpBox = styled.div`
+    width: 90%;
+
+    margin-bottom: 1rem;
+`
