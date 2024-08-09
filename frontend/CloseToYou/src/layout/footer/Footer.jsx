@@ -32,7 +32,7 @@ const Footer = () => {
     setTimeout(() => {
       e.target.blur();
 
-      nav("/bookmark");
+      nav("/bookmarks");
     }, 100);
   };
 
@@ -40,7 +40,7 @@ const Footer = () => {
     setTimeout(() => {
       e.target.blur();
 
-      nav("/mypage");
+      nav("/user");
     }, 100);
   };
 
