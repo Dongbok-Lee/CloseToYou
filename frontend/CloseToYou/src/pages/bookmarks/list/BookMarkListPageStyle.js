@@ -13,8 +13,11 @@ export const BookMarkListPageContainer = styled.div`
 `;
 
 export const TextWrapper = styled.div`
-  margin-top: 4rem;
-  height: 4rem;
+  margin: 2.5rem  0 1.5rem 0;
+  height: 3.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 `;
 
 export const TitleText = styled.p`
