@@ -1,8 +1,8 @@
 package ssafy.closetoyou.bookmark.controller.request;
 
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
-import ssafy.closetoyou.bookmark.domain.BookmarkCategory;
 
 import java.util.List;
 
@@ -12,8 +12,12 @@ public class BookmarkRequest {
     @NotNull
     private String nickname;
 
-    private BookmarkCategory category;
-
     @NotNull
     private List<Long> clothesIds;
+
+    @Builder
+    public BookmarkRequest(String nickname, List<Long> clothesIds) {
+        this.nickname = nickname;
+        this.clothesIds = clothesIds;
+    }
 }
