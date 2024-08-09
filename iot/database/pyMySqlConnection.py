@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 
 def execute_query(query):
-    load_dotenv('../env/data.env')
+    load_dotenv('/home/orin/S11P12B201/iot/env/data.env')
     connection = pymysql.connect(
         host=os.getenv('dbhost'),  # 데이터베이스 호스트 이름 또는 IP 주소
         user=os.getenv('user'),   # 데이터베이스 사용자 이름
@@ -28,4 +28,3 @@ def execute_query(query):
     return result
 
 # print(execute_query("insert into clothes(nickname, type, pattern, color, location) values ('하양 티셔츠', '티셔츠', '없음', '하양', 'a9')"))
-# print(execute_query("select * from clothes"))

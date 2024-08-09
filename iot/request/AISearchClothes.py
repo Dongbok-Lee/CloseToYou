@@ -26,7 +26,7 @@ class CompletionExecutor:
 
 
 def request_find_clothes(question):
-    load_dotenv('../env/data.env')
+    load_dotenv('/home/orin/S11P12B201/iot/env/data.env')
     completion_executor = CompletionExecutor(
         host=os.getenv('aihost'),
         api_key=os.getenv('api_key'),
