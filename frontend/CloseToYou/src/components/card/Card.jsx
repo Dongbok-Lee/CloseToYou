@@ -1,13 +1,16 @@
-import CardStyle from "./CardStyle";
+import { CardContainer } from "./CardStyle";
+import { useState } from "react";
 
-const Card = ({ cardType, onTouchStart, bookmarkName }) => {
+const Card = ({ handleTouch, handleDoubleClick, Icon, FocusIcon, isFocused }) => {
   return (
-    <CardStyle cardType={cardType} onTouchStart={onTouchStart} tabIndex={0}>
-      <div className="card-icon-box">
-        {cardType !== "text" && <div className="card-icon"></div>}
-        {cardType === "text" && <div className="card-text">{bookmarkName}</div>}
-      </div>
-    </CardStyle>
+    <CardContainer
+      onTouchStart={handleTouch}
+      onDoubleClick={handleDoubleClick}
+      tabIndex={0}
+      isFocused={isFocused}
+    >
+      {isFocused ? <FocusIcon /> : <Icon />}
+    </CardContainer>
   );
 };
 
