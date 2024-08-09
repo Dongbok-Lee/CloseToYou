@@ -21,7 +21,6 @@ const ClothesListPage = () => {
     {
       id: 0,
       nickname: '산뜻 노랑',
-      imageUrl: 'https://via.placeholder.com/150',
       color: 'yellow',
       type: 'shirt',
       pattern: '무지',
@@ -29,23 +28,20 @@ const ClothesListPage = () => {
     {
       id: 1,
       nickname: '시원한 블루',
-      imageUrl: 'https://via.placeholder.com/150',
       color: 'blue',
-      type: 'shirt',
+      type: 'skirt',
       pattern: '체크',
     },
     {
       id: 2,
       nickname: '따뜻한 레드',
-      imageUrl: 'https://via.placeholder.com/150',
       color: 'red',
-      type: 'coat',
+      type: 'jumper',
       pattern: '무지',
     },
     {
       id: 3,
       nickname: '부드러운 그린',
-      imageUrl: 'https://via.placeholder.com/150',
       color: 'green',
       type: 'cardigan',
       pattern: '무지',
@@ -53,7 +49,6 @@ const ClothesListPage = () => {
     {
       id: 4,
       nickname: '클래식 블랙',
-      imageUrl: 'https://via.placeholder.com/150',
       color: 'black',
       type: 'jacket',
       pattern: '무지',
