@@ -1,4 +1,4 @@
-import ClothesCardStyle from './ClothesCardStyle';
+import ClothesCardStyle from "./ClothesCardStyle";
 
 const ClothesCard = ({ handleTouchClothesCard, type, color }) => {
   const iconUrl = `/src/assets/icons/clothes/${type}/${color}.png`;

@@ -11,7 +11,7 @@ const icons = {
   nfc: NfcIcon
 };
 
-const FloatingButton = ({ type, handleClick }) => {
+const FloatingButton = ({ type, onTouchStart }) => {
   return (
     <ButtonContainer onTouchStart={() => handleClick()} type = {type} isdeleteType={type === "delete"} tabIndex={0}>
       <img src={icons[type]} alt={`${type} icon`} style={{ width: "2rem", height: "2rem" }} />
