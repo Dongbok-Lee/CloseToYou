@@ -55,7 +55,7 @@ export const ChangeWrapper = styled.div`
 export const ButtonText = styled.p`
   font-weight: 700;
   font-size: 1.5rem;
-  color: #ff6969;
+  color: ${props => props.theme.colors.point[0]};
   text-align: center;
   cursor: pointer;
 

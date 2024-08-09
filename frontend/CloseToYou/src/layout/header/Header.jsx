@@ -1,8 +1,8 @@
-import HeaderContainer from "./HeaderStyle";
-import BackIcon from "../../assets/icons/etc/back.svg";
-import SearchIcon from "../../assets/icons/etc/search.svg";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import HeaderContainer from './HeaderStyle';
+import BackIcon from '../../assets/icons/etc/back.svg';
+import SearchIcon from '../../assets/icons/etc/search.svg';
 
 const icons = {
   back: BackIcon,
@@ -17,39 +17,45 @@ const Header = () => {
   useEffect(() => {
     const path = location.pathname;
 
-    switch (path) {
-      case "/signin":
+    switch (true) {
+      case path === "/signin":
         setTitle("로그인");
         break;
-      case "/signup":
+      case path === "/signup":
         setTitle("회원가입");
         break;
-      case "/closets":
+      case path === "/closets":
         setTitle("옷장 선택");
         break;
-      case "/clothes":
+      case path === "/clothes":
         setTitle("옷 선택");
         break;
-      case path.match(/^\/clothes\/\d+$/)?.input:
-        setTitle("옷 상세");
+      case /^\/clothes\/\d+$/.test(path):
+        setTitle("상세보기");
         break;
-      case "/search":
+      case /^\/clothes\/edit\/\d+$/.test(path):
+        setTitle("수정하기");
+        break;
+      case path === "/search":
         setTitle("검색");
         break;
-      case "/bookmarks":
+      case path === "/bookmarks":
         setTitle("코디");
         break;
-      case path.match(/^\/bookmarks\/\d+$/)?.input:
+      case /^\/bookmarks\/\d+$/.test(path):
         setTitle("코디 상세");
         break;
-      case "/user":
+      case path === "/user":
         setTitle("마이페이지");
         break;
-      case "/nickname":
+      case path === "/nickname":
         setTitle("닉네임 변경");
         break;
-      case "/password":
+      case path === "/password":
         setTitle("비밀번호 변경");
+        break;
+      case /^\/clothes\/nfc\/\d+$/.test(path):
+        setTitle("NFC 태그");
         break;
       default:
         setTitle("default");
@@ -65,32 +71,18 @@ const Header = () => {
     navigate("/search");
   };
 
+  const isSearchPage = location.pathname === "/search";
+
   return (
     <HeaderContainer>
-      <div
-        style={{
-          width: "95%",
-          margin: "auto",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
+      <div className='header-content'>
         <button className="Button" onTouchStart={handleTouchBackIcon} aria-label="뒤로가기">
-          <img
-            src={icons.back}
-            alt="뒤로가기"
-            style={{ width: "25px", height: "25px", verticalAlign: "middle" }}
-          />
+          <img src={icons.back} alt="뒤로가기" className="icon" />
         </button>
         <span className="Title">{title}</span>
         <div className="IconContainer">
           <button className="Button" onTouchStart={handleTouchSearchIcon} aria-label="검색">
-            <img
-              src={icons.search}
-              alt="검색"
-              style={{ width: "25px", height: "25px", verticalAlign: "middle" }}
-            />
+            <img src={icons.search} alt="검색" className="icon" />
           </button>
         </div>
       </div>

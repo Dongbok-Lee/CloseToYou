@@ -7,17 +7,19 @@ const SearchBox = ({ value = "", onSearch }) => {
   const [inputValue, setInputValue] = useState(value);
   const [isFocused, setIsFocused] = useState(false);
 
-  const handleChangeInput = e => {
-    setInputValue(e.target.value);
+  const handleChangeInput = (e) => {
+    const newValue = e.target.value;
+    setInputValue(newValue);
+    onSearch(newValue);
   };
 
-  const handleClickSearch = () => {
+  const handleTouchSearch = () => {
     onSearch(inputValue);
   };
 
-  const handleKeyDown = e => {
+  const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      handleClickSearch();
+      handleTouchSearch();
     }
   };
 
@@ -32,6 +34,7 @@ const SearchBox = ({ value = "", onSearch }) => {
   return (
     <SearchBoxContainer isFocused={isFocused}>
       <input
+        aria-label="검색어 입력"
         className="input"
         type="text"
         value={inputValue}
@@ -40,7 +43,7 @@ const SearchBox = ({ value = "", onSearch }) => {
         onFocus={handleFocus}
         onBlur={handleBlur}
       />
-      <div className="IconContainer" onTouchStart={handleClickSearch}>
+      <div className="icon-container" onTouchStart={handleTouchSearch}>
         <img src={SearchBoxIcon} alt="검색 아이콘" className="icon" />
       </div>
     </SearchBoxContainer>
