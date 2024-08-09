@@ -7,10 +7,9 @@ export const CardContainer = styled.div`
   align-items: center;
   border-radius: 1.25rem;
   border: 3px solid rgba(255, 105, 105, 1);
-  width: 8.75rem;
-  height: 8.75rem;
+  width: 32vw;
+  height: 32vw;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
   -webkit-tap-highlight-color: transparent;
-  background-color: ${props => props.isFocused && "#ff6969"};
+  background-color: ${props => props.isFocused && props.theme.colors.point[0]};
 `;
-// TODO: background-color: ${props => props.theme.colors.point[0]}

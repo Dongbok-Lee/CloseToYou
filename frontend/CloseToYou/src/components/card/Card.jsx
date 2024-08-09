@@ -1,5 +1,4 @@
 import { CardContainer } from "./CardStyle";
-import { useState } from "react";
 
 const Card = ({ handleTouch, handleDoubleClick, Icon, FocusIcon, isFocused }) => {
   return (
