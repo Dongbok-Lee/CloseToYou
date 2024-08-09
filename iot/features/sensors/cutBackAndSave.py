@@ -40,7 +40,7 @@ def remove_background(image_path, output_folder):
 
 if __name__ == "__main__":
     # 이미지 경로 설정
-    image_path = "path/to/your/image.jpg"
+    image_path = "check2.png"
     
     # 결과 이미지를 저장할 폴더 설정 (홈 디렉토리 아래)
     home_directory = os.path.expanduser('~')

@@ -1,6 +1,6 @@
 import sys
 import time
-from sensors import speaker, nfc, infrared_sensor
+from features.sensors import speaker, nfc, infrared_sensor
 sys.path.append('/home/orin/S11P12B201/iot/database')
 from pyMySqlConnection import execute_query
 import Jetson.GPIO as GPIO
@@ -54,5 +54,4 @@ def put_clothes():
     return
 
 
-put_clothes()
 

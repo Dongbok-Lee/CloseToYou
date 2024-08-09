@@ -9,7 +9,7 @@ sys.path.append('/home/orin/S11P12B201/iot/database')
 from pyMySqlConnection import execute_query
 
 
-def searchClothes():
+def search():
     while True:
         text = recognize_speech_from_mic()
         print(text)
@@ -61,6 +61,4 @@ def list_to_string(lst, delimiter=' '):
 
 # data = "[{'clothes_id': 1, 'nickname': '빨간 티셔츠', 'type': '티셔츠', 'location': 'a4', 'pattern': '>없음', 'color': '빨강'}, {'clothes_id': 2, 'nickname': '이쁜이', 'type': '코트', 'location': 'a3', 'pattern': '없음', 'color': '파랑'}, {'clothes_id': 3, 'nickname': '노랑 티셔츠', 'type': '티셔츠', 'location': 'a2', 'pattern': '없음', 'color': '노랑'}, {'clothes_id': 4, 'nickname': '이동복', 'type': '바지', 'location': 'a2', 'pattern': '없음', 'color': '하양'}] 상의의 위치만 단독으로 출력해줘"
 
-if __name__ == "__main__":
-    searchClothes()
 
