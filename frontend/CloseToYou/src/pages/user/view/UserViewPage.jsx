@@ -1,11 +1,13 @@
 import {
-    ButtonText,
-    ChangeWrapper,
-    HighContrastWrapper, SubText, TitleText,
-    UserInfoWrapper,
-    UserPageContainer,
-    WelcomeWrapper,
-} from "./UserPageStyle";
+  ButtonText,
+  ChangeWrapper,
+  HighContrastWrapper,
+  SubText,
+  TitleText,
+  UserInfoWrapper,
+  UserPageContainer,
+  WelcomeWrapper,
+} from "./UserViewPageStyle.js";
 import { ToggleContainer } from "../../../components/togglebutton/ToggleButtonStyle.js";
 import { useEffect, useState } from "react";
 import ToggleButton from "../../../components/togglebutton/ToggleButton.jsx";
@@ -20,7 +22,7 @@ const user = {
   isHighContrast: false,
 };
 
-const UserPage = () => {
+const UserViewPage = () => {
   const [isToggle, setIsToggle] = useState(false);
 
   const navigate = useNavigate();
@@ -57,18 +59,24 @@ const UserPage = () => {
       </UserInfoWrapper>
       <UserInfoWrapper>
         <TitleText tabIndex={0}>닉네임</TitleText>
-        <ChangeWrapper >
-            <SubText tabIndex={0}>{user.nickname}</SubText>
-          <ButtonText onTouchStart={handleTouchChangeNickname} tabIndex={0}>변경</ButtonText>
+        <ChangeWrapper>
+          <SubText tabIndex={0}>{user.nickname}</SubText>
+          <ButtonText onTouchStart={handleTouchChangeNickname} tabIndex={0}>
+            변경
+          </ButtonText>
         </ChangeWrapper>
       </UserInfoWrapper>
       <ChangeWrapper>
         <SubText tabIndex={0}>비밀 번호</SubText>
-        <ButtonText tabIndex={0} onTouchStart={handleTouchChangePassword}>변경</ButtonText>
+        <ButtonText tabIndex={0} onTouchStart={handleTouchChangePassword}>
+          변경
+        </ButtonText>
       </ChangeWrapper>
-      <ButtonText tabIndex={0} onTouchStart={handleTouchLogout}>로그아웃</ButtonText>
+      <ButtonText tabIndex={0} onTouchStart={handleTouchLogout}>
+        로그아웃
+      </ButtonText>
     </UserPageContainer>
   );
 };
 
-export default UserPage;
+export default UserViewPage;
