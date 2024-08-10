@@ -3,13 +3,18 @@ import styled from "@emotion/styled";
 export const ClosetsPageContainer = styled.div`
     display: flex;
 
-    width: 100%;
-    height: 100%;
-
     flex-direction: column;
 
     span {
         height: 2.2rem;
+    }
+
+    p {
+        margin: 0;
+    }
+    
+    Card {
+        rgba(255,255,255,1);
     }
 `;
 
@@ -22,9 +27,10 @@ export const ClosetTextWrapper = styled.div`
 
     text-align: center;
 
-    gap: 1rem;
+    gap: 0.3rem;
 
-    padding-top: 4rem;
+    margin-top: 2rem;
+    
 `;
 
 export const ClosetTextTitleWrapper = styled.div`
@@ -54,6 +60,8 @@ export const SelectedText = styled.p`
     text-align: left;
     font-size: 1.625rem;
     font-weight: 700;
+
+    padding-left: 0.2rem;
 `;
 
 export const ClosetSelectWrapper = styled.div`
@@ -64,12 +72,9 @@ export const ClosetSelectWrapper = styled.div`
     justify-content: space-between;
     align-items: center;
 
-    gap: 2.5rem;
+    gap: 4rem;
 
-    margin-left: 1.5rem;
-    margin-right: 1.5rem;
-
-    padding-top: 1.5rem;
+    margin-top: 2rem;
 `;
 
 export const ClosetButtonWrapper = styled.div`
@@ -79,7 +84,4 @@ export const ClosetButtonWrapper = styled.div`
 
     justify-content: space-between;
     align-items: flex-end;
-
-    padding-top : 4rem;
-    padding-bottom: 1rem;
 `;
