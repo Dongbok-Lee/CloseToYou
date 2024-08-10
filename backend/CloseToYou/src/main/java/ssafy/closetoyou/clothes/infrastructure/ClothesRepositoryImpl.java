@@ -28,6 +28,11 @@ public class ClothesRepositoryImpl implements ClothesRepository {
     }
 
     @Override
+    public boolean existClothesByNfcId(Long nfcId) {
+        return clothesJpaRepository.existsByNfcIdAndIsDeleted(nfcId, false);
+    }
+
+    @Override
     public boolean existClothesByUserIdAndClothesNickname(Long userId, String clothesNickname) {
         return clothesJpaRepository.existsByUserIdAndNicknameAndIsDeleted(userId, clothesNickname, false);
     }
@@ -35,14 +40,19 @@ public class ClothesRepositoryImpl implements ClothesRepository {
 
     @Override
     public Clothes findClothesByClothesId(Long clothesId) {
-        return clothesJpaRepository.findClothesByClothesIdAndIsDeleted(clothesId, false).orElseThrow(
-                () -> new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION)).toModel();
+        return clothesJpaRepository.findClothesByClothesIdAndIsDeleted(clothesId, false).toModel();
+    }
+
+    @Override
+    public Clothes findClothesByNfcId(Long nfcId) {
+        return clothesJpaRepository.findClothesByNfcIdAndIsDeleted(nfcId, false).toModel();
     }
 
     @Override
     public List<Clothes> findAllClothes(Long userId) {
         return clothesJpaRepository
                 .findAllByUserIdAndIsDeleted(userId, false)
+                .orElse(Collections.emptyList())
                 .stream()
                 .map(ClothesEntity::toModel)
                 .toList();
@@ -52,6 +62,7 @@ public class ClothesRepositoryImpl implements ClothesRepository {
     public List<Clothes> searchClothesByClothesCondition(ClothesCondition clothesCondition) {
         return clothesJpaRepository
                 .searchClothesByClosetIdAndClothesConditionAndIsDeleted(clothesCondition, false)
+                .orElse(Collections.emptyList())
                 .stream()
                 .map(ClothesEntity::toModel)
                 .toList();

@@ -80,6 +80,16 @@ public class ClothesServiceImpl implements ClothesService {
     }
 
     @Override
+    public ClothesDetail findClothesByNfcId(Long nfcId) {
+        if (!clothesRepository.existClothesByNfcId(nfcId)) {
+            throw new CloseToYouException(ClothesErrorCode.NO_NFC_EXCEPTION);
+        }
+
+        Clothes clothes = clothesRepository.findClothesByNfcId(nfcId);
+        return ClothesDetail.fromModel(clothes);
+    }
+
+    @Override
     public List<ClothesSummary> findAllClothes(Long userId) {
         return clothesRepository.findAllClothes(userId)
                 .stream()
