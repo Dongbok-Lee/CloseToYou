@@ -1,6 +1,5 @@
 package ssafy.closetoyou.clothes.service.port;
 
-import org.springframework.stereotype.Repository;
 import ssafy.closetoyou.clothes.controller.request.ClothesCondition;
 import ssafy.closetoyou.clothes.domain.Clothes;
 
@@ -12,7 +11,7 @@ public interface ClothesRepository {
     boolean existClothesByClothesId(Long clothesId);
     boolean existClothesByUserIdAndClothesNickname(Long userId, String clothesNickname);
 
-    Clothes findClothes(Long clothesId);
+    Clothes findClothesByClothesId(Long clothesId);
     List<Clothes> findAllClothes(Long closetId);
     List<Clothes> searchClothesByClothesCondition(ClothesCondition clothesCondition);
     List<Clothes> searchClothesBySearchKeyword(String searchKeyword);

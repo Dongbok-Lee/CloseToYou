@@ -7,7 +7,7 @@ public enum Color {
     GREEN,
     BLUE,
     NAVY,
-    PURBLE,
+    PURPLE,
     PINK,
     BROWN,
     BLACK,

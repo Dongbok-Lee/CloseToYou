@@ -11,6 +11,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import ssafy.closetoyou.global.security.oauth.OAuthAttributes;
 import ssafy.closetoyou.user.domain.User;
+import ssafy.closetoyou.user.infrastructure.UserEntity;
 import ssafy.closetoyou.user.service.port.UserRepository;
 import ssafy.closetoyou.global.security.oauth.CustomOAuth2User;
 import ssafy.closetoyou.global.security.oauth.OauthServerType;

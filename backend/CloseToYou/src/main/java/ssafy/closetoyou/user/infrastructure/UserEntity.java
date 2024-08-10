@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import ssafy.closetoyou.user.domain.User;
 
 import java.time.LocalDateTime;
@@ -29,7 +30,6 @@ public class UserEntity {
     private String password;
 
     @Email
-    @Column(unique = true)
     private String email;
 
     private Boolean isDeleted;
@@ -51,10 +51,11 @@ public class UserEntity {
 
     public static UserEntity fromModel(User user) {
         return builder()
+                .userId(user.getUserId())
                 .nickname(user.getNickname())
                 .password(user.getPassword())
                 .email(user.getEmail())
-                .isDeleted(false)
+                .isDeleted(user.getIsDeleted() != null && user.getIsDeleted())
                 .build();
     }
 
@@ -68,6 +69,10 @@ public class UserEntity {
                 .updatedDateTime(updatedDateTime)
                 .isDeleted(isDeleted)
                 .build();
+    }
+
+    public void passwordEncode(PasswordEncoder passwordEncoder, String newPassword) {
+        this.password = passwordEncoder.encode(newPassword);
     }
 
 }
