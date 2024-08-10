@@ -8,7 +8,7 @@ const Footer = () => {
 
   let location = useLocation();
 
-  const [url, setUrl] = useState('/user');
+  const [url, setUrl] = useState('');
 
   useEffect(() => {
 
