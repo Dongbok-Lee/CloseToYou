@@ -6,7 +6,8 @@ export const ClothesListPageContainer = styled.div`
 `;
 
 export const PageContainer = styled.div`
-  padding-top: 1.5rem;
+  bottom : 30%;
+  position : relative;
 `;
 
 export const Title = styled.h1`
@@ -23,7 +24,7 @@ export const Title = styled.h1`
 export const Filters = styled.div`
   display: flex;
   gap: 10px;
-  margin: 30px;
+  margin: 20px;
 `;
 
 export const FilterSelect = styled.select`
@@ -38,7 +39,7 @@ export const SwipeContainer = styled.div`
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   max-width: 95%;
-  min-height: 350px;
+  min-height: 330px;
   -webkit-overflow-scrolling: touch;
   position: relative;
   padding-left: calc(50% - 125px);
@@ -60,7 +61,7 @@ export const ClothesCardWrapper = styled.div`
   margin-right: 20px;
   transform: ${props => props.isActive ? 'translate(0, 40px) scale(1.1)' : 'translate(0, 0)'};
   transition: transform 0.2s ease-in-out;
-  
+  pointer-events: ${(props) => (props.isActive ? 'auto' : 'none')};
 `;
 
 export const ClothesCard = styled.div`
@@ -92,7 +93,7 @@ export const Nickname = styled.div`
 
 export const FloatingButtonMove = styled(FloatingButton)`
   display: block;
-  margin: 20px auto 0 auto;
+  margin: 20px auto 10px auto;
   padding: 10px 20px;
   background-color: #FF6969;
   color: #fff;
@@ -114,9 +115,9 @@ export const NoClothesText = styled.div`
   color: gray;
 `;
 
-export const FixedContainer = styled.div`
+export const FloatingButtonContainer = styled.div`
   position: fixed;
-  bottom: 10px;
+  bottom: 5rem;
   width: 100%;
   display: flex;
   justify-content: center;

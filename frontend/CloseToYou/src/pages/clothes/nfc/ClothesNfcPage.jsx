@@ -17,7 +17,7 @@ const NFCPage = () => {
   };
 
   return (
-    <SkipContainer>
+    <SkipContainer className='page'>
       <NfcImg src={NFCImg} alt="NFC 이미지" />
       <NfcText>옷장의 리더기에<br />NFC 태그를 찍어주세요</NfcText>
       <SkipButton onTouchStart={handleSkip} aria-label="건너뛰기 버튼">Skip</SkipButton>

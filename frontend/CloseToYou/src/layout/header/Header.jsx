@@ -54,7 +54,7 @@ const Header = () => {
       case path === "/password":
         setTitle("비밀번호 변경");
         break;
-      case /^\/clothes\/nfc\/\d+$/.test(path):
+      case path === '/clothes/nfc':
         setTitle("NFC 태그");
         break;
       default:
@@ -65,6 +65,7 @@ const Header = () => {
 
   const handleTouchBackIcon = () => {
     navigate(-1);
+    console.log('뒤록가기')
   };
 
   const handleTouchSearchIcon = () => {

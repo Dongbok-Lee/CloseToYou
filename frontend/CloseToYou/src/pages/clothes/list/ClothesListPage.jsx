@@ -10,7 +10,7 @@ import {
   Title,
   SwipeContainer,
   NoClothesText,
-  FixedContainer,
+  FloatingButtonContainer,
   ClothesCardWrapper,
 } from './ClothesListPageStyle';
 import FloatingButton from '../../../components/floatingbutton/FloatingButton';
@@ -206,14 +206,12 @@ const ClothesListPage = () => {
             ))}
           </SwipeContainer>
         )}
-        <FixedContainer>
           <FloatingButton type="delete" onTouchStart={handleTouchDelete}>
             Delete
           </FloatingButton>
           <FloatingButton type="nfc" onTouchStart={handleTouchNfc}>
             NFC
           </FloatingButton>
-        </FixedContainer>
       </PageContainer>
     </ClothesListPageContainer>
   );
