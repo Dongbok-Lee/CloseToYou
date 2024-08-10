@@ -10,7 +10,8 @@ import {
   DetailInfoText,
   LocationInfoText,
   ImageContainer,
-  LastWornDateText
+  LastWornDateText,
+  PageContainer
 } from './ClothesDetailPageStyle';
 import FloatingButton from '../../../components/floatingbutton/FloatingButton';
 import tempImage from '../../../assets/icons/temp-image.png';
@@ -40,6 +41,7 @@ const ClothesDetailPage = () => {
 
   return (
     <ClothesDetailPageContainer className="page">
+      <PageContainer>
       <ClothesNameText aria-label="옷 별명">{details.nickname}</ClothesNameText>
       <ImageContainer>
         <img src={details.imageUrl} alt="옷 이미지" />
@@ -79,9 +81,8 @@ const ClothesDetailPage = () => {
           <DetailInfoText>{details.memo}</DetailInfoText>
         </DetailItem>
       </DetailContainer>
-
       <LastWornDateText aria-label="최근 입은 날짜">최근 입은 날짜: {details.lastWornDate}</LastWornDateText>
-
+      </PageContainer>
       <FloatingButton type="edit" onTouchStart={handleEditClick} aria-label="편집 버튼" />
     </ClothesDetailPageContainer>
   );
