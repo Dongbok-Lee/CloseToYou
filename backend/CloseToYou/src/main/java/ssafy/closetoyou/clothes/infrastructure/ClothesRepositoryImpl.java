@@ -35,14 +35,14 @@ public class ClothesRepositoryImpl implements ClothesRepository {
 
     @Override
     public Clothes findClothesByClothesId(Long clothesId) {
-        return clothesJpaRepository.findClothesByClothesIdAndIsDeleted(clothesId, false).orElseThrow(
-                () -> new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION)).toModel();
+        return clothesJpaRepository.findClothesByClothesIdAndIsDeleted(clothesId, false).toModel();
     }
 
     @Override
     public List<Clothes> findAllClothes(Long userId) {
         return clothesJpaRepository
                 .findAllByUserIdAndIsDeleted(userId, false)
+                .orElse(Collections.emptyList())
                 .stream()
                 .map(ClothesEntity::toModel)
                 .toList();
@@ -52,6 +52,7 @@ public class ClothesRepositoryImpl implements ClothesRepository {
     public List<Clothes> searchClothesByClothesCondition(ClothesCondition clothesCondition) {
         return clothesJpaRepository
                 .searchClothesByClosetIdAndClothesConditionAndIsDeleted(clothesCondition, false)
+                .orElse(Collections.emptyList())
                 .stream()
                 .map(ClothesEntity::toModel)
                 .toList();

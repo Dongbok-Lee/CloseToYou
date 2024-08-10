@@ -22,7 +22,7 @@ public interface ClothesJpaRepository extends JpaRepository<ClothesEntity,Intege
                                                   @Param("nickname") String nickname,
                                                   @Param("isDeleted") boolean isDeleted);
 
-    Optional<ClothesEntity> findClothesByClothesIdAndIsDeleted(Long clothesId, boolean deleted);
+    ClothesEntity findClothesByClothesIdAndIsDeleted(Long clothesId, boolean deleted);
 
     @Query("SELECT c " +
             "FROM ClothesEntity c " +
@@ -30,7 +30,7 @@ public interface ClothesJpaRepository extends JpaRepository<ClothesEntity,Intege
             "WHERE cl.userId = :userId " +
             "AND c.isDeleted = :isDeleted " +
             "ORDER BY c.wearingCount DESC")
-    List<ClothesEntity> findAllByUserIdAndIsDeleted(@Param("userId") Long userId,
+    Optional<List<ClothesEntity>> findAllByUserIdAndIsDeleted(@Param("userId") Long userId,
                                                     @Param("isDeleted") boolean isDeleted);
 
     @Query("select c from ClothesEntity c " +
@@ -40,8 +40,8 @@ public interface ClothesJpaRepository extends JpaRepository<ClothesEntity,Intege
             "and c.isDeleted = :isDeleted " +
             "and (:#{#clothesCondition.closetId} = 0 or c.closet.closetId = :#{#clothesCondition.closetId}) " +
             "ORDER BY c.wearingCount DESC")
-    List<ClothesEntity> searchClothesByClosetIdAndClothesConditionAndIsDeleted(@Param("clothesCondition") ClothesCondition clothesCondition,
-                                                                               boolean isDeleted);
+    Optional<List<ClothesEntity>> searchClothesByClosetIdAndClothesConditionAndIsDeleted(@Param("clothesCondition") ClothesCondition clothesCondition,
+                                                                               @Param("isDeleted") boolean isDeleted);
 
     @Query("SELECT c " +
             "FROM ClothesEntity c " +
@@ -53,12 +53,13 @@ public interface ClothesJpaRepository extends JpaRepository<ClothesEntity,Intege
             "AND c.isDeleted = :isDeleted " +
             "ORDER BY c.wearingCount DESC ")
     Optional<List<ClothesEntity>> searchClothesByUserIdAndSearchKeywordAndIsDeleted(@Param("searchKeyword") String searchKeyword,
-                                                                                    boolean isDeleted);
+                                                                                    @Param("isDeleted") boolean isDeleted);
 
     @Query("SELECT COUNT(*) " +
             "FROM ClothesEntity c " +
             "JOIN ClosetEntity cl ON c.closet.closetId = cl.closetId " +
             "WHERE cl.closetId = :closetId " +
             "AND c.isDeleted = :isDeleted")
-    int countClothesByClosetIdAndIsDeleted(Long closetId, boolean isDeleted);
+    int countClothesByClosetIdAndIsDeleted(@Param("closetId") Long closetId,
+                                           @Param("isDeleted") boolean isDeleted);
 }

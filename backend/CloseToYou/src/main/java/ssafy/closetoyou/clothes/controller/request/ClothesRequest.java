@@ -3,6 +3,7 @@ package ssafy.closetoyou.clothes.controller.request;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import ssafy.closetoyou.closet.domain.Closet;
@@ -34,6 +35,16 @@ public class ClothesRequest {
 
     @NotNull
     private String imageUrl;
+
+    @Builder
+    public ClothesRequest(Type type, Pattern pattern, Color color, String location, Long closetId, String imageUrl) {
+        this.type = type;
+        this.pattern = pattern;
+        this.color = color;
+        this.location = location;
+        this.closetId = closetId;
+        this.imageUrl = imageUrl;
+    }
 
     public Clothes toModel() {
         return Clothes.builder()
