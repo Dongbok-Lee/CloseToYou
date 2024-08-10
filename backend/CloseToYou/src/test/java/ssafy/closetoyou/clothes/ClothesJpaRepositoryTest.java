@@ -50,6 +50,7 @@ class ClothesJpaRepositoryTest {
     private final String fakeLocation = "A1";
     private final Long fakeUserId = 1L;
     private final Long fakeClothesId = 1L;
+    private final Long fakeNfcId = 1L;
 
     @BeforeEach
     void setUp() {
@@ -76,7 +77,7 @@ class ClothesJpaRepositoryTest {
     @DisplayName("옷 아이디로 존재 여부를 확인할 수 있다.")
     void shouldReturnTrueWhenClothesExistsById() {
         //given
-        Clothes clothes = new Clothes(fakeClothesId, fakeCloset, fakeLocation, fakeNickname, fakeType, fakePattern, fakeColor, false);
+        Clothes clothes = new Clothes(fakeClothesId, fakeNfcId, fakeCloset, fakeLocation, fakeNickname, fakeType, fakePattern, fakeColor, false);
         ClothesEntity clothesEntity = ClothesEntity.fromModel(clothes);
 
         //when
@@ -90,7 +91,7 @@ class ClothesJpaRepositoryTest {
     @DisplayName("삭제된 옷의 경우, 특정 아이디의 옷이 옷장에 존재하지 않다고 반환한다.")
     void shouldReturnFalseWhenClothesIsDeletedById() {
         //given
-        Clothes clothes = new Clothes(fakeClothesId, fakeCloset, fakeLocation, fakeNickname, fakeType, fakePattern, fakeColor, true);
+        Clothes clothes = new Clothes(fakeClothesId, fakeNfcId, fakeCloset, fakeLocation, fakeNickname, fakeType, fakePattern, fakeColor, true);
         ClothesEntity clothesEntity = ClothesEntity.fromModel(clothes);
 
         //when
@@ -104,7 +105,7 @@ class ClothesJpaRepositoryTest {
     @DisplayName("해당 유저의 특정 닉네임을 가진 옷 보유 여부를 확인할 수 있다.")
     void shouldReturnTrueWhenClothesExistsByUserIdAndNickname() {
         //given
-        Clothes clothes = new Clothes(fakeClothesId, fakeCloset, fakeLocation, fakeNickname, fakeType, fakePattern, fakeColor, false);
+        Clothes clothes = new Clothes(fakeClothesId, fakeNfcId, fakeCloset, fakeLocation, fakeNickname, fakeType, fakePattern, fakeColor, false);
         ClothesEntity clothesEntity = ClothesEntity.fromModel(clothes);
 
         //when
@@ -118,7 +119,7 @@ class ClothesJpaRepositoryTest {
     @DisplayName("삭제된 옷의 경우, 특정 닉네임을 가진 옷이 해당 유저의 옷장에 존재하지 않다고 반환한다.")
     void shouldReturnFalseWhenClothesIsDeletedAndUserIdAndNickname() {
         //given
-        Clothes clothes = new Clothes(fakeClothesId, fakeCloset, fakeLocation, fakeNickname, fakeType, fakePattern, fakeColor, true);
+        Clothes clothes = new Clothes(fakeClothesId, fakeNfcId, fakeCloset, fakeLocation, fakeNickname, fakeType, fakePattern, fakeColor, true);
         ClothesEntity clothesEntity = ClothesEntity.fromModel(clothes);
 
         //when
@@ -132,7 +133,7 @@ class ClothesJpaRepositoryTest {
     @DisplayName("아이디를 기반으로 옷을 조회할 수 있다.")
     void findClothesById() {
         //given
-        Clothes clothes = new Clothes(fakeClothesId, fakeCloset, fakeLocation, fakeNickname, fakeType, fakePattern, fakeColor, false);
+        Clothes clothes = new Clothes(fakeClothesId, fakeNfcId, fakeCloset, fakeLocation, fakeNickname, fakeType, fakePattern, fakeColor, false);
         ClothesEntity clothesEntity = ClothesEntity.fromModel(clothes);
 
         //when
@@ -146,9 +147,9 @@ class ClothesJpaRepositoryTest {
     @DisplayName("모든 옷을 조회할 수 있다.")
     void findAllClothesByUserId() {
         //given
-        Clothes clothes1 = new Clothes(1L, fakeCloset, fakeLocation, "a", fakeType, fakePattern, fakeColor, false);
-        Clothes clothes2 = new Clothes(2L, fakeCloset, fakeLocation, "b", fakeType, fakePattern, fakeColor, false);
-        Clothes clothes3 = new Clothes(3L, fakeCloset, fakeLocation, "c", fakeType, fakePattern, fakeColor, true);
+        Clothes clothes1 = new Clothes(1L, fakeNfcId, fakeCloset, fakeLocation, "a", fakeType, fakePattern, fakeColor, false);
+        Clothes clothes2 = new Clothes(2L, fakeNfcId, fakeCloset, fakeLocation, "b", fakeType, fakePattern, fakeColor, false);
+        Clothes clothes3 = new Clothes(3L, fakeNfcId, fakeCloset, fakeLocation, "c", fakeType, fakePattern, fakeColor, true);
 
         //when
         clothesJpaRepository.save(ClothesEntity.fromModel(clothes1));
@@ -163,11 +164,11 @@ class ClothesJpaRepositoryTest {
     @DisplayName("조건에 따라 옷을 검색할 수 있다.")
     void searchClothesByCondition() {
         //given
-        Clothes clothes1 = new Clothes(1L, fakeCloset, fakeLocation, fakeNickname, Type.COAT, Pattern.DOT, Color.BEIGE, false);
-        Clothes clothes2 = new Clothes(2L, fakeCloset, fakeLocation, fakeNickname, Type.COAT, Pattern.DOT, Color.RED, false);
-        Clothes clothes3 = new Clothes(3L, fakeCloset, fakeLocation, fakeNickname, Type.COAT, Pattern.DOT, Color.RED, false);
-        Clothes clothes4 = new Clothes(4L, fakeCloset, fakeLocation, fakeNickname, Type.COAT, Pattern.DOT, Color.BEIGE, false);
-        Clothes clothes5 = new Clothes(4L, fakeCloset, fakeLocation, fakeNickname, Type.COAT, Pattern.DOT, Color.RED, true);
+        Clothes clothes1 = new Clothes(1L, fakeNfcId, fakeCloset, fakeLocation, fakeNickname, Type.COAT, Pattern.DOT, Color.BEIGE, false);
+        Clothes clothes2 = new Clothes(2L, fakeNfcId, fakeCloset, fakeLocation, fakeNickname, Type.COAT, Pattern.DOT, Color.RED, false);
+        Clothes clothes3 = new Clothes(3L, fakeNfcId, fakeCloset, fakeLocation, fakeNickname, Type.COAT, Pattern.DOT, Color.RED, false);
+        Clothes clothes4 = new Clothes(4L, fakeNfcId, fakeCloset, fakeLocation, fakeNickname, Type.COAT, Pattern.DOT, Color.BEIGE, false);
+        Clothes clothes5 = new Clothes(4L, fakeNfcId, fakeCloset, fakeLocation, fakeNickname, Type.COAT, Pattern.DOT, Color.RED, true);
 
         //when
         clothesJpaRepository.save(ClothesEntity.fromModel(clothes1));
@@ -190,10 +191,10 @@ class ClothesJpaRepositoryTest {
     @DisplayName("검색 키워드에 따라 옷을 검색할 수 있다.")
     void searchClothesBySearchKeyword() {
         //given
-        Clothes clothes1 = new Clothes(1L, fakeCloset, fakeLocation, "닉네임", Type.COAT, Pattern.DOT, Color.BEIGE, false);
-        Clothes clothes2 = new Clothes(2L, fakeCloset, fakeLocation, "ㄴ", Type.COAT, Pattern.DOT, Color.RED, false);
-        Clothes clothes3 = new Clothes(3L, fakeCloset, fakeLocation, "네", Type.COAT, Pattern.DOT, Color.RED, false);
-        Clothes clothes4 = new Clothes(4L, fakeCloset, fakeLocation, "임", Type.COAT, Pattern.DOT, Color.BEIGE, false);
+        Clothes clothes1 = new Clothes(1L, fakeNfcId, fakeCloset, fakeLocation, "닉네임", Type.COAT, Pattern.DOT, Color.BEIGE, false);
+        Clothes clothes2 = new Clothes(2L, fakeNfcId, fakeCloset, fakeLocation, "ㄴ", Type.COAT, Pattern.DOT, Color.RED, false);
+        Clothes clothes3 = new Clothes(3L, fakeNfcId, fakeCloset, fakeLocation, "네", Type.COAT, Pattern.DOT, Color.RED, false);
+        Clothes clothes4 = new Clothes(4L, fakeNfcId, fakeCloset, fakeLocation, "임", Type.COAT, Pattern.DOT, Color.BEIGE, false);
 
         //when
         clothesJpaRepository.save(ClothesEntity.fromModel(clothes1));
@@ -209,9 +210,9 @@ class ClothesJpaRepositoryTest {
     @DisplayName("특정 옷장의 옷의 개수를 구할 수 있다.")
     void countClothesByClosetId() {
         //given
-        Clothes clothes1 = new Clothes(1L, fakeCloset, fakeLocation, "닉네임", Type.COAT, Pattern.DOT, Color.BEIGE, false);
-        Clothes clothes2 = new Clothes(2L, fakeCloset, fakeLocation, "ㄴ", Type.COAT, Pattern.DOT, Color.RED, false);
-        Clothes clothes3 = new Clothes(3L, fakeCloset, fakeLocation, "네", Type.COAT, Pattern.DOT, Color.RED, false);
+        Clothes clothes1 = new Clothes(1L, fakeNfcId, fakeCloset, fakeLocation, "닉네임", Type.COAT, Pattern.DOT, Color.BEIGE, false);
+        Clothes clothes2 = new Clothes(2L, fakeNfcId, fakeCloset, fakeLocation, "ㄴ", Type.COAT, Pattern.DOT, Color.RED, false);
+        Clothes clothes3 = new Clothes(3L, fakeNfcId, fakeCloset, fakeLocation, "네", Type.COAT, Pattern.DOT, Color.RED, false);
 
         //when
         clothesJpaRepository.save(ClothesEntity.fromModel(clothes1));

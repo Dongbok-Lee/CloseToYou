@@ -28,6 +28,11 @@ public class ClothesRepositoryImpl implements ClothesRepository {
     }
 
     @Override
+    public boolean existClothesByNfcId(Long nfcId) {
+        return clothesJpaRepository.existsByNfcIdAndIsDeleted(nfcId, false);
+    }
+
+    @Override
     public boolean existClothesByUserIdAndClothesNickname(Long userId, String clothesNickname) {
         return clothesJpaRepository.existsByUserIdAndNicknameAndIsDeleted(userId, clothesNickname, false);
     }
@@ -36,6 +41,11 @@ public class ClothesRepositoryImpl implements ClothesRepository {
     @Override
     public Clothes findClothesByClothesId(Long clothesId) {
         return clothesJpaRepository.findClothesByClothesIdAndIsDeleted(clothesId, false).toModel();
+    }
+
+    @Override
+    public Clothes findClothesByNfcId(Long nfcId) {
+        return clothesJpaRepository.findClothesByNfcIdAndIsDeleted(nfcId, false).toModel();
     }
 
     @Override

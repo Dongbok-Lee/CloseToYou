@@ -12,6 +12,7 @@ public interface ClothesService {
     void removeClothes(Long clothesId);
     Long addClothes(ClothesRequest clothesRequest);
     ClothesDetail findClothes(Long clothesId);
+    ClothesDetail findClothesByNfcId(Long nfcId);
     List<ClothesSummary> findAllClothes(Long userId);
     List<ClothesSummary> searchClothesByClothesCondition(ClothesCondition clothesCondition);
     List<ClothesSummary> searchClothesBySearchKeyword(String searchKeyword);

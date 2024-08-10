@@ -12,6 +12,8 @@ import java.util.Optional;
 @Repository
 public interface ClothesJpaRepository extends JpaRepository<ClothesEntity,Integer> {
     boolean existsByClothesIdAndIsDeleted(Long clothesId, boolean deleted);
+    boolean existsByNfcIdAndIsDeleted(Long nfcId, boolean deleted);
+
     @Query(" SELECT COUNT(c) > 0 " +
             "FROM ClothesEntity c " +
             "JOIN ClosetEntity cl ON c.closet.closetId = cl.closetId " +
@@ -23,6 +25,8 @@ public interface ClothesJpaRepository extends JpaRepository<ClothesEntity,Intege
                                                   @Param("isDeleted") boolean isDeleted);
 
     ClothesEntity findClothesByClothesIdAndIsDeleted(Long clothesId, boolean deleted);
+
+    ClothesEntity findClothesByNfcIdAndIsDeleted(Long nfcId, boolean deleted);
 
     @Query("SELECT c " +
             "FROM ClothesEntity c " +

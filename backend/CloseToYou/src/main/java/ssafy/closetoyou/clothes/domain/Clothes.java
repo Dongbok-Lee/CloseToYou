@@ -52,6 +52,29 @@ public class Clothes {
         this.updatedDateTime = updatedDateTime;
         this.lastWornDate = lastWornDate;
     }
+    public Clothes(Long clothesId, Closet closet, String location, String nickname, Type type, Pattern pattern, Color color) {
+        this.clothesId = clothesId;
+        this.closet = closet;
+        this.location = location;
+        this.nickname = nickname;
+        this.type = type;
+        this.pattern = pattern;
+        this.color = color;
+        this.season = Season.DEFAULT;
+    }
+
+    public Clothes(Long clothesId, Long nfcId, Closet closet, String location, String nickname, Type type, Pattern pattern, Color color, Boolean isDeleted) {
+        this.clothesId = clothesId;
+        this.nfcId = nfcId;
+        this.closet = closet;
+        this.location = location;
+        this.nickname = nickname;
+        this.type = type;
+        this.pattern = pattern;
+        this.color = color;
+        this.season = Season.DEFAULT;
+        this.isDeleted = isDeleted;
+    }
 
     public void changeClothesInfo(ClothesUpdateRequest clothesUpdateRequest) {
         if (clothesUpdateRequest.getNickname() != null) this.nickname = clothesUpdateRequest.getNickname();
