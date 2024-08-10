@@ -35,4 +35,8 @@ public class ClosetCodeEntity {
                 .isUsed(closetCode.getIsUsed())
                 .build();
     }
+
+    public ClosetCode toModel() {
+        return ClosetCode.builder().closetCode(closetCode).closetCodeId(closetCodeId).isUsed(isUsed).build();
+    }
 }

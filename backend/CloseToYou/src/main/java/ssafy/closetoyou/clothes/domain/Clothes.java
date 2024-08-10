@@ -30,7 +30,7 @@ public class Clothes {
     private LocalDate lastWornDate;
 
     public void delete() {
-        this.isDeleted = true;
+        this.isDeleted = Boolean.TRUE;
     }
     @Builder
     public Clothes(Long clothesId, Closet closet, Long nfcId, String location, String nickname, Type type, Pattern pattern, Color color, Season season, String size, String memo, int wearingCount, Boolean isDeleted, String imageUrl, LocalDateTime createdDateTime, LocalDateTime updatedDateTime, LocalDate lastWornDate) {

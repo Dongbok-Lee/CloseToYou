@@ -2,6 +2,7 @@ package ssafy.closetoyou.closetcode.infrastructure;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import ssafy.closetoyou.closet.domain.Closet;
 import ssafy.closetoyou.closetcode.domain.ClosetCode;
 import ssafy.closetoyou.closetcode.service.port.ClosetCodeRepository;
 import ssafy.closetoyou.global.error.errorcode.ClosetErrorCode;
@@ -24,15 +25,14 @@ public class ClosetCodeRepositoryImpl implements ClosetCodeRepository {
     }
 
     @Override
-    public void setClosetCodeIsUsed(String closetCode, boolean isUsed) {
-        ClosetCodeEntity closetCodeEntity = closetCodeJpaRepository.findByClosetCode(closetCode)
-                .orElseThrow(() -> new CloseToYouException(ClosetErrorCode.NO_CLOSET_CODE_EXCEPTION));
-        closetCodeEntity.use();
-        closetCodeJpaRepository.save(closetCodeEntity);
+    public Long saveClosetCode(ClosetCode closetCode) {
+        return closetCodeJpaRepository.save(ClosetCodeEntity.fromModel(closetCode)).getClosetCodeId();
     }
 
     @Override
-    public Long saveClosetCode(ClosetCode closetCode) {
-        return closetCodeJpaRepository.save(ClosetCodeEntity.fromModel(closetCode)).getClosetCodeId();
+    public ClosetCode findClosetCodeByClosetCode(String closetCode) {
+        return closetCodeJpaRepository.findByClosetCode(closetCode)
+                .orElseThrow(() -> new CloseToYouException(ClosetErrorCode.NO_CLOSET_CODE_EXCEPTION))
+                .toModel();
     }
 }

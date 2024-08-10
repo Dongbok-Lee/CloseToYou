@@ -10,7 +10,8 @@ public enum Type {
     SWEATER,
     TSHIRT,
     VEST,
-    BOTTOM,
+    PANTS,
+    SKIRT,
     DRESS,
     JUMPSUITE
 }
