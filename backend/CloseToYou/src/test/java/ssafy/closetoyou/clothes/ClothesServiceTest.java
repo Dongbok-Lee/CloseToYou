@@ -118,6 +118,23 @@ class ClothesServiceTest {
     }
 
     @Test
+    @DisplayName("NFC 아이디 기반 옷을 조회할 수 있다")
+    void findClothesByNfcId() throws Exception {
+        //given
+        Long nfcId = 5L;
+        Closet closet = Closet.builder().nickname("옷장 닉네임").closetCode("A1B2C3").build();
+        Clothes clothes =  new Clothes(clothesId, nfcId, closet, fakeLocation, fakeNickname,  fakeType,  fakePattern,  fakeColor, false);
+
+        //when
+        Mockito.when(clothesRepository.existClothesByNfcId(nfcId)).thenReturn(true);
+        Mockito.when(clothesRepository.findClothesByNfcId(nfcId)).thenReturn(clothes);
+
+        //given
+        assertThat(clothesService.findClothesByNfcId(nfcId).getClothesId()).isEqualTo(clothesId);
+        assertThat(clothesService.findClothesByNfcId(nfcId).getNickname()).isEqualTo(clothes.getNickname());
+    }
+
+    @Test
     @DisplayName("유저의 전체 옷 조회를 할 수 있다.")
     void findAllClothesByUserId() throws Exception {
         //given

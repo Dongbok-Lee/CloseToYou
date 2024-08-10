@@ -65,6 +65,13 @@ public class ClothesController {
         return ResponseEntity.ok()
                 .body((new SuccessResponse<>("옷 상세 정보 조회 성공", clothesDetail)));
     }
+    @Operation(summary = "nfc id 기반 옷 상세 정보 조회 api")
+    @GetMapping("/nfc/{nfcId}")
+    public ResponseEntity<SuccessResponse<ClothesDetail>> findClothesByNfcId(@PathVariable Long nfcId) {
+        ClothesDetail clothesDetail = clothesService.findClothesByNfcId(nfcId);
+        return ResponseEntity.ok()
+                .body((new SuccessResponse<>("nfc id 기반 옷 상세 정보 조회 성공", clothesDetail)));
+    }
 
     @Operation(summary = "옷 전체 조회 api")
     @GetMapping
