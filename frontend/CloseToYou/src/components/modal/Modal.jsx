@@ -1,62 +1,70 @@
-import ModalStyle from "./ModalStyle";
+import {CloseImg, CloseImgBox, ContentWrapper, DeleteText, TextInputWrapper, ModalContainer, ModalWrapper, TextBox} from "./ModalStyle"
+import TextInput from "../textinput/TextInput";
 import Button from "../button/Button";
-import Input from "../input/Input";
 
 const Modal = ({
-  modalType,
-  modalSize,
-  modalPlaceholderFirst,
-  modalPlaceholderSecond,
-  setIsOpenModal,
-  children,
+    modalType,
+    modalSize,
+    firstPlaceholder,
+    secondPlaceholder,
+    setIsOpenModal,
+    setFirstValue,
+    setSecondValue,
+    children
 }) => {
-  const deleteText = "정말 삭제 하시겠어요?";
 
-  const handleTouchCloseIcon = e => {
-    e.target.focus();
+    const deleteMessage = "정말 삭제하시겠습니까?";
 
-    setTimeout(() => {
-      e.target.blur();
-      setIsOpenModal(false);
-    }, 100);
-  };
+    const handleChangeFirstValue = (e) => {
+      setFirstValue(e.target.value);
+    }
 
-  const handleTouchButton = e => {
-    e.target.focus();
+    const handleChangeSecondValue = (e) => {
+      setSecondValue(e.target.value)
+    }
 
-    setTimeout(() => {
-      e.target.blur();
-      setIsOpenModal(false);
-    }, 100);
-  };
+    const handleTouchClose = () => {
+      e.target.focus();
 
-  return (
-    <ModalStyle modalType={modalType} modalSize={modalSize}>
-      <div className="modal-container">
-        <div className="modal-up-box">
-          <div className="close-icon-box">
-            <div className="close-icon" onTouchStart={handleTouchCloseIcon} tabIndex={0}></div>
-          </div>
-        </div>
-        <div className="modal-down-box">
-          <div className="modal-down-input">
-            {modalType === "delete" && <div className="modal-delete-text">{deleteText}</div>}
-            {modalSize === "large" && modalType !== "delete" && (
-              <Input inputSize="medium" inputPlaceholder={modalPlaceholderSecond}></Input>
-            )}
-            {modalType !== "delete" && (
-              <Input inputSize="medium" inputPlaceholder={modalPlaceholderFirst}></Input>
-            )}
-          </div>
-          <div className="modal-down-button">
-            <Button btnSize="small" onTouchStart={handleTouchButton}>
-              {children}
-            </Button>
-          </div>
-        </div>
-      </div>
-    </ModalStyle>
-  );
-};
+      setTimeout(() => {
+        setIsOpenModal(false);
+      }, 100)
+    }
+
+    const handleTouchButton = (e) => {
+      e.target.focus();
+
+      setTimeout(() => {
+        setIsOpenModal(false);
+      }, 100)
+    }
+
+    return(
+            <ModalContainer>
+                <ModalWrapper size={modalSize}>
+                    <CloseImgBox>
+                        <CloseImg src="src/assets/icons/etc/close-button.svg" onTouchStart={handleTouchClose} tabIndex={0}></CloseImg>
+                    </CloseImgBox>
+                    <ContentWrapper>
+                        {modalType === "delete" ?
+                        <TextBox>
+                            <DeleteText>{deleteMessage}</DeleteText>
+                        </TextBox>
+                        :
+                        <TextInputWrapper>
+                            {modalSize !== "" &&
+                                <TextInput textInputPlaceholder={firstPlaceholder} handleChangeTextInput={handleChangeFirstValue}></TextInput>
+                            }
+                            {modalSize === "large" &&
+                                <TextInput textInputPlaceholder={secondPlaceholder} handleChangeTextInput={handleChangeSecondValue}></TextInput>
+                            }
+                        </TextInputWrapper>
+                        }
+                        <Button handleTouchButton={handleTouchButton}>{children}</Button>
+                    </ContentWrapper>
+                </ModalWrapper>
+            </ModalContainer>       
+    );
+}
 
 export default Modal;
