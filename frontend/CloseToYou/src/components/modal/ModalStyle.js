@@ -1,24 +1,29 @@
 import styled from "@emotion/styled";
 
-const ModalStyle = styled.div`
-  box-sizing: border-box;
+export const ModalContainer = styled.div`
+    box-sizing: border-box;
 
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
 
-  display: flex;
+    display: flex;
 
-  justify-content: center;
-  align-items: center;
+    justify-content: center;
+    align-items: center;
 
-  background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.2);
 
-  -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: transparent;
 
-  .modal-container {
+    div {
+        padding: 0;
+    }
+`;
+
+export const ModalWrapper = styled.div`
     box-sizing: border-box;
 
     display: flex;
@@ -28,84 +33,72 @@ const ModalStyle = styled.div`
     justify-content: flex-start;
     align-items: center;
 
-    gap: 0.38rem;
-
     border-radius: 0.625rem;
-
+    
     width: 18.75rem;
-    height: 13.75rem;
+    height: ${(props) => props.size === 'large' ? '16.6rem' : '13.75rem'};
 
     background-color: rgba(255, 255, 255, 1);
 
-    ${({ modalSize }) =>
-      modalSize === "large" &&
-      `
-            height: 16.5625rem;
-        `}
-  }
+`
 
-  .modal-up-box {
+export const CloseImgBox = styled.div`
     display: flex;
 
     justify-content: flex-end;
 
     width: 100%;
 
-    padding: 0.5rem;
-  }
+    margin: 0.5rem 0;
+`
 
-  .close-icon {
+export const CloseImg = styled.img`
     width: 2.5rem;
     height: 2.5rem;
 
-    background: url(src/assets/icons/etc/close-button.svg) center no-repeat;
+    margin-right: 0.3rem;
+
 
     &:focus {
-      border: 2px solid rgba(255, 105, 105, 1);
-
+      border: 3px solid rgba(255, 105, 105, 1);
+      
       outline: none;
     }
-  }
+`
 
-  .modal-down-box {
+export const ContentWrapper = styled.div`
     display: flex;
 
     flex-direction: column;
 
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
 
-    ${({ modalType }) =>
-      modalType === "delete" &&
-      `
-            gap: 1.25rem;
-        `}
+    width: 80%;
+    height: 100%;
 
-    ${({ modalType }) =>
-      modalType !== "delete" &&
-      `
-            gap: 0.63rem;
-        `}
-  }
+    gap: 1rem;
 
-  .modal-down-input {
-    display: flex;
+    margin-bottom: 3rem;
+`
 
-    flex-direction: column;
+export const TextBox = styled.div`
+    width: 100%;
+`
 
-    justify-content: center;
-    align-items: center;
-
-    gap: 0.4rem;
-  }
-
-  .modal-delete-text {
-    color: rgba(0, 0, 0, 1);
-
+export const DeleteText = styled.p`
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 400;
-  }
-`;
+`
 
-export default ModalStyle;
+export const TextInputWrapper = styled.div`
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 0.5rem;
+`
