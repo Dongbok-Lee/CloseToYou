@@ -1,85 +1,71 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import FooterStyle from "./FooterStyle";
+import {FooterContainer, ClosetImg, ClosetWrapper, ClosetText, ClothesWrapper, ClothesImg, ClothesText, BookmarkWrapper, BookmarkImg, BookmarkText, ProfileWrapper, ProfileImg, ProfileText } from "./FooterStyle";
 
 const Footer = () => {
   const nav = useNavigate();
 
   let location = useLocation();
 
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState('/user');
 
-  const handleTouchClosetIcon = e => {
+  useEffect(() => {
+
+    setUrl(location.pathname)
+    console.log(location.pathname)
+
+  }, [location.pathname])
+
+  const handleTouchCloset = (e) => {
     setTimeout(() => {
-      e.target.blur();
-
-      setUrl(location.pathname);
-
+      document.activeElement.blur();
       nav("/closets");
-    }, 100);
+    }, 150);
   };
 
-  const handleTouchHangerIcon = e => {
+  const handleTouchClothes = (e) => {
     setTimeout(() => {
-      e.target.blur();
-
+      document.activeElement.blur();
       nav("/clothes");
-    }, 100);
+    }, 150);
   };
 
-  const handleTouchBookmarkIcon = e => {
+  const handleTouchBookmark = (e) => {
     setTimeout(() => {
-      e.target.blur();
-
+      document.activeElement.blur();
       nav("/bookmarks");
-    }, 100);
+
+    }, 150);
   };
 
-  const handleTouchProfileIcon = e => {
+  const handleTouchProfile = (e) => {
     setTimeout(() => {
-      e.target.blur();
-
+      document.activeElement.blur();
       nav("/user");
-    }, 100);
+
+    }, 150);
   };
 
   return (
-    <FooterStyle>
-      <div className="footer-container">
-        <div className="footer-closet-box" onTouchStart={handleTouchClosetIcon} tabIndex={0}>
-          {url === "/closets" ? (
-            <div className="footer-closet-icon-box">
-              <div className="footer-closet-icon touched"></div>
-            </div>
-          ) : (
-            <div className="footer-closet-icon-box">
-              <div className="footer-closet-icon"></div>
-            </div>
-          )}
-
-          <div className="footer-content">옷장</div>
-        </div>
-        <div className="footer-hanger-box" onTouchStart={handleTouchHangerIcon} tabIndex={0}>
-          <div className="footer-hanger-icon-box">
-            <div className="footer-hanger-icon"></div>
-          </div>
-          <div className="footer-content">옷</div>
-        </div>
-        <div className="footer-bookmark-box" onTouchStart={handleTouchBookmarkIcon} tabIndex={0}>
-          <div className="footer-bookmark-icon-box">
-            <div className="footer-bookmark-icon"></div>
-          </div>
-          <div className="footer-content">북마크</div>
-        </div>
-        <div className="footer-profile-box" onTouchStart={handleTouchProfileIcon} tabIndex={0}>
-          <div className="footer-profile-icon-box">
-            <div className="footer-profile-icon"></div>
-          </div>
-          <div className="footer-content">프로필</div>
-        </div>
-      </div>
-    </FooterStyle>
+    <FooterContainer>
+      <ClosetWrapper tabIndex={0} onTouchStart={handleTouchCloset}>
+        {url.includes('/closets') ? <ClosetImg src="src/assets/icons/etc/closet-focus.svg" alt="옷장으로 바로가기"></ClosetImg> : <ClosetImg src="src/assets/icons/etc/closet-basic.svg" alt="옷장으로 바로가기"></ClosetImg>}
+        <ClosetText url={url}>옷장</ClosetText>
+      </ClosetWrapper>
+      <ClothesWrapper tabIndex={0} onTouchStart={handleTouchClothes}>
+        {url.includes('/clothes') ? <ClothesImg src="src/assets/icons/etc/hanger-focus.svg" alt="옷으로 바로가기"></ClothesImg> : <ClothesImg src="src/assets/icons/etc/hanger-basic.svg" alt="옷으로 바로가기"></ClothesImg>}
+        <ClothesText url={url}>옷</ClothesText>
+      </ClothesWrapper>
+      <BookmarkWrapper tabIndex={0} onTouchStart={handleTouchBookmark}>
+        {url.includes('/bookmarks') ? <BookmarkImg src="src/assets/icons/etc/bookmark-focus.svg" alt="북마크로 바로가기"></BookmarkImg> : <BookmarkImg src="src/assets/icons/etc/bookmark-basic.svg" alt="북마크로 바로가기"></BookmarkImg>}
+        <BookmarkText url={url}>북마크</BookmarkText>
+      </BookmarkWrapper>
+      <ProfileWrapper tabIndex={0} onTouchStart={handleTouchProfile}>
+        {url.includes('/user') || url.includes('/nickname') || url.includes('/password') ? <ProfileImg src="src/assets/icons/etc/profile-focus.svg" alt="프로필로 바로가기"></ProfileImg> : <ProfileImg src="src/assets/icons/etc/profile-basic.svg" alt="프로필로 바로가기"></ProfileImg>}
+        <ProfileText url={url}>프로필</ProfileText>
+      </ProfileWrapper>
+    </FooterContainer>
   );
 };
 
