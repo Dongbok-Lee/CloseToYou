@@ -68,12 +68,12 @@ public class UserServiceImpl implements UserService {
     }
 
     public void validateSignUpEmail(String email) {
-        if (!emailAuthenticationRepository.isEmailAuthenticated(email)) {
-            throw new CloseToYouException(UserErrorCode.NOT_AUTHENTICATED);
-        }
-
         if (userRepository.existsUserByUserEmail(email)) {
             throw new CloseToYouException(UserErrorCode.DUPLICATE_EMAIL);
+        }
+
+        if (!emailAuthenticationRepository.isEmailAuthenticated(email)) {
+            throw new CloseToYouException(UserErrorCode.NOT_AUTHENTICATED);
         }
     }
 
