@@ -68,15 +68,25 @@ public class UserController {
         );
     }
 
-    @Operation(summary = "유저 정보 변경 api")
-    @PatchMapping
+    @Operation(summary = "유저 닉네임 변경 api")
+    @PatchMapping("/nickname")
     public ResponseEntity<SuccessResponse<Long>> changeNickname(Authentication authentication, @Valid @RequestBody UserUpdateRequest userUpdateRequest) {
         User user = ((CustomUserDetail) authentication.getPrincipal()).getUser();
-        userService.updateUser(user.getUserId(), userUpdateRequest);
+        userService.updateUserNickname(user.getUserId(), userUpdateRequest);
 
         return ResponseEntity.ok(
                 new SuccessResponse<>("유저 정보 변경 성공", user.getUserId())
         );
     }
 
+    @Operation(summary = "유저 고대비 모드 변경 api")
+    @PatchMapping("/highcontrast/{isHighContrast}")
+    public ResponseEntity<SuccessResponse<Long>> changeIsHighContrast(Authentication authentication, @PathVariable boolean isHighContrast) {
+        User user = ((CustomUserDetail) authentication.getPrincipal()).getUser();
+        userService.updateUserHighContrastMode(user.getUserId(), isHighContrast);
+
+        return ResponseEntity.ok(
+                new SuccessResponse<>("유저 정보 변경 성공", user.getUserId())
+        );
+    }
 }
