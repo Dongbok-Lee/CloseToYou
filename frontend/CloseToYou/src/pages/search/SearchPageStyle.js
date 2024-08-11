@@ -1,11 +1,10 @@
 import styled from "@emotion/styled";
 import { colors } from '../../constants/colors';
 
-
 export const SearchPageContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 2rem auto;
+  width: 100%;
 `;
 
 export const ResultMessage = styled.div`
