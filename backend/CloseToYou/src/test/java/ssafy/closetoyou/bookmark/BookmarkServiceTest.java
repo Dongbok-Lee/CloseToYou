@@ -220,7 +220,7 @@ class BookmarkServiceTest {
         Mockito.when(clothesRepository.findClothesByClothesId(3L)).thenReturn(clothes3);
         Mockito.when(clothesRepository.findClothesByClothesId(4L)).thenReturn(clothes4);
 
-        List<BookmarkResponse> bookmarkResponseList = bookmarkService.findAllBookmarks(fakeUserId);
+        List<Bookmark> bookmarkResponseList = bookmarkService.findAllBookmarks(fakeUserId);
 
         //then
         assertThat(bookmarkResponseList).hasSize(2);

@@ -5,10 +5,13 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
+import io.swagger.v3.oas.models.servers.Server;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.List;
 
 @Configuration
 public class SwaggerConfig implements WebMvcConfigurer {
@@ -27,9 +30,14 @@ public class SwaggerConfig implements WebMvcConfigurer {
                 .scheme("bearer")
                 .bearerFormat("JWT")
         );
+
+        Server server = new Server();
+        server.setUrl("https://i11b201.p.ssafy.io");
+
         return new OpenAPI()
                 .components(new Components())
                 .info(apiInfo())
+                .servers(List.of(server))
                 .addSecurityItem(securityRequirement)
                 .components(components);
     }

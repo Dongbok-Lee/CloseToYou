@@ -126,13 +126,9 @@ public class BookmarkServiceImpl implements BookmarkService {
     }
 
     @Override
-    public List<BookmarkResponse> findAllBookmarks(Long userId) {
+    public List<Bookmark> findAllBookmarks(Long userId) {
         List<Bookmark> bookmarks = bookmarkRepository.findBookmarksByUserId(userId);
-        List<BookmarkResponse> bookmarkResponseList = new ArrayList<>();
-        for (Bookmark bookmark : bookmarks) {
-            bookmarkResponseList.add(findBookmark(userId, bookmark.getBookmarkId()));
-        }
-        return bookmarkResponseList;
+        return bookmarks;
     }
 
     private void checkAllClothesExists(Long userId, List<Long> clothesIds) {
