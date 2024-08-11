@@ -1,10 +1,12 @@
 import { create } from "zustand";
-import { sendEmail } from "../api/email";
+import { sendEmail, checkCode } from "../api/email";
 
 export const useEmailStore = create(set => ({
   email: null,
-  authCode: null,
+  code: null,
   emailResponse: null,
+  codeResponse: null,
+  isSucces: false,
 
   sendEmail: async email => {
     set({ email: email });
@@ -25,4 +27,23 @@ export const useEmailStore = create(set => ({
   },
 
   setEmailResponse: newEmailResponse => set({ emailResponse: newEmailResponse }),
+
+  checkCode: async (email, code) => {
+    set({ code: code });
+
+    const result = await checkCode(email, code)
+      .then(response => {
+        set({ codeResponse: response.message, isSucces: true });
+        console.log(response.message);
+      })
+      .catch(error => {
+        if (error.response.status === 404) {
+          set({ codeResponse: error.response.data.message });
+        } else {
+          // todo: 서버에러 시 처리
+        }
+      });
+  },
+
+  setCodeResponse: newCodeResponse => set({ codeResponse: newCodeResponse }),
 }));
