@@ -1,14 +1,15 @@
 spring:
-  datasource :
-    url: jdbc:h2:mem:test
-    driverClassName: org.h2.Driver
-    username: sa
-    password:
+  datasource:
+    url: jdbc:mysql://localhost:3306/closetoyoutest
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 1234
 
   jpa:
     hibernate:
-      ddl-auto: create-drop
-    database-platform: org.hibernate.dialect.H2Dialect
+      ddl-auto: create
+    database-platform: org.hibernate.dialect.MySQLDialect
+
 logging:
   level:
     org.hibernate.SQL: debug
