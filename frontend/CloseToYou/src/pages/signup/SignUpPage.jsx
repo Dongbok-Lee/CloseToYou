@@ -23,7 +23,15 @@ import { useEmailStore } from "../../stores/email";
 const SignUpPage = () => {
   const nav = useNavigate();
 
-  const { sendEmail, emailResponse, setEmailResponse } = useEmailStore();
+  const {
+    sendEmail,
+    checkCode,
+    isSucces,
+    emailResponse,
+    setEmailResponse,
+    codeResponse,
+    setCodeResponse,
+  } = useEmailStore();
 
   const nicknamePlaceholder = "닉네임을 입력해주세요.";
   const emailPlaceholder = "이메일을 입력해주세요.";
@@ -77,6 +85,8 @@ const SignUpPage = () => {
 
     setAuthCode(newAuthCode);
     setAuthCodeLength(newLength);
+
+    setCodeResponse("");
   };
 
   const handleTouchEailAuthButton = e => {
@@ -85,6 +95,14 @@ const SignUpPage = () => {
     setTimeout(() => {
       sendEmail(email);
     }, 100);
+  };
+
+  const handleTouchAuthCheckButton = e => {
+    e.target.focus();
+
+    setTimeout(() => {
+      checkCode(email, authCode);
+    });
   };
 
   const handleChangePassword = e => {
@@ -119,6 +137,7 @@ const SignUpPage = () => {
             textInputPlaceholder={nicknamePlaceholder}
             textInputValue={nickname}
             handleChangeTextInput={handleChangeNcikname}
+            textInputType="text"
           ></TextInput>
           {nickname.length === 0 ? (
             <ErrorText>{nicknameErrorMessage}</ErrorText>
@@ -142,16 +161,13 @@ const SignUpPage = () => {
               textInputPlaceholder={authCodePlaceholder}
               textInputValue={authCode}
               handleChangeTextInput={handleChangeAuthCode}
+              textInputType="number"
             ></TextInput>
-            <Button btnSize="small" btnColor="white">
+            <Button btnSize="small" btnColor="white" handleTouchButton={handleTouchAuthCheckButton}>
               확인
             </Button>
           </AuthCodeWrapper>
-          {!isAuthCode && authCodeLength === 0 ? (
-            <ErrorText>{authCodeErrorMessage}</ErrorText>
-          ) : (
-            <span></span>
-          )}
+          {codeResponse ? <ErrorText>{codeResponse}</ErrorText> : <span></span>}
         </AuthWrapper>
         <PasswordWrapper>
           <TextInput
