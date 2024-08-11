@@ -17,8 +17,9 @@
     "@emotion/styled": "^11.13.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "zustand": "^4.5.4",
-    "react-router-dom": "^6.25.1"
+    "react-router-dom": "^6.25.1",
+    "react-swipeable": "^7.0.1",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
     "@swc/cli": "^0.4.0",
@@ -35,6 +36,7 @@
     "prettier": "^3.3.3",
     "vite": "^5.2.10",
     "vite-plugin-pwa": "^0.20.0",
+    "vite-plugin-svgr": "^4.2.0",
     "workbox-core": "^7.1.0",
     "workbox-precaching": "^7.1.0",
     "workbox-routing": "^7.1.0",

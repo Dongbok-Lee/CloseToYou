@@ -1,70 +1,54 @@
 import styled from "@emotion/styled";
+import { colors } from "../../constants/colors";
 
 const SearchCardStyle = styled.div`
-  box-sizing: border-box;
-
   display: flex;
-
   justify-content: space-between;
   align-items: center;
-
-  gap: 2.5rem;
-
+  max-width: 100%;
+  height: 5rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border: 1px solid ${colors.point[0]};
   border-radius: 0.625rem;
-  border: 1px solid rgba(255, 105, 105, 1);
-
-  width: 22rem;
-  height: 10rem;
-
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   -webkit-tap-highlight-color: transparent;
 
-  .search-card-left-box {
-    margin-left: 2rem;
-  }
-
-  .search-card-icon-box {
+  .leftBox {
     width: 5rem;
     height: 5rem;
-  }
-
-  .search-card-icon {
-    width: 100%;
-    height: 100%;
-
-    background: url(src/assets/icons/etc/yellow-tshirt.svg) center no-repeat;
-
-    background-size: 100% 100%;
-  }
-
-  .search-card-right-box {
+    background: center no-repeat;
+    background-size: cover;
     display: flex;
-
-    flex-direction: column;
-
     justify-content: center;
+    align-items: center;
+  }
 
+  .rightBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     flex: 1;
-
-    width: 5rem;
-    height: 5rem;
-
     text-align: left;
-    font-size: 1.5rem;
-    font-weight: 400;
+    padding: 1rem;
 
-    margin-right: 2rem;
+    .name {
+      font-size: 1.25rem;
+      font-weight: 400;
+    }
+
+    .location {
+      font-size: 1.25rem;
+      color: gray;
+    }
   }
 
   &:focus {
-    border: 3px solid rgba(255, 105, 105, 1);
-
+    border: 3px solid ${colors.point[0]};
     outline: none;
 
-    .search-card-location {
-      color: rgba(255, 105, 105, 1);
-
+    .location {
+      color: ${colors.point[0]};
       font-weight: 600;
     }
   }

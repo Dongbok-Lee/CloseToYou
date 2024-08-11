@@ -6,7 +6,7 @@ const TextInputStyle = styled.input`
   border-radius: 0.3125rem;
   border: 0.5px solid rgba(0, 0, 0, 1);
 
-  width: 18.75rem;
+  width: 100%;
   height: 3.125rem;
 
   background-color: rgba(255, 255, 255, 1);
