@@ -42,13 +42,15 @@ public class UserEntity {
     private LocalDateTime updatedDateTime;
 
     @Builder
-    public UserEntity(Long userId, String nickname, String password, String email, Boolean isDeleted, Boolean isHighContrast) {
+    public UserEntity(Long userId, String nickname, String password, String email, Boolean isDeleted, Boolean isHighContrast, LocalDateTime createdDateTime, LocalDateTime updatedDateTime) {
         this.userId = userId;
         this.nickname = nickname;
         this.password = password;
         this.email = email;
         this.isDeleted = isDeleted;
         this.isHighContrast = isHighContrast;
+        this.createdDateTime = createdDateTime;
+        this.updatedDateTime = updatedDateTime;
     }
 
     public static UserEntity fromModel(User user) {
@@ -59,6 +61,8 @@ public class UserEntity {
                 .email(user.getEmail())
                 .isDeleted(user.getIsDeleted() != null && user.getIsDeleted())
                 .isHighContrast(user.getIsHighContrast() != null && user.getIsHighContrast())
+                .createdDateTime(user.getCreatedDateTime())
+                .updatedDateTime(user.getUpdatedDateTime())
                 .build();
     }
 
@@ -72,6 +76,8 @@ public class UserEntity {
                 .updatedDateTime(updatedDateTime)
                 .isDeleted(isDeleted)
                 .isHighContrast(isHighContrast)
+                .createdDateTime(createdDateTime)
+                .updatedDateTime(updatedDateTime)
                 .build();
     }
 

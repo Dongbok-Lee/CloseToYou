@@ -52,12 +52,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(Long userId, UserUpdateRequest userUpdateRequest) {
+    public void updateUserNickname(Long userId, UserUpdateRequest userUpdateRequest) {
         checkUserExists(userId);
 
         User user = userRepository.findUserByUserId(userId);
 
         user.updateUserInfo(userUpdateRequest);
+        userRepository.saveUser(user);
+    }
+
+    @Override
+    public void updateUserHighContrastMode(Long userId, boolean isHighContrast) {
+        checkUserExists(userId);
+
+        User user = userRepository.findUserByUserId(userId);
+        user.updateUserHighContrastMode(isHighContrast);
         userRepository.saveUser(user);
     }
 

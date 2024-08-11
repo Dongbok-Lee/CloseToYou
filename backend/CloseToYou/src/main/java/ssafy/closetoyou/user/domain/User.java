@@ -37,8 +37,11 @@ public class User {
     }
 
     public void updateUserInfo(UserUpdateRequest userUpdateRequest) {
-        if (userUpdateRequest.getNickname() != null) this.nickname = userUpdateRequest.getNickname();
-        if (userUpdateRequest.getIsHighContrast() != null) this.isHighContrast = userUpdateRequest.getIsHighContrast();
+        this.nickname = userUpdateRequest.getNickname();
+    }
+
+    public void updateUserHighContrastMode(boolean isHighContrast) {
+        this.isHighContrast = isHighContrast;
     }
 
     public void passwordEncode(PasswordEncoder passwordEncoder, String newPassword) {
