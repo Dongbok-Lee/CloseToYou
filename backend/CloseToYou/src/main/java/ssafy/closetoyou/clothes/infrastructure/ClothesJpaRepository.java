@@ -37,12 +37,13 @@ public interface ClothesJpaRepository extends JpaRepository<ClothesEntity,Intege
     Optional<List<ClothesEntity>> findAllByUserIdAndIsDeleted(@Param("userId") Long userId,
                                                     @Param("isDeleted") boolean isDeleted);
 
-    @Query("select c from ClothesEntity c " +
-            "where (:#{#clothesCondition.pattern} is null or c.pattern = :#{#clothesCondition.pattern}) " +
-            "and (:#{#clothesCondition.color} is null or :#{#clothesCondition.color} = '' or c.color = :#{#clothesCondition.color}) " +
-            "and (:#{#clothesCondition.type} is null or c.type = :#{#clothesCondition.type}) " +
-            "and c.isDeleted = :isDeleted " +
-            "and (:#{#clothesCondition.closetId} = 0 or c.closet.closetId = :#{#clothesCondition.closetId}) " +
+    @Query("SELECT c " +
+            "FROM ClothesEntity c " +
+            "WHERE (:#{#clothesCondition.pattern} IS NULL OR c.pattern = :#{#clothesCondition.pattern}) " +
+            "AND (:#{#clothesCondition.color} IS NULL OR c.color = :#{#clothesCondition.color}) " +
+            "AND (:#{#clothesCondition.type} IS NULL OR c.type = :#{#clothesCondition.type}) " +
+            "AND c.isDeleted = :isDeleted " +
+            "AND (:#{#clothesCondition.closetId} = 0 OR c.closet.closetId = :#{#clothesCondition.closetId}) " +
             "ORDER BY c.wearingCount DESC")
     Optional<List<ClothesEntity>> searchClothesByClosetIdAndClothesConditionAndIsDeleted(@Param("clothesCondition") ClothesCondition clothesCondition,
                                                                                @Param("isDeleted") boolean isDeleted);
