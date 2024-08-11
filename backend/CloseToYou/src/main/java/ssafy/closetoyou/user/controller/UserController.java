@@ -68,7 +68,7 @@ public class UserController {
         );
     }
 
-    @Operation(summary = "유저 닉네임 변경 api")
+    @Operation(summary = "유저 정보 변경 api")
     @PatchMapping
     public ResponseEntity<SuccessResponse<Long>> changeNickname(Authentication authentication, @Valid @RequestBody UserUpdateRequest userUpdateRequest) {
         User user = ((CustomUserDetail) authentication.getPrincipal()).getUser();
