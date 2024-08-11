@@ -1,6 +1,12 @@
 import styled from "@emotion/styled";
+import { colors } from '../../constants/colors';
 
-export const SearchPageContainer = styled.div``;
+
+export const SearchPageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 2rem auto;
+`;
 
 export const ResultMessage = styled.div`
   display: flex;
@@ -8,7 +14,7 @@ export const ResultMessage = styled.div`
   align-items: center;
   height: 50vh;
   font-size: 1.5rem;
-  color: gray;
+  color: ${colors.text[1]};
   text-align: center;
 `;
 
@@ -18,6 +24,6 @@ export const ResultCount = styled.div`
   margin-bottom: 10px;
 
   span {
-    color: #ff6969;
+    color: ${colors.point[0]};
   }
 `;

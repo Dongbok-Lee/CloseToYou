@@ -1,5 +1,9 @@
-import { useState, useEffect } from "react";
-import { SearchPageContainer, ResultMessage, ResultCount } from "./SearchPageStyle";
+import React, { useState, useEffect } from "react";
+import {
+  SearchPageContainer,
+  ResultMessage,
+  ResultCount,
+} from "./SearchPageStyle";
 import SearchBox from "../../components/searchbox/SearchBox";
 import SearchCard from "../../components/searchCard/SearchCard";
 
@@ -26,7 +30,7 @@ const SearchPage = () => {
       .filter((item) => item.nickname.toLowerCase().includes(searchQuery.toLowerCase()))
       .map((item) => {
         const closet = closets.find((closet) => closet.id === item.closet_id);
-        return { ...item, closet_nickname: closet ? closet.nickname : "" };
+        return { ...item, closetNickname: closet ? closet.nickname : "" };
       });
     setSearchResults(results);
   }, [searchQuery]);
@@ -37,25 +41,26 @@ const SearchPage = () => {
 
   return (
     <SearchPageContainer className="page">
-      <SearchBox onSearch={handleSearch} />
+      <SearchBox onSearch={handleSearch} aria-label="검색창" />
       {searchQuery === "" ? (
-        <ResultMessage>검색어를 입력해주세요.</ResultMessage>
+        <ResultMessage aria-live="polite">검색어를 입력해주세요.</ResultMessage>
       ) : searchResults.length === 0 ? (
-        <ResultMessage>검색된 결과가 없습니다.</ResultMessage>
+        <ResultMessage aria-live="polite">검색된 결과가 없습니다.</ResultMessage>
       ) : (
         <>
-          <ResultCount>
+          <ResultCount aria-live="polite">
             검색 결과: <span>{searchResults.length}</span>개
           </ResultCount>
           {searchResults.map((result) => (
             <SearchCard
               key={result.id}
               searchCardName={result.nickname}
-              searchCardLocation={`${result.closet_nickname} ${result.location}`}
+              searchCardLocation={`${result.closetNickname} ${result.location}`}
               clothesId={result.id}
               clothesType={result.type}
               clothesColor={result.color}
               handleTouchSearchCard={() => console.log(result.id)}
+              aria-label={`${result.nickname} 위치: ${result.closetNickname} ${result.location}`}
             />
           ))}
         </>
