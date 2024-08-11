@@ -39,13 +39,6 @@ public class EmailAuthenticationServiceImpl implements EmailAuthenticationServic
     }
 
     @Override
-    public void checkEmailAuthenticated(String email) {
-        if (!emailAuthenticationRepository.isEmailAuthenticated(email)) {
-            throw new CloseToYouException(UserErrorCode.NOT_AUTHENTICATED);
-        }
-    }
-
-    @Override
     public void checkAuthenticationCode(EmailAuthenticationCheck emailAuthenticationCheck) {
 
         int authenticationCode = emailAuthenticationCheck.getCode();
