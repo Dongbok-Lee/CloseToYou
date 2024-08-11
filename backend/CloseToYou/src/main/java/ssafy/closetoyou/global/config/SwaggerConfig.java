@@ -31,15 +31,13 @@ public class SwaggerConfig implements WebMvcConfigurer {
                 .bearerFormat("JWT")
         );
 
-        Server server1 = new Server();
-        server1.setUrl("https://i11b201.p.ssafy.io");
-        Server server2 = new Server();
-        server2.setUrl("http://i11b201.p.ssafy.io");
+        Server server = new Server();
+        server.setUrl("https://i11b201.p.ssafy.io");
 
         return new OpenAPI()
                 .components(new Components())
                 .info(apiInfo())
-                .servers(List.of(server1, server2))
+                .servers(List.of(server))
                 .addSecurityItem(securityRequirement)
                 .components(components);
     }
