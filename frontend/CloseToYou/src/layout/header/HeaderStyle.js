@@ -7,10 +7,10 @@ const HeaderContainer = styled.header`
   top: 0;
   display: flex;
   align-items: center;
-  background: #ff6969;
+  background: ${props => props.theme.colors.point[0]};
 
   .header-content {
-    width: 95%;
+    width: 90%;
     margin: auto;
     display: flex;
     justify-content: space-between;
@@ -33,7 +33,7 @@ const HeaderContainer = styled.header`
   }
 
   .Title {
-    color: #fff;
+    color: ${props => props.theme.colors.text[1]};
     text-align: center;
     font-family: "KoddiUD OnGothic";
     font-size: 1.5rem;
