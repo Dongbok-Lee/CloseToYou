@@ -119,7 +119,6 @@ public class BookmarkServiceImpl implements BookmarkService {
                 .bookmarkId(bookmarkId)
                 .nickname(bookmark.getNickname())
                 .userId(userId)
-                .isDeleted(bookmark.getIsDeleted())
                 .createDateTime(bookmark.getCreatedDateTime())
                 .updateDateTime(bookmark.getUpdateDateTime())
                 .clothes(clothesDetailList)
@@ -131,7 +130,6 @@ public class BookmarkServiceImpl implements BookmarkService {
         List<Bookmark> bookmarks = bookmarkRepository.findBookmarksByUserId(userId);
         List<BookmarkResponse> bookmarkResponseList = new ArrayList<>();
         for (Bookmark bookmark : bookmarks) {
-            log.info("bookmark id: {}", bookmark.getBookmarkId());
             bookmarkResponseList.add(findBookmark(userId, bookmark.getBookmarkId()));
         }
         return bookmarkResponseList;

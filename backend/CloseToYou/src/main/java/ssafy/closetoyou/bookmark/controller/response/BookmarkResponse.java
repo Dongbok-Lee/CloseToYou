@@ -14,18 +14,15 @@ public class BookmarkResponse {
     private Long bookmarkId;
     private String nickname;
     private Long userId;
-    private Boolean isDeleted;
     private LocalDateTime createDateTime;
     private LocalDateTime updateDateTime;
     private List<ClothesDetail> clothes;
 
     @Builder
-
-    public BookmarkResponse(Long bookmarkId, String nickname, Long userId, Boolean isDeleted, LocalDateTime createDateTime, LocalDateTime updateDateTime, List<ClothesDetail> clothes) {
+    public BookmarkResponse(Long bookmarkId, String nickname, Long userId, LocalDateTime createDateTime, LocalDateTime updateDateTime, List<ClothesDetail> clothes) {
         this.bookmarkId = bookmarkId;
         this.nickname = nickname;
         this.userId = userId;
-        this.isDeleted = isDeleted;
         this.createDateTime = createDateTime;
         this.updateDateTime = updateDateTime;
         this.clothes = clothes;

@@ -39,4 +39,11 @@ public class Bookmark {
         this.createdDateTime = createdDateTime;
         this.updateDateTime = updateDateTime;
     }
+
+    public Bookmark(Long bookmarkId, String nickname, Long userId, Boolean isDeleted) {
+        this.bookmarkId = bookmarkId;
+        this.nickname = nickname;
+        this.userId = userId;
+        this.isDeleted = isDeleted;
+    }
 }
