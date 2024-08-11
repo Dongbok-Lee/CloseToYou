@@ -22,6 +22,12 @@ public class UserSignUp {
     @NotBlank
     private String email;
 
+    public UserSignUp(String nickname, String password, String email) {
+        this.nickname = nickname;
+        this.password = password;
+        this.email = email;
+    }
+
     public User toModel() {
         return User.builder()
                 .nickname(nickname)

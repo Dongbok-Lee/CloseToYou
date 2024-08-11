@@ -33,6 +33,7 @@ public class UserEntity {
     private String email;
 
     private Boolean isDeleted;
+    private Boolean isHighContrast;
 
     @CreatedDate
     private LocalDateTime createdDateTime;
@@ -41,12 +42,13 @@ public class UserEntity {
     private LocalDateTime updatedDateTime;
 
     @Builder
-    public UserEntity(Long userId, String nickname, String password, String email, Boolean isDeleted) {
+    public UserEntity(Long userId, String nickname, String password, String email, Boolean isDeleted, Boolean isHighContrast) {
         this.userId = userId;
         this.nickname = nickname;
         this.password = password;
         this.email = email;
         this.isDeleted = isDeleted;
+        this.isHighContrast = isHighContrast;
     }
 
     public static UserEntity fromModel(User user) {
@@ -56,6 +58,7 @@ public class UserEntity {
                 .password(user.getPassword())
                 .email(user.getEmail())
                 .isDeleted(user.getIsDeleted() != null && user.getIsDeleted())
+                .isHighContrast(user.getIsHighContrast() != null && user.getIsHighContrast())
                 .build();
     }
 
@@ -68,11 +71,8 @@ public class UserEntity {
                 .createdDateTime(createdDateTime)
                 .updatedDateTime(updatedDateTime)
                 .isDeleted(isDeleted)
+                .isHighContrast(isHighContrast)
                 .build();
-    }
-
-    public void passwordEncode(PasswordEncoder passwordEncoder, String newPassword) {
-        this.password = passwordEncoder.encode(newPassword);
     }
 
 }

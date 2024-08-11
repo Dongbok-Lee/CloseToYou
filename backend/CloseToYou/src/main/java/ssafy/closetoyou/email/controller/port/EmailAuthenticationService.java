@@ -4,6 +4,5 @@ import ssafy.closetoyou.email.domain.EmailAuthenticationCheck;
 
 public interface EmailAuthenticationService {
     void sendEmail(String email);
-    void checkEmailAuthenticated (String email);
     void checkAuthenticationCode(EmailAuthenticationCheck emailAuthenticationCheck);
 }
