@@ -11,6 +11,7 @@ import static lombok.AccessLevel.PROTECTED;
 @Getter
 @NoArgsConstructor(access= PROTECTED)
 public class SendEmail {
-    @Email @NotBlank
+    @Email(message = "이메일 형식이 올바르지 않습니다.", regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")
+    @NotBlank(message = "이메일을 입력해주세요.")
     String email;
 }

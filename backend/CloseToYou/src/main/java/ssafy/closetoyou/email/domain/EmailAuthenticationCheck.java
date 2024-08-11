@@ -12,9 +12,9 @@ import static lombok.AccessLevel.PROTECTED;
 @NoArgsConstructor(access = PROTECTED)
 public class EmailAuthenticationCheck {
 
-    @Email
+    @Email(message = "이메일 형식이 올바르지 않습니다.", regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")
     private String email;
 
-    @NotNull
+    @NotNull(message = "인증 코드를 입력해주세요.")
     private int code;
 }

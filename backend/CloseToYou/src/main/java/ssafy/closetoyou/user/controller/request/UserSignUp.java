@@ -12,14 +12,14 @@ import static lombok.AccessLevel.PROTECTED;
 @NoArgsConstructor(access = PROTECTED)
 public class UserSignUp {
 
-    @NotBlank
+    @NotBlank(message = "닉네임을 입력해주세요.")
     private String nickname;
 
-    @NotBlank
+    @NotBlank(message = "비밀번호를 입력해주세요.")
     private String password;
 
-    @Email
-    @NotBlank
+    @Email(message = "이메일 형식이 올바르지 않습니다.", regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")
+    @NotBlank(message = "이메일을 입력해주세요.")
     private String email;
 
     public UserSignUp(String nickname, String password, String email) {

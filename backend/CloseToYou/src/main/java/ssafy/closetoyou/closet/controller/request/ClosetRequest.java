@@ -6,9 +6,9 @@ import lombok.Getter;
 @Getter
 public class ClosetRequest {
 
-    @NotNull
+    @NotNull(message = "닉네임을 입력해주세요.")
     private String nickname;
 
-    @NotNull
+    @NotNull(message = "옷장 코드를 입력해주세요.")
     private String closetCode;
 }

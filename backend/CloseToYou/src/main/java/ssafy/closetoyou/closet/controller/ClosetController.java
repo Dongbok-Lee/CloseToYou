@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import ssafy.closetoyou.closet.controller.port.ClosetService;
 import ssafy.closetoyou.closet.controller.request.ClosetRequest;
+import ssafy.closetoyou.closet.controller.request.ClosetUpdateRequest;
 import ssafy.closetoyou.closet.controller.response.ClosetResponse;
 import ssafy.closetoyou.global.common.response.SuccessResponse;
 import ssafy.closetoyou.global.security.login.userdetail.CustomUserDetail;
@@ -42,9 +43,9 @@ public class ClosetController {
     @PatchMapping("/{closetId}")
     public ResponseEntity<SuccessResponse<Long>> updateClosetNickname(Authentication authentication,
                                                                       @PathVariable Long closetId,
-                                                                      @NotNull @RequestBody Map<String, String> newNickname) {
+                                                                      @Valid @RequestBody ClosetUpdateRequest closetUpdateRequest) {
         Long userId = ((CustomUserDetail) authentication.getPrincipal()).getUser().getUserId();
-        closetService.changeClosetNickname(userId, closetId, newNickname.get("nickname"));
+        closetService.changeClosetNickname(userId, closetId, closetUpdateRequest.getNickname());
         return ResponseEntity.ok(
                 new SuccessResponse<>("옷장 정보 수정에 성공했습니다", closetId)
         );
