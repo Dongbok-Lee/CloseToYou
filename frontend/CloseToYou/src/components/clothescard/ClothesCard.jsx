@@ -5,8 +5,12 @@ const ClothesCard = ({ handleTouchClothesCard, type, color }) => {
 
   return (
     <ClothesCardStyle onTouchStart={handleTouchClothesCard} iconUrl={iconUrl}>
-      <div className="clothes-card-icon-box" tabIndex={0}>
-        <div className="clothes-card-icon"></div>
+      <div 
+        className="clothesCardIconBox" 
+        tabIndex={0} 
+        aria-label={`${type} - ${color}`}
+      >
+        <div className="clothesCardIcon"></div>
       </div>
     </ClothesCardStyle>
   );

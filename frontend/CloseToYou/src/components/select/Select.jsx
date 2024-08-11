@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import SelectStyle from './SelectStyle';
 
 const Select = ({ initItem, type }) => {
@@ -13,20 +13,18 @@ const Select = ({ initItem, type }) => {
   const [selectedItem, setSelectedItem] = useState(initItem);
   const selectRef = useRef(null);
 
-  useEffect(() => {
-    if (selectRef.current) {
-      const maxWidth = Math.max(...Array.from(selectRef.current.options).map(option => option.text.length));
-      selectRef.current.style.width = `${maxWidth}ch`;
-    }
-  }, [items]);
-
   const handleChange = (event) => {
     setSelectedItem(event.target.value);
   };
 
   return (
     <SelectStyle>
-      <select ref={selectRef} value={selectedItem} onChange={handleChange}>
+      <select 
+        ref={selectRef} 
+        value={selectedItem} 
+        onChange={handleChange} 
+        aria-label={`${type} 선택`}
+      >
         {items.map((item, index) => (
           <option key={index} value={item}>
             {item}
