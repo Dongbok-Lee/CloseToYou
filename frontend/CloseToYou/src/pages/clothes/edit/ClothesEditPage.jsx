@@ -39,18 +39,13 @@ const ClothesEditPage = () => {
   return (
     <ClothesEditPageContainer className="page">
       <ClothesNameText>
-        <TextInput textInputPlaceholder={nickname} textInputSize="small" aria-label="옷 별명 입력" />
+        <TextInput textInputPlaceholder={nickname} aria-label="옷 별명 입력" />
       </ClothesNameText>
       <ImageContainer>
         <img src={tempImage} alt="옷 이미지" />
       </ImageContainer>
       <LocationInputContainer>
-        <TextInputStyled
-          textInputPlaceholder={location}
-          textInputSize="smaller"
-          style={{ textAlign: 'center' }}
-          aria-label="위치 입력"
-        />
+      <DetailTitleText>{location}</DetailTitleText>
       </LocationInputContainer>
       <DetailContainer>
         <TabText aria-label="기본 정보">기본 정보</TabText>

@@ -2,8 +2,13 @@ import styled from '@emotion/styled';
 
 export const ClothesDetailPageContainer = styled.div``;
 
+export const PageContainer = styled.div`
+  bottom : 30%;
+  flex-grow: 1;
+`;
+
 export const ClothesNameText = styled.h1`
-  margin: 40px;
+  margin: 30px;
   color: #FF6969;
   font-family: "KoddiUD OnGothic";
   font-size: 1.5rem;
@@ -37,8 +42,7 @@ export const DetailContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin: 20px;
-  padding: 20px;
+  width: 100%;
 `;
 
 export const DetailItem = styled.div`
@@ -79,8 +83,6 @@ export const ImageContainer = styled.div`
 `;
 
 export const LastWornDateText = styled.div`
-  margin-left: 20px;
-  padding-left: 20px;
   font-family: "KoddiUD OnGothic";
   font-size: 1rem;
   color: gray;
