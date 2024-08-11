@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import ssafy.closetoyou.bookmark.controller.port.BookmarkService;
 import ssafy.closetoyou.bookmark.controller.request.BookmarkRequest;
 import ssafy.closetoyou.bookmark.controller.response.BookmarkResponse;
+import ssafy.closetoyou.bookmark.domain.Bookmark;
 import ssafy.closetoyou.closet.controller.port.ClosetService;
 import ssafy.closetoyou.closet.controller.request.ClosetRequest;
 import ssafy.closetoyou.global.common.response.SuccessResponse;
@@ -97,9 +98,9 @@ public class BookmarkController {
 
     @Operation(summary = "북마크 전체 조회 api")
     @GetMapping
-    public ResponseEntity<SuccessResponse<List<BookmarkResponse>>> findBookmarks(Authentication authentication) {
+    public ResponseEntity<SuccessResponse<List<Bookmark>>> findBookmarks(Authentication authentication) {
         Long userId = ((CustomUserDetail) authentication.getPrincipal()).getUser().getUserId();
-        List<BookmarkResponse> bookmarks = bookmarkService.findAllBookmarks(userId);
+        List<Bookmark> bookmarks = bookmarkService.findAllBookmarks(userId);
         return ResponseEntity.ok(
                 new SuccessResponse<>("북마크 전체 조회에 성공했습니다.", bookmarks)
         );

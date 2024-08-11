@@ -28,6 +28,7 @@ public class ClothesEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "closet_id")
     private ClosetEntity closet;
+
     private Long nfcId;
     private String location;
     private String nickname;
