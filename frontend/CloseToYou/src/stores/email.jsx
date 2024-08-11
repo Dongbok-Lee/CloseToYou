@@ -11,13 +11,17 @@ export const useEmailStore = create(set => ({
   sendEmail: async email => {
     set({ email: email });
 
-    const result = await sendEmail(email)
+    await sendEmail(email)
       .then(response => {
         set({ emailResponse: response.message });
       })
       .catch(error => {
         if (error.response.status === 400) {
-          set({ emailResponse: error.response.data.errors[0].message });
+          if (email) {
+            set({ emailResponse: error.response.data.errors[0].message });
+          } else {
+            set({ emailResponse: error.response.data.errors[1].message });
+          }
         } else {
           // todo: 서버에러 시 처리
         }
@@ -34,11 +38,12 @@ export const useEmailStore = create(set => ({
         set({ codeResponse: response.message, isSucces: true });
       })
       .catch(error => {
-        if (error.response.status === 404) {
+        if (error.response.status === 401) {
           set({ codeResponse: error.response.data.message });
         } else {
           // todo: 서버에러 시 처리
         }
+        console.log(error);
       });
   },
 
