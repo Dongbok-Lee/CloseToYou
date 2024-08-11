@@ -24,6 +24,7 @@ public enum UserErrorCode implements ErrorCode {
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "해당하는 정보의 사용자를 찾을 수 없습니다."),
     MAIL_SEND_FAIL(HttpStatus.INTERNAL_SERVER_ERROR,"메일 전송에 실패했습니다."),
     MAIL_CHECK_FAIL(HttpStatus.UNAUTHORIZED,"메일 인증에 실패했습니다."),
+    MAIL_CREATE_FAIL(HttpStatus.UNAUTHORIZED,"인증 메일 생성에 실패했습니다."),
     NOT_FOUND_MAIL_CODE(HttpStatus.NOT_FOUND, "해당 메일 코드를 찾을 수 없습니다."),
     ALREADY_AUTHENTICATED_CODE(HttpStatus.BAD_REQUEST, "이미 인증이 완료된 이메일 입니다."),
     NOT_AUTHENTICATED(HttpStatus.UNAUTHORIZED, "인증이 완료되지 않은 이메일 입니다."),
