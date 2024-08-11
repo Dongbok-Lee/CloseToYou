@@ -9,10 +9,10 @@ import java.util.List;
 @Getter
 public class BookmarkRequest {
 
-    @NotNull
+    @NotNull(message = "닉네임을 입력해주세요.")
     private String nickname;
 
-    @NotNull
+    @NotNull(message = "북마크에 담을 옷을 선택해주세요.")
     private List<Long> clothesIds;
 
     @Builder

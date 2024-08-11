@@ -11,16 +11,16 @@ import ssafy.closetoyou.global.common.util.ValidEnum;
 @Getter
 public class ClothesCondition {
 
-    @NotNull
+    @NotNull(message = "옷장 아이디를 입력해주세요.")
     private Long closetId;
 
-    @ValidEnum(enumClass = Color.class)
+    @ValidEnum(enumClass = Color.class, message = "옷 색상이 아닙니다.")
     private String color;
 
-    @ValidEnum(enumClass = Type.class)
+    @ValidEnum(enumClass = Type.class, message = "옷 타입이 아닙니다.")
     private String type;
 
-    @ValidEnum(enumClass = Pattern.class)
+    @ValidEnum(enumClass = Pattern.class, message = "옷 패턴이 아닙니다.")
     private String pattern;
 
     @Builder

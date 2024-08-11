@@ -18,22 +18,22 @@ import ssafy.closetoyou.global.error.exception.CloseToYouException;
 @Getter
 public class ClothesRequest {
 
-    @NotNull
+    @NotNull(message = "옷 타입을 입력해주세요.")
     private Type type;
 
-    @NotNull
+    @NotNull(message = "옷 패턴을 입력해주세요.")
     private Pattern pattern;
 
-    @NotNull
+    @NotNull(message = "옷 색상을 입력해주세요.")
     private Color color;
 
-    @NotNull
+    @NotNull(message = "옷 위치를 입력해주세요.")
     private String location;
 
-    @NotNull
+    @NotNull(message = "옷장 아이디를 입력해주세요.")
     private Long closetId;
 
-    @NotNull
+    @NotNull(message = "이미지 url을 입력해주세요.")
     private String imageUrl;
 
     @Builder

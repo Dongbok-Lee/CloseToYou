@@ -6,10 +6,8 @@ import lombok.Getter;
 @Getter
 public class UserUpdateRequest {
 
-    @NotNull
     private String nickname;
 
-    @NotNull
     private Boolean isHighContrast;
 
     public UserUpdateRequest(String nickname, Boolean isHighContrast) {
