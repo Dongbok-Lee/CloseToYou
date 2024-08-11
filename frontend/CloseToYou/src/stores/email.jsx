@@ -14,12 +14,10 @@ export const useEmailStore = create(set => ({
     const result = await sendEmail(email)
       .then(response => {
         set({ emailResponse: response.message });
-        console.log(response.message);
       })
       .catch(error => {
         if (error.response.status === 400) {
           set({ emailResponse: error.response.data.errors[0].message });
-          console.log(error.response.data.errors[0].message);
         } else {
           // todo: 서버에러 시 처리
         }
@@ -34,7 +32,6 @@ export const useEmailStore = create(set => ({
     const result = await checkCode(email, code)
       .then(response => {
         set({ codeResponse: response.message, isSucces: true });
-        console.log(response.message);
       })
       .catch(error => {
         if (error.response.status === 404) {
