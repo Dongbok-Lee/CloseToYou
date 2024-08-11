@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @Operation(summary = "일반 가입자 회원가입 api")
-    @PostMapping
+    @PostMapping("/join")
     public ResponseEntity<SuccessResponse<Long>> SignUpUser (@Valid @RequestBody UserSignUp userSignUp) {
         Long userId = userService.signUp(userSignUp);
 
