@@ -15,10 +15,14 @@ import {
   ErrorText,
 } from "./SignUpPageStyle";
 
+import { placeholder } from "../../constants/placeholder";
+import { error } from "../../constants/error";
+
 import TextInput from "../../components/textinput/TextInput";
 import Button from "../../components/button/Button";
 
 import { useEmailStore } from "../../stores/email";
+import { useUserStore } from "../../stores/user";
 
 const SignUpPage = () => {
   const nav = useNavigate();
@@ -33,18 +37,8 @@ const SignUpPage = () => {
     setCodeResponse,
   } = useEmailStore();
 
-  const nicknamePlaceholder = "닉네임을 입력해주세요.";
-  const emailPlaceholder = "이메일을 입력해주세요.";
-  const authCodePlaceholder = "인증번호";
-  const passwordPlaceholder = "비밀번호를 입력해주세요.";
-  const passwordCheckPlaceholder = "비밀번호를 확인해주세요.";
-
-  const nicknameErrorMessage = "닉네임을 입력해주세요.";
-  const authCodeErrorMessage = "인증을 진행해주세요.";
-  const passwordErrorMessage = "비밀번호를 입력해주세요.";
-  const passwordCheckErrorMessage = "비밀번호 재확인을 해주세요.";
-
-  const nicknameLengthErrorMessage = "닉네임은 최대 8자까지 입니다.";
+  const { addUser, nicknameResponse, passwordResponse, setNicknameResponse, setPasswordResponse } =
+    useUserStore();
 
   const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
@@ -52,16 +46,30 @@ const SignUpPage = () => {
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
 
-  const [isAuthCode, setIsAuthCode] = useState(false);
   const [isPasswordCorrect, setIsPasswordCorrect] = useState(true);
 
-  const [authCodeLength, setAuthCodeLength] = useState(0);
+  const handleTouchSignUpButton = e => {
+    e.target.focus();
 
-  const handleTouchSignUpButton = () => {
-    nav("/signin");
+    setTimeout(() => {
+      addUser(nickname, email, password);
+    }, 100);
+
+    if (!isPasswordCorrect) {
+      setIsPasswordCorrect(false);
+    }
+
+    if (passwordCheck !== "" && isPasswordCorrect && isSucces) {
+      alert("회원 가입이 완료되었습니다.");
+      nav("/signin", { replace: true });
+    }
+
+    if (!isSucces) {
+      alert("이메일 인증을 해주세요.");
+    }
   };
 
-  const handleChangeNcikname = e => {
+  const handleChangeNickname = e => {
     const newNickname = e.target.value;
 
     const newLength = newNickname.length;
@@ -69,6 +77,7 @@ const SignUpPage = () => {
     if (newLength <= 8) {
       setNickname(newNickname);
     }
+    setNicknameResponse("");
   };
 
   const handleChangeEmail = e => {
@@ -81,10 +90,8 @@ const SignUpPage = () => {
 
   const handleChangeAuthCode = e => {
     const newAuthCode = e.target.value;
-    const newLength = newAuthCode.length;
 
     setAuthCode(newAuthCode);
-    setAuthCodeLength(newLength);
 
     setCodeResponse("");
   };
@@ -109,6 +116,7 @@ const SignUpPage = () => {
     const newPassword = e.target.value;
 
     setPassword(newPassword);
+    setPasswordResponse("");
   };
 
   const handleChangePasswordCheck = e => {
@@ -134,22 +142,22 @@ const SignUpPage = () => {
         <SignUpInfoTitle>회원 가입</SignUpInfoTitle>
         <SignUpInfoNickname>
           <TextInput
-            textInputPlaceholder={nicknamePlaceholder}
+            textInputPlaceholder={placeholder.nickname}
             textInputValue={nickname}
-            handleChangeTextInput={handleChangeNcikname}
+            handleChangeTextInput={handleChangeNickname}
             textInputType="text"
           ></TextInput>
-          {nickname.length === 0 ? (
-            <ErrorText>{nicknameErrorMessage}</ErrorText>
+          {nicknameResponse ? (
+            <ErrorText>{nicknameResponse}</ErrorText>
           ) : nickname.length === 8 ? (
-            <ErrorText>{nicknameLengthErrorMessage}</ErrorText>
+            <ErrorText>{error.nicknameLengthError}</ErrorText>
           ) : (
             <span></span>
           )}
         </SignUpInfoNickname>
         <AuthWrapper>
           <TextInput
-            textInputPlaceholder={emailPlaceholder}
+            textInputPlaceholder={placeholder.email}
             textInputValue={email}
             handleChangeTextInput={handleChangeEmail}
             textInputType="email"
@@ -158,7 +166,7 @@ const SignUpPage = () => {
           <Button handleTouchButton={handleTouchEailAuthButton}>이메일 인증</Button>
           <AuthCodeWrapper>
             <TextInput
-              textInputPlaceholder={authCodePlaceholder}
+              textInputPlaceholder={placeholder.authCode}
               textInputValue={authCode}
               handleChangeTextInput={handleChangeAuthCode}
               textInputType="number"
@@ -171,23 +179,19 @@ const SignUpPage = () => {
         </AuthWrapper>
         <PasswordWrapper>
           <TextInput
-            textInputPlaceholder={passwordPlaceholder}
+            textInputPlaceholder={placeholder.password}
             textInputValue={password}
             textInputType="password"
             handleChangeTextInput={handleChangePassword}
           ></TextInput>
-          {password.length === 0 ? <ErrorText>{passwordErrorMessage}</ErrorText> : <span></span>}
+          {passwordResponse ? <ErrorText>{passwordResponse}</ErrorText> : <span></span>}
           <TextInput
-            textInputPlaceholder={passwordCheckPlaceholder}
+            textInputPlaceholder={placeholder.passwordCheck}
             textInputValue={passwordCheck}
             textInputType="password"
             handleChangeTextInput={handleChangePasswordCheck}
           ></TextInput>
-          {passwordCheck === 0 || !isPasswordCorrect ? (
-            <ErrorText>{passwordCheckErrorMessage}</ErrorText>
-          ) : (
-            <span></span>
-          )}
+          {!isPasswordCorrect ? <ErrorText>{error.passwordCheckError}</ErrorText> : <span></span>}
         </PasswordWrapper>
         <SignUpBox>
           <Button handleTouchButton={handleTouchSignUpButton}>회원가입</Button>
