@@ -11,4 +11,9 @@ public class UserUpdateRequest {
 
     @NotNull
     private Boolean isHighContrast;
+
+    public UserUpdateRequest(String nickname, Boolean isHighContrast) {
+        this.nickname = nickname;
+        this.isHighContrast = isHighContrast;
+    }
 }
