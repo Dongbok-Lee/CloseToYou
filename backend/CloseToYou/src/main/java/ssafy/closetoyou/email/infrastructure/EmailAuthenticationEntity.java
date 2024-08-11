@@ -32,6 +32,7 @@ public class EmailAuthenticationEntity {
     public void verify() {
         this.isVerified = true;
     }
+
     @Builder
     public EmailAuthenticationEntity(Long emailAuthenticationId, String email, int authenticationCode, boolean isVerified, LocalDateTime createdDateTime) {
         this.emailAuthenticationId = emailAuthenticationId;
@@ -43,6 +44,7 @@ public class EmailAuthenticationEntity {
 
     public static EmailAuthenticationEntity fromModel(EmailAuthentication emailAuthentication) {
         return builder()
+                .emailAuthenticationId(emailAuthentication.getEmailAuthenticationId())
                 .email(emailAuthentication.getEmail())
                 .authenticationCode(emailAuthentication.getAuthenticationCode())
                 .isVerified(emailAuthentication.isVerified())
