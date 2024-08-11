@@ -5,14 +5,13 @@ export const ClothesEditPageContainer = styled.div`
 `;
 
 export const ClothesNameText = styled.h1`
-  margin: 40px;
+  margin: 30px;
   color: #FF6969;
   font-family: "KoddiUD OnGothic";
   font-size: 1.5rem;
-  font-style: normal;
   font-weight: 700;
-  line-height: normal;
 `;
+
 
 export const TabText = styled.div`
   width: 9.375rem;
@@ -27,7 +26,6 @@ export const TabText = styled.div`
   color: #FFF;
   font-family: "KoddiUD OnGothic";
   font-size: 1.25rem;
-  font-style: normal;
   font-weight: 700;
 `;
 
@@ -35,8 +33,7 @@ export const DetailContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin: 20px;
-  padding: 20px;
+  width: 100%;
 `;
 
 export const DetailItem = styled.div`
@@ -52,7 +49,6 @@ export const DetailTitleText = styled.h2`
   text-align: left;
   font-family: "KoddiUD OnGothic";
   font-size: 1.25rem;
-  font-style: normal;
   font-weight: 700;
 `;
 
@@ -61,7 +57,6 @@ export const DetailInfoText = styled.p`
   text-align: ${({ alignRight }) => (alignRight ? 'right' : 'left')};
   font-family: "KoddiUD OnGothic";
   font-size: 1.25rem;
-  font-style: normal;
   font-weight: 400;
 `;
 
@@ -81,7 +76,6 @@ export const ImageContainer = styled.div`
 export const LocationInputContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin: 20px 0;
 `;
 
 export const TextInputStyled = styled(TextInput)`
