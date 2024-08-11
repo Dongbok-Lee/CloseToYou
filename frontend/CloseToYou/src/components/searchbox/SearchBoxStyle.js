@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { colors } from "../../constants/colors";
 
 export const SearchBoxContainer = styled.div`
   max-width: 100%;
@@ -6,8 +7,8 @@ export const SearchBoxContainer = styled.div`
   display: flex;
   align-items: center;
   border-radius: 0.625rem;
-  border: ${(props) => (props.isFocused ? "3px solid #FF6969" : "2px solid #FF6969")};
-  background: #fff;
+  border: ${(props) => (props.isFocused ? `3px solid ${colors.point[0]}` : `2px solid ${colors.point[0]}`)};
+  background: ${colors.background[0]};
   margin: 3rem auto 1rem;
   padding: 0 0.3rem;
 
@@ -20,7 +21,7 @@ export const SearchBoxContainer = styled.div`
     font-size: 1.5rem;
   }
 
-  .icon-container {
+  .iconContainer {
     width: ${(props) => (props.isFocused ? "10%" : "8%")};
     height: ${(props) => (props.isFocused ? "100%" : "90%")};
     display: flex;
