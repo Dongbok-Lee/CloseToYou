@@ -3,6 +3,7 @@ package ssafy.closetoyou.email.domain;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import jakarta.mail.internet.MimeMessage.RecipientType;
+import jakarta.mail.internet.MimeUtility;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,6 +13,7 @@ import ssafy.closetoyou.global.error.errorcode.UserErrorCode;
 import ssafy.closetoyou.global.error.exception.CloseToYouException;
 import ssafy.closetoyou.global.error.errorcode.CommonErrorCode;
 
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 
 @Getter
@@ -61,16 +63,18 @@ public class EmailAuthentication {
     // 인증 메일 생성
     private MimeMessage createEmail(JavaMailSender javaMailSender, int authenticationCode) {
         MimeMessage message = javaMailSender.createMimeMessage();
+        String subject = "CloseToYou 이메일 인증";
         try {
             message.setFrom(EMAIL_SENDER);
             message.setRecipients(RecipientType.TO, email);
-            message.setSubject("CloseToYou 이메일 인증");
+            message.setSubject(subject);
             String body = "";
             body += "<h2>" + authenticationCode + "<h2>";
             body += "<h3> 요청하신 인증 코드 입니다. 인증 화면으로 돌아가 인증을 완료해주세요. </h3>";
+            message.setSubject(MimeUtility.encodeText(subject, "UTF-8", "Q"));
             message.setText(body,"UTF-8", "html");
-        } catch (MessagingException e) {
-            e.printStackTrace();
+        } catch (MessagingException | UnsupportedEncodingException e) {
+            throw new CloseToYouException(UserErrorCode.MAIL_CREATE_FAIL);
         }
         return message;
     }
