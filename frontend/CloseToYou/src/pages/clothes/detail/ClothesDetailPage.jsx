@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   ClothesDetailPageContainer,
@@ -35,55 +35,61 @@ const ClothesDetailPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const handleEditClick = () => {
+  const handleNavigateToEdit = () => {
     navigate(`/clothes/edit/${id}`);
   };
 
   return (
     <ClothesDetailPageContainer className="page">
       <PageContainer>
-      <ClothesNameText aria-label="옷 별명">{details.nickname}</ClothesNameText>
-      <ImageContainer>
-        <img src={details.imageUrl} alt="옷 이미지" />
-      </ImageContainer>
-      <LocationInfoText aria-label="위치 정보">{details.location}</LocationInfoText>
+        <ClothesNameText aria-label="옷 별명">{details.nickname}</ClothesNameText>
+        <ImageContainer>
+          <img src={details.imageUrl} alt="옷 이미지" />
+        </ImageContainer>
+        <LocationInfoText aria-label="위치 정보">{details.location}</LocationInfoText>
 
-      <DetailContainer>
-        <TabText aria-label="기본 정보">기본 정보</TabText>
-        {[
-          { title: '색상', info: details.color },
-          { title: '종류', info: details.type },
-          { title: '패턴', info: details.pattern },
-        ].map((item, index) => (
-          <DetailItem key={index}>
-            <DetailTitleText aria-label={item.title}>{item.title}</DetailTitleText>
-            <DetailInfoText>{item.info}</DetailInfoText>
+        <DetailContainer>
+          <TabText aria-label="기본 정보">기본 정보</TabText>
+          {[
+            { title: '색상', info: details.color },
+            { title: '종류', info: details.type },
+            { title: '패턴', info: details.pattern },
+          ].map((item, index) => (
+            <DetailItem key={index}>
+              <DetailTitleText aria-label={item.title}>{item.title}</DetailTitleText>
+              <DetailInfoText>{item.info}</DetailInfoText>
+            </DetailItem>
+          ))}
+        </DetailContainer>
+
+        <DetailContainer>
+          <TabText aria-label="추가 정보">추가 정보</TabText>
+          {[
+            { title: '사이즈', info: details.size },
+            { title: '계절감', info: details.season },
+          ].map((item, index) => (
+            <DetailItem key={index}>
+              <DetailTitleText aria-label={item.title}>{item.title}</DetailTitleText>
+              <DetailInfoText>{item.info}</DetailInfoText>
+            </DetailItem>
+          ))}
+        </DetailContainer>
+
+        <DetailContainer>
+          <TabText aria-label="메모">메&emsp;&emsp;모</TabText>
+          <DetailItem>
+            <DetailInfoText>{details.memo}</DetailInfoText>
           </DetailItem>
-        ))}
-      </DetailContainer>
-
-      <DetailContainer>
-        <TabText aria-label="추가 정보">추가 정보</TabText>
-        {[
-          { title: '사이즈', info: details.size },
-          { title: '계절감', info: details.season },
-        ].map((item, index) => (
-          <DetailItem key={index}>
-            <DetailTitleText aria-label={item.title}>{item.title}</DetailTitleText>
-            <DetailInfoText>{item.info}</DetailInfoText>
-          </DetailItem>
-        ))}
-      </DetailContainer>
-
-      <DetailContainer>
-        <TabText aria-label="메모">메모</TabText>
-        <DetailItem>
-          <DetailInfoText>{details.memo}</DetailInfoText>
-        </DetailItem>
-      </DetailContainer>
-      <LastWornDateText aria-label="최근 입은 날짜">최근 입은 날짜: {details.lastWornDate}</LastWornDateText>
+          <LastWornDateText aria-label="최근 입은 날짜">최근 입은 날짜: {details.lastWornDate}
+        <FloatingButton 
+          type="edit" 
+          onTouchStart={handleNavigateToEdit} 
+          aria-label="편집 버튼" 
+        />
+        </LastWornDateText>
+        </DetailContainer>
+        
       </PageContainer>
-      <FloatingButton type="edit" onTouchStart={handleEditClick} aria-label="편집 버튼" />
     </ClothesDetailPageContainer>
   );
 };
