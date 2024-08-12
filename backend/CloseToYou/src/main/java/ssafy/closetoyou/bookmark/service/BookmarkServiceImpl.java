@@ -35,7 +35,6 @@ public class BookmarkServiceImpl implements BookmarkService {
     public Long addBookmark(Long userId, BookmarkRequest bookmarkRequest) {
 
         checkNicknameDuplicate(userId, bookmarkRequest.getNickname());
-        checkAllClothesExists(userId, bookmarkRequest.getClothesIds());
 
         Bookmark bookmark = Bookmark.builder()
                 .nickname(bookmarkRequest.getNickname())
@@ -44,14 +43,7 @@ public class BookmarkServiceImpl implements BookmarkService {
 
         bookmark = bookmarkRepository.saveBookmark(bookmark);
 
-        Long bookmarkId = bookmark.getBookmarkId();
-
-        for (Long clothesId : bookmarkRequest.getClothesIds()) {
-            BookmarkInformationEntity bookmarkInformationEntity = getBookmarkInformationEntity(clothesId, bookmarkId);
-            bookmarkInformationRepository.saveBookmarkInformation(bookmarkInformationEntity);
-        }
-
-        return bookmarkId;
+        return bookmark.getBookmarkId();
     }
 
     @Override
@@ -129,14 +121,6 @@ public class BookmarkServiceImpl implements BookmarkService {
     public List<Bookmark> findAllBookmarks(Long userId) {
         List<Bookmark> bookmarks = bookmarkRepository.findBookmarksByUserId(userId);
         return bookmarks;
-    }
-
-    private void checkAllClothesExists(Long userId, List<Long> clothesIds) {
-        for (Long clothesId : clothesIds) {
-            if (!clothesRepository.existClothesByClothesId(clothesId)) {
-                throw new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION);
-            }
-        }
     }
 
     public void checkBookmarkExists(Long userId, Long bookmarkId) {
