@@ -25,8 +25,8 @@ public class ClosetCodeRepositoryImpl implements ClosetCodeRepository {
     }
 
     @Override
-    public Long saveClosetCode(ClosetCode closetCode) {
-        return closetCodeJpaRepository.save(ClosetCodeEntity.fromModel(closetCode)).getClosetCodeId();
+    public ClosetCode saveClosetCode(ClosetCode closetCode) {
+        return closetCodeJpaRepository.save(ClosetCodeEntity.fromModel(closetCode)).toModel();
     }
 
     @Override

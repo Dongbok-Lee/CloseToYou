@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ssafy.closetoyou.closetcode.controller.port.ClosetCodeService;
+import ssafy.closetoyou.closetcode.domain.ClosetCode;
 import ssafy.closetoyou.global.common.response.SuccessResponse;
 
 @RestController
@@ -20,10 +21,10 @@ public class ClosetCodeController {
 
     @Operation(summary = "옷장 코드 생성 api")
     @PostMapping
-    public ResponseEntity<SuccessResponse<Long>> makeClosetCode() {
-        Long closetCodeId = closetCodeService.makeRandomClosetCodeAndSave();
+    public ResponseEntity<SuccessResponse<ClosetCode>> makeClosetCode() {
+        ClosetCode closetCode = closetCodeService.makeRandomClosetCodeAndSave();
         return ResponseEntity.ok(
-                new SuccessResponse<>("옷장 코드 생성에 성공하였습니다.", closetCodeId)
+                new SuccessResponse<>("옷장 코드 생성에 성공하였습니다.", closetCode)
         );
     }
 
