@@ -30,8 +30,14 @@ const BookMarkListPage = () => {
   const [newNickname, setNewNickname] = useState("");
   const [isDoubleClick, updateTouchTime] = useDoubleClick();
 
-  const { bookmarkList, loadBookmarkList, removeBookmark, addBookmark, editBookmark } =
-    useBookmarkStore();
+  const {
+    bookmarkList,
+    loadBookmarkList,
+    removeBookmark,
+    addBookmark,
+    editBookmark,
+    loadBookmarkDetail,
+  } = useBookmarkStore();
   const navigate = useNavigate();
 
   const handleTouchCard = bookmark => {
@@ -44,9 +50,10 @@ const BookMarkListPage = () => {
     }
   };
 
-  const handleDoubleClick = () => {
+  const handleDoubleClick = async () => {
     if (selectedBookmark.id > -1) {
       navigate(`/bookmarks/${selectedBookmark.id}`);
+      await loadBookmarkDetail(selectedBookmark.id);
     }
   };
 
