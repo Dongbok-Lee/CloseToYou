@@ -45,7 +45,7 @@ export const patchBookmark = async (bookmarkId, modifiedNickname) => {
 };
 
 export const getBookmarkDetail = async bookmarkId => {
-  return await clientInstance
+  return await authClientInstance
     .get("api/bookmarks/" + bookmarkId)
     .then(res => {
       return res;
@@ -56,7 +56,7 @@ export const getBookmarkDetail = async bookmarkId => {
 };
 
 export const deleteClothesInBookmark = async (bookmarkId, clothesId) => {
-  return await clientInstance
+  return await authClientInstance
     .delete("api/bookmarks/" + bookmarkId + "/delete/" + clothesId)
     .then(res => {
       return res;
