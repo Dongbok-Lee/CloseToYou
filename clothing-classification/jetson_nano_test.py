@@ -14,13 +14,12 @@ def convert_images_to_coco(images_path, classes_file, output_json):
         print(f"Error: {e.stderr.decode()}")
 
 # 2. 모델 테스트 실행
-def run_model_test(config_file, checkpoint_file, output_pkl, work_dir, show_dir):
+def run_model_test(config_file, checkpoint_file, output_pkl, work_dir):
     command = [
         'python', 'tools/test.py',
         config_file, checkpoint_file,
         '--out', output_pkl,
-        '--work-dir', work_dir,
-        '--show-dir', show_dir
+        '--work-dir', work_dir
     ]
     try:
         subprocess.run(command, check=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
@@ -53,10 +52,9 @@ if __name__ == "__main__":
     clothes_checkpoint_file = 'work_dirs/mask-rcnn_r50_fpn_1x_clothes/epoch_10.pth'
     clothes_output_pkl = 'results/clothes/results.pkl'
     clothes_work_dir = 'results/clothes/work_dirs'
-    clothes_show_dir = 'results/clothes/'
 
     print("============================== 옷 종류 구분을 시작합니다. ===================================================")
-    run_model_test(clothes_config_file, clothes_checkpoint_file, clothes_output_pkl, clothes_work_dir, clothes_show_dir)
+    run_model_test(clothes_config_file, clothes_checkpoint_file, clothes_output_pkl, clothes_work_dir)
     
     # 옷 종류 결과 로드 및 예측
     with open(clothes_output_pkl, "rb") as fr:
@@ -83,10 +81,9 @@ if __name__ == "__main__":
     pattern_checkpoint_file = 'work_dirs/mask-rcnn_r50_fpn_1x_pattern/epoch_10.pth'
     pattern_output_pkl = 'results/pattern/results.pkl'
     pattern_work_dir = 'results/pattern/work_dirs'
-    pattern_show_dir = 'results/pattern/'
-
+    
     print("=============================== 옷 패턴 구분을 시작합니다. =================================================")
-    run_model_test(pattern_config_file, pattern_checkpoint_file, pattern_output_pkl, pattern_work_dir, pattern_show_dir)
+    run_model_test(pattern_config_file, pattern_checkpoint_file, pattern_output_pkl, pattern_work_dir)
     
     # 패턴 결과 로드 및 예측
     with open(pattern_output_pkl, "rb") as fr:
