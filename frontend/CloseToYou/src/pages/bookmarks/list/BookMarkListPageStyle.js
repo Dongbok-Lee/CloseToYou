@@ -27,11 +27,10 @@ export const TitleText = styled.p`
   font-weight: 400;
 `;
 
-//TODO: color: ${props => props.theme.colors.point[0]};
 export const SelectedText = styled.p`
   font-size: 1.5rem;
   font-weight: 700;
-  color: #ff6969;
+  color: ${props => props.theme.colors.point[0]};
 `;
 
 export const CardListWrapper = styled.div`

@@ -77,10 +77,6 @@ const BookMarkListPage = () => {
   };
 
   useEffect(() => {
-    Cookies.set(
-      "access_token",
-      "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcyMzQ5MDMxMSwiZW1haWwiOiJocmIuaGFycGVyQGdtYWlsLmNvbSIsImlkIjoxM30.CcenH2M2IHvjjWn2Tmbcrcsv-asu8o-fN-Ml0mZ1HtBlRkyCiQysJXcQNXIzVgqZbwnPYpOK5KhtOTX_BtnhyQ",
-    );
     loadBookmarkList();
     window.addEventListener("keydown", handleKeyDown);
     return () => {
