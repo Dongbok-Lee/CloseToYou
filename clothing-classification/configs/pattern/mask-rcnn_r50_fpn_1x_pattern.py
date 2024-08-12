@@ -7,20 +7,13 @@ _base_ = [
 # We also need to change the num_classes in head to match the dataset's annotation
 model = dict(
     roi_head=dict(
-        bbox_head=dict(num_classes=13),
-        mask_head=dict(num_classes=13)))
+        bbox_head=dict(num_classes=4),
+        mask_head=dict(num_classes=4)))
 
-# Checkpoint 설정
-# checkpoint_config = dict(
-#     interval=1, 
-#     filename_tmpl='mini_dataset_epoch_{}.pth'
-# )
-
-# data_root = 'data/clothes/'
-data_root = 'data/mini-clothes/'
+data_root = 'data/patterns/'
 
 metainfo = {
-    'classes': ("blouse", "cardigan", "coat", "jacket", "jumper", "shirt", "sweater", "t-shirt", "vest", "pants", "skirt", "dress", "jumpsuite",)
+    'classes': ('check', 'dot', 'stripe', 'plants',)
 }
 
 train_dataloader = dict(
@@ -49,13 +42,13 @@ val_dataloader = dict(
 # )
 
 test_dataloader=dict(
-    batch_size=1,
-    dataset=dict(
-        data_root='',
-        metainfo=metainfo,
-        ann_file='data/test/annotations/test.json',
-        data_prefix=dict(img='data/test/images/') 
-    )
+   batch_size=1,
+   dataset=dict(
+       data_root='',
+       metainfo=metainfo,
+       ann_file='data/test/annotations/test.json',
+       data_prefix=dict(img='data/test/images/') 
+   )
 )
 
 # Modify metric related settings
