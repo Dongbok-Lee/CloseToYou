@@ -7,7 +7,7 @@ const SearchBox = ({ value = "", onSearch }) => {
   const [inputValue, setInputValue] = useState(value);
   const [isFocused, setIsFocused] = useState(false);
 
-  const handleChangeInput = (e) => {
+  const handleChangeInput = e => {
     const newValue = e.target.value;
     setInputValue(newValue);
     onSearch(newValue);
@@ -17,7 +17,7 @@ const SearchBox = ({ value = "", onSearch }) => {
     onSearch(inputValue);
   };
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = e => {
     if (e.key === "Enter") {
       handleTouchSearch();
     }
