@@ -1,5 +1,6 @@
 import { create } from "zustand";
-import { createUser } from "../api/user";
+import { createUser, createSignIn } from "../api/user";
+import { setAccessToken, removeAccessToken } from "../utils/token";
 
 export const useUserStore = create(set => ({
   nickname: null,
@@ -8,6 +9,8 @@ export const useUserStore = create(set => ({
   nicknameResponse: null,
   passwordResponse: null,
   signUpResponse: null,
+  signInResponse: null,
+  isSuccess: false,
 
   addUser: async (nickname, email, password) => {
     set({ nickname: nickname, email: email, password: password });
@@ -33,6 +36,28 @@ export const useUserStore = create(set => ({
         }
       });
   },
+
+  addSignIn: async (email, password) => {
+    set({ email: email, password: password });
+
+    await createSignIn(email, password)
+      .then(response => {
+        if (response.status === 200) {
+          set({ signInResponse: response.data.message, isSuccess: true });
+        }
+        setAccessToken();
+        removeAccessToken();
+      })
+      .catch(error => {
+        if (error.response.status === 400) {
+          set({ signInResponse: error.response.data.message });
+        } else {
+          // todo: 서버 에러 시 처리
+        }
+      });
+  },
+
   setNicknameResponse: newNicknameResponse => set({ nicknameResponse: newNicknameResponse }),
   setPasswordResponse: newPasswordResponse => set({ passwordResponse: newPasswordResponse }),
+  setSignInResponse: newSignInResponse => set({ signInResponse: newSignInResponse }),
 }));
