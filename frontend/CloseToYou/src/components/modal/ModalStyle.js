@@ -8,12 +8,12 @@ export const ModalContainer = styled.div`
     right: 0;
     bottom: 0;
 
-    display: flex;
+    display: flex;    
     justify-content: center;
     align-items: center;
-
     background: rgba(0, 0, 0, 0.5);
-    z-index: 1000; /* Ensure the modal is above other content */
+    z-index: 1000; 
+    -webkit-tap-highlight-color: transparent
 `;
 
 export const ModalWrapper = styled.div`
@@ -25,11 +25,11 @@ export const ModalWrapper = styled.div`
 
     border-radius: 0.625rem;
     width: 90%;
-    max-width: 30rem; /* Use max-width for responsiveness */
+    max-width: 30rem;
     height: ${props => (props.size === "large" ? "20rem" : "15rem")};
 
     background-color: #fff;
-    overflow: hidden; /* Prevent content overflow */
+    overflow: hidden;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 `;
 
