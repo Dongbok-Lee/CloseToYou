@@ -1,44 +1,51 @@
-import {create} from "zustand";
-import {createBookmark, deleteBookmark, getBookmarkList} from "../api/bookmark.js";
+import { create } from "zustand";
+import { createBookmark, deleteBookmark, getBookmarkList, patchBookmark } from "../api/bookmark.js";
 
 const useBookmarkStore = create(set => ({
-    bookmarkList: [],
-    bookmark: {
-        bookmarkId: 0,
-        nickname: "",
-        userId: 0,
-    },
-    error: null,
-    loading: true,
+  bookmarkList: [],
+  bookmark: {
+    bookmarkId: 0,
+    nickname: "",
+  },
+  error: null,
+  loading: true,
 
-    loadBookmarkList: async () => {
-        const {data, status} = await getBookmarkList();
-        if (status === 200) {
-            set({bookmarkList: data.data});
-            set({loading: false});
-        } else {
-            set({error: data});
-        }
-    },
-
-    removeBookmark: async (bookmarkId) => {
-        const {data, status} = await deleteBookmark(bookmarkId);
-        if (status === 200) {
-            set({loading: false})
-        } else {
-            set({error: data});
-        }
-    },
-
-    addBookmark: async (nickname) => {
-        const {data, status} = await createBookmark(nickname);
-        if (status === 200) {
-            set({loading: false});
-        } else {
-
-            set({error: data});
-        }
+  loadBookmarkList: async () => {
+    const { data, status } = await getBookmarkList();
+    if (status === 200) {
+      set({ bookmarkList: data.data });
+      set({ loading: false });
+    } else {
+      set({ error: data });
     }
+  },
+
+  removeBookmark: async bookmarkId => {
+    const { data, status } = await deleteBookmark(bookmarkId);
+    if (status === 200) {
+      set({ loading: false });
+    } else {
+      set({ error: data });
+    }
+  },
+
+  addBookmark: async newNickname => {
+    const { data, status } = await createBookmark(newNickname);
+    if (status === 200) {
+      set({ loading: false });
+    } else {
+      set({ error: data });
+    }
+  },
+
+  editBookmark: async (bookmarkId, modifiedNickname) => {
+    const { data, status } = await patchBookmark(bookmarkId, modifiedNickname);
+    if (status === 200) {
+      set({ loading: false });
+    } else {
+      set({ error: data });
+    }
+  },
 }));
 
 export default useBookmarkStore;
