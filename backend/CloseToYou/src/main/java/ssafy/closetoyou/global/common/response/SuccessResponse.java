@@ -7,7 +7,7 @@ import lombok.Getter;
 public class SuccessResponse<T> {
     private String message; // 결과 메시지
 
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @JsonInclude(JsonInclude.Include.NON_ABSENT)
     private T data; // 반환 데이터
 
     public SuccessResponse(String message, T data) {
