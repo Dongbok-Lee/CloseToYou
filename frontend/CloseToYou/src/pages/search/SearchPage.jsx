@@ -16,21 +16,18 @@ const SearchPage = () => {
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
-    const results = clothes
+    const results = clothesList
       .filter(item => item.nickname.toLowerCase().includes(searchQuery.toLowerCase()))
       .map(item => {
         const closet = closets.find(closet => closet.id === item.closet_id);
         return { ...item, closet_nickname: closet ? closet.nickname : "" };
       });
     setSearchResults(results);
-  }, [searchQuery]);
+  }, [searchQuery, clothesList]);
 
   const handleSearch = async query => {
     setSearchQuery(query);
-    // API 호출 후 결과를 설정합니다.
     await searchClothesByKeyword(query);
-
-    setSearchResults(Object.values(clothesList) || []); // API에서 데이터를 가져와 상태에 설정합니다.
   };
 
   return (
