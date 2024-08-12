@@ -10,30 +10,41 @@ import HangerBlack from "../../../assets/icons/etc/hanger-black.svg?react";
 import Plus from "../../../assets/icons/etc/plus-large.svg?react";
 import BookMarkedClothesBasic from "../../../assets/icons/etc/bookmarked-clothes-basic.svg?react";
 import BookMarkedClothesFocus from "../../../assets/icons/etc/bookmarked-clothes-focus.svg?react";
-import { useState, useEffect, useCallback } from "react";
+import { useEffect, useState } from "react";
 import Card from "../../../components/card/Card.jsx";
 import FloatingButton from "../../../components/floatingbutton/FloatingButton.jsx";
 import { useNavigate } from "react-router-dom";
 import { useDoubleClick } from "../../../hooks/useDoubleClick.js";
+import useBookmarkStore from "../../../stores/bookmark.jsx";
 
 const BookMarkListPage = () => {
-  const [bookMarkIndex, setBookMarkIndex] = useState(-1);
   const [isDoubleClick, updateTouchTime] = useDoubleClick();
+  const [selectedBookmark, setSelectedBookmark] = useState({
+    id: -1,
+    nickname: "",
+  });
+
+  const bookmarkList = useBookmarkStore(state => state.bookmarkList);
+  const loadBookmarkList = useBookmarkStore(state => state.loadBookmarkList);
 
   const navigate = useNavigate();
 
-  const handleTouchCard = id => {
+  const handleTouchCard = bookmark => {
     updateTouchTime();
 
     if (isDoubleClick()) {
       handleDoubleClick();
     } else {
-      setBookMarkIndex(id);
+      setSelectedBookmark({
+        ...selectedBookmark,
+        id: bookmark.bookmarkId,
+        nickname: bookmark.nickname,
+      });
     }
   };
 
   const handleDoubleClick = () => {
-    bookMarkIndex > -1 && navigate(`/bookmarks/${bookMarkIndex}`);
+    selectedBookmark.id > -1 && navigate(`/bookmarks/${selectedBookmark.id}`);
   };
 
   const handleTouchPlusCard = () => {
@@ -43,40 +54,20 @@ const BookMarkListPage = () => {
   const handleKeyDown = e => {
     if (e.key === "Tab") {
       e.preventDefault(); // 기본 탭 동작 방지
-      setBookMarkIndex(prevIndex => (prevIndex + 1) % cards.length);
+      setSelectedBookmark({
+        ...selectedBookmark,
+        id: prevIndex => (prevIndex + 1) % bookmarkList.length,
+      });
     }
   };
 
   useEffect(() => {
+    loadBookmarkList();
     window.addEventListener("keydown", handleKeyDown);
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
-
-  const cards = [
-    {
-      bookmarkId: 0,
-      nickname: "데이트 코디",
-    },
-    {
-      bookmarkId: 1,
-      nickname: "여름 축제 코디",
-    },
-    {
-      bookmarkId: 2,
-      nickname: "출근할 때 무난한 코디",
-    },
-    {
-      bookmarkId: 3,
-      nickname: "장마 코디",
-    },
-
-    {
-      bookmarkId: 4,
-      nickname: "결혼식 갈 때 입는 옷",
-    },
-  ];
 
   return (
     <BookMarkListPageContainer className="page">
@@ -85,18 +76,18 @@ const BookMarkListPage = () => {
           <HangerBlack title="옷걸이 아이콘" />
           선택된 코디
         </TitleText>
-        <SelectedText>{bookMarkIndex > -1 && cards[bookMarkIndex].nickname}</SelectedText>
+        <SelectedText>{selectedBookmark.id > -1 && selectedBookmark.nickname}</SelectedText>
       </TextWrapper>
 
       <CardListWrapper>
-        {cards.map((card, index) => (
+        {Object.values(bookmarkList).map((bookmark, index) => (
           <Card
             key={index}
-            handleTouch={() => handleTouchCard(card.bookmarkId)}
+            handleTouch={() => handleTouchCard(bookmark)}
             handleDoubleClick={handleDoubleClick}
             Icon={BookMarkedClothesBasic}
             FocusIcon={BookMarkedClothesFocus}
-            isFocused={index === bookMarkIndex}
+            isFocused={index === selectedBookmark.id}
           />
         ))}
         {/*TODO: PlusCard 컴포넌트 만들기*/}

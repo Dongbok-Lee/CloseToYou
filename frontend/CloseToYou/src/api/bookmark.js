@@ -1,7 +1,7 @@
-import { clientInstance } from "@/util/http-client";
+import { authClientInstance } from "../utils/http-client.js";
 
-export const getBookmarksList = async () => {
-  return await clientInstance
+export const getBookmarkList = async () => {
+  return await authClientInstance
     .get("/api/bookmarks")
     .then(res => {
       return res;
