@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   ClothesEditPageContainer,
@@ -39,52 +39,82 @@ const ClothesEditPage = () => {
   return (
     <ClothesEditPageContainer className="page">
       <ClothesNameText>
-        <TextInput textInputPlaceholder={nickname} aria-label="옷 별명 입력" />
+        <TextInput 
+          textInputPlaceholder={nickname} 
+          aria-label="옷 별명 입력" 
+          value={nickname} 
+          onChange={(e) => setNickname(e.target.value)} 
+        />
       </ClothesNameText>
       <ImageContainer>
         <img src={tempImage} alt="옷 이미지" />
       </ImageContainer>
       <LocationInputContainer>
-      <DetailTitleText>{location}</DetailTitleText>
+        <DetailTitleText>{location}</DetailTitleText>
       </LocationInputContainer>
+      
       <DetailContainer>
         <TabText aria-label="기본 정보">기본 정보</TabText>
         <DetailItem>
           <DetailTitleText aria-label="색상">색상</DetailTitleText>
-          <Select initItem={color} type="color" />
+          <Select initItem={color} type="color" onChange={(item) => setColor(item)} />
         </DetailItem>
         <DetailItem>
           <DetailTitleText aria-label="종류">종류</DetailTitleText>
-          <Select initItem={type} type="type" />
+          <Select initItem={type} type="type" onChange={(item) => setType(item)} />
         </DetailItem>
         <DetailItem>
           <DetailTitleText aria-label="패턴">패턴</DetailTitleText>
-          <Select initItem={pattern} type="pattern" />
+          <Select initItem={pattern} type="pattern" onChange={(item) => setPattern(item)} />
         </DetailItem>
       </DetailContainer>
+      
       <DetailContainer>
         <TabText aria-label="추가 정보">추가 정보</TabText>
         <DetailItem>
           <DetailTitleText aria-label="사이즈">사이즈</DetailTitleText>
-          <TextInput textInputPlaceholder={size} textInputSize="small" aria-label="사이즈 입력" />
+          <TextInput 
+            textInputPlaceholder={size} 
+            textInputSize="small" 
+            aria-label="사이즈 입력" 
+            value={size} 
+            onChange={(e) => setSize(e.target.value)} 
+          />
         </DetailItem>
         <DetailItem>
           <DetailTitleText aria-label="재질">재질</DetailTitleText>
-          <TextInput textInputPlaceholder={texture} textInputSize="small" aria-label="재질 입력" />
+          <TextInput 
+            textInputPlaceholder={texture} 
+            textInputSize="small" 
+            aria-label="재질 입력" 
+            value={texture} 
+            onChange={(e) => setTexture(e.target.value)} 
+          />
         </DetailItem>
         <DetailItem>
           <DetailTitleText aria-label="계절감">계절감</DetailTitleText>
-          <Select initItem={season} type="season" />
+          <Select initItem={season} type="season" onChange={(item) => setSeason(item)} />
         </DetailItem>
       </DetailContainer>
+      
       <DetailContainer>
         <TabText aria-label="메모">메모</TabText>
         <DetailItem>
-          <TextArea textareaPlaceholder={memo} aria-label="메모 입력" />
+          <TextArea 
+            textareaPlaceholder={memo} 
+            aria-label="메모 입력" 
+            value={memo} 
+            onChange={(e) => setMemo(e.target.value)} 
+          />
         </DetailItem>
       </DetailContainer>
+      
       <ButtonWrapper>
-        <Button btnSize="large" btnColor="primary" onClick={handleSave} aria-label="수정 완료 버튼">
+        <Button 
+          btnColor="primary" 
+          onTouchStart={handleSave} 
+          aria-label="수정 완료 버튼"
+        >
           수정 완료
         </Button>
       </ButtonWrapper>

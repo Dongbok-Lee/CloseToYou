@@ -2,14 +2,14 @@ import styled from "@emotion/styled";
 import { colors } from "../../constants/colors";
 
 export const SearchBoxContainer = styled.div`
-  max-width: 100%;
+  max-width: 90%;
   height: 2.5rem;
   display: flex;
   align-items: center;
   border-radius: 0.625rem;
   border: ${(props) => (props.isFocused ? `3px solid ${colors.point[0]}` : `2px solid ${colors.point[0]}`)};
   background: ${colors.background[0]};
-  margin: 3rem auto 1rem;
+  margin: 3rem auto;
   padding: 0 0.3rem;
 
   .input {
