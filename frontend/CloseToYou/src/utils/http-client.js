@@ -17,7 +17,7 @@ const createClientInstance = () => {
 };
 
 const createAuthClientInstance = () => {
-  const accessToken = Cookies.get("access_token");
+  const accessToken = sessionStorage.getItem("accessToken");
 
   const instance = axios.create({
     baseURL: import.meta.env.VITE_REST_API_URL,
@@ -35,8 +35,8 @@ const createAuthClientInstance = () => {
 };
 
 const createAuthWithRefreshClientInstance = () => {
-  const accessToken = Cookies.get("access_token");
-  const refreshToken = Cookies.get("refresh_token");
+  const accessToken = sessionStorage.getItem("accessToken");
+  const refreshToken = Cookies.get("refreshToken");
 
   const instance = axios.create({
     baseURL: import.meta.env.VITE_REST_API_URL,
