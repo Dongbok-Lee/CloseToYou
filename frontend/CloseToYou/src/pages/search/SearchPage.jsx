@@ -1,5 +1,9 @@
-import { useState, useEffect } from "react";
-import { SearchPageContainer, ResultMessage, ResultCount } from "./SearchPageStyle";
+import React, { useState, useEffect } from "react";
+import {
+  SearchPageContainer,
+  ResultMessage,
+  ResultCount,
+} from "./SearchPageStyle";
 import SearchBox from "../../components/searchbox/SearchBox";
 import SearchCard from "../../components/searchCard/SearchCard";
 
@@ -35,12 +39,12 @@ const SearchPage = () => {
       <SearchBox onSearch={handleSearch} />
 
       {searchQuery === "" ? (
-        <ResultMessage>검색어를 입력해주세요.</ResultMessage>
+        <ResultMessage aria-live="polite">검색어를 입력해주세요.</ResultMessage>
       ) : searchResults.length === 0 ? (
-        <ResultMessage>검색된 결과가 없습니다.</ResultMessage>
+        <ResultMessage aria-live="polite">검색된 결과가 없습니다.</ResultMessage>
       ) : (
         <>
-          <ResultCount>
+          <ResultCount aria-live="polite">
             검색 결과: <span>{searchResults.length}</span>개
           </ResultCount>
           {searchResults.map(result => {

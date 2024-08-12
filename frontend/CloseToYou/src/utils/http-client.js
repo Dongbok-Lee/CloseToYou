@@ -24,7 +24,7 @@ const createAuthClientInstance = () => {
     timeout: 5000,
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcyMzQ1NTM2MywiZW1haWwiOiJkYW55YTZAbmF2ZXIuY29tIiwiaWQiOjE0fQ.Y9KXoLhWYNTQBDT6QpSz8MBNaozDzAnJ4dMfoBO7vgEz1N93SoyjBCKKTwPla1cC6Johx82oqJLOiyiOkmT9hQ`,
+      "Authorization": `Bearer ${accessToken}`,
       "Access-Control-Allow-Origin": import.meta.env.VITE_CLIENT_URL,
       "Access-Control-Allow-Credentials": "true",
     },
@@ -43,8 +43,8 @@ const createAuthWithRefreshClientInstance = () => {
     timeout: 5000,
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcyMzQ0OTQzOCwiZW1haWwiOiJkYW55YTZAbmF2ZXIuY29tIiwiaWQiOjE0fQ.bJG2UmLeokJftvhP34ZpiidgDyt425rC8rkmX_cZXeuolNtPzYac8Nv3irzIXQSdEwdN_Ec1tcPlqf53SYkySA`,
-      "Authorization-refresh": `Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJSZWZyZXNoVG9rZW4iLCJleHAiOjE3MjQ2NTU0MzgsImVtYWlsIjoiZGFueWE2QG5hdmVyLmNvbSIsImlkIjoxNH0.hoklTeauvIrV1oJ9JessszSFeUbrYsupWrjHbRR1gR2NxSi9a6BSptpzZ6EWs_qDpXoMZj0v8AoOd-6hsfbpJw`,
+      "Authorization": `Bearer ${accessToken}`,
+      "Authorization-refresh": `Bearer ${refreshToken}`,
       "Access-Control-Allow-Origin": import.meta.env.VITE_CLIENT_URL,
       "Access-Control-Allow-Credentials": "true",
     },
