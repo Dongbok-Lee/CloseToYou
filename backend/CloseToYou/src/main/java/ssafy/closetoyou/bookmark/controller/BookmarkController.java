@@ -16,6 +16,7 @@ import ssafy.closetoyou.closet.controller.request.ClosetRequest;
 import ssafy.closetoyou.global.common.response.SuccessResponse;
 import ssafy.closetoyou.global.security.login.userdetail.CustomUserDetail;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
