@@ -30,7 +30,7 @@ const SignUpPage = () => {
   const {
     sendEmail,
     checkCode,
-    isSucces,
+    isSuccess,
     emailResponse,
     setEmailResponse,
     codeResponse,
@@ -59,12 +59,12 @@ const SignUpPage = () => {
       setIsPasswordCorrect(false);
     }
 
-    if (passwordCheck !== "" && isPasswordCorrect && isSucces) {
+    if (passwordCheck !== "" && isPasswordCorrect && isSuccess) {
       alert("회원 가입이 완료되었습니다.");
       nav("/signin", { replace: true });
     }
 
-    if (!isSucces) {
+    if (!isSuccess) {
       alert("이메일 인증을 해주세요.");
     }
   };

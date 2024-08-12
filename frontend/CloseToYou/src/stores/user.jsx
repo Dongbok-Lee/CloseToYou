@@ -3,13 +3,13 @@ import { createUser, createSignIn } from "../api/user";
 import { setAccessToken, removeAccessToken } from "../utils/token";
 
 export const useUserStore = create(set => ({
-  nickname: null,
-  email: null,
-  password: null,
-  nicknameResponse: null,
-  passwordResponse: null,
-  signUpResponse: null,
-  signInResponse: null,
+  nickname: "",
+  email: "",
+  password: "",
+  nicknameResponse: "",
+  passwordResponse: "",
+  signUpResponse: "",
+  signInResponse: "",
   isSuccess: false,
 
   addUser: async (nickname, email, password) => {
