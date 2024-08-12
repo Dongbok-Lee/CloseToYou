@@ -1,13 +1,12 @@
 import { authClientInstance } from "../utils/http-client";
 
 // 옷 검색하는 함수 getSearchedClothes
-export const getSearchedClothes = async (keyword) => {
+export const getSearchedClothes = async keyword => {
+  // eslint-disable-next-line no-useless-catch
   try {
-    const response = await authClientInstance.get(`/api/clothes/search/${keyword}`)
-    console.log("api res", response)
+    const response = await authClientInstance.get(`/api/clothes/search/${keyword}`);
     return response;
   } catch (error) {
-    console.error("API 요청 오류 (getSearchedClothes):", error);
     throw error;
   }
 };
