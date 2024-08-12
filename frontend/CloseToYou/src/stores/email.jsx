@@ -2,11 +2,11 @@ import { create } from "zustand";
 import { sendEmail, checkCode } from "../api/email";
 
 export const useEmailStore = create(set => ({
-  email: null,
-  code: null,
-  emailResponse: null,
-  codeResponse: null,
-  isSucces: false,
+  email: "",
+  code: "",
+  emailResponse: "",
+  codeResponse: "",
+  isSuccess: false,
 
   sendEmail: async email => {
     set({ email: email });
@@ -35,7 +35,7 @@ export const useEmailStore = create(set => ({
 
     const result = await checkCode(email, code)
       .then(response => {
-        set({ codeResponse: response.message, isSucces: true });
+        set({ codeResponse: response.message, isSuccess: true });
       })
       .catch(error => {
         if (error.response.status === 401) {
