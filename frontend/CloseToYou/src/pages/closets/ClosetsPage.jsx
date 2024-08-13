@@ -17,18 +17,18 @@ import Card from "../../components/card/Card";
 import FloatingButton from "../../components/floatingbutton/FloatingButton";
 import Modal from "../../components/modal/Modal";
 
+import { useDoubleClick } from "../../hooks/useDoubleClick";
+import { useClosetsStore } from "../../stores/closet";
+import { placeholder } from "../../constants/placeholder";
+
+import { useNavigate } from "react-router-dom";
 const ClosetsPage = () => {
-  const addNicknameMessage = "새로운 옷장 별명";
-  const addClosetCodeMessage = "새로운 옷장 코드";
-  const modifyNicknameMessage = "수정할 옷장 별명";
+  const { loadClosets, addClosets, removeClosets, editClosets, closets } = useClosetsStore();
 
-  const items = [
-    { nickname: "여름옷 전용 옷장", closetCode: "1" },
-    { nickname: "가을옷 전용 옷장2", closetCode: "2" },
-    { nickname: "봄옷 전용 옷장", closetCode: "3" },
-    { nickname: "겨울옷 전용 옷장", closetCode: "4" },
-  ];
+  const [isDoubleClick, updateTouchTime] = useDoubleClick();
 
+  const [nickname, setNickname] = useState("");
+  const [closetCode, setClosetCode] = useState("");
   const [cardIndex, setCardIndex] = useState("");
 
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -36,30 +36,51 @@ const ClosetsPage = () => {
   const [isModify, setIsModify] = useState(false);
   const [isAdd, setIsAdd] = useState(false);
 
-  const [firstValue, setFirstValue] = useState("");
-  const [secondValue, setSecondValue] = useState("");
+  const nav = useNavigate();
+
+  useEffect(() => {
+    loadClosets();
+  }, []);
 
   useEffect(() => {
     if (!isOpenModal) {
       if (isDelete) {
         setIsDelete(false);
+
+        setTimeout(() => {
+          removeClosets(closets[cardIndex].closetId);
+        }, 100);
       }
 
       if (isModify) {
         setIsModify(false);
+
+        setTimeout(() => {
+          editClosets(closets[cardIndex].closetId, nickname);
+        }, 100);
       }
 
       if (isAdd) {
         setIsAdd(false);
+
+        setTimeout(() => {
+          addClosets(nickname, closetCode);
+        }, 100);
       }
     }
-  });
+  }, [isOpenModal, closets]);
 
   const handleTouchCard = index => {
     setCardIndex(index);
+
+    if (isDoubleClick()) {
+      nav(`/closets/${closets[cardIndex].closetId}`);
+    } else {
+      updateTouchTime();
+    }
   };
 
-  const handleTouchAdd = e => {
+  const handleTouchAdd = async e => {
     e.target.focus();
 
     setIsAdd(true);
@@ -68,6 +89,9 @@ const ClosetsPage = () => {
 
   const handleTouchDelete = e => {
     e.target.focus();
+
+    console.log(cardIndex);
+    console.log(closets[cardIndex].closetId);
 
     setIsOpenModal(true);
     setIsDelete(true);
@@ -88,14 +112,14 @@ const ClosetsPage = () => {
           <ClosetText>선택된 옷장</ClosetText>
         </ClosetTextTitleWrapper>
         {cardIndex !== "" ? (
-          <SelectedText>{items[cardIndex].nickname}</SelectedText>
+          <SelectedText>{closets[cardIndex].nickname}</SelectedText>
         ) : (
           <span></span>
         )}
       </ClosetTextWrapper>
       <ClosetSelectWrapper>
-        {items !== undefined &&
-          items.map((item, index) => (
+        {closets !== undefined &&
+          closets.map((item, index) => (
             <Card
               key={index}
               handleTouch={() => handleTouchCard(index)}
@@ -117,8 +141,8 @@ const ClosetsPage = () => {
         )}
         {isOpenModal && isModify && (
           <Modal
-            firstPlaceholder={modifyNicknameMessage}
-            setFirstValue={setFirstValue}
+            firstPlaceholder={placeholder.newClosetNickname}
+            setFirstValue={setNickname}
             setIsOpenModal={setIsOpenModal}
           >
             수정하기
@@ -126,10 +150,10 @@ const ClosetsPage = () => {
         )}
         {isOpenModal && isAdd && (
           <Modal
-            firstPlaceholder={addNicknameMessage}
-            secondPlaceholder={addClosetCodeMessage}
-            setFirstValue={setFirstValue}
-            setSecondValue={setSecondValue}
+            firstPlaceholder={placeholder.closetNickname}
+            secondPlaceholder={placeholder.closetCode}
+            setFirstValue={setNickname}
+            setSecondValue={setClosetCode}
             modalSize="large"
             setIsOpenModal={setIsOpenModal}
           >
