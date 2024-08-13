@@ -19,7 +19,8 @@ def run_model_test(config_file, checkpoint_file, output_pkl, work_dir):
         'python', 'tools/test.py',
         config_file, checkpoint_file,
         '--out', output_pkl,
-        '--work-dir', work_dir
+        '--work-dir', work_dir,
+        '--show-dir', 'vis/',
     ]
     try:
         subprocess.run(command, check=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
@@ -94,7 +95,7 @@ if __name__ == "__main__":
     # 'check', 'dot', 'stripe', 'plants'
     pattern_translations = [
         ["check", "체크"], ["dot", "도트"], 
-        ["stripe", "스트라이프"], ["plants", "꽃무늬"]
+        ["stripe", "스트라이프"], ["plants", "꽃무늬"], ["etc", "기타"]
     ]
 
     print_prediction(labels, scores, pattern_translations)
