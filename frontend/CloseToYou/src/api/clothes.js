@@ -12,14 +12,32 @@ export const getSearchedClothes = async keyword => {
 };
 
 //옷 전체 조회하는 함수 getClothes
+// export const getClothes = async () => {
+//   try {
+//     console.log("옷 목록 조회 API 요청 시작"); // 요청 전 콘솔 로그
+//     const response = await authClientInstance.get("/api/clothes");
+//     console.log("API 요청 성공, 응답 데이터:", response.data); // 성공 시 응답 데이터 콘솔 로그
+//     return response.data; // data 안의 data 배열만 반환
+//   } catch (error) {
+//     console.error("API 요청 실패:", error); // 오류 발생 시 콘솔 로그
+//     throw error;
+//   }
+// };
+
 export const getClothes = async () => {
-  const { data, status } = await authClientInstance.get('/clothes/');
-  return { data, status };
+  return await authClientInstance
+    .get("/api/clothes")
+    .then(res => {
+      console.log("res", res);
+      return res;
+    })
+    .catch(e => {
+      return e;
+    });
 };
 
-
 //옷 삭제하는 함수
-export const deleteClothes = async (clothesId) => {
+export const deleteClothes = async clothesId => {
   const { data, status } = await authClientInstance.delete(`/clothes/${clothesId}`);
   return { data, status };
 };
@@ -31,7 +49,7 @@ export const patchClothes = async (clothesId, clothesData) => {
 };
 
 //NFC로 상세조회
-export const getClothesByNfc = async (nfcId) => {
+export const getClothesByNfc = async nfcId => {
   const { data, status } = await authClientInstance.get(`/clothes/nfc/${nfcId}`);
   return { data, status };
 };
