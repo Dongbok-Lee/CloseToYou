@@ -62,14 +62,14 @@ export const filterLabels = {
     "PANTS": "바지",
     "SKIRT": "치마",
     "DRESS": "원피스",
-    "JUMPSUIT": "점프수트",
+    "JUMPSUITE": "점프수트",
   },
   pattern: {
     CHECK: "체크",
     DOT: "도트",
     STRIPE: "스트라이프",
     PLANTS: "꽃무늬",
-    OTHER: "기타",
-    PLAIN: "무지",
+    ETC: "기타",
+    BLANK: "무지",
   },
 };
