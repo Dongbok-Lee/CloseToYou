@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   ClothesDetailPageContainer,
   ClothesNameText,
@@ -11,29 +11,58 @@ import {
   LocationInfoText,
   ImageContainer,
   LastWornDateText,
-  PageContainer
-} from './ClothesDetailPageStyle';
-import FloatingButton from '../../../components/floatingbutton/FloatingButton';
-import tempImage from '../../../assets/icons/temp-image.png';
+  PageContainer,
+} from "./ClothesDetailPageStyle";
+import FloatingButton from "../../../components/floatingbutton/FloatingButton";
+import tempImage from "../../../assets/icons/temp-image.png";
+import { getClothesById } from "../../../api/clothes"; // API 요청 함수 import
 
 const ClothesDetailPage = () => {
   const [details, setDetails] = useState({
-    clothesId: '',
-    nickname: '산뜻 노랑',
-    closetNickname: '',
-    color: 'yellow',
-    type: 'shirt',
-    pattern: '무지',
-    season: '봄, 가을',
-    size: 'L',
-    memo: '산뜻한 봄에 피크닉 가고 싶을 때 입을 티셔츠',
-    location: 'A-14',
+    clothesId: "",
+    nickname: "",
+    closetNickname: "",
+    color: "",
+    type: "",
+    pattern: "",
+    season: "",
+    size: "",
+    memo: "",
+    location: "",
     imageUrl: tempImage,
-    lastWornDate: '2023-08-01'
+    lastWornDate: "",
   });
 
   const navigate = useNavigate();
   const { id } = useParams();
+
+  useEffect(() => {
+    const fetchClothesDetails = async () => {
+      try {
+        const response = await getClothesById(id);
+        const clothesData = response.data;
+
+        setDetails({
+          clothesId: clothesData.clothesId,
+          nickname: clothesData.nickname,
+          closetNickname: clothesData.closetNickname,
+          color: clothesData.color,
+          type: clothesData.type,
+          pattern: clothesData.pattern,
+          season: clothesData.season,
+          size: clothesData.size,
+          memo: clothesData.memo,
+          location: clothesData.location,
+          imageUrl: clothesData.imageUrl || tempImage,
+          lastWornDate: clothesData.lastWornDate || "N/A",
+        });
+      } catch (error) {
+        console.error("옷 정보를 가져오는 데 실패했습니다:", error);
+      }
+    };
+
+    fetchClothesDetails();
+  }, [id]);
 
   const handleNavigateToEdit = () => {
     navigate(`/clothes/edit/${id}`);
@@ -42,7 +71,7 @@ const ClothesDetailPage = () => {
   return (
     <ClothesDetailPageContainer className="page">
       <PageContainer>
-        <ClothesNameText aria-label="옷 별명">{details.nickname}</ClothesNameText>
+        <ClothesNameText aria-label="옷 별명">{details.nickname || "별명 없음"}</ClothesNameText>
         <ImageContainer>
           <img src={details.imageUrl} alt="옷 이미지" />
         </ImageContainer>
@@ -51,9 +80,9 @@ const ClothesDetailPage = () => {
         <DetailContainer>
           <TabText aria-label="기본 정보">기본 정보</TabText>
           {[
-            { title: '색상', info: details.color },
-            { title: '종류', info: details.type },
-            { title: '패턴', info: details.pattern },
+            { title: "색상", info: details.color },
+            { title: "종류", info: details.type },
+            { title: "패턴", info: details.pattern },
           ].map((item, index) => (
             <DetailItem key={index}>
               <DetailTitleText aria-label={item.title}>{item.title}</DetailTitleText>
@@ -65,8 +94,8 @@ const ClothesDetailPage = () => {
         <DetailContainer>
           <TabText aria-label="추가 정보">추가 정보</TabText>
           {[
-            { title: '사이즈', info: details.size },
-            { title: '계절감', info: details.season },
+            { title: "사이즈", info: details.size },
+            { title: "계절감", info: details.season },
           ].map((item, index) => (
             <DetailItem key={index}>
               <DetailTitleText aria-label={item.title}>{item.title}</DetailTitleText>
@@ -80,15 +109,15 @@ const ClothesDetailPage = () => {
           <DetailItem>
             <DetailInfoText>{details.memo}</DetailInfoText>
           </DetailItem>
-          <LastWornDateText aria-label="최근 입은 날짜">최근 입은 날짜: {details.lastWornDate}
-        <FloatingButton 
-          type="edit" 
-          onTouchStart={handleNavigateToEdit} 
-          aria-label="편집 버튼" 
-        />
-        </LastWornDateText>
+          <LastWornDateText aria-label="최근 입은 날짜">
+            최근 입은 날짜: {details.lastWornDate}
+            <FloatingButton
+              type="edit"
+              onTouchStart={handleNavigateToEdit}
+              aria-label="편집 버튼"
+            />
+          </LastWornDateText>
         </DetailContainer>
-        
       </PageContainer>
     </ClothesDetailPageContainer>
   );
