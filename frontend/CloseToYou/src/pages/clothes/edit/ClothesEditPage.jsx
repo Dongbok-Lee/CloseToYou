@@ -19,7 +19,7 @@ import tempImage from "../../../assets/icons/temp-image.png";
 import { patchClothes, getClothesById } from "../../../api/clothes";
 import { filterLabels } from "../../../constants/filter";
 import useClothesStore from "../../../stores/clothes";
-import fetchClothesDetails from "../detail/ClothesDetailPage"
+
 const convertToEnglish = (type, value) => {
   const labelType = filterLabels[type];
   if (!labelType) return value;
@@ -34,64 +34,49 @@ const convertToEnglish = (type, value) => {
 };
 
 const ClothesEditPage = () => {
-  const [initialData, setInitialData] = useState({})
-  const [clothesId, setClothesId] = useState("");
+  const [initialData, setInitialData] = useState({});
   const [nickname, setNickname] = useState("");
-  const [closetNickname, setClosetNickname] = useState("");
-  const [color, setColor] = useState("분홍색");
-  const [type, setType] = useState("블라우스");
-  const [pattern, setPattern] = useState("체크");
+  const [closetNickname, setClosetNickname] = useState(""); // closetNickname 상태 추가
+  const [color, setColor] = useState("");
+  const [type, setType] = useState("");
+  const [pattern, setPattern] = useState("");
   const [size, setSize] = useState("");
-  const [season, setSeason] = useState("여름");
+  const [season, setSeason] = useState("");
   const [memo, setMemo] = useState("");
   const [location, setLocation] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [lastWornDate, setLastWornDate] = useState("");  
+  const [imageUrl, setImageUrl] = useState(tempImage);
+  const [lastWornDate, setLastWornDate] = useState("");
+
   const { clothes, loadClothesDetail } = useClothesStore();
 
   const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
-    const fetchClothes = async () => {
-      await loadClothesDetail(id);
+    loadClothesDetail(id);
+  }, [id, loadClothesDetail]);
+
+  useEffect(() => {
+    if (clothes) {
+      const defaultNickname = clothes.nickname
+        ? clothes.nickname
+        : `${filterLabels.color[clothes.color] || ""} ${filterLabels.category[clothes.type] || ""}`;
+
+      setNickname(defaultNickname);
+      setClosetNickname(clothes.closetNickname || "");
+      setColor(filterLabels.color[clothes.color] || "");
+      setType(filterLabels.category[clothes.type] || "");
+      setPattern(filterLabels.pattern[clothes.pattern] || "");
+      setSize(clothes.size || "");
+      setSeason(filterLabels.season[clothes.season] || "");
+      setMemo(clothes.memo || "");
+      setLocation(clothes.location || "");
+      setImageUrl(clothes.imageUrl || tempImage);
+      setLastWornDate(clothes.lastWornDate || "");
     }
-    fetchClothes();
-  }, [id, loadClothesDetail])  
-
-  useEffect(() => {
-    console.log(initialData)
-  }, [initialData])
-  useEffect(() => {
-    console.log('clothes', clothes)
-
-    setInitialData({
-      nickname: clothes.nickname,
-      color: filterLabels.color[clothes.color],
-      type: filterLabels.category[clothes.type],
-      pattern: filterLabels.pattern[clothes.pattern],
-      season: filterLabels.season[clothes.season],
-      size: clothes.size,
-      memo: clothes.memo
-    })
-
-    setClothesId(clothes.clothesId)
-    setNickname(clothes.nickname)
-    setClosetNickname(clothes.closetNickname)
-    setColor(filterLabels.color[clothes.color])
-    setType(filterLabels.category[clothes.type])
-    setPattern(filterLabels.pattern[clothes.pattern])
-    setSize(clothes.size)
-    setSeason(filterLabels.season[clothes.season])
-    setMemo(clothes.memo)
-    setLocation(clothes.location)
-    setImageUrl(clothes.imageUrl)
-    setLastWornDate(clothes.lastWornDate || "");
-}, [clothes])  
+  }, [clothes]);
 
   const handleSave = async () => {
-    console.log('수정완료 버튼 클릭!')
-
     const updatedClothes = {};
 
     if (nickname !== initialData.nickname) {
@@ -127,7 +112,6 @@ const ClothesEditPage = () => {
       console.log("서버로 전송할 데이터:", updatedClothes);
       await patchClothes(id, updatedClothes);
       console.log("데이터 전송 성공");
-      // fetchClothesDetails()
       navigate(`/clothes/${id}`);
     } catch (error) {
       console.error("옷 정보 수정 실패:", error);
@@ -145,10 +129,12 @@ const ClothesEditPage = () => {
         />
       </ClothesNameText>
       <ImageContainer>
-        <img src={tempImage} alt="옷 이미지" />
+        <img src={imageUrl} alt="옷 이미지" />
       </ImageContainer>
       <LocationInputContainer>
-        <DetailTitleText>{location}</DetailTitleText>
+        <DetailTitleText>
+          {closetNickname ? `${closetNickname} ${location}` : location}
+        </DetailTitleText>
       </LocationInputContainer>
 
       <DetailContainer>
@@ -190,8 +176,8 @@ const ClothesEditPage = () => {
         <DetailItem>
           <TextArea
             initItem={memo}
-            textareaPlaceholder="최대 50자까지 입력가능합니다."
-            onChange={e => setMemo(e)}
+            textareaPlaceholder="최대 50자까지 입력 가능합니다."
+            onChange={value => setMemo(value)}
           />
         </DetailItem>
       </DetailContainer>
