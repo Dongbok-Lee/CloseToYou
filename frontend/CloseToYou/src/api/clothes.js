@@ -11,19 +11,7 @@ export const getSearchedClothes = async keyword => {
   }
 };
 
-//옷 전체 조회하는 함수 getClothes
-// export const getClothes = async () => {
-//   try {
-//     console.log("옷 목록 조회 API 요청 시작"); // 요청 전 콘솔 로그
-//     const response = await authClientInstance.get("/api/clothes");
-//     console.log("API 요청 성공, 응답 데이터:", response.data); // 성공 시 응답 데이터 콘솔 로그
-//     return response.data; // data 안의 data 배열만 반환
-//   } catch (error) {
-//     console.error("API 요청 실패:", error); // 오류 발생 시 콘솔 로그
-//     throw error;
-//   }
-// };
-
+//옷 목록 조회하는 함수 getClothes
 export const getClothes = async () => {
   return await authClientInstance
     .get("/api/clothes")

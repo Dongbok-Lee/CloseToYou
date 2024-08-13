@@ -159,8 +159,8 @@ const ClothesListPage = () => {
                 <ClothesCardWrapper key={clothing.clothesId} isActive={index === activeIndex}>
                   <ClothesCard
                     handleTouchClothesCard={() => handleTouchClothesCard(clothing.clothesId, index)}
-                    type={clothing.categoryLabel} // 한글로 변환된 category 사용
-                    color={clothing.colorLabel} // 한글로 변환된 color 사용
+                    type={clothing.categoryLabel}
+                    color={clothing.colorLabel}
                   />
                   <Nickname isActive={index === activeIndex}>{clothing.nickname}</Nickname>
                 </ClothesCardWrapper>
