@@ -12,13 +12,9 @@ export const useClothesStore = create(set => ({
   selectedClothes: null,
 
   loadClothesList: async () => {
-    console.log("옷 목록을 불러오는 중..."); // 요청 전 콘솔 로그
     const { data, status } = await getClothes();
-    console.log("API 응답 상태:", status); // 응답 상태 콘솔 로그
-    console.log("받아온 데이터:", data); // 받아온 데이터 콘솔 로그
     if (status === 200) {
       set({ clothesList: data.data });
-      console.log("상태 업데이트 완료:", data); // 상태 업데이트 후 콘솔 로그
     }
   },
 
