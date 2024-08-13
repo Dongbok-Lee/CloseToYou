@@ -19,7 +19,7 @@ import tempImage from "../../../assets/icons/temp-image.png";
 import { patchClothes, getClothesById } from "../../../api/clothes";
 import { filterLabels } from "../../../constants/filter";
 import useClothesStore from "../../../stores/clothes";
-
+import fetchClothesDetails from "../detail/ClothesDetailPage"
 const convertToEnglish = (type, value) => {
   const labelType = filterLabels[type];
   if (!labelType) return value;
@@ -34,47 +34,74 @@ const convertToEnglish = (type, value) => {
 };
 
 const ClothesEditPage = () => {
-  const [initialData, setInitialData] = useState({});
+  const [initialData, setInitialData] = useState({})
+  const [clothesId, setClothesId] = useState("");
   const [nickname, setNickname] = useState("");
-  const [color, setColor] = useState("");
-  const [type, setType] = useState("");
-  const [pattern, setPattern] = useState("");
+  const [closetNickname, setClosetNickname] = useState("");
+  const [color, setColor] = useState("분홍색");
+  const [type, setType] = useState("블라우스");
+  const [pattern, setPattern] = useState("체크");
   const [size, setSize] = useState("");
-  const [season, setSeason] = useState("");
+  const [season, setSeason] = useState("여름");
   const [memo, setMemo] = useState("");
   const [location, setLocation] = useState("");
-
+  const [imageUrl, setImageUrl] = useState("");
+  const [lastWornDate, setLastWornDate] = useState("");  
   const { clothes, loadClothesDetail } = useClothesStore();
 
   const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
-    loadClothesDetail(id);
-  }, [id]);
+    const fetchClothes = async () => {
+      await loadClothesDetail(id);
+    }
+    fetchClothes();
+  }, [id, loadClothesDetail])  
 
-  // 옷 데이터가 변경될 때만 상태 업데이트
-  // useEffect(() => {
-  //   console.log("타입확인");
-  //   console.log(clothes);
-  //   console.log(typeof clothes);
-  //   console.log(typeof clothes[type]);
-  //   console.log(type[clothes.type]);
-  //   console.log(type["COAT"]);
-  //   setType(type[clothes.type]);
-  // }, [clothes]);
+  useEffect(() => {
+    console.log(initialData)
+  }, [initialData])
+  useEffect(() => {
+    console.log('clothes', clothes)
 
-  console.log("print clothes", clothes);
+    setInitialData({
+      nickname: clothes.nickname,
+      color: filterLabels.color[clothes.color],
+      type: filterLabels.category[clothes.type],
+      pattern: filterLabels.pattern[clothes.pattern],
+      season: filterLabels.season[clothes.season],
+      size: clothes.size,
+      memo: clothes.memo
+    })
+
+    setClothesId(clothes.clothesId)
+    setNickname(clothes.nickname)
+    setClosetNickname(clothes.closetNickname)
+    setColor(filterLabels.color[clothes.color])
+    setType(filterLabels.category[clothes.type])
+    setPattern(filterLabels.pattern[clothes.pattern])
+    setSize(clothes.size)
+    setSeason(filterLabels.season[clothes.season])
+    setMemo(clothes.memo)
+    setLocation(clothes.location)
+    setImageUrl(clothes.imageUrl)
+    setLastWornDate(clothes.lastWornDate || "");
+}, [clothes])  
 
   const handleSave = async () => {
+    console.log('수정완료 버튼 클릭!')
+
     const updatedClothes = {};
 
     if (nickname !== initialData.nickname) {
       updatedClothes.nickname = nickname;
     }
+
     if (color !== initialData.color) {
       updatedClothes.color = convertToEnglish("color", color);
     }
+
     if (type !== initialData.type) {
       updatedClothes.type = convertToEnglish("category", type);
     }
@@ -100,6 +127,7 @@ const ClothesEditPage = () => {
       console.log("서버로 전송할 데이터:", updatedClothes);
       await patchClothes(id, updatedClothes);
       console.log("데이터 전송 성공");
+      // fetchClothesDetails()
       navigate(`/clothes/${id}`);
     } catch (error) {
       console.error("옷 정보 수정 실패:", error);
@@ -131,7 +159,7 @@ const ClothesEditPage = () => {
         </DetailItem>
         <DetailItem>
           <DetailTitleText aria-label="종류">종류</DetailTitleText>
-          <Select initItem={"코트"} type="type" onChange={item => setType(type[clothes.type])} />
+          <Select initItem={type} type="type" onChange={item => setType(item)} />
         </DetailItem>
         <DetailItem>
           <DetailTitleText aria-label="패턴">패턴</DetailTitleText>
@@ -161,8 +189,9 @@ const ClothesEditPage = () => {
         <TabText aria-label="메모">메모</TabText>
         <DetailItem>
           <TextArea
+            initItem={memo}
             textareaPlaceholder="최대 50자까지 입력가능합니다."
-            onChange={e => setMemo(e.target.value)}
+            onChange={e => setMemo(e)}
           />
         </DetailItem>
       </DetailContainer>

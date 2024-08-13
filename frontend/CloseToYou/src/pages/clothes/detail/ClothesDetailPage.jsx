@@ -36,35 +36,37 @@ const ClothesDetailPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
+  const fetchClothesDetails = async () => {
+    try {
+      const response = await getClothesById(id);
+      const clothesData = response.data.data;
+      setDetails({
+        clothesId: clothesData.clothesId,
+        nickname: clothesData.nickname,
+        closetNickname: clothesData.closetNickname,
+        color: clothesData.color,
+        type: clothesData.type,
+        pattern: clothesData.pattern,
+        season: clothesData.season,
+        size: clothesData.size,
+        memo: clothesData.memo,
+        location: clothesData.location,
+        imageUrl: clothesData.imageUrl || tempImage,
+        lastWornDate: clothesData.lastWornDate || "N/A",
+      });
+    } catch (error) {
+      console.error("옷 정보를 가져오는 데 실패했습니다:", error);
+    }
+  };
+
   useEffect(() => {
-    const fetchClothesDetails = async () => {
-      try {
-        const response = await getClothesById(id);
-        const clothesData = response.data;
-
-        setDetails({
-          clothesId: clothesData.clothesId,
-          nickname: clothesData.nickname,
-          closetNickname: clothesData.closetNickname,
-          color: clothesData.color,
-          type: clothesData.type,
-          pattern: clothesData.pattern,
-          season: clothesData.season,
-          size: clothesData.size,
-          memo: clothesData.memo,
-          location: clothesData.location,
-          imageUrl: clothesData.imageUrl || tempImage,
-          lastWornDate: clothesData.lastWornDate || "N/A",
-        });
-      } catch (error) {
-        console.error("옷 정보를 가져오는 데 실패했습니다:", error);
-      }
-    };
-
     fetchClothesDetails();
-  }, [id]);
+    console.log(details)
+  }, [id]); // `id`가 변경될 때마다 호출
 
-  const handleNavigateToEdit = () => {
+
+
+  const handleNavigateToEdit = e => {
     navigate(`/clothes/edit/${id}`);
   };
 

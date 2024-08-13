@@ -38,7 +38,6 @@ export const patchClothes = async (clothesId, clothesData) => {
 export const getClothesById = async clothesId => {
   try {
     const response = await authClientInstance.get(`/api/clothes/${clothesId}`);
-    console.log("response", response);
     return response;
   } catch (error) {
     throw error;

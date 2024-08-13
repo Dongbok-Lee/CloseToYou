@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import SelectStyle from "./SelectStyle";
 const Select = ({ initItem, type, onChange }) => {
   // onChange prop 추가
@@ -32,13 +32,17 @@ const Select = ({ initItem, type, onChange }) => {
       "원피스",
       "점프슈트",
     ],
-    season: ["봄", "여름", "가을", "겨울"],
+    season: ["봄", "여름", "가을", "겨울", "사계절"],
   };
 
   const items = categories[type] || [];
   const [selectedItem, setSelectedItem] = useState(initItem);
   const selectRef = useRef(null);
 
+  useEffect(() => {
+    setSelectedItem(initItem)
+  }, [initItem])
+  
   const handleChange = event => {
     const value = event.target.value;
     setSelectedItem(value);
