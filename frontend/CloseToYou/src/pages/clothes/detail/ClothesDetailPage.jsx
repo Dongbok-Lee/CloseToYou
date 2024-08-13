@@ -15,7 +15,8 @@ import {
 } from "./ClothesDetailPageStyle";
 import FloatingButton from "../../../components/floatingbutton/FloatingButton";
 import tempImage from "../../../assets/icons/temp-image.png";
-import { getClothesById } from "../../../api/clothes"; // API 요청 함수 import
+import { getClothesById } from "../../../api/clothes";
+import { filterLabels } from "../../../constants/filter";
 
 const ClothesDetailPage = () => {
   const [details, setDetails] = useState({
@@ -40,17 +41,20 @@ const ClothesDetailPage = () => {
     try {
       const response = await getClothesById(id);
       const clothesData = response.data.data;
+
       setDetails({
         clothesId: clothesData.clothesId,
-        nickname: clothesData.nickname,
-        closetNickname: clothesData.closetNickname,
-        color: clothesData.color,
-        type: clothesData.type,
-        pattern: clothesData.pattern,
-        season: clothesData.season,
-        size: clothesData.size,
-        memo: clothesData.memo,
-        location: clothesData.location,
+        nickname:
+          clothesData.nickname ||
+          `${filterLabels.color[clothesData.color]} ${filterLabels.category[clothesData.type]}`,
+        closetNickname: clothesData.closetNickname || "설정안함",
+        color: filterLabels.color[clothesData.color] || "설정안함",
+        type: filterLabels.category[clothesData.type] || "설정안함",
+        pattern: filterLabels.pattern[clothesData.pattern] || "설정안함",
+        season: filterLabels.season[clothesData.season] || "설정안함",
+        size: clothesData.size || "설정안함",
+        memo: clothesData.memo || "메모없음",
+        location: clothesData.location || "설정안함",
         imageUrl: clothesData.imageUrl || tempImage,
         lastWornDate: clothesData.lastWornDate || "N/A",
       });
@@ -61,10 +65,7 @@ const ClothesDetailPage = () => {
 
   useEffect(() => {
     fetchClothesDetails();
-    console.log(details)
-  }, [id]); // `id`가 변경될 때마다 호출
-
-
+  }, [id]);
 
   const handleNavigateToEdit = e => {
     navigate(`/clothes/edit/${id}`);
@@ -73,11 +74,13 @@ const ClothesDetailPage = () => {
   return (
     <ClothesDetailPageContainer className="page">
       <PageContainer>
-        <ClothesNameText aria-label="옷 별명">{details.nickname || "별명 없음"}</ClothesNameText>
+        <ClothesNameText aria-label="옷 별명">{details.nickname}</ClothesNameText>
         <ImageContainer>
           <img src={details.imageUrl} alt="옷 이미지" />
         </ImageContainer>
-        <LocationInfoText aria-label="위치 정보">{details.location}</LocationInfoText>
+        <LocationInfoText aria-label="위치 정보">
+          {details.closetNickname} {details.location}
+        </LocationInfoText>
 
         <DetailContainer>
           <TabText aria-label="기본 정보">기본 정보</TabText>

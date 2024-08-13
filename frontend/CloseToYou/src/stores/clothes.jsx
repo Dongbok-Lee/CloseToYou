@@ -12,7 +12,7 @@ export const useClothesStore = create(set => ({
   clothesList: [],
   selectedClothes: null,
   clothes: {},
-  
+
   loadClothesList: async () => {
     const { data, status } = await getClothes();
     if (status === 200) {

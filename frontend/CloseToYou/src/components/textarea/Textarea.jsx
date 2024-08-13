@@ -1,30 +1,37 @@
 import React, { useState, useEffect } from "react";
 import TextareaStyle from "./TextareaStyle";
 
-const Textarea = ({ initItem, textareaPlaceholder, onChange }) => {
-
+const Textarea = ({ initItem = "", textareaPlaceholder, onChange }) => {
   const [text, setText] = useState(initItem);
 
   useEffect(() => {
-    setText(initItem)
-  }, [initItem])
+    setText(initItem);
+  }, [initItem]);
+
+  useEffect(() => {
+    const textarea = document.querySelector("textarea");
+    if (textarea) {
+      textarea.style.height = "auto";
+      textarea.style.height = `${textarea.scrollHeight}px`;
+    }
+  }, [text]);
 
   const handleResize = e => {
     const textarea = e.target;
     textarea.style.height = "auto";
-    textarea.style.height = textarea.scrollHeight + "px";
+    textarea.style.height = `${textarea.scrollHeight}px`;
   };
 
   const handleChangeTextLength = event => {
-    const text = event.target;
-    const textLength = text.value.length;
+    let value = event.target.value;
 
-    if (textLength > 50) {
-      text.value = text.value.substring(0, 50);
+    if (value.length > 50) {
+      value = value.substring(0, 50);
     }
 
+    setText(value);
     if (onChange) {
-      onChange(text.value)
+      onChange(value);
     }
   };
 
@@ -36,8 +43,7 @@ const Textarea = ({ initItem, textareaPlaceholder, onChange }) => {
       onKeyDown={handleResize}
       rows="3"
       value={text}
-    >
-    </TextareaStyle>
+    />
   );
 };
 

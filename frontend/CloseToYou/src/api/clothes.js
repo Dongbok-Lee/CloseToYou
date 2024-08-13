@@ -14,13 +14,13 @@ export const getSearchedClothes = async keyword => {
 
 //옷 전체 조회하는 함수 getClothes
 export const getClothes = async () => {
-  const { data, status } = await authClientInstance.get("/clothes/");
+  const { data, status } = await authClientInstance.get("api/clothes/");
   return { data, status };
 };
 
 //옷 삭제하는 함수
 export const deleteClothes = async clothesId => {
-  const { data, status } = await authClientInstance.delete(`/clothes/${clothesId}`);
+  const { data, status } = await authClientInstance.delete(`api/clothes/${clothesId}`);
   return { data, status };
 };
 
