@@ -49,6 +49,7 @@ const ClosetsPage = () => {
 
         setTimeout(() => {
           removeClosets(closets[cardIndex].closetId);
+          setCardIndex("");
         }, 100);
       }
 
@@ -57,6 +58,7 @@ const ClosetsPage = () => {
 
         setTimeout(() => {
           editClosets(closets[cardIndex].closetId, nickname);
+          setCardIndex("");
         }, 100);
       }
 
@@ -65,6 +67,7 @@ const ClosetsPage = () => {
 
         setTimeout(() => {
           addClosets(nickname, closetCode);
+          setCardIndex("");
         }, 100);
       }
     }
@@ -89,9 +92,6 @@ const ClosetsPage = () => {
 
   const handleTouchDelete = e => {
     e.target.focus();
-
-    console.log(cardIndex);
-    console.log(closets[cardIndex].closetId);
 
     setIsOpenModal(true);
     setIsDelete(true);
