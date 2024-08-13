@@ -12,10 +12,9 @@ export const useClosetsStore = create((set, get) => ({
     await getClosets()
       .then(response => {
         set({ closets: response.data.data });
-        console.log(response.data.data);
       })
       .catch(error => {
-        console.log(error);
+        // todo: 서버 에러 처리
       });
   },
 
@@ -25,10 +24,9 @@ export const useClosetsStore = create((set, get) => ({
     await createClosets(nickname, closetCode)
       .then(async response => {
         await get().loadClosets();
-        console.log(response);
       })
       .catch(error => {
-        console.log(error);
+        // todo: 서버 에러 처리
       });
   },
 
@@ -38,10 +36,9 @@ export const useClosetsStore = create((set, get) => ({
     await deleteClosets(closetId)
       .then(async response => {
         await get().loadClosets();
-        console.log(response);
       })
       .catch(error => {
-        console.log(error);
+        // todo: 서버 에러 처리
       });
   },
 
@@ -51,10 +48,9 @@ export const useClosetsStore = create((set, get) => ({
     await patchClosets(closetId, nickname)
       .then(async response => {
         await get().loadClosets();
-        console.log(response);
       })
       .catch(error => {
-        console.log(error);
+        // todo: 서버 에러 처리
       });
   },
 }));
