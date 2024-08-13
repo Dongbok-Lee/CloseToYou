@@ -66,9 +66,9 @@ public class BookmarkController {
     @PatchMapping("/{bookmarkId}/nickname")
     public ResponseEntity<SuccessResponse<Long>> updateBookmarkNickname(Authentication authentication,
                                                                         @PathVariable Long bookmarkId,
-                                                                        @RequestBody Map<String, String> newNickname) {
+                                                                        @Valid @RequestBody BookmarkRequest bookmarkRequest) {
         Long userId = ((CustomUserDetail) authentication.getPrincipal()).getUser().getUserId();
-        String nickname = newNickname.get("nickname");
+        String nickname = bookmarkRequest.getNickname();
         bookmarkService.updateBookmarkNickname(userId, bookmarkId, nickname);
         return ResponseEntity.ok(
                 new SuccessResponse<>("북마크 닉네임 변경에 성공했습니다.", bookmarkId)
