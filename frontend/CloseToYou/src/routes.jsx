@@ -5,6 +5,7 @@ import LandingPageLayout from "./layout/landingPageLayout/LandingPageLayout";
 import SignInPage from "./pages/signin/SignInPage";
 import SignUpPage from "./pages/signup/SignUpPage";
 import ClosetsPage from "./pages/closets/ClosetsPage";
+import ClosetsDetailPage from "./pages/closets/detail/ClosetsDetailPage.jsx";
 import ClothesListPage from "./pages/clothes/list/ClothesListPage";
 import ClothesDetailPage from "./pages/clothes/detail/ClothesDetailPage";
 import ClothesNfcPage from "./pages/clothes/nfc/ClothesNfcPage";
@@ -22,6 +23,7 @@ const AppRoutes = () => {
       <Route path="/signin" element={<LandingPageLayout page={<SignInPage />} />} />
       <Route path="/signup" element={<LandingPageLayout page={<SignUpPage />} />} />
       <Route path="/closets" element={<PageLayout page={<ClosetsPage />} />} />
+      <Route path="/closets/:id" element={<PageLayout page={<ClosetsDetailPage />} />} />
       <Route path="/clothes" element={<PageLayout page={<ClothesListPage />} />} />
       <Route path="/clothes/:id" element={<PageLayout page={<ClothesDetailPage />} />} />
       <Route path="/clothes/edit/:id" element={<PageLayout page={<ClothesEditPage />} />} />
