@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import {
   getClothes,
+  getClothesById,
   deleteClothes,
   patchClothes,
   getSearchedClothes,
@@ -10,14 +11,22 @@ import {
 export const useClothesStore = create(set => ({
   clothesList: [],
   selectedClothes: null,
+  clothes: [],
 
   loadClothesList: async () => {
     const { data, status } = await getClothes();
     if (status === 200) {
-      set({ clothesList: data });
+      console.log("data111", data.data);
+      set({ clothes: data.data });
     }
   },
-
+  loadClothesDetail: async id => {
+    const { data, status } = await getClothesById(id);
+    if (status === 200) {
+      console.log("data", data.data);
+      set({ clothes: data.data });
+    }
+  },
   removeClothesItem: async clothesId => {
     const { status } = await deleteClothes(clothesId);
     if (status === 204) {
