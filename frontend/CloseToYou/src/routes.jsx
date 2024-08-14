@@ -4,7 +4,7 @@ import LandingPage from "./pages/landing/LandingPage";
 import LandingPageLayout from "./layout/landingPageLayout/LandingPageLayout";
 import SignInPage from "./pages/signin/SignInPage";
 import SignUpPage from "./pages/signup/SignUpPage";
-import ClosetsPage from "./pages/closets/ClosetsPage";
+import ClosetsPage from "./pages/closets/list/ClosetsPage.jsx";
 import ClosetsDetailPage from "./pages/closets/detail/ClosetsDetailPage.jsx";
 import ClothesListPage from "./pages/clothes/list/ClothesListPage";
 import ClothesDetailPage from "./pages/clothes/detail/ClothesDetailPage";
