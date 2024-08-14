@@ -14,20 +14,20 @@ import {
   ClosetHumi,
 } from "./ClosetsDetailPageStyle";
 import { useClosetsStore } from "../../../stores/closet";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const ClosetsDetailPage = () => {
   const { closets } = useClosetsStore();
 
-  const location = useLocation();
-  const closetId = location.pathname.substring(9);
+  const params = useParams();
+  const closetId = parseInt(params.id, 10);
 
   return (
     <ClosetDetailPageContainer className="page">
       <NicknameBox>
         {closets.map((item, index) => (
           <ClosetNickname key={index} tabIndex={0}>
-            {item.nickname}
+            {closetId === item.closetId && item.nickname}
           </ClosetNickname>
         ))}
       </NicknameBox>
@@ -41,7 +41,7 @@ const ClosetsDetailPage = () => {
       <ClosetContentWrapper>
         {closets.map((item, index) => (
           <ClosetClothesText key={index} tabIndex={0}>
-            보유 옷 개수 : {item.clothesCount}개
+            {closetId === item.closetId && `보유 옷 개수 : ${item.clothesCount}개`}
           </ClosetClothesText>
         ))}
         <ClosetConditionWrapper>
