@@ -104,7 +104,7 @@ const ClosetsPage = () => {
         {cardIndex !== "" ? (
           <SelectedText>{closets[cardIndex].nickname}</SelectedText>
         ) : (
-          <span></span>
+          <span>선택된 옷장 없음</span>
         )}
       </ClosetTextWrapper>
       <ClosetSelectWrapper>
