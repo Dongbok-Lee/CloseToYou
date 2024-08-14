@@ -15,6 +15,7 @@ import FloatingButton from "../../../components/floatingbutton/FloatingButton";
 import ClothesCard from "../../../components/clothescard/ClothesCard";
 import FilterList from "../../../components/filter/list/FilterList.jsx";
 import useClothesStore from "../../../stores/clothes"; // zustand store import
+import { filterLabels } from "../../../constants/filter"; // filterLabels import
 
 const ClothesListPage = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -23,8 +24,7 @@ const ClothesListPage = () => {
   const listRef = useRef(null);
 
   const navigate = useNavigate();
-  const { clothes, clothesList, loadClothesList } = useClothesStore();
-  console.log("clothes", clothes);
+  const { clothes, clothesList, loadClothesList, removeClothesItem } = useClothesStore();
 
   useEffect(() => {
     loadClothesList(); // 컴포넌트가 마운트될 때 옷 목록 로드
@@ -35,8 +35,13 @@ const ClothesListPage = () => {
     // 필터 변경 로직 (추후 구현 가능)
   };
 
-  const handleTouchDelete = () => {
-    // 삭제 버튼 눌렀을 때의 처리 로직
+  const handleTouchDelete = async () => {
+    const activeClothesId = clothes[activeIndex]?.clothesId;
+    if (activeClothesId) {
+      await removeClothesItem(activeClothesId);
+      await loadClothesList(); // 옷 삭제 후 옷 목록 다시 로드
+      setActiveIndex(prevIndex => Math.max(prevIndex - 1, 0)); // 삭제 후 인덱스 조정
+    }
   };
 
   const handleNext = () => {
@@ -90,7 +95,6 @@ const ClothesListPage = () => {
       if (lastTouchedIndex === index) {
         navigate(`/clothes/${id}`);
       } else {
-        console.log(`Touched card ID: ${id}`);
         setLastTouchedIndex(index);
       }
     }
@@ -109,16 +113,23 @@ const ClothesListPage = () => {
           <NoClothesText>등록된 옷이 없습니다.</NoClothesText>
         ) : (
           <SwipeContainer {...handlers} id="clothes-list" ref={listRef}>
-            {clothes.map((clothing, index) => (
-              <ClothesCardWrapper key={clothing.clothesId} isActive={index === activeIndex}>
-                <ClothesCard
-                  handleTouchClothesCard={() => handleTouchClothesCard(clothing.clothesId, index)}
-                  type={clothing.type}
-                  color={clothing.color}
-                />
-                <Nickname isActive={index === activeIndex}>{clothing.nickname}</Nickname>
-              </ClothesCardWrapper>
-            ))}
+            {clothes.map((clothing, index) => {
+              const colorInKorean = filterLabels.color[clothing.color] || clothing.color;
+              const typeInKorean = filterLabels.category[clothing.type] || clothing.type;
+
+              return (
+                <ClothesCardWrapper key={clothing.clothesId} isActive={index === activeIndex}>
+                  <ClothesCard
+                    handleTouchClothesCard={() => handleTouchClothesCard(clothing.clothesId, index)}
+                    type={clothing.type}
+                    color={clothing.color}
+                  />
+                  <Nickname>
+                    {clothing.nickname ? clothing.nickname : `${colorInKorean} ${typeInKorean}`}
+                  </Nickname>
+                </ClothesCardWrapper>
+              );
+            })}
           </SwipeContainer>
         )}
         <FloatingButton type="delete" onTouchStart={handleTouchDelete}>
