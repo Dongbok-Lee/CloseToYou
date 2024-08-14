@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import {
   SignInPageContainer,
   SignInTitle,
-  SignInLogoImg,
   UserInfoInputWrapper,
   ErrorText,
   SignInUpButtonWrapper,
   SNSButtonWrapper,
 } from "./SignInPageStyle";
 
+import Logo from "../../assets/icons/etc/signin-logo.svg?react";
 import TextInput from "../../components/textinput/TextInput";
 import Button from "../../components/button/Button";
 import SocialButton from "../../components/socialbutton/SocialButton";
@@ -59,10 +59,7 @@ const SignInPage = () => {
   return (
     <SignInPageContainer className="page">
       <SignInTitle tabIndex={0}>Close To You</SignInTitle>
-      <SignInLogoImg
-        src="src/assets/icons/etc/logo-192x192.svg"
-        alt="Close To You Logo"
-      ></SignInLogoImg>
+      <Logo></Logo>
       <UserInfoInputWrapper>
         <TextInput
           textInputPlaceholder={placeholder.email}

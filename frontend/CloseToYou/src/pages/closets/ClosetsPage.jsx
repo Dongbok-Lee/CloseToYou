@@ -17,6 +17,8 @@ import Card from "../../components/card/Card";
 import FloatingButton from "../../components/floatingbutton/FloatingButton";
 import Modal from "../../components/modal/Modal";
 
+import Closet from "../../assets/icons/etc/closet.svg";
+
 import { useDoubleClick } from "../../hooks/useDoubleClick";
 import { useClosetsStore } from "../../stores/closet";
 import { placeholder } from "../../constants/placeholder";
@@ -108,7 +110,7 @@ const ClosetsPage = () => {
     <ClosetsPageContainer className="page">
       <ClosetTextWrapper>
         <ClosetTextTitleWrapper>
-          <ClosetImg src="src/assets/icons/etc/closet.svg" alt="closet logo"></ClosetImg>
+          <ClosetImg src={Closet} alt="closet logo"></ClosetImg>
           <ClosetText>선택된 옷장</ClosetText>
         </ClosetTextTitleWrapper>
         {cardIndex !== "" ? (
