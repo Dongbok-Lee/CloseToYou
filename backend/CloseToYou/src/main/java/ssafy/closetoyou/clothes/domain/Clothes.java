@@ -42,7 +42,7 @@ public class Clothes {
         this.type = type;
         this.pattern = pattern;
         this.color = color;
-        this.season = Season.DEFAULT;
+        this.season = season;
         this.size = size;
         this.memo = memo;
         this.wearingCount = wearingCount;
@@ -52,7 +52,7 @@ public class Clothes {
         this.updatedDateTime = updatedDateTime;
         this.lastWornDate = lastWornDate;
     }
-    public Clothes(Long clothesId, Closet closet, String location, String nickname, Type type, Pattern pattern, Color color) {
+    public Clothes(Long clothesId, Closet closet, String location, String nickname, Type type, Pattern pattern, Season season, Color color) {
         this.clothesId = clothesId;
         this.closet = closet;
         this.location = location;
@@ -60,10 +60,10 @@ public class Clothes {
         this.type = type;
         this.pattern = pattern;
         this.color = color;
-        this.season = Season.DEFAULT;
+        this.season = season;
     }
 
-    public Clothes(Long clothesId, Long nfcId, Closet closet, String location, String nickname, Type type, Pattern pattern, Color color, Boolean isDeleted) {
+    public Clothes(Long clothesId, Long nfcId, Closet closet, String location, String nickname, Type type, Pattern pattern, Season season, Color color, Boolean isDeleted) {
         this.clothesId = clothesId;
         this.nfcId = nfcId;
         this.closet = closet;
@@ -72,7 +72,7 @@ public class Clothes {
         this.type = type;
         this.pattern = pattern;
         this.color = color;
-        this.season = Season.DEFAULT;
+        this.season = season;
         this.isDeleted = isDeleted;
     }
 
