@@ -125,7 +125,7 @@ const BookMarkDetailPage = () => {
       <FloatingButtonWraper>
         <FloatingButton type="delete" onTouchStart={() => setIsOpenDeleteModal(true)} />
         <FloatingButton
-          type="plus"
+          type="add"
           onTouchStart={() => {
             navigate("/clothes/nfc");
           }}
