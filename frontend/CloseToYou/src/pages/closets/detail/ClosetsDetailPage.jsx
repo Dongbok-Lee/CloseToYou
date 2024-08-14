@@ -16,6 +16,8 @@ import {
 import { useClosetsStore } from "../../../stores/closet";
 import { useParams } from "react-router-dom";
 
+import Sun from "../../../assets/icons/etc/sun.svg";
+
 const ClosetsDetailPage = () => {
   const { closets } = useClosetsStore();
 
@@ -34,7 +36,7 @@ const ClosetsDetailPage = () => {
       <WeatherWrapper>
         <WeatherText>오늘의 날씨</WeatherText>
         <WeatherApiWrapper>
-          <WeatherImg src="src/assets/icons/etc/sun.svg" alt="맑음"></WeatherImg>
+          <WeatherImg src={Sun} alt="맑음"></WeatherImg>
           <WeatherTemp>28℃</WeatherTemp>
         </WeatherApiWrapper>
       </WeatherWrapper>

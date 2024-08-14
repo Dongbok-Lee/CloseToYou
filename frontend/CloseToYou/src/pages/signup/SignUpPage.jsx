@@ -21,6 +21,8 @@ import { error } from "../../constants/error";
 import TextInput from "../../components/textinput/TextInput";
 import Button from "../../components/button/Button";
 
+import logo from "../../assets/icons/etc/signin-logo.svg";
+
 import { useEmailStore } from "../../stores/email";
 import { useUserStore } from "../../stores/user";
 
@@ -133,10 +135,7 @@ const SignUpPage = () => {
 
   return (
     <SignUpPageContainer className="page">
-      <SignUpLogoImg
-        src="src/assets/icons/etc/logo-192x192.svg"
-        alt="Close To You Logo"
-      ></SignUpLogoImg>
+      <SignUpLogoImg src={logo} alt="Close To You Logo"></SignUpLogoImg>
       <SignUpTitle>Close To You</SignUpTitle>
       <SingUpInfoWrapper>
         <SignUpInfoTitle>회원 가입</SignUpInfoTitle>

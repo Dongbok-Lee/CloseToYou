@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import {
   SignInPageContainer,
   SignInTitle,
-  SignInLogoImg,
   UserInfoInputWrapper,
   ErrorText,
   SignInUpButtonWrapper,
   SNSButtonWrapper,
 } from "./SignInPageStyle";
 
+import Logo from "../../assets/icons/etc/signin-logo.svg?react";
 import TextInput from "../../components/textinput/TextInput";
 import Button from "../../components/button/Button";
 import SocialButton from "../../components/socialbutton/SocialButton";
@@ -56,13 +56,18 @@ const SignInPage = () => {
     setSignInResponse("");
   };
 
+  const handleTouchKakaoButton = async () => {
+    window.location.href = import.meta.env.VITE_KAKAO_LOGIN_URL;
+  };
+
+  const handleTouchGoogleButton = async () => {
+    window.location.href = import.meta.env.VITE_GOOGLE_LOGIN_URL;
+  };
+
   return (
     <SignInPageContainer className="page">
       <SignInTitle tabIndex={0}>Close To You</SignInTitle>
-      <SignInLogoImg
-        src="src/assets/icons/etc/logo-192x192.svg"
-        alt="Close To You Logo"
-      ></SignInLogoImg>
+      <Logo></Logo>
       <UserInfoInputWrapper>
         <TextInput
           textInputPlaceholder={placeholder.email}
@@ -83,8 +88,8 @@ const SignInPage = () => {
         </Button>
       </SignInUpButtonWrapper>
       <SNSButtonWrapper>
-        <SocialButton socialBtnType="kakao"></SocialButton>
-        <SocialButton socialBtnType="google"></SocialButton>
+        <SocialButton socialBtnType="kakao" onTouchStart={handleTouchKakaoButton}></SocialButton>
+        <SocialButton socialBtnType="google" onTouchStart={handleTouchGoogleButton}></SocialButton>
       </SNSButtonWrapper>
     </SignInPageContainer>
   );
