@@ -1,12 +1,16 @@
 import SocialButtonStyle from "./SocialButtonStyle";
+import Kakao from "../../assets/icons/kakao.svg?react";
+import Google from "../../assets/icons/google.svg?react";
 
-const SocialButton = ({ socialBtnType, onTouchStart }) => {
+const SocialButton = ({ socialBtnType, handleTouchButton }) => {
   return (
-    <SocialButtonStyle
-      socialBtnType={socialBtnType}
-      onTouchStart={onTouchStart}
-      tabIndex={0}
-    ></SocialButtonStyle>
+    <SocialButtonStyle>
+      {socialBtnType === "kakao" ? (
+        <Kakao onTouchStart={handleTouchButton}></Kakao>
+      ) : (
+        <Google onTouchStart={handleTouchButton}></Google>
+      )}
+    </SocialButtonStyle>
   );
 };
 
