@@ -11,12 +11,12 @@ import {
 export const useClothesStore = create(set => ({
   clothesList: [],
   selectedClothes: null,
-  clothes: {},
+  clothes: [],
 
   loadClothesList: async () => {
     const { data, status } = await getClothes();
     if (status === 200) {
-      console.log("data", data.data);
+      console.log("data111", data.data);
       set({ clothes: data.data });
     }
   },
