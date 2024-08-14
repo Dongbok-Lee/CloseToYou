@@ -38,37 +38,19 @@ const Footer = () => {
     console.log(location.pathname);
   }, [location.pathname]);
 
-  const handleTouchCloset = e => {
-    setTimeout(() => {
-      document.activeElement.blur();
-      nav("/closets");
-    }, 150);
-  };
+  const handleTouch = path => {
+    document.activeElement.blur();
 
-  const handleTouchClothes = e => {
-    setTimeout(() => {
-      document.activeElement.blur();
-      nav("/clothes");
-    }, 150);
-  };
+    nav(path);
 
-  const handleTouchBookmark = e => {
     setTimeout(() => {
       document.activeElement.blur();
-      nav("/bookmarks");
-    }, 150);
-  };
-
-  const handleTouchProfile = e => {
-    setTimeout(() => {
-      document.activeElement.blur();
-      nav("/user");
-    }, 150);
+    }, 100);
   };
 
   return (
     <FooterContainer>
-      <ClosetWrapper tabIndex={0} onTouchStart={handleTouchCloset}>
+      <ClosetWrapper tabIndex={0} onTouchStart={() => handleTouch("/closets")}>
         {url.includes("/closets") ? (
           <ClosetImg src={ClosetFocusImg} alt="옷장으로 바로가기"></ClosetImg>
         ) : (
@@ -76,7 +58,7 @@ const Footer = () => {
         )}
         <ClosetText url={url}>옷장</ClosetText>
       </ClosetWrapper>
-      <ClothesWrapper tabIndex={0} onTouchStart={handleTouchClothes}>
+      <ClothesWrapper tabIndex={0} onTouchStart={() => handleTouch("/clothes")}>
         {url.includes("/clothes") ? (
           <ClothesImg src={ClothesFocusImg} alt="옷으로 바로가기"></ClothesImg>
         ) : (
@@ -84,7 +66,7 @@ const Footer = () => {
         )}
         <ClothesText url={url}>옷</ClothesText>
       </ClothesWrapper>
-      <BookmarkWrapper tabIndex={0} onTouchStart={handleTouchBookmark}>
+      <BookmarkWrapper tabIndex={0} onTouchStart={() => handleTouch("/bookmarks")}>
         {url.includes("/bookmarks") ? (
           <BookmarkImg src={BookmarkFocusImg} alt="북마크로 바로가기"></BookmarkImg>
         ) : (
@@ -92,7 +74,7 @@ const Footer = () => {
         )}
         <BookmarkText url={url}>북마크</BookmarkText>
       </BookmarkWrapper>
-      <ProfileWrapper tabIndex={0} onTouchStart={handleTouchProfile}>
+      <ProfileWrapper tabIndex={0} onTouchStart={() => handleTouch("/user")}>
         {url.includes("/user") || url.includes("/nickname") || url.includes("/password") ? (
           <ProfileImg src={ProfileFocusImg} alt="프로필로 바로가기"></ProfileImg>
         ) : (
