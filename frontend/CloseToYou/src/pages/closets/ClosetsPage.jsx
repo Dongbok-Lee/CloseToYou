@@ -17,6 +17,8 @@ import Card from "../../components/card/Card";
 import FloatingButton from "../../components/floatingbutton/FloatingButton";
 import Modal from "../../components/modal/Modal";
 
+import Closet from "../../assets/icons/etc/closet.svg";
+
 import { useDoubleClick } from "../../hooks/useDoubleClick";
 import { useClosetsStore } from "../../stores/closet";
 import { placeholder } from "../../constants/placeholder";
@@ -46,29 +48,14 @@ const ClosetsPage = () => {
     if (!isOpenModal) {
       if (isDelete) {
         setIsDelete(false);
-
-        setTimeout(() => {
-          removeClosets(closets[cardIndex].closetId);
-          setCardIndex("");
-        }, 100);
       }
 
       if (isModify) {
         setIsModify(false);
-
-        setTimeout(() => {
-          editClosets(closets[cardIndex].closetId, nickname);
-          setCardIndex("");
-        }, 100);
       }
 
       if (isAdd) {
         setIsAdd(false);
-
-        setTimeout(() => {
-          addClosets(nickname, closetCode);
-          setCardIndex("");
-        }, 100);
       }
     }
   }, [isOpenModal, closets]);
@@ -108,7 +95,7 @@ const ClosetsPage = () => {
     <ClosetsPageContainer className="page">
       <ClosetTextWrapper>
         <ClosetTextTitleWrapper>
-          <ClosetImg src="src/assets/icons/etc/closet.svg" alt="closet logo"></ClosetImg>
+          <ClosetImg src={Closet} alt="closet logo"></ClosetImg>
           <ClosetText>선택된 옷장</ClosetText>
         </ClosetTextTitleWrapper>
         {cardIndex !== "" ? (
@@ -135,7 +122,14 @@ const ClosetsPage = () => {
         <FloatingButton type="delete" onTouchStart={handleTouchDelete}></FloatingButton>
         <FloatingButton type="edit" onTouchStart={handleTouchModify}></FloatingButton>
         {isOpenModal && isDelete && (
-          <Modal modalType="delete" setIsOpenModal={setIsOpenModal}>
+          <Modal
+            modalType="delete"
+            setIsOpenModal={setIsOpenModal}
+            handleTouchConfirmButton={async () => {
+              await removeClosets(closets[cardIndex].closetId);
+              setCardIndex("");
+            }}
+          >
             삭제하기
           </Modal>
         )}
@@ -144,6 +138,10 @@ const ClosetsPage = () => {
             firstPlaceholder={placeholder.newClosetNickname}
             setFirstValue={setNickname}
             setIsOpenModal={setIsOpenModal}
+            handleTouchConfirmButton={async () => {
+              await editClosets(closets[cardIndex].closetId, nickname);
+              setCardIndex("");
+            }}
           >
             수정하기
           </Modal>
@@ -156,6 +154,10 @@ const ClosetsPage = () => {
             setSecondValue={setClosetCode}
             modalSize="large"
             setIsOpenModal={setIsOpenModal}
+            handleTouchConfirmButton={async () => {
+              await addClosets(nickname, closetCode);
+              setCardIndex("");
+            }}
           >
             추가하기
           </Modal>
