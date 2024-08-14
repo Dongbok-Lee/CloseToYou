@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { colors } from "../../constants/colors";
 
 const SearchCardStyle = styled.div`
   display: flex;
@@ -8,12 +9,12 @@ const SearchCardStyle = styled.div`
   height: 5rem;
   margin-bottom: 1rem;
   padding: 1rem;
-  border: 1px solid rgba(255, 105, 105, 1);
+  border: 1px solid ${colors.point[0]};
   border-radius: 0.625rem;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   -webkit-tap-highlight-color: transparent;
 
-  .left-box {
+  .leftBox {
     width: 5rem;
     height: 5rem;
     background: center no-repeat;
@@ -23,7 +24,7 @@ const SearchCardStyle = styled.div`
     align-items: center;
   }
 
-  .right-box {
+  .rightBox {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -43,11 +44,11 @@ const SearchCardStyle = styled.div`
   }
 
   &:focus {
-    border: 3px solid rgba(255, 105, 105, 1);
+    border: 3px solid ${colors.point[0]};
     outline: none;
 
     .location {
-      color: rgba(255, 105, 105, 1);
+      color: ${colors.point[0]};
       font-weight: 600;
     }
   }
