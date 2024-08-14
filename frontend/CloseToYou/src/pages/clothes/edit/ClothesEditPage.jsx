@@ -73,13 +73,24 @@ const ClothesEditPage = () => {
       setLocation(clothes.location || "");
       setImageUrl(clothes.imageUrl || tempImage);
       setLastWornDate(clothes.lastWornDate || "");
+
+      setInitialData({
+        nickname: defaultNickname,
+        color: filterLabels.color[clothes.color] || "",
+        type: filterLabels.category[clothes.type] || "",
+        pattern: filterLabels.pattern[clothes.pattern] || "",
+        size: clothes.size || "",
+        season: filterLabels.season[clothes.season] || "",
+        memo: clothes.memo || "",
+        location: clothes.location || "",
+      });
     }
   }, [clothes]);
 
   const handleSave = async () => {
     const updatedClothes = {};
 
-    if (nickname !== initialData.nickname) {
+    if (nickname !== initialData.nickname && nickname !== "") {
       updatedClothes.nickname = nickname;
     }
 
@@ -103,8 +114,10 @@ const ClothesEditPage = () => {
       updatedClothes.memo = memo;
     }
 
+    // 변경사항이 없을 때는 서버에 요청을 보내지 않음
     if (Object.keys(updatedClothes).length === 0) {
       console.log("변경사항이 없습니다.");
+      navigate(`/clothes/${id}`);
       return;
     }
 
