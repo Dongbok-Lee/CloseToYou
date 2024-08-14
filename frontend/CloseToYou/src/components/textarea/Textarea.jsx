@@ -1,18 +1,37 @@
+import React, { useState, useEffect } from "react";
 import TextareaStyle from "./TextareaStyle";
 
-const Textarea = ({ textareaPlaceholder }) => {
+const Textarea = ({ initItem = "", textareaPlaceholder, onChange }) => {
+  const [text, setText] = useState(initItem);
+
+  useEffect(() => {
+    setText(initItem);
+  }, [initItem]);
+
+  useEffect(() => {
+    const textarea = document.querySelector("textarea");
+    if (textarea) {
+      textarea.style.height = "auto";
+      textarea.style.height = `${textarea.scrollHeight}px`;
+    }
+  }, [text]);
+
   const handleResize = e => {
     const textarea = e.target;
     textarea.style.height = "auto";
-    textarea.style.height = textarea.scrollHeight + "px";
+    textarea.style.height = `${textarea.scrollHeight}px`;
   };
 
-  const handleChangeTextLength = e => {
-    const text = e.target;
-    const textLength = text.value.length;
+  const handleChangeTextLength = event => {
+    let value = event.target.value;
 
-    if (textLength > 50) {
-      text.value = text.value.substring(0, 50);
+    if (value.length > 50) {
+      value = value.substring(0, 50);
+    }
+
+    setText(value);
+    if (onChange) {
+      onChange(value);
     }
   };
 
@@ -23,7 +42,8 @@ const Textarea = ({ textareaPlaceholder }) => {
       onKeyUp={handleResize}
       onKeyDown={handleResize}
       rows="3"
-    ></TextareaStyle>
+      value={text}
+    />
   );
 };
 
