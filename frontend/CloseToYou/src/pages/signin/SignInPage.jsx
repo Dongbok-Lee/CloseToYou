@@ -88,8 +88,14 @@ const SignInPage = () => {
         </Button>
       </SignInUpButtonWrapper>
       <SNSButtonWrapper>
-        <SocialButton socialBtnType="kakao" onTouchStart={handleTouchKakaoButton}></SocialButton>
-        <SocialButton socialBtnType="google" onTouchStart={handleTouchGoogleButton}></SocialButton>
+        <SocialButton
+          socialBtnType="kakao"
+          handleTouchButton={handleTouchKakaoButton}
+        ></SocialButton>
+        <SocialButton
+          socialBtnType="google"
+          handleTouchButton={handleTouchGoogleButton}
+        ></SocialButton>
       </SNSButtonWrapper>
     </SignInPageContainer>
   );
