@@ -39,7 +39,7 @@ export const SignInTitle = styled.p`
   }
 `;
 
-export const SignInLogoImg = styled.img`
+export const Logo = styled.img`
   width: 7rem;
   height: 10rem;
 `;
@@ -57,7 +57,7 @@ export const UserInfoInputWrapper = styled.div`
   gap: 0.8rem;
 
   margin-top: 1.5rem;
-  `;
+`;
 
 export const ErrorText = styled.p`
   box-sizing: border-box;
