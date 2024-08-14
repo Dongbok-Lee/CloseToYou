@@ -1,6 +1,4 @@
 import styled from "@emotion/styled";
-import Kakao from "../../assets/icons/kakao.svg";
-import Google from "../../assets/icons/google.svg";
 
 const SocialButtonStyle = styled.div`
   box-sizing: border-box;
@@ -22,18 +20,6 @@ const SocialButtonStyle = styled.div`
 
     outline: none;
   }
-
-  ${({ socialBtnType }) =>
-    socialBtnType === "kakao" &&
-    `
-        background-image: url(${Kakao});
-    `}
-
-  ${({ socialBtnType }) =>
-    socialBtnType === "google" &&
-    `
-        background-image: url(${Google});
-    `}
 `;
 
 export default SocialButtonStyle;
