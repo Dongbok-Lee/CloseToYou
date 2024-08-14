@@ -12,10 +12,17 @@ export const getSearchedClothes = async keyword => {
   }
 };
 
-//옷 전체 조회하는 함수 getClothes
+//옷 목록 조회하는 함수 getClothes
 export const getClothes = async () => {
-  const { data, status } = await authClientInstance.get("api/clothes/");
-  return { data, status };
+  return await authClientInstance
+    .get("/api/clothes")
+    .then(res => {
+      console.log("res", res);
+      return res;
+    })
+    .catch(e => {
+      return e;
+    });
 };
 
 //옷 삭제하는 함수
