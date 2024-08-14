@@ -43,10 +43,11 @@ export const useUserStore = create(set => ({
     await createSignIn(email, password)
       .then(response => {
         if (response.status === 200) {
+          setAccessToken();
+          removeAccessToken();
           set({ signInResponse: response.data.message, isSuccess: true });
         }
-        setAccessToken();
-        removeAccessToken();
+        
       })
       .catch(error => {
         if (error.response.status === 400) {
