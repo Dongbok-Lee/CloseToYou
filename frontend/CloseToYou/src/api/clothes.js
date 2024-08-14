@@ -17,7 +17,6 @@ export const getClothes = async () => {
   return await authClientInstance
     .get("/api/clothes")
     .then(res => {
-      console.log("res", res);
       return res;
     })
     .catch(e => {
