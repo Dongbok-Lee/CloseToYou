@@ -1,7 +1,7 @@
-import { clientInstance } from "@/util/http-client";
+import { authClientInstance } from "../utils/http-client.js";
 
-export const getBookmarksList = async () => {
-  return await clientInstance
+export const getBookmarkList = async () => {
+  return await authClientInstance
     .get("/api/bookmarks")
     .then(res => {
       return res;
@@ -12,8 +12,30 @@ export const getBookmarksList = async () => {
 };
 
 export const deleteBookmark = async bookmarkId => {
-  return await clientInstance
-    .delete("/api/delete/" + bookmarkId)
+  return await authClientInstance
+    .delete("/api/bookmarks/" + bookmarkId)
+    .then(res => {
+      return res;
+    })
+    .catch(error => {
+      return error;
+    });
+};
+
+export const createBookmark = async newNickname => {
+  return await authClientInstance
+    .post("/api/bookmarks", { nickname: newNickname })
+    .then(res => {
+      return res;
+    })
+    .catch(error => {
+      return error;
+    });
+};
+
+export const patchBookmark = async (bookmarkId, modifiedNickname) => {
+  return await authClientInstance
+    .patch("api/bookmarks/" + bookmarkId + "/nickname", { nickname: modifiedNickname })
     .then(res => {
       return res;
     })
@@ -23,7 +45,7 @@ export const deleteBookmark = async bookmarkId => {
 };
 
 export const getBookmarkDetail = async bookmarkId => {
-  return await clientInstance
+  return await authClientInstance
     .get("api/bookmarks/" + bookmarkId)
     .then(res => {
       return res;
@@ -33,19 +55,8 @@ export const getBookmarkDetail = async bookmarkId => {
     });
 };
 
-export const patchBookmarkNickname = async bookmarkId => {
-  return await clientInstance
-    .patch("api/bookmarks/" + bookmarkId + "/nickname")
-    .then(res => {
-      return res;
-    })
-    .catch(error => {
-      return error;
-    });
-};
-
 export const deleteClothesInBookmark = async (bookmarkId, clothesId) => {
-  return await clientInstance
+  return await authClientInstance
     .delete("api/bookmarks/" + bookmarkId + "/delete/" + clothesId)
     .then(res => {
       return res;
@@ -55,9 +66,9 @@ export const deleteClothesInBookmark = async (bookmarkId, clothesId) => {
     });
 };
 
-export const addClothesInBookmark = async (bookmarkId, clothesId) => {
-  return await clientInstance
-    .post("api/bookmarks/" + bookmarkId + "/delete/" + clothesId)
+export const createclothesInBookmark = async (bookmarkId, clothesId) => {
+  return await authClientInstance
+    .post("api/bookmarks/" + bookmarkId + "/add/" + clothesId)
     .then(res => {
       return res;
     })
