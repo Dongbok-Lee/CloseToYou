@@ -7,10 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import ssafy.closetoyou.closet.domain.Closet;
-import ssafy.closetoyou.clothes.domain.Clothes;
-import ssafy.closetoyou.clothes.domain.Color;
-import ssafy.closetoyou.clothes.domain.Pattern;
-import ssafy.closetoyou.clothes.domain.Type;
+import ssafy.closetoyou.clothes.domain.*;
 import ssafy.closetoyou.global.error.errorcode.ClothesErrorCode;
 import ssafy.closetoyou.global.error.exception.CloseToYouException;
 
@@ -52,6 +49,7 @@ public class ClothesRequest {
                 .color(color)
                 .pattern(pattern)
                 .location(location)
+                .season(Season.DEFAULT)
                 .closet(Closet.builder().closetId(closetId).build())
                 .imageUrl(imageUrl)
                 .build();
