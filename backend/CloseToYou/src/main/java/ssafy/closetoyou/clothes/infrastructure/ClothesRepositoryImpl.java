@@ -40,12 +40,16 @@ public class ClothesRepositoryImpl implements ClothesRepository {
 
     @Override
     public Clothes findClothesByClothesId(Long clothesId) {
-        return clothesJpaRepository.findClothesByClothesIdAndIsDeleted(clothesId, false).toModel();
+        return clothesJpaRepository.findClothesByClothesIdAndIsDeleted(clothesId, false)
+                .orElseThrow(() -> new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION))
+                .toModel();
     }
 
     @Override
     public Clothes findClothesByNfcId(Long nfcId) {
-        return clothesJpaRepository.findClothesByNfcIdAndIsDeleted(nfcId, false).toModel();
+        return clothesJpaRepository.findClothesByNfcIdAndIsDeleted(nfcId, false)
+                .orElseThrow(() -> new CloseToYouException(ClothesErrorCode.NO_CLOTHES_EXCEPTION))
+                .toModel();
     }
 
     @Override
