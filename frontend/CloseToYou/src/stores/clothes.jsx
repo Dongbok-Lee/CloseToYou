@@ -31,7 +31,7 @@ export const useClothesStore = create(set => ({
     const { status } = await deleteClothes(clothesId);
     if (status === 204) {
       set(state => ({
-        clothesList: state.clothesList.filter(clothes => clothes.id !== clothesId),
+        clothes: state.clothes.filter(clothes => clothes.clothesId !== clothesId),
       }));
     }
   },
