@@ -10,17 +10,16 @@ const NFCPage = () => {
   const loadClothesByNfc = useClothesStore(state => state.loadClothesByNfc);
   const [error, setError] = useState(null);
   const [recordId, setRecordId] = useState(null);
-
   useEffect(() => {
-    const handleNfcScan = async () => {
+    const handleNfcScan = () => {
       if ("NDEFReader" in window) {
         try {
           const ndef = new NDEFReader();
-          await ndef.scan();
-          console.log("Scan started successfully.");
+          ndef.scan().then(() => {
+            setError("Scan started successfully");
+          });g
 
           ndef.onreadingerror = () => {
-            console.log("Cannot read data from the NFC tag. Try another one?");
             setError("NFC 태그에서 데이터를 읽을 수 없습니다. 다른 태그를 시도해보세요.");
           };
 
@@ -28,10 +27,8 @@ const NFCPage = () => {
             console.log("NDEF message read.");
             const message = event.message;
             for (const record of message.records) {
-              console.log("Record type:  " + record.recordType);
-              console.log("MIME type:    " + record.mediaType);
               console.log("Record id:    " + record.id);
-              setRecordId(record.id); // record.id 값을 상태로 저장
+              setRecordId(record.id);
             }
           };
         } catch (error) {
@@ -61,7 +58,8 @@ const NFCPage = () => {
         <br />
         옷의 NFC 태그를 찍어주세요
       </NfcText>
-      {recordId && <div>Record ID: {recordId}</div>} {/* 화면에 record.id 출력 */}
+      {alertText}
+      {recordId && <div>Record ID: {recordId}</div>}
       {error && <div>{error}</div>}
       <SkipButton onClick={handleSkip} aria-label="건너뛰기 버튼">
         Skip
