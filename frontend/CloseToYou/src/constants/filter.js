@@ -1,5 +1,5 @@
 export const filterItems = {
-  closet: [], // 옷장: []
+  closet: [],
   color: [
     "RED",
     "ORANGE",
@@ -23,14 +23,14 @@ export const filterItems = {
     "JUMPER",
     "SHIRT",
     "SWEATER",
-    "T-SHIRT",
+    "TSHIRT",
     "VEST",
     "PANTS",
     "SKIRT",
     "DRESS",
-    "JUMPSUIT",
+    "JUMPSUITE",
   ],
-  pattern: ["CHECK", "DOT", "STRIPE", "PLANTS", "OTHER", "PLAIN"],
+  pattern: ["CHECK", "DOT", "STRIPE", "PLANTS", "ETC", "BLANK"],
 };
 
 export const filterLabels = {
@@ -71,5 +71,12 @@ export const filterLabels = {
     PLANTS: "꽃무늬",
     ETC: "기타",
     BLANK: "무지",
+  },
+  season: {
+    SPRING: "봄",
+    SUMMER: "여름",
+    AUTUMN: "가을",
+    WINTER: "겨울",
+    DEFAULT: "사계절",
   },
 };

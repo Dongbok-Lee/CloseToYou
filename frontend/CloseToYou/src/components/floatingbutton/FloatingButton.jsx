@@ -14,7 +14,7 @@ const icons = {
 const FloatingButton = ({ type, onTouchStart }) => {
   return (
     <ButtonContainer 
-      onTouchStart={onTouchStart} 
+      onClick={onTouchStart} 
       type={type} 
       isDeleteType={type === "delete"} 
       tabIndex={0} 
