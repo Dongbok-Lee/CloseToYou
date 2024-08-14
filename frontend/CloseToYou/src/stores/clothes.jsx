@@ -56,6 +56,9 @@ export const useClothesStore = create(set => ({
     const { data, status } = await getClothesByNfc(nfcId);
     if (status === 200) {
       set({ selectedClothes: data });
+      return data.id;
+    } else {
+      throw new Error("옷을 찾을 수 없습니다.");
     }
   },
 
