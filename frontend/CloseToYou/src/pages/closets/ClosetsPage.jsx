@@ -48,17 +48,20 @@ const ClosetsPage = () => {
     if (!isOpenModal) {
       if (isDelete) {
         setIsDelete(false);
+        setCardIndex("");
       }
 
       if (isModify) {
         setIsModify(false);
+        setCardIndex("");
       }
 
       if (isAdd) {
         setIsAdd(false);
+        setCardIndex("");
       }
     }
-  }, [isOpenModal, closets]);
+  }, [isOpenModal, cardIndex]);
 
   const handleTouchCard = index => {
     setCardIndex(index);

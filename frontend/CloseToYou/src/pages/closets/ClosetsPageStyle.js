@@ -3,6 +3,8 @@ import styled from "@emotion/styled";
 export const ClosetsPageContainer = styled.div`
     display: flex;
 
+    height: 100%;
+
     flex-direction: column;
 
     span {
@@ -19,69 +21,68 @@ export const ClosetsPageContainer = styled.div`
 `;
 
 export const ClosetTextWrapper = styled.div`
-    display: flex;
+  display: flex;
 
-    flex-direction: column;
+  flex-direction: column;
 
-    justify-content: center;
+  justify-content: center;
 
-    text-align: center;
+  text-align: center;
 
-    gap: 0.3rem;
+  gap: 0.3rem;
 
-    margin-top: 2rem;
-    
+  margin-top: 2rem;
 `;
 
 export const ClosetTextTitleWrapper = styled.div`
-    display: flex;
+  display: flex;
 
-    align-items: center;
+  align-items: center;
 
-    gap: 0.5rem;
+  gap: 0.5rem;
 `;
 
 export const ClosetImg = styled.img`
-    width: 2rem;
-    height: 2rem;
+  width: 2rem;
+  height: 2rem;
 `;
 
 export const ClosetText = styled.p`
-    text-align: left;
-    font-size: 1.25rem;
-    font-weight: 600;
+  text-align: left;
+  font-size: 1.25rem;
+  font-weight: 600;
 
-    line-height: 3rem;
+  line-height: 3rem;
 `;
 
 export const SelectedText = styled.p`
-    color: rgba(255, 105, 105, 1);
+  color: rgba(255, 105, 105, 1);
 
-    text-align: left;
-    font-size: 1.625rem;
-    font-weight: 700;
+  text-align: left;
+  font-size: 1.625rem;
+  font-weight: 700;
 
-    padding-left: 0.2rem;
+  padding-left: 0.2rem;
 `;
 
 export const ClosetSelectWrapper = styled.div`
-    display: flex;
+  display: flex;
 
-    flex-flow: wrap;
+  flex-flow: wrap;
 
-    justify-content: space-between;
-    align-items: center;
+  justify-content: space-between;
+  align-items: center;
 
-    gap: 4rem;
+  gap: 4rem;
 
-    margin-top: 2rem;
+  margin-top: 2rem;
 `;
 
 export const ClosetButtonWrapper = styled.div`
-    display: flex;
+  display: flex;
 
-    flex:1;
+  height: 25vh;
 
-    justify-content: space-between;
-    align-items: flex-end;
+  justify-content: space-between;
+  align-items: flex-end;
 `;
