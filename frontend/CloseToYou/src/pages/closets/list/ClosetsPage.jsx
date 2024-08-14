@@ -10,18 +10,18 @@ import {
   ClosetButtonWrapper,
 } from "./ClosetsPageStyle";
 
-import ClosetsCardBasic from "../../assets/icons/etc/closet-card-basic.svg?react";
-import ClosetsCardFocus from "../../assets/icons/etc/closet-card-focus.svg?react";
-import Plus from "../../assets/icons/etc/plus-large.svg?react";
-import Card from "../../components/card/Card";
-import FloatingButton from "../../components/floatingbutton/FloatingButton";
-import Modal from "../../components/modal/Modal";
+import ClosetsCardBasic from "../../../assets/icons/etc/closet-card-basic.svg?react";
+import ClosetsCardFocus from "../../../assets/icons/etc/closet-card-focus.svg?react";
+import Plus from "../../../assets/icons/etc/plus-large.svg?react";
+import Card from "../../../components/card/Card";
+import FloatingButton from "../../../components/floatingbutton/FloatingButton";
+import Modal from "../../../components/modal/Modal";
 
-import Closet from "../../assets/icons/etc/closet.svg";
+import Closet from "../../../assets/icons/etc/closet.svg";
 
-import { useDoubleClick } from "../../hooks/useDoubleClick";
-import { useClosetsStore } from "../../stores/closet";
-import { placeholder } from "../../constants/placeholder";
+import { useDoubleClick } from "../../../hooks/useDoubleClick";
+import { useClosetsStore } from "../../../stores/closet";
+import { placeholder } from "../../../constants/placeholder";
 
 import { useNavigate } from "react-router-dom";
 const ClosetsPage = () => {
@@ -48,17 +48,20 @@ const ClosetsPage = () => {
     if (!isOpenModal) {
       if (isDelete) {
         setIsDelete(false);
+        setCardIndex("");
       }
 
       if (isModify) {
         setIsModify(false);
+        setCardIndex("");
       }
 
       if (isAdd) {
         setIsAdd(false);
+        setCardIndex("");
       }
     }
-  }, [isOpenModal, closets]);
+  }, [isOpenModal, cardIndex]);
 
   const handleTouchCard = index => {
     setCardIndex(index);
