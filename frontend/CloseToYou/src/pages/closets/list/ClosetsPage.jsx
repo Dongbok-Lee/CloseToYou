@@ -21,11 +21,13 @@ import Closet from "../../../assets/icons/etc/closet.svg";
 
 import { useDoubleClick } from "../../../hooks/useDoubleClick";
 import { useClosetsStore } from "../../../stores/closet";
+import { useUserStore } from "../../../stores/user";
 import { placeholder } from "../../../constants/placeholder";
 
 import { useNavigate } from "react-router-dom";
 const ClosetsPage = () => {
   const { loadClosets, addClosets, removeClosets, editClosets, closets } = useClosetsStore();
+  const { isSuccess } = useUserStore();
 
   const [isDoubleClick, updateTouchTime] = useDoubleClick();
 
@@ -41,8 +43,14 @@ const ClosetsPage = () => {
   const nav = useNavigate();
 
   useEffect(() => {
-    loadClosets();
-  }, []);
+    const fetchData = async () => {
+      if (isSuccess) {
+        await loadClosets();
+      }
+    };
+
+    fetchData();
+  }, [isSuccess]);
 
   useEffect(() => {
     if (!isOpenModal) {
@@ -104,7 +112,7 @@ const ClosetsPage = () => {
         {cardIndex !== "" ? (
           <SelectedText>{closets[cardIndex].nickname}</SelectedText>
         ) : (
-          <span></span>
+          <span>선택된 옷장 없음</span>
         )}
       </ClosetTextWrapper>
       <ClosetSelectWrapper>

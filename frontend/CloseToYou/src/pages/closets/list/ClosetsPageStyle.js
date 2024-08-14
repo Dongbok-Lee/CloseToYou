@@ -3,11 +3,19 @@ import styled from "@emotion/styled";
 export const ClosetsPageContainer = styled.div`
     display: flex;
 
-    height: 100%;
+    min-height: 75vh;
 
     flex-direction: column;
 
+    justify-content: space-between;
+
     span {
+      text-align: left;
+      padding-left: 0.2rem;
+
+      color: rgba(255, 105, 105, 1);
+      font-size: 1.625rem;
+      font-weight: 700;
         height: 2.2rem;
     }
 
@@ -81,8 +89,7 @@ export const ClosetSelectWrapper = styled.div`
 export const ClosetButtonWrapper = styled.div`
   display: flex;
 
-  height: 25vh;
-
   justify-content: space-between;
-  align-items: flex-end;
+
+  margin: 4rem 0 1.25rem 0;
 `;
