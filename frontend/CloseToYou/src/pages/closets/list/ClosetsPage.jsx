@@ -43,7 +43,13 @@ const ClosetsPage = () => {
   const nav = useNavigate();
 
   useEffect(() => {
-    loadClosets();
+    const fetchData = async () => {
+      if (isSuccess) {
+        await loadClosets();
+      }
+    };
+
+    fetchData();
   }, [isSuccess]);
 
   useEffect(() => {
