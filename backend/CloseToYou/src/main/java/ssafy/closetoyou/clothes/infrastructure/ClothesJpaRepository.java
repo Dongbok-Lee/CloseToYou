@@ -24,9 +24,9 @@ public interface ClothesJpaRepository extends JpaRepository<ClothesEntity,Intege
                                                   @Param("nickname") String nickname,
                                                   @Param("isDeleted") boolean isDeleted);
 
-    ClothesEntity findClothesByClothesIdAndIsDeleted(Long clothesId, boolean deleted);
+    Optional<ClothesEntity> findClothesByClothesIdAndIsDeleted(Long clothesId, boolean deleted);
 
-    ClothesEntity findClothesByNfcIdAndIsDeleted(Long nfcId, boolean deleted);
+    Optional<ClothesEntity> findClothesByNfcIdAndIsDeleted(Long nfcId, boolean deleted);
 
     @Query("SELECT c " +
             "FROM ClothesEntity c " +

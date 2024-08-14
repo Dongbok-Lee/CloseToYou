@@ -97,9 +97,9 @@ public class ClothesEntity {
 
     public Clothes toModel() {
         return Clothes.builder()
-                .clothesId(clothesId)
                 .closet(closet.toModel())
                 .nfcId(nfcId)
+                .clothesId(clothesId)
                 .nickname(nickname)
                 .type(Type.valueOf(type))
                 .pattern(Pattern.valueOf(pattern))
