@@ -5,7 +5,7 @@ export const SkipContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 80vh;
   position: relative;
 `;
 
@@ -16,8 +16,7 @@ export const NfcImg = styled.img`
 export const NfcText = styled.span`
   text-align: center;
   font-family: "KoddiUD OnGothic";
-  font-size: 2rem;
-  font-style: normal;
+  font-size: 1.5rem;
   font-weight: 700;
   line-height: normal;
 `;
@@ -28,9 +27,11 @@ export const SkipButton = styled.p`
   border-radius: 5px;
   border: none;
   position: absolute;
-  bottom: 20px;
-  right: 20px;
+  bottom: 2rem;
+  right: 1.25rem;
   text-decoration: underline;
+  text-underline-offset: 10px;
+
 `;
 
 export default SkipContainer;

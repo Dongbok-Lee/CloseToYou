@@ -13,11 +13,11 @@ export const BookMarkListPageContainer = styled.div`
 `;
 
 export const TextWrapper = styled.div`
-  margin: 2.5rem  0 1.5rem 0;
+  margin: 2.5rem 0 1.5rem 0;
   height: 3.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 export const TitleText = styled.p`
@@ -27,11 +27,10 @@ export const TitleText = styled.p`
   font-weight: 400;
 `;
 
-//TODO: color: ${props => props.theme.colors.point[0]};
 export const SelectedText = styled.p`
   font-size: 1.5rem;
   font-weight: 700;
-  color: #ff6969;
+  color: ${props => props.theme.colors.point[0]};
 `;
 
 export const CardListWrapper = styled.div`

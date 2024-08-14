@@ -1,35 +1,30 @@
-import styled from '@emotion/styled';
-import FloatingButton from '../../../components/floatingbutton/FloatingButton';
+import styled from "@emotion/styled";
+import FloatingButton from "../../../components/floatingbutton/FloatingButton";
 
 export const ClothesListPageContainer = styled.div`
   width: 100%;
 `;
 
 export const PageContainer = styled.div`
-  padding-top: 1.5rem;
+  bottom: 30%;
+  position: relative;
+`;
+
+export const InfoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80vw;
+  margin: auto;
 `;
 
 export const Title = styled.h1`
   font-size: 1.25rem;
-  margin-bottom: 20px;
   text-align: right;
-  padding-right: 20px;
 
   span {
-    color: #FF6969;
+    color: #ff6969;
   }
-`;
-
-export const Filters = styled.div`
-  display: flex;
-  gap: 10px;
-  margin: 30px;
-`;
-
-export const FilterSelect = styled.select`
-  padding: 10px;
-  font-size: 1rem;
-  width: 30%;
 `;
 
 export const SwipeContainer = styled.div`
@@ -38,7 +33,7 @@ export const SwipeContainer = styled.div`
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   max-width: 95%;
-  min-height: 350px;
+  min-height: 330px;
   -webkit-overflow-scrolling: touch;
   position: relative;
   padding-left: calc(50% - 125px);
@@ -51,16 +46,18 @@ export const SwipeContainer = styled.div`
   & > div {
     scroll-snap-align: center;
     flex: 0 0 auto;
-    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    transition:
+      transform 0.3s ease-in-out,
+      opacity 0.3s ease-in-out;
     position: relative;
   }
 `;
 
 export const ClothesCardWrapper = styled.div`
   margin-right: 20px;
-  transform: ${props => props.isActive ? 'translate(0, 40px) scale(1.1)' : 'translate(0, 0)'};
+  transform: ${props => (props.isActive ? "translate(0, 40px) scale(1.1)" : "translate(0, 0)")};
   transition: transform 0.2s ease-in-out;
-  
+  pointer-events: ${props => (props.isActive ? "auto" : "none")};
 `;
 
 export const ClothesCard = styled.div`
@@ -73,9 +70,8 @@ export const ClothesCard = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  opacity: ${(props) => (props.isActive ? 1 : 0.2)};
-  filter: ${(props) => (props.isActive ? 'none' : 'blur(4px)')};
-
+  opacity: ${props => (props.isActive ? 1 : 0.2)};
+  filter: ${props => (props.isActive ? "none" : "blur(4px)")};
 `;
 
 export const Image = styled.img`
@@ -87,14 +83,13 @@ export const Nickname = styled.div`
   margin-top: 10px;
   font-size: 1.2rem;
   text-align: center;
-  visibility: ${(props) => (props.isActive ? 'visible' : 'hidden')};
 `;
 
 export const FloatingButtonMove = styled(FloatingButton)`
   display: block;
-  margin: 20px auto 0 auto;
+  margin: 20px auto 10px auto;
   padding: 10px 20px;
-  background-color: #FF6969;
+  background-color: #ff6969;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -114,9 +109,9 @@ export const NoClothesText = styled.div`
   color: gray;
 `;
 
-export const FixedContainer = styled.div`
+export const FloatingButtonContainer = styled.div`
   position: fixed;
-  bottom: 10px;
+  bottom: 5rem;
   width: 100%;
   display: flex;
   justify-content: center;
