@@ -27,12 +27,12 @@ const ButtonStyle = styled.button`
   }
 
   ${({ btnSize }) =>
-    btnSize === 'small' &&
+    btnSize === "small" &&
     `
     width: 5rem;
     height: 3.125rem;
 
-    font-size: 1.3rem;
+    font-size: 1rem;
   `}
 
   ${({ btnSize }) =>
