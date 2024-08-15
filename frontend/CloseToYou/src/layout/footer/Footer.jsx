@@ -17,15 +17,6 @@ import {
   ProfileWrapper,
 } from "./FooterStyle";
 
-import ClosetBaiscImg from "https://i11b201.p.ssafy.io/assets/icons/etc/closet-basic.svg";
-import ClosetFocusImg from "https://i11b201.p.ssafy.io/assets/icons/etc/closet-focus.svg";
-import ClothesBasicImg from "https://i11b201.p.ssafy.io/assets/icons/etc/hanger-basic.svg";
-import ClothesFocusImg from "https://i11b201.p.ssafy.io/assets/icons/etc/hanger-focus.svg";
-import BookmarkBasicImg from "https://i11b201.p.ssafy.io/assets/icons/etc/bookmark-basic.svg";
-import BookmarkFocusImg from "https://i11b201.p.ssafy.io/assets/icons/etc/bookmark-focus.svg";
-import ProfileBasicImg from "https://i11b201.p.ssafy.io/assets/icons/etc/profile-basic.svg";
-import ProfileFocusImg from "https://i11b201.p.ssafy.io/assets/icons/etc/profile-focus.svg";
-
 const Footer = () => {
   const nav = useNavigate();
   const theme = useTheme();
@@ -73,63 +64,59 @@ const Footer = () => {
   return (
     <FooterContainer>
       <ClosetWrapper tabIndex={0} onTouchStart={handleTouchCloset}>
-        <ClosetImg
-          src={
-            mode === 1
-              ? url.includes("/closets")
-                ? "src/assets/icons/etc/closet-focus-dark.svg"
-                : "src/assets/icons/etc/closet-basic-dark.svg"
-              : url.includes("/closets")
-                ? "src/assets/icons/etc/closet-focus.svg"
-                : "src/assets/icons/etc/closet-basic.svg"
-          }
-          alt="옷장으로 바로가기"
-        />
+        {url.includes("/closets") ? (
+          <ClosetImg
+            src="https://i11b201.p.ssafy.io/assets/icons/etc/closet-focus.svg"
+            alt="옷장으로 바로가기"
+          ></ClosetImg>
+        ) : (
+          <ClosetImg
+            src="https://i11b201.p.ssafy.io/assets/icons/etc/closet-basic.svg"
+            alt="옷장으로 바로가기"
+          ></ClosetImg>
+        )}
         <ClosetText url={url}>옷장</ClosetText>
       </ClosetWrapper>
       <ClothesWrapper tabIndex={0} onTouchStart={handleTouchClothes}>
-        <ClothesImg
-          src={
-            mode === 1
-              ? url.includes("/clothes")
-                ? "src/assets/icons/etc/hanger-focus-dark.svg"
-                : "src/assets/icons/etc/hanger-basic-dark.svg"
-              : url.includes("/clothes")
-                ? "src/assets/icons/etc/hanger-focus.svg"
-                : "src/assets/icons/etc/hanger-basic.svg"
-          }
-          alt="옷으로 바로가기"
-        />
+        {url.includes("/clothes") ? (
+          <ClothesImg
+            src="https://i11b201.p.ssafy.io/assets/icons/etc/hanger-focus.svg"
+            alt="옷으로 바로가기"
+          ></ClothesImg>
+        ) : (
+          <ClothesImg
+            src="https://i11b201.p.ssafy.io/assets/icons/etc/hanger-basic.svg"
+            alt="옷으로 바로가기"
+          ></ClothesImg>
+        )}
         <ClothesText url={url}>옷</ClothesText>
       </ClothesWrapper>
       <BookmarkWrapper tabIndex={0} onTouchStart={handleTouchBookmark}>
-        <BookmarkImg
-          src={
-            mode === 1
-              ? url.includes("/bookmarks")
-                ? "src/assets/icons/etc/bookmark-focus-dark.svg"
-                : "src/assets/icons/etc/bookmark-basic-dark.svg"
-              : url.includes("/bookmarks")
-                ? "src/assets/icons/etc/bookmark-focus.svg"
-                : "src/assets/icons/etc/bookmark-basic.svg"
-          }
-          alt="북마크로 바로가기"
-        />
+        {url.includes("/bookmarks") ? (
+          <BookmarkImg
+            src="https://i11b201.p.ssafy.io/assets/icons/etc/bookmark-focus.svg"
+            alt="북마크로 바로가기"
+          ></BookmarkImg>
+        ) : (
+          <BookmarkImg
+            src="https://i11b201.p.ssafy.io/assets/icons/etc/bookmark-basic.svg"
+            alt="북마크로 바로가기"
+          ></BookmarkImg>
+        )}
         <BookmarkText url={url}>북마크</BookmarkText>
       </BookmarkWrapper>
       <ProfileWrapper tabIndex={0} onTouchStart={handleTouchProfile}>
-        <ProfileImg
-          src={
-            mode === 1
-              ? url.includes("/user") || url.includes("/nickname") || url.includes("/password")
-                ? "src/assets/icons/etc/profile-focus-dark.svg"
-                : "src/assets/icons/etc/profile-basic-dark.svg"
-              : url.includes("/user") || url.includes("/nickname") || url.includes("/password")
-                ? "src/assets/icons/etc/profile-focus.svg"
-                : "src/assets/icons/etc/profile-basic.svg"
-          }
-          alt="프로필로 바로가기"
-        />
+        {url.includes("/user") || url.includes("/nickname") || url.includes("/password") ? (
+          <ProfileImg
+            src="https://i11b201.p.ssafy.io/assets/icons/etc/profile-focus.svg"
+            alt="프로필로 바로가기"
+          ></ProfileImg>
+        ) : (
+          <ProfileImg
+            src="https://i11b201.p.ssafy.io/assets/icons/etc/profile-basic.svg"
+            alt="프로필로 바로가기"
+          ></ProfileImg>
+        )}
         <ProfileText url={url}>프로필</ProfileText>
       </ProfileWrapper>
     </FooterContainer>
