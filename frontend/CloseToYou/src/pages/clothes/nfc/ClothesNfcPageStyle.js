@@ -1,11 +1,11 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
 export const SkipContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 80vh;
+  height: 70vh;
   position: relative;
 `;
 
@@ -27,11 +27,10 @@ export const SkipButton = styled.p`
   border-radius: 5px;
   border: none;
   position: absolute;
-  bottom: 2rem;
+  bottom: 3rem;
   right: 1.25rem;
   text-decoration: underline;
   text-underline-offset: 10px;
-
 `;
 
 export default SkipContainer;
