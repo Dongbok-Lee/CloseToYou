@@ -17,14 +17,14 @@ import {
   ProfileText,
 } from "./FooterStyle";
 
-import ClosetBaiscImg from "../../assets/icons/etc/closet-basic.svg";
-import ClosetFocusImg from "../../assets/icons/etc/closet-focus.svg";
-import ClothesBasicImg from "../../assets/icons/etc/hanger-basic.svg";
-import ClothesFocusImg from "../../assets/icons/etc/hanger-focus.svg";
-import BookmarkBasicImg from "../../assets/icons/etc/bookmark-basic.svg";
-import BookmarkFocusImg from "../../assets/icons/etc/bookmark-focus.svg";
-import ProfileBasicImg from "../../assets/icons/etc/profile-basic.svg";
-import ProfileFocusImg from "../../assets/icons/etc/profile-focus.svg";
+import ClosetBaiscImg from "https://i11b201.p.ssafy.io/assets/icons/etc/closet-basic.svg";
+import ClosetFocusImg from "https://i11b201.p.ssafy.io/assets/icons/etc/closet-focus.svg";
+import ClothesBasicImg from "https://i11b201.p.ssafy.io/assets/icons/etc/hanger-basic.svg";
+import ClothesFocusImg from "https://i11b201.p.ssafy.io/assets/icons/etc/hanger-focus.svg";
+import BookmarkBasicImg from "https://i11b201.p.ssafy.io/assets/icons/etc/bookmark-basic.svg";
+import BookmarkFocusImg from "https://i11b201.p.ssafy.io/assets/icons/etc/bookmark-focus.svg";
+import ProfileBasicImg from "https://i11b201.p.ssafy.io/assets/icons/etc/profile-basic.svg";
+import ProfileFocusImg from "https://i11b201.p.ssafy.io/assets/icons/etc/profile-focus.svg";
 
 const Footer = () => {
   const nav = useNavigate();
