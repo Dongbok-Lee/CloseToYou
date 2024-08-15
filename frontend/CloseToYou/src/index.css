@@ -1,19 +1,36 @@
+@font-face {
+    font-family: 'KoddiUDOnGothic';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/KoddiUDOnGothic-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     margin: 0;
     padding: 0;
     min-width: 320px;
     min-height: 100vh;
-    font-family: "KoddiUD OnGothic";
+    font-family: "KoddiUDOnGothic", system-ui;
 }
 
 #root {
     width: 100%;
     height: 100%;
+    font-family: "KoddiUDOnGothic", system-ui;
+}
+
+header {
+    font-family: "KoddiUDOnGothic", system-ui;
+}
+
+footer {
+    font-family: "KoddiUDOnGothic", system-ui;
 }
 
 .high-contrast {
     background-color: #000;
     color: #fff;
+    font-family: "KoddiUDOnGothic", system-ui;
 }
 
 .high-contrast path {
@@ -25,8 +42,13 @@ body {
     margin: auto;
     padding-top: 3.125rem;
     padding-bottom: 5.8rem;
+    font-family: "KoddiUDOnGothic", system-ui;
 }
 
 input::placeholder {
-    font-family: "KoddiUD OnGothic";
+    font-family: "KoddiUDOnGothic", system-ui;
+}
+
+input {
+    font-family: "KoddiUDOnGothic", system-ui;
 }
