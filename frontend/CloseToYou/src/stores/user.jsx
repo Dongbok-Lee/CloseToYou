@@ -48,7 +48,6 @@ export const useUserStore = create(set => ({
           removeAccessToken();
           set({ signInResponse: response.data.message, isSuccess: true });
         }
-        
       })
       .catch(error => {
         if (error.response.status === 400) {
@@ -65,7 +64,6 @@ export const useUserStore = create(set => ({
 
   loadUserInfo: async () => {
     const { data, status } = await getUserInfo();
-    console.log(data);
     if (status === 200) {
       set({ email: data.data.email });
       set({ nickname: data.data.nickname });
