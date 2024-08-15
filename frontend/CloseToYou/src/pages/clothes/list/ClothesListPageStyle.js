@@ -30,10 +30,11 @@ export const Title = styled.h1`
 export const SwipeContainer = styled.div`
   display: flex;
   overflow-x: auto;
+  overflow-y: hidden;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   max-width: 95%;
-  min-height: 330px;
+  min-height: 350px;
   -webkit-overflow-scrolling: touch;
   position: relative;
   padding-left: calc(50% - 125px);
@@ -81,7 +82,7 @@ export const Image = styled.img`
 
 export const Nickname = styled.div`
   margin-top: 10px;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   text-align: center;
 `;
 
