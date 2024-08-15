@@ -1,5 +1,12 @@
 import { create } from "zustand";
-import { createSignIn, createUser, getUserInfo, patchHighContrast } from "../api/user";
+import {
+  createSignIn,
+  createUser,
+  getUserInfo,
+  patchHighContrast,
+  patchNickname,
+  patchPassword,
+} from "../api/user";
 import { removeAccessToken, setAccessToken } from "../utils/token";
 
 export const useUserStore = create(set => ({
@@ -69,12 +76,22 @@ export const useUserStore = create(set => ({
       set({ nickname: data.data.nickname });
       set({ isHighContrast: data.data.isHighContrast });
     } else {
-      set({ error: data.data });
+      set({ error: data });
     }
   },
 
   editHighContrast: async value => {
     const { status } = await patchHighContrast(value);
     if (status === 200) set({ isHighContrast: value });
+  },
+
+  editNickname: async nickname => {
+    const { status } = await patchNickname(nickname);
+    if (status === 200) set({ nickname: nickname });
+  },
+
+  editPassword: async (oldPassword, newPassword) => {
+    const { status } = await patchPassword(oldPassword, newPassword);
+    if (status === 200) set({ loading: false });
   },
 }));
