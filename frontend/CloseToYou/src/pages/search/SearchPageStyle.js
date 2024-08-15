@@ -1,19 +1,20 @@
 import styled from "@emotion/styled";
-import { colors } from '../../constants/colors';
+import { colors } from "../../constants/colors";
 
 export const SearchPageContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
 `;
 
 export const ResultMessage = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50vh;
+  height: 40vh;
   font-size: 1.5rem;
-  color: ${colors.text[1]};
+  color: ${colors.text[0]};
   text-align: center;
 `;
 
