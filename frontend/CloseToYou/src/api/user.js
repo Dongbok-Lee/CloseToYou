@@ -1,27 +1,47 @@
 import { authClientInstance, clientInstance } from "../utils/http-client";
 
 export const createUser = async (nickname, email, password) => {
-  const response = await clientInstance.post("api/users/join", {
-    nickname: nickname,
-    email: email,
-    password: password,
-  });
+  const response = await clientInstance.post(
+    "api/users/join",
+    {
+      nickname: nickname,
+      email: email,
+      password: password,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+      },
+    },
+  );
 
   return response;
 };
 
 export const createSignIn = async (email, password) => {
-  const response = await clientInstance.post("api/users/login", {
-    email: email,
-    password: password,
-  });
+  const response = await clientInstance.post(
+    "api/users/login",
+    {
+      email: email,
+      password: password,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+      },
+    },
+  );
 
   return response;
 };
 
 export const getUserInfo = async () => {
   return await authClientInstance
-    .get("/api/users")
+    .get("/api/users", {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+      },
+    })
     .then(res => {
       return res;
     })
@@ -32,7 +52,11 @@ export const getUserInfo = async () => {
 
 export const patchHighContrast = async value => {
   return await authClientInstance
-    .patch("/api/users/highcontrast/" + value)
+    .patch("/api/users/highcontrast/" + value, {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+      },
+    })
     .then(res => {
       return res;
     })
@@ -43,9 +67,17 @@ export const patchHighContrast = async value => {
 
 export const patchNickname = async nickname => {
   return await authClientInstance
-    .patch("api/users/nickname", {
-      nickname: nickname,
-    })
+    .patch(
+      "api/users/nickname",
+      {
+        nickname: nickname,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+        },
+      },
+    )
     .then(res => {
       return res;
     })
@@ -56,10 +88,18 @@ export const patchNickname = async nickname => {
 
 export const patchPassword = async (oldPassword, newPassword) => {
   return await authClientInstance
-    .patch("api/users/password", {
-      oldPassword: oldPassword,
-      newPassword: newPassword,
-    })
+    .patch(
+      "api/users/password",
+      {
+        oldPassword: oldPassword,
+        newPassword: newPassword,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+        },
+      },
+    )
     .then(res => {
       return res;
     })
