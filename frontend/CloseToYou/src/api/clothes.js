@@ -60,16 +60,13 @@ export const getClothesByNfc = async nfcId => {
   }
 };
 
-export const getClothesByFilter = async (closetId, key, value) => {
+export const getClothesByFilter = async (key, value) => {
   return await authClientInstance
-    .get(`/api/clothes/filter`, { closetId: closetId, [key]: value })
+    .get(`/api/clothes/filter`, { params: { [key]: value } })
     .then(res => {
-      console.log(res);
       return res;
     })
     .catch(e => {
-      console.log(e);
-      console.log({ closetId: closetId, [key]: value });
       return e;
     });
 };
