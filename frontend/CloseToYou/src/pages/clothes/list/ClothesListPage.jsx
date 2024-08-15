@@ -82,6 +82,10 @@ const ClothesListPage = () => {
   }, [activeIndex, clothes]);
 
   const handleTouchNfc = () => {
+    const activeClothesId = clothes[activeIndex]?.clothesId;
+    if (activeClothesId) {
+      setFocusedClothesId(activeClothesId);
+    }
     navigate(`/clothes/nfc`);
   };
 
