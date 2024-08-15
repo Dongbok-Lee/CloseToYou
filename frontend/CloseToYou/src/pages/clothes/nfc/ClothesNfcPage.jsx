@@ -62,7 +62,7 @@ const NFCPage = () => {
   }, [scan]);
 
   useEffect(() => {
-    if (nfcId) {
+    if (nfcId !== null) {
       fetchClothesId(nfcId);
     }
   }, [nfcId]); // nfcId가 변경될 때마다 fetchClothesId 호출
