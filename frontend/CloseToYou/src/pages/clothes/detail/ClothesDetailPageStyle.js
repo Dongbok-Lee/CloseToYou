@@ -12,7 +12,7 @@ export const PageContainer = styled.div`
   flex-grow: 2;
   width: 100%;
 `;
-
+export const TextWrapper = styled.div``;
 export const ClothesNameText = styled.div`
   margin: 30px;
   color: ${colors.point[0]};
