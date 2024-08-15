@@ -51,8 +51,8 @@ const ClothesListPage = () => {
   });
 
   useEffect(() => {
-    loadClothesList(); // 컴포넌트가 마운트될 때 옷 목록 로드
-  }, [loadClothesList]);
+    loadClothesList();
+  }, [location]);
 
   useEffect(() => {
     const container = listRef.current;
