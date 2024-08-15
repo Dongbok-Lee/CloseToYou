@@ -104,7 +104,7 @@ public class ClothesEntity {
                 .type(Type.valueOf(type))
                 .pattern(Pattern.valueOf(pattern))
                 .color(Color.valueOf(color))
-                .season(Season.valueOf(season))
+                .season(season == null ? Season.DEFAULT : Season.valueOf(season))
                 .size(size)
                 .memo(memo)
                 .wearingCount(wearingCount)
