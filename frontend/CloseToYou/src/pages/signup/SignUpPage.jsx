@@ -2,17 +2,17 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {
-  SignUpPageContainer,
-  SignUpLogoImg,
-  SignUpTitle,
-  SingUpInfoWrapper,
-  SignUpInfoTitle,
-  SignUpInfoNickname,
-  AuthWrapper,
   AuthCodeWrapper,
+  AuthWrapper,
+  ErrorText,
   PasswordWrapper,
   SignUpBox,
-  ErrorText,
+  SignUpInfoNickname,
+  SignUpInfoTitle,
+  SignUpLogoImg,
+  SignUpPageContainer,
+  SignUpTitle,
+  SingUpInfoWrapper,
 } from "./SignUpPageStyle";
 
 import { placeholder } from "../../constants/placeholder";
@@ -25,6 +25,7 @@ import logo from "../../assets/icons/etc/signin-logo.svg";
 
 import { useEmailStore } from "../../stores/email";
 import { useUserStore } from "../../stores/user";
+import Modal from "../../components/modal/Modal.jsx";
 
 const SignUpPage = () => {
   const nav = useNavigate();
@@ -47,8 +48,8 @@ const SignUpPage = () => {
   const [authCode, setAuthCode] = useState("");
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
-
   const [isPasswordCorrect, setIsPasswordCorrect] = useState(true);
+  const [isOpenSuccessModal, setIsOpenSuccessModal] = useState(true);
 
   const handleTouchSignUpButton = e => {
     e.target.focus();
@@ -62,8 +63,7 @@ const SignUpPage = () => {
     }
 
     if (passwordCheck !== "" && isPasswordCorrect && isSuccess) {
-      alert("회원 가입이 완료되었습니다.");
-      nav("/signin", { replace: true });
+      setIsOpenSuccessModal(true);
     }
 
     if (!isSuccess) {
@@ -135,6 +135,15 @@ const SignUpPage = () => {
 
   return (
     <SignUpPageContainer className="page">
+      {isOpenSuccessModal && (
+        <Modal
+          modalType="text"
+          setIsOpenModal={setIsOpenSuccessModal}
+          handleTouchConfirmButton={() => nav("/signin", { replace: true })}
+          content="회원 가입에 성공했습니다."
+          children="확인"
+        ></Modal>
+      )}
       <SignUpLogoImg src={logo} alt="Close To You Logo"></SignUpLogoImg>
       <SignUpTitle>Close To You</SignUpTitle>
       <SingUpInfoWrapper>

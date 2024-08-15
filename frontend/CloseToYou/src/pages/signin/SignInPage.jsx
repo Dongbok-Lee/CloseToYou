@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
+  ErrorText,
   SignInPageContainer,
   SignInTitle,
-  UserInfoInputWrapper,
-  ErrorText,
   SignInUpButtonWrapper,
   SNSButtonWrapper,
+  UserInfoInputWrapper,
 } from "./SignInPageStyle";
 
 import Logo from "../../assets/icons/etc/signin-logo.svg?react";
@@ -18,17 +18,17 @@ import { placeholder } from "../../constants/placeholder";
 import { error } from "../../constants/error";
 
 import { useUserStore } from "../../stores/user";
+import Modal from "../../components/modal/Modal.jsx";
 
 const SignInPage = () => {
+  const [isOpenSuccessModal, setIsOpenSuccessModal] = useState(false);
+
   const { addSignIn, setSignInResponse, signInResponse, isSuccess } = useUserStore();
 
   const nav = useNavigate();
 
   useEffect(() => {
-    if (isSuccess) {
-      alert("로그인 되었습니다.");
-      nav("/closets", { replace: true });
-    }
+    isSuccess && setIsOpenSuccessModal(true);
   }, [isSuccess]);
 
   const [email, setEmail] = useState("");
@@ -66,6 +66,15 @@ const SignInPage = () => {
 
   return (
     <SignInPageContainer className="page">
+      {isOpenSuccessModal && (
+        <Modal
+          modalType="text"
+          setIsOpenModal={setIsOpenSuccessModal}
+          handleTouchConfirmButton={() => nav("/closets", { replace: true })}
+          content="로그인에 성공했습니다."
+          children="확인"
+        ></Modal>
+      )}
       <SignInTitle tabIndex={0}>Close To You</SignInTitle>
       <Logo></Logo>
       <UserInfoInputWrapper>

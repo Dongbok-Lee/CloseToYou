@@ -5,6 +5,7 @@ import {
   DeleteText,
   ModalContainer,
   ModalWrapper,
+  Text,
   TextBox,
   TextInputWrapper,
 } from "./ModalStyle";
@@ -24,6 +25,7 @@ const Modal = ({
   setFirstValue,
   setSecondValue,
   handleTouchConfirmButton,
+  content,
   children,
 }) => {
   const deleteMessage = "정말 삭제하시겠습니까?";
@@ -81,6 +83,8 @@ const Modal = ({
             <TextBox id="modal-description">
               <DeleteText id="modal-title">{deleteMessage}</DeleteText>
             </TextBox>
+          ) : modalType === "text" ? (
+            <Text>{content}</Text>
           ) : (
             <TextInputWrapper>
               {modalSize !== "" && (
