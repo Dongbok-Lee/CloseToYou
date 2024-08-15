@@ -21,7 +21,6 @@ import Closet from "../../../assets/icons/etc/closet.svg";
 
 import { useDoubleClick } from "../../../hooks/useDoubleClick";
 import { useClosetsStore } from "../../../stores/closet";
-import { useUserStore } from "../../../stores/user";
 import { placeholder } from "../../../constants/placeholder";
 
 import { useNavigate } from "react-router-dom";
@@ -33,6 +32,7 @@ const ClosetsPage = () => {
   const [nickname, setNickname] = useState("");
   const [closetCode, setClosetCode] = useState("");
   const [cardIndex, setCardIndex] = useState("");
+  const [isLoad, setIsload] = useState(false);
 
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
@@ -44,6 +44,8 @@ const ClosetsPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       await loadClosets();
+
+      setIsload(true);
     };
 
     fetchData();
@@ -66,7 +68,7 @@ const ClosetsPage = () => {
         setCardIndex("");
       }
     }
-  }, [isOpenModal, cardIndex, closets]);
+  }, [isOpenModal, cardIndex, isLoad]);
 
   const handleTouchCard = index => {
     setCardIndex(index);
