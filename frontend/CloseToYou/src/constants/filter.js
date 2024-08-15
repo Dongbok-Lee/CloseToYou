@@ -1,3 +1,57 @@
+export const titleMap = {
+  옷장: "closet",
+  색상: "color",
+  종류: "category",
+  패턴: "pattern",
+};
+
+export const filterMap = {
+  옷장: [],
+  색상: [
+    "빨간색",
+    "주황색",
+    "노란색",
+    "파란색",
+    "남색",
+    "보라색",
+    "분홍색",
+    "갈색",
+    "검은색",
+    "흰색",
+    "회색",
+    "베이지색",
+  ],
+  종류: ["블라우스", "가디건", "코트", "재킷"],
+  패턴: ["체크", "도트", "스트라이프", "꽃무늬", "무지", "기타"],
+};
+
+export const translate = {
+  색상: "color",
+  종류: "type",
+  패턴: "pattern",
+  빨간색: "RED",
+  주황색: "ORANGE",
+  노란색: "YELLOW",
+  파란색: "BLUE",
+  남색: "NAVY",
+  보라색: "PURPLE",
+  분홍색: "PINK",
+  갈색: "BROWN",
+  검은색: "BLACK",
+  흰색: "WHITE",
+  회색: "GRAY",
+  베이지색: "BEIGE",
+  블라우스: "BLOUSE",
+  가디건: "CARDIGAN",
+  코트: "COAT",
+  재킷: "JACKET",
+  체크: "CHECK",
+  도트: "DOT",
+  스트라이프: "STRIPE",
+  꽃무늬: "PLANTS",
+  무지: "ETC",
+  기타: "BLANK",
+};
 export const filterItems = {
   closet: [],
   color: [
