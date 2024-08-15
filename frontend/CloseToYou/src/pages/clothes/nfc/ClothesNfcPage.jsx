@@ -10,6 +10,11 @@ const NFCPage = () => {
   const navigate = useNavigate();
   const { id: skipClothesId } = useParams();
   const loadClothesByNfc = useClothesStore(state => state.loadClothesByNfc);
+  const [clothesId, setClothesId] = useState(undefined);
+
+  const test = () => {
+    setNfcId(1161931032322432);
+  };
 
   const scan = useCallback(async () => {
     if ("NDEFReader" in window) {
@@ -44,26 +49,31 @@ const NFCPage = () => {
     return nfcId;
   };
 
-  const fetchClothesId = async nfcId => {
-    try {
-      const clothesId = await loadClothesByNfc(nfcId);
-      if (clothesId) {
-        navigate(`/clothes/${clothesId}`);
-      } else {
-        console.log("해당 NFC ID에 대한 옷 정보를 찾을 수 없습니다.");
-      }
-    } catch (error) {
-      console.log("옷 정보를 불러오는 중 오류가 발생했습니다:", error);
-    }
-  };
-
   useEffect(() => {
     scan();
   }, [scan]);
 
   useEffect(() => {
+    if (clothesId !== undefined) {
+      navigate(`/clothes/${clothesId}`);
+    } else {
+      console.log("해당 NFC ID에 대한 옷 정보를 찾을 수 없습니다.");
+    }
+  }, [clothesId]);
+
+  useEffect(() => {
+    console.log("적용됨!!");
+    const fetchClothesId = async () => {
+      try {
+        const clothesId = await loadClothesByNfc(nfcId);
+        setClothesId(clothesId);
+      } catch (error) {
+        console.log("옷 정보를 불러오는 중 오류가 발생했습니다:", error);
+      }
+    };
+
     if (nfcId !== null) {
-      fetchClothesId(nfcId);
+      fetchClothesId();
     }
   }, [nfcId]); // nfcId가 변경될 때마다 fetchClothesId 호출
 
@@ -77,6 +87,7 @@ const NFCPage = () => {
 
   return (
     <SkipContainer className="page">
+      <button onClick={test}>네스트 버튼</button>
       <NfcImg src={NFCImg} alt="NFC 이미지" />
       <NfcText>
         핸드폰의 뒷면에
