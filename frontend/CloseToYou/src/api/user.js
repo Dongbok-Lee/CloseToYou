@@ -40,3 +40,30 @@ export const patchHighContrast = async value => {
       return error;
     });
 };
+
+export const patchNickname = async nickname => {
+  return await authClientInstance
+    .patch("api/users/nickname", {
+      nickname: nickname,
+    })
+    .then(res => {
+      return res;
+    })
+    .catch(e => {
+      return e;
+    });
+};
+
+export const patchPassword = async (oldPassword, newPassword) => {
+  return await authClientInstance
+    .patch("api/users/password", {
+      oldPassword: oldPassword,
+      newPassword: newPassword,
+    })
+    .then(res => {
+      return res;
+    })
+    .catch(e => {
+      return e;
+    });
+};

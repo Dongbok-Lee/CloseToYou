@@ -6,17 +6,17 @@ export const UserEditPageContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   min-height: 75vh;
-  gap: 8rem;
+  gap: 5rem;
 `;
 
 export const TextWrapper = styled.div`
-  margin-top: 15rem;
+  margin-top: 8rem;
   text-align: center;
   tab-index: var(0);
 `;
 
 export const TitleText = styled.p`
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   tab-index: var(0);
   margin: 0;
   font-weight: 600;
@@ -24,18 +24,18 @@ export const TitleText = styled.p`
 
 export const SubText = styled.p`
   font-weight: 400;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   tab-index: var(0);
   margin: 0;
 `;
 
-//      TODO: color: ${props => props.theme.colors.point[0]};
 export const PointText = styled.span`
-  color: #ff6969;
+  color: ${props => props.theme.colors.point[props.theme.mode]};
 `;
 
 export const TextInputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  width: 100%;
 `;
