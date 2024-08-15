@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import PageLayout from "./layout/pageLayout/PageLayout";
 import LandingPage from "./pages/landing/LandingPage";
 import LandingPageLayout from "./layout/landingPageLayout/LandingPageLayout";
@@ -15,6 +15,7 @@ import BookMarkListPage from "./pages/bookmarks/list/BookMarkListPage";
 import BookMarkDetailPage from "./pages/bookmarks/detail/BookMarkDetailPage";
 import UserViewPage from "./pages/user/view/UserViewPage.jsx";
 import UserEditPage from "./pages/user/edit/UserEditPage.jsx";
+import BookmarkNfcPage from "./pages/bookmarks/nfc/BookmarkNfcPage.jsx";
 
 const AppRoutes = () => {
   return (
@@ -31,6 +32,7 @@ const AppRoutes = () => {
       <Route path="/search" element={<PageLayout page={<SearchPage />} />} />
       <Route path="/bookmarks" element={<PageLayout page={<BookMarkListPage />} />} />
       <Route path="/bookmarks/:id" element={<PageLayout page={<BookMarkDetailPage />} />} />
+      <Route path="/bookmarks/nfc/:id" element={<PageLayout page={<BookmarkNfcPage />} />} />
       <Route path="/user" element={<PageLayout page={<UserViewPage />} />} />
       <Route path="/nickname" element={<PageLayout page={<UserEditPage type="nickname" />} />} />
       <Route path="/password" element={<PageLayout page={<UserEditPage type="password" />} />} />
