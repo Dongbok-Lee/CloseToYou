@@ -98,24 +98,13 @@ export const deleteClothesInBookmark = async (bookmarkId, clothesId) => {
     });
 };
 
-export const createclothesInBookmark = async (bookmarkId, clothesId) => {
+export const createClothesInBookmark = async (bookmarkId, clothesId) => {
   return await authClientInstance
     .post("api/bookmarks/" + bookmarkId + "/add/" + clothesId, {
       headers: {
         Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
       },
     })
-    .then(res => {
-      return res;
-    })
-    .catch(error => {
-      return error;
-    });
-};
-
-export const addBookmark = async () => {
-  return await clientInstance
-    .post("api/bookmarks/")
     .then(res => {
       return res;
     })
