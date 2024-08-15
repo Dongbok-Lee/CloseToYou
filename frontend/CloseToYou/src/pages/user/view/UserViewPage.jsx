@@ -8,32 +8,43 @@ import {
   UserPageContainer,
   WelcomeWrapper,
 } from "./UserViewPageStyle.js";
-import { ToggleContainer } from "../../../components/togglebutton/ToggleButtonStyle.js";
 import { useEffect, useState } from "react";
 import ToggleButton from "../../../components/togglebutton/ToggleButton.jsx";
 import { useNavigate } from "react-router-dom";
-
-// TODO: GET, /api/users
-const user = {
-  email: "chano@gmail.com",
-  nickname: "기가차노",
-  registTime: "",
-  updateTime: "",
-  isHighContrast: false,
-};
+import { useUserStore } from "../../../stores/user.jsx";
+import { useTheme } from "@emotion/react";
 
 const UserViewPage = () => {
-  const [isToggle, setIsToggle] = useState(false);
+  const [isToggle, setIsToggle] = useState(() => {
+    const savedValue = localStorage.getItem("isHighContrast");
+    return savedValue !== null ? JSON.parse(savedValue) : false;
+  });
+
+  const { nickname, email, loadUserInfo, editHighContrast } = useUserStore();
 
   const navigate = useNavigate();
+  const theme = useTheme();
 
   useEffect(() => {
-    setIsToggle(user.isHighContrast);
-  }, []);
+    const fetchUserInfo = async () => {
+      await loadUserInfo();
+      const savedValue = localStorage.getItem("isHighContrast");
+      setIsToggle(savedValue !== null ? JSON.parse(savedValue) : false);
+    };
+    fetchUserInfo();
+  }, [loadUserInfo]);
 
-  const handleTouchChangeNickname = e => {
+  useEffect(() => {
+    editHighContrast(isToggle);
+    theme.mode = isToggle;
+    console.log(theme.mode);
+    localStorage.setItem("isHighContrast", JSON.stringify(isToggle));
+  }, [isToggle, editHighContrast]);
+
+  const handleTouchChangeNickname = () => {
     navigate("/nickname");
   };
+
   const handleTouchChangePassword = () => {
     navigate("/password");
   };
@@ -49,25 +60,25 @@ const UserViewPage = () => {
         <span>고대비 모드</span>
         <ToggleButton isOn={isToggle} setIsOn={setIsToggle} />
       </HighContrastWrapper>
-      <WelcomeWrapper tabIndex={0} title={`${user.nickname}님, 안녕하세요.`}>
-        <TitleText>{user.nickname}</TitleText>
+      <WelcomeWrapper tabIndex={0} title={`${nickname}님, 안녕하세요.`}>
+        <TitleText>{nickname}</TitleText>
         <SubText>님, 안녕하세요!</SubText>
       </WelcomeWrapper>
       <UserInfoWrapper>
         <TitleText tabIndex={0}>이메일</TitleText>
-        <SubText tabIndex={0}>{user.email}</SubText>
+        <SubText tabIndex={0}>{email}</SubText>
       </UserInfoWrapper>
       <UserInfoWrapper>
         <TitleText tabIndex={0}>닉네임</TitleText>
         <ChangeWrapper>
-          <SubText tabIndex={0}>{user.nickname}</SubText>
+          <SubText tabIndex={0}>{nickname}</SubText>
           <ButtonText onTouchStart={handleTouchChangeNickname} tabIndex={0}>
             변경
           </ButtonText>
         </ChangeWrapper>
       </UserInfoWrapper>
       <ChangeWrapper>
-        <SubText tabIndex={0}>비밀 번호</SubText>
+        <SubText tabIndex={0}>비밀번호</SubText>
         <ButtonText tabIndex={0} onTouchStart={handleTouchChangePassword}>
           변경
         </ButtonText>

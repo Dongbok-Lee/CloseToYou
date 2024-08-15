@@ -1,23 +1,32 @@
 body {
-  margin: 0;
-  padding: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  font-family: "KoddiUD OnGothic";
+    margin: 0;
+    padding: 0;
+    min-width: 320px;
+    min-height: 100vh;
+    font-family: "KoddiUD OnGothic";
 }
 
 #root {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
+}
+
+.high-contrast {
+    background-color: #000;
+    color: #fff;
+}
+
+.high-contrast path {
+    fill: #fff;
 }
 
 .page {
-  width: 80%;
-  margin: auto;
-  padding-top: 3.125rem;
-  padding-bottom: 5rem;
+    width: 80%;
+    margin: auto;
+    padding-top: 3.125rem;
+    padding-bottom: 5rem;
 }
 
 input::placeholder {
-  font-family: "KoddiUD OnGothic";
+    font-family: "KoddiUD OnGothic";
 }

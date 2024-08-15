@@ -1,6 +1,6 @@
 import { create } from "zustand";
-import { createUser, createSignIn } from "../api/user";
-import { setAccessToken, removeAccessToken } from "../utils/token";
+import { createSignIn, createUser, getUserInfo, patchHighContrast } from "../api/user";
+import { removeAccessToken, setAccessToken } from "../utils/token";
 
 export const useUserStore = create(set => ({
   nickname: "",
@@ -11,6 +11,7 @@ export const useUserStore = create(set => ({
   signUpResponse: "",
   signInResponse: "",
   isSuccess: false,
+  isHighContrast: null,
 
   addUser: async (nickname, email, password) => {
     set({ nickname: nickname, email: email, password: password });
@@ -61,4 +62,21 @@ export const useUserStore = create(set => ({
   setNicknameResponse: newNicknameResponse => set({ nicknameResponse: newNicknameResponse }),
   setPasswordResponse: newPasswordResponse => set({ passwordResponse: newPasswordResponse }),
   setSignInResponse: newSignInResponse => set({ signInResponse: newSignInResponse }),
+
+  loadUserInfo: async () => {
+    const { data, status } = await getUserInfo();
+    console.log(data);
+    if (status === 200) {
+      set({ email: data.data.email });
+      set({ nickname: data.data.nickname });
+      set({ isHighContrast: data.data.isHighContrast });
+    } else {
+      set({ error: data.data });
+    }
+  },
+
+  editHighContrast: async value => {
+    const { status } = await patchHighContrast(value);
+    if (status === 200) set({ isHighContrast: value });
+  },
 }));
