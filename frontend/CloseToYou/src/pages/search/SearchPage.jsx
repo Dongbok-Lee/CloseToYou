@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  SearchPageContainer,
-  ResultMessage,
-  ResultCount,
-} from "./SearchPageStyle";
+import { SearchPageContainer, ResultMessage, ResultCount } from "./SearchPageStyle";
 import SearchBox from "../../components/searchbox/SearchBox";
 import SearchCard from "../../components/searchCard/SearchCard";
 
