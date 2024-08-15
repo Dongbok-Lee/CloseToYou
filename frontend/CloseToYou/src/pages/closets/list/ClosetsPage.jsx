@@ -21,19 +21,18 @@ import Closet from "../../../assets/icons/etc/closet.svg";
 
 import { useDoubleClick } from "../../../hooks/useDoubleClick";
 import { useClosetsStore } from "../../../stores/closet";
-import { useUserStore } from "../../../stores/user";
 import { placeholder } from "../../../constants/placeholder";
 
 import { useNavigate } from "react-router-dom";
 const ClosetsPage = () => {
   const { loadClosets, addClosets, removeClosets, editClosets, closets } = useClosetsStore();
-  const { isSuccess } = useUserStore();
 
   const [isDoubleClick, updateTouchTime] = useDoubleClick();
 
   const [nickname, setNickname] = useState("");
   const [closetCode, setClosetCode] = useState("");
   const [cardIndex, setCardIndex] = useState("");
+  const [isLoad, setIsload] = useState(false);
 
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
@@ -44,13 +43,13 @@ const ClosetsPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (isSuccess) {
-        await loadClosets();
-      }
+      await loadClosets();
+
+      setIsload(true);
     };
 
     fetchData();
-  }, [isSuccess]);
+  }, []);
 
   useEffect(() => {
     if (!isOpenModal) {
@@ -69,7 +68,7 @@ const ClosetsPage = () => {
         setCardIndex("");
       }
     }
-  }, [isOpenModal, cardIndex]);
+  }, [isOpenModal, cardIndex, isLoad]);
 
   const handleTouchCard = index => {
     setCardIndex(index);
@@ -124,7 +123,7 @@ const ClosetsPage = () => {
               Icon={ClosetsCardBasic}
               FocusIcon={ClosetsCardFocus}
               tabIndex={0}
-              isFocused={index == cardIndex}
+              isFocused={index === cardIndex}
             ></Card>
           ))}
         <Card Icon={Plus} tabIndex={0} handleTouch={handleTouchAdd}></Card>

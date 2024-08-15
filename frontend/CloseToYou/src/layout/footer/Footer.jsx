@@ -2,23 +2,25 @@ import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import {
-  FooterContainer,
-  ClosetImg,
-  ClosetWrapper,
-  ClosetText,
-  ClothesWrapper,
-  ClothesImg,
-  ClothesText,
-  BookmarkWrapper,
   BookmarkImg,
   BookmarkText,
-  ProfileWrapper,
+  BookmarkWrapper,
+  ClosetImg,
+  ClosetText,
+  ClosetWrapper,
+  ClothesImg,
+  ClothesText,
+  ClothesWrapper,
+  FooterContainer,
   ProfileImg,
   ProfileText,
+  ProfileWrapper,
 } from "./FooterStyle";
 
 const Footer = () => {
   const nav = useNavigate();
+  const theme = useTheme();
+  const { mode } = theme;
 
   let location = useLocation();
 
@@ -26,34 +28,36 @@ const Footer = () => {
 
   useEffect(() => {
     setUrl(location.pathname);
-    console.log(location.pathname);
   }, [location.pathname]);
 
-  const handleTouchCloset = e => {
+
+  const handleTouchCloset = (e) => {
     setTimeout(() => {
       document.activeElement.blur();
       nav("/closets");
     }, 150);
   };
 
-  const handleTouchClothes = e => {
+  const handleTouchClothes = (e) => {
     setTimeout(() => {
       document.activeElement.blur();
       nav("/clothes");
     }, 150);
   };
 
-  const handleTouchBookmark = e => {
+  const handleTouchBookmark = (e) => {
     setTimeout(() => {
       document.activeElement.blur();
       nav("/bookmarks");
+
     }, 150);
   };
 
-  const handleTouchProfile = e => {
+  const handleTouchProfile = (e) => {
     setTimeout(() => {
       document.activeElement.blur();
       nav("/user");
+
     }, 150);
   };
 
