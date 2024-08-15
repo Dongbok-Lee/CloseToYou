@@ -56,7 +56,7 @@ const ClothesDetailPage = () => {
         memo: clothesData.memo || "메모없음",
         location: clothesData.location || "설정안함",
         imageUrl: clothesData.imageUrl || tempImage,
-        lastWornDate: clothesData.lastWornDate || "N/A",
+        lastWornDate: clothesData.lastWornDate || "입은 기록 없음",
       });
     } catch (error) {
       console.error("옷 정보를 가져오는 데 실패했습니다:", error);
