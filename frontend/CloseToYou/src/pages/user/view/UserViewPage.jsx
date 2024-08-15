@@ -37,7 +37,6 @@ const UserViewPage = () => {
   useEffect(() => {
     editHighContrast(isToggle);
     theme.mode = isToggle;
-    console.log(theme.mode);
     localStorage.setItem("isHighContrast", JSON.stringify(isToggle));
   }, [isToggle, editHighContrast]);
 
