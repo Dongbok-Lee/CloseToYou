@@ -24,7 +24,8 @@ const ClothesListPage = () => {
   const listRef = useRef(null);
 
   const navigate = useNavigate();
-  const { clothes, clothesList, loadClothesList, removeClothesItem } = useClothesStore();
+  const { clothes, clothesList, loadClothesList, removeClothesItem, setFocusedClothesId } =
+    useClothesStore();
 
   useEffect(() => {
     loadClothesList(); // 컴포넌트가 마운트될 때 옷 목록 로드
@@ -87,6 +88,10 @@ const ClothesListPage = () => {
   }, [activeIndex, clothes]);
 
   const handleTouchNfc = () => {
+    const activeClothesId = clothes[activeIndex]?.clothesId;
+    if (activeClothesId) {
+      setFocusedClothesId(activeClothesId);
+    }
     navigate(`/clothes/nfc`);
   };
 
