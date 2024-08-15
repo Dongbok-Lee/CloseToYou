@@ -1,12 +1,8 @@
 import { ToggleCircleIcon, ToggleContainer } from "./ToggleButtonStyle";
-import { useUserStore } from "../../stores/user.jsx";
 
 const ToggleButton = ({ isOn, setIsOn }) => {
-  const { editHighContrast } = useUserStore();
-
-  const handleToggle = async () => {
+  const handleToggle = () => {
     setIsOn(!isOn);
-    await editHighContrast(isOn);
   };
 
   return (

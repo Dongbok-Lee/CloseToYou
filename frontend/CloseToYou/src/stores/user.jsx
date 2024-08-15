@@ -11,7 +11,7 @@ export const useUserStore = create(set => ({
   signUpResponse: "",
   signInResponse: "",
   isSuccess: false,
-  isHighContrast: false,
+  isHighContrast: null,
 
   addUser: async (nickname, email, password) => {
     set({ nickname: nickname, email: email, password: password });
