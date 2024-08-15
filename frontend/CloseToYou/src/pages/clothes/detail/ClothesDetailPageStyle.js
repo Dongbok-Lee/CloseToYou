@@ -13,7 +13,7 @@ export const PageContainer = styled.div`
   width: 100%;
 `;
 
-export const ClothesNameText = styled.h1`
+export const ClothesNameText = styled.div`
   margin: 30px;
   color: ${colors.point[0]};
   font-family: "KoddiUD OnGothic";
@@ -21,7 +21,7 @@ export const ClothesNameText = styled.h1`
   font-weight: 700;
 `;
 
-export const LocationInfoText = styled.h1`
+export const LocationInfoText = styled.div`
   font-family: "KoddiUD OnGothic";
   font-size: 1.5rem;
   font-weight: 700;
@@ -29,7 +29,7 @@ export const LocationInfoText = styled.h1`
   color: ${colors.text[0]};
 `;
 
-export const TabText = styled.p`
+export const TabText = styled.div`
   width: 9.375rem;
   height: 2.5rem;
   flex-shrink: 0;
@@ -61,7 +61,7 @@ export const DetailItem = styled.div`
   margin-bottom: 10px;
 `;
 
-export const DetailTitleText = styled.h2`
+export const DetailTitleText = styled.div`
   color: ${colors.text[0]};
   text-align: left;
   font-family: "KoddiUD OnGothic";
