@@ -1,5 +1,4 @@
 import { AppTitleText, LandigPageContainer } from "./LandingPageStyle";
-import Logo from "../../assets/logo.svg?react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
@@ -24,7 +23,7 @@ const LandingPage = () => {
 
   return (
     <LandigPageContainer title="Close To You 애플리케이션의 랜딩 화면 입니다.">
-      <Logo />
+      <img src="https://i11b201.p.ssafy.io/assets/logo.svg" />
       <AppTitleText>Close To You</AppTitleText>
     </LandigPageContainer>
   );
