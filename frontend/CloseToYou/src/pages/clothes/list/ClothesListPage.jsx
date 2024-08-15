@@ -75,7 +75,7 @@ const ClothesListPage = () => {
         container.removeEventListener("scroll", handleScroll);
       }
     };
-  }, [clothes.length]);
+  }, [listRef.current]);
 
   useEffect(() => {
     console.log(`Active card ID: ${clothes[activeIndex]?.clothesId}`);
