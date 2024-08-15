@@ -84,7 +84,7 @@ const BookMarkDetailPage = () => {
         container.removeEventListener("scroll", handleScroll);
       }
     };
-  }, [[bookmark.clothes].length]);
+  }, [listRef.current]);
 
   return (
     <BookMarkDetailPageContainer className="page">
@@ -100,7 +100,7 @@ const BookMarkDetailPage = () => {
             );
           }}
         >
-          획인
+          확인
         </Modal>
       )}
       {Object.values(bookmark.clothes).length === 0 ? (
