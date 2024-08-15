@@ -1,5 +1,5 @@
-import styled from '@emotion/styled';
-import { colors } from '../../../constants/colors';
+import styled from "@emotion/styled";
+import { colors } from "../../../constants/colors";
 
 export const ClothesDetailPageContainer = styled.div`
   display: flex;
@@ -71,7 +71,7 @@ export const DetailTitleText = styled.h2`
 
 export const DetailInfoText = styled.p`
   color: ${colors.text[0]};
-  text-align: ${({ alignRight }) => (alignRight ? 'right' : 'left')};
+  text-align: ${({ alignRight }) => (alignRight ? "right" : "left")};
   font-family: "KoddiUD OnGothic";
   font-size: 1.25rem;
   font-weight: 400;
@@ -88,6 +88,12 @@ export const ImageContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 0.625rem;
+  }
 `;
 
 export const LastWornDateText = styled.div`
