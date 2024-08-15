@@ -75,13 +75,13 @@ const ClothesDetailPage = () => {
   return (
     <ClothesDetailPageContainer className="page">
       <PageContainer>
-        <TextWrapper aria-label="옷 별명">
+        <TextWrapper role="text" aria-label="옷 별명">
           <ClothesNameText>{details.nickname}</ClothesNameText>
         </TextWrapper>
         <ImageContainer>
           <img src={details.imageUrl} alt="옷" />
         </ImageContainer>
-        <TextWrapper aria-label="위치 정보">
+        <TextWrapper role="text" aria-label="위치 정보">
           <LocationInfoText>
             {details.closetNickname} {details.location}
           </LocationInfoText>
@@ -122,6 +122,7 @@ const ClothesDetailPage = () => {
           <LastWornDateText aria-label="최근 입은 날짜">
             최근 입은 날짜: {details.lastWornDate}
             <FloatingButton
+              role="text"
               aria-label="편집 버튼"
               type="edit"
               onTouchStart={handleNavigateToEdit}
