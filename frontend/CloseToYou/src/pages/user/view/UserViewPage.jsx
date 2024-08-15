@@ -12,26 +12,39 @@ import { useEffect, useState } from "react";
 import ToggleButton from "../../../components/togglebutton/ToggleButton.jsx";
 import { useNavigate } from "react-router-dom";
 import { useUserStore } from "../../../stores/user.jsx";
+import { useTheme } from "@emotion/react";
 
 const UserViewPage = () => {
-  const [isToggle, setIsToggle] = useState(false);
+  const [isToggle, setIsToggle] = useState(() => {
+    const savedValue = localStorage.getItem("isHighContrast");
+    return savedValue !== null ? JSON.parse(savedValue) : false;
+  });
 
-  const { nickname, email, isHighContrast, loadUserInfo, editHighContrast } = useUserStore();
+  const { nickname, email, loadUserInfo, editHighContrast } = useUserStore();
 
   const navigate = useNavigate();
+  const theme = useTheme();
 
   useEffect(() => {
-    // Cookies.set(
-    //   "accessToken",
-    //   "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBY2Nlc3NUb2tlbiIsImV4cCI6MTcyMzQ5NTU0OSwiZW1haWwiOiJocmIuaGFycGVyQGdtYWlsLmNvbSIsImlkIjoxM30.Q4xqqDSdYwnhwgC2cF6VheRFR_7k5CJtb-vbbkRs6_i3VeTsn0J1M0HYOvw8vL8fC7Nao8xVXVVjBbgXxIQBgQ",
-    // );
-    (!nickname || !email) && loadUserInfo();
-    setIsToggle(isHighContrast);
-  }, []);
+    const fetchUserInfo = async () => {
+      await loadUserInfo();
+      const savedValue = localStorage.getItem("isHighContrast");
+      setIsToggle(savedValue !== null ? JSON.parse(savedValue) : false);
+    };
+    fetchUserInfo();
+  }, [loadUserInfo]);
 
-  const handleTouchChangeNickname = e => {
+  useEffect(() => {
+    editHighContrast(isToggle);
+    theme.mode = isToggle;
+    console.log(theme.mode);
+    localStorage.setItem("isHighContrast", JSON.stringify(isToggle));
+  }, [isToggle, editHighContrast]);
+
+  const handleTouchChangeNickname = () => {
     navigate("/nickname");
   };
+
   const handleTouchChangePassword = () => {
     navigate("/password");
   };
@@ -65,7 +78,7 @@ const UserViewPage = () => {
         </ChangeWrapper>
       </UserInfoWrapper>
       <ChangeWrapper>
-        <SubText tabIndex={0}>비밀 번호</SubText>
+        <SubText tabIndex={0}>비밀번호</SubText>
         <ButtonText tabIndex={0} onTouchStart={handleTouchChangePassword}>
           변경
         </ButtonText>
