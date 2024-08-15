@@ -1,6 +1,6 @@
-import styled from '@emotion/styled';
-import { colors } from '../../../constants/colors';
-import TextInput from '../../../components/textinput/TextInput';
+import styled from "@emotion/styled";
+import { colors } from "../../../constants/colors";
+import TextInput from "../../../components/textinput/TextInput";
 
 export const ClothesEditPageContainer = styled.div`
   display: flex;
@@ -68,6 +68,12 @@ export const ImageContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 0.625rem;
+  }
 `;
 
 export const LocationInputContainer = styled.div`
