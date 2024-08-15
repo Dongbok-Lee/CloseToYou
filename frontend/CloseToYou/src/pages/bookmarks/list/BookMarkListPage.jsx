@@ -13,7 +13,7 @@ import BookMarkedClothesFocus from "../../../assets/icons/etc/bookmarked-clothes
 import { useEffect, useState } from "react";
 import Card from "../../../components/card/Card.jsx";
 import FloatingButton from "../../../components/floatingbutton/FloatingButton.jsx";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useBookmarkStore from "../../../stores/bookmark.jsx";
 import Modal from "../../../components/modal/Modal.jsx";
 import { useDoubleClick } from "../../../hooks/useDoubleClick.js";
@@ -33,7 +33,9 @@ const BookMarkListPage = () => {
     editBookmark,
     loadBookmarkDetail,
   } = useBookmarkStore();
+
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleTouchCard = bookmark => {
     updateTouchTime();
@@ -77,7 +79,7 @@ const BookMarkListPage = () => {
     return () => {
       window.removeEventListener("keydown", handleKeyDownWrapper);
     };
-  }, [bookmarkList]);
+  }, [location]);
 
   useEffect(() => {
     loadBookmarkList();
