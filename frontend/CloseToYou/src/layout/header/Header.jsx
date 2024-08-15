@@ -38,7 +38,7 @@ const Header = () => {
       case path === "/closets":
         setTitle("나의 옷장");
         break;
-      case /^\/closet\/\d+$/.test(path):
+      case /^\/closets\/\d+$/.test(path):
         setTitle("나의 옷장");
         break;
       case path === "/clothes":
