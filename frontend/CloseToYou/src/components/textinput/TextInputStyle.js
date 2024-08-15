@@ -4,16 +4,16 @@ const TextInputStyle = styled.input`
   box-sizing: border-box;
 
   border-radius: 0.3125rem;
-  border: 0.5px solid rgba(0, 0, 0, 1);
+  border: 0.5px solid ${props => props.theme.colors.border[props.theme.mode]};
 
   width: 100%;
   height: 3.125rem;
 
-  background-color: rgba(255, 255, 255, 1);
+  background-color: ${props => props.theme.colors.background[props.theme.mode]};
 
   padding-left: 1.25rem;
 
-  color: rgba(0, 0, 0, 1);
+  color: ${props => props.theme.colors.text[props.theme.mode]};
 
   font-size: 1.25rem;
   font-weight: 400;
@@ -21,11 +21,11 @@ const TextInputStyle = styled.input`
   cursor: pointer;
 
   &::placeholder {
-    color: rgba(170, 170, 170, 1);
+    color: ${props => props.theme.colors.border[props.theme.mode]};
   }
 
   &:focus {
-    border: 3px solid rgba(255, 105, 105, 1);
+    border: 3px solid ${props => props.theme.colors.point[props.theme.mode]};
     outline: none;
   }
 
