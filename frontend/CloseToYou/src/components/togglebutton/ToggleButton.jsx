@@ -1,4 +1,4 @@
-import { ToggleContainer, ToggleCircleIcon } from "./ToggleButtonStyle";
+import { ToggleCircleIcon, ToggleContainer } from "./ToggleButtonStyle";
 
 const ToggleButton = ({ isOn, setIsOn }) => {
   const handleToggle = () => {
