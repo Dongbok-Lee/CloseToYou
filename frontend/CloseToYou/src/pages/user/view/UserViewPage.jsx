@@ -51,6 +51,7 @@ const UserViewPage = () => {
   const handleTouchLogout = e => {
     e.target.focus();
     window.confirm("정말 로그아웃 하세요?🥺");
+    navigate("/signin");
   };
 
   return (
