@@ -1,7 +1,7 @@
 import ClothesCardStyle from "./ClothesCardStyle";
 
 const ClothesCard = ({ handleTouchClothesCard, type, color }) => {
-  const iconUrl = `/src/assets/icons/clothes/${type}/${color}.png`;
+  const iconUrl = `https://i11b201.p.ssafy.io/assets/icons/clothes/${type.toLowerCase()}/${color.toLowerCase()}.png`;
 
   return (
     <ClothesCardStyle onTouchStart={handleTouchClothesCard} iconUrl={iconUrl}>
