@@ -27,7 +27,6 @@ import { placeholder } from "../../../constants/placeholder";
 import { useNavigate } from "react-router-dom";
 const ClosetsPage = () => {
   const { loadClosets, addClosets, removeClosets, editClosets, closets } = useClosetsStore();
-  const { isSuccess } = useUserStore();
 
   const [isDoubleClick, updateTouchTime] = useDoubleClick();
 
@@ -67,7 +66,7 @@ const ClosetsPage = () => {
         setCardIndex("");
       }
     }
-  }, [isOpenModal, cardIndex]);
+  }, [isOpenModal, cardIndex, closets]);
 
   const handleTouchCard = index => {
     setCardIndex(index);
