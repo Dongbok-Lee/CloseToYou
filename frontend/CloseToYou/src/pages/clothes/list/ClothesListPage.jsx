@@ -24,16 +24,7 @@ const ClothesListPage = () => {
   const listRef = useRef(null);
 
   const navigate = useNavigate();
-  const { clothes, clothesList, loadClothesList, removeClothesItem } = useClothesStore();
-
-  useEffect(() => {
-    loadClothesList(); // 컴포넌트가 마운트될 때 옷 목록 로드
-  }, [loadClothesList]);
-
-  const handleFilterChange = e => {
-    const { name, value } = e.target;
-    // 필터 변경 로직 (추후 구현 가능)
-  };
+  const { clothes, loadClothesList, removeClothesItem } = useClothesStore();
 
   const handleTouchDelete = async () => {
     const activeClothesId = clothes[activeIndex]?.clothesId;
@@ -49,7 +40,7 @@ const ClothesListPage = () => {
   };
 
   const handlePrev = () => {
-    setActiveIndex(prevIndex => (prevIndex - 1 + clothes.length) % clothesList.length);
+    setActiveIndex(prevIndex => (prevIndex - 1 + clothes.length) % clothes.length);
   };
 
   const handlers = useSwipeable({
@@ -58,6 +49,10 @@ const ClothesListPage = () => {
     preventDefaultTouchmoveEvent: true,
     trackMouse: true,
   });
+
+  useEffect(() => {
+    loadClothesList(); // 컴포넌트가 마운트될 때 옷 목록 로드
+  }, [loadClothesList]);
 
   useEffect(() => {
     const container = listRef.current;
@@ -80,7 +75,7 @@ const ClothesListPage = () => {
         container.removeEventListener("scroll", handleScroll);
       }
     };
-  }, [clothesList.length]);
+  }, [clothes.length]);
 
   useEffect(() => {
     console.log(`Active card ID: ${clothes[activeIndex]?.clothesId}`);

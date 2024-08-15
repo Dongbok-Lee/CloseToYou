@@ -67,11 +67,11 @@ export const useClothesStore = create(set => ({
     set({ selectedClothes: clothes });
   },
 
-  loadClothesByFilter: async (closetId, key, value) => {
-    const { data, status } = await getClothesByFilter(closetId, key, value);
+  loadClothesByFilter: async (key, value) => {
+    const { data, status } = await getClothesByFilter(key, value);
     if (status === 200) {
       set({ loading: false });
-      set({ clothesList: data });
+      set({ clothes: data.data });
     } else {
       set({ error: data });
     }

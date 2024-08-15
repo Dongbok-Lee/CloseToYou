@@ -17,7 +17,7 @@ const FilterItem = ({ title, isOpen, setIsOpen, setIsDisabled }) => {
   const handleTouchItem = item => {
     if (isDoubleClick()) {
       setIsDisabled(false);
-      loadClothesByFilter(0, translate[title], translate[item]);
+      loadClothesByFilter(translate[title], translate[item]);
     } else {
       updateTouchTime();
     }
