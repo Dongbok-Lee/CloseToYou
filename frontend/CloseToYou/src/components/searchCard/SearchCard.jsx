@@ -10,7 +10,7 @@ const SearchCard = ({
   clothesColor,
 }) => {
   const navigate = useNavigate();
-  const iconUrl = `/src/assets/icons/clothes/${clothesType}/${clothesColor}.png`;
+  const iconUrl = `https://i11b201.p.ssafy.io/assets/icons/clothes/${clothesType.toLowerCase()}/${clothesColor.toLowerCase()}.png`;
 
   const handleKeyDown = e => {
     if (e.key === "Enter") {
