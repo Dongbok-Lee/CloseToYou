@@ -13,7 +13,7 @@ const Select = ({ initItem, type, onChange }) => {
       "보라색",
       "분홍색",
       "갈색",
-      "검정색",
+      "검은색",
       "회색",
       "흰색",
       "베이지색",
@@ -30,6 +30,8 @@ const Select = ({ initItem, type, onChange }) => {
       "티셔츠",
       "조끼",
       "원피스",
+      "바지",
+      "치마",
       "점프슈트",
     ],
     season: ["봄", "여름", "가을", "겨울", "사계절"],
@@ -40,9 +42,9 @@ const Select = ({ initItem, type, onChange }) => {
   const selectRef = useRef(null);
 
   useEffect(() => {
-    setSelectedItem(initItem)
-  }, [initItem])
-  
+    setSelectedItem(initItem);
+  }, [initItem]);
+
   const handleChange = event => {
     const value = event.target.value;
     setSelectedItem(value);

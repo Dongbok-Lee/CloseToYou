@@ -87,14 +87,14 @@ const NFCPage = () => {
 
   return (
     <SkipContainer className="page">
-      <button onClick={test}>네스트 버튼</button>
       <NfcImg src={NFCImg} alt="NFC 이미지" />
       <NfcText>
         핸드폰의 뒷면에
         <br />
-        옷의 NFC 태그를 찍어주세요
+        옷의 NFC 태그를
+        <br />
+        가져다 대주세요
       </NfcText>
-      <p>nfcId: {nfcId}</p>
       <SkipButton onClick={handleSkip} aria-label="건너뛰기 버튼">
         Skip
       </SkipButton>
