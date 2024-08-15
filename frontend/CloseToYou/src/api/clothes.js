@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-catch */
-import { authClientInstance } from "../utils/http-client";
+import {authClientInstance} from "../utils/http-client"; // 옷 검색하는 함수 getSearchedClothes
 
 // 옷 검색하는 함수 getSearchedClothes
 export const getSearchedClothes = async keyword => {
@@ -58,4 +58,15 @@ export const getClothesByNfc = async nfcId => {
   } catch (error) {
     throw error;
   }
+};
+
+export const getClothesByFilter = async (key, value) => {
+  return await authClientInstance
+    .get(`/api/clothes/filter`, { params: { [key]: value } })
+    .then(res => {
+      return res;
+    })
+    .catch(e => {
+      return e;
+    });
 };
