@@ -34,7 +34,6 @@ export const patchHighContrast = async value => {
   return await authClientInstance
     .patch("/api/users/highcontrast/" + value)
     .then(res => {
-      console.log(res);
       return res;
     })
     .then(error => {
