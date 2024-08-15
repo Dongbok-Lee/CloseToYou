@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { SkipContainer, NfcImg, NfcText, SkipButton } from "./ClothesNfcPageStyle";
 import NFCImg from "../../../assets/icons/nfc.png";
 import { useNavigate, useParams } from "react-router-dom";
-import { useClothesStore } from "../../../stores/clothes";
+import useClothesStore from "../../../stores/clothes";
 
 const NFCPage = () => {
   const [serialNumber, setSerialNumber] = useState("");
@@ -10,11 +10,8 @@ const NFCPage = () => {
   const navigate = useNavigate();
   const { id: skipClothesId } = useParams();
   const loadClothesByNfc = useClothesStore(state => state.loadClothesByNfc);
+  const { focusedClothesId, clearFocusedClothesId } = useClothesStore();
   const [clothesId, setClothesId] = useState(undefined);
-
-  const test = () => {
-    setNfcId(1161931032322432);
-  };
 
   const scan = useCallback(async () => {
     if ("NDEFReader" in window) {
@@ -59,10 +56,9 @@ const NFCPage = () => {
     } else {
       console.log("해당 NFC ID에 대한 옷 정보를 찾을 수 없습니다.");
     }
-  }, [clothesId]);
+  }, [clothesId, navigate]);
 
   useEffect(() => {
-    console.log("적용됨!!");
     const fetchClothesId = async () => {
       try {
         const clothesId = await loadClothesByNfc(nfcId);
@@ -75,10 +71,13 @@ const NFCPage = () => {
     if (nfcId !== null) {
       fetchClothesId();
     }
-  }, [nfcId]); // nfcId가 변경될 때마다 fetchClothesId 호출
+  }, [nfcId, loadClothesByNfc]);
 
   const handleSkip = () => {
-    if (skipClothesId) {
+    if (focusedClothesId) {
+      navigate(`/clothes/edit/${focusedClothesId}`);
+      clearFocusedClothesId();
+    } else if (skipClothesId) {
       navigate(`/clothes/edit/${skipClothesId}`);
     } else {
       console.log("옷 ID가 유효하지 않습니다.");
