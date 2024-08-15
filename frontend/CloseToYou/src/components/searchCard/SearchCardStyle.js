@@ -5,7 +5,7 @@ const SearchCardStyle = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 100%;
+  max-width: 90%;
   height: 5rem;
   margin-bottom: 1rem;
   padding: 1rem;
