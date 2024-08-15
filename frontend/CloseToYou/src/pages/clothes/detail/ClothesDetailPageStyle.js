@@ -22,6 +22,8 @@ export const ClothesNameText = styled.div`
 `;
 
 export const LocationInfoText = styled.div`
+  margin: 0 30px;
+
   font-family: "KoddiUD OnGothic";
   font-size: 1.5rem;
   font-weight: 700;
