@@ -1,5 +1,5 @@
-import styled from '@emotion/styled';
-import { colors } from '../../../constants/colors';
+import styled from "@emotion/styled";
+import { colors } from "../../../constants/colors";
 
 export const ClothesDetailPageContainer = styled.div`
   display: flex;
@@ -12,8 +12,8 @@ export const PageContainer = styled.div`
   flex-grow: 2;
   width: 100%;
 `;
-
-export const ClothesNameText = styled.h1`
+export const TextWrapper = styled.div``;
+export const ClothesNameText = styled.div`
   margin: 30px;
   color: ${colors.point[0]};
   font-family: "KoddiUD OnGothic";
@@ -21,7 +21,7 @@ export const ClothesNameText = styled.h1`
   font-weight: 700;
 `;
 
-export const LocationInfoText = styled.h1`
+export const LocationInfoText = styled.div`
   font-family: "KoddiUD OnGothic";
   font-size: 1.5rem;
   font-weight: 700;
@@ -29,7 +29,7 @@ export const LocationInfoText = styled.h1`
   color: ${colors.text[0]};
 `;
 
-export const TabText = styled.p`
+export const TabText = styled.div`
   width: 9.375rem;
   height: 2.5rem;
   flex-shrink: 0;
@@ -61,7 +61,7 @@ export const DetailItem = styled.div`
   margin-bottom: 10px;
 `;
 
-export const DetailTitleText = styled.h2`
+export const DetailTitleText = styled.div`
   color: ${colors.text[0]};
   text-align: left;
   font-family: "KoddiUD OnGothic";
@@ -71,7 +71,7 @@ export const DetailTitleText = styled.h2`
 
 export const DetailInfoText = styled.p`
   color: ${colors.text[0]};
-  text-align: ${({ alignRight }) => (alignRight ? 'right' : 'left')};
+  text-align: ${({ alignRight }) => (alignRight ? "right" : "left")};
   font-family: "KoddiUD OnGothic";
   font-size: 1.25rem;
   font-weight: 400;
@@ -88,6 +88,12 @@ export const ImageContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 0.625rem;
+  }
 `;
 
 export const LastWornDateText = styled.div`

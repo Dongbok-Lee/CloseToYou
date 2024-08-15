@@ -1,6 +1,13 @@
 import TextInputStyle from "./TextInputStyle";
 
-const TextInput = ({ textInputType, textInputValue, textInputSize, textInputPlaceholder, handleChangeTextInput }) => {
+const TextInput = ({
+  textInputType,
+  textInputValue,
+  textInputSize,
+  textInputPlaceholder,
+  handleChangeTextInput,
+  handleTouchEnd,
+}) => {
   return (
     <TextInputStyle
       type={textInputType}
@@ -8,6 +15,7 @@ const TextInput = ({ textInputType, textInputValue, textInputSize, textInputPlac
       textInputSize={textInputSize}
       placeholder={textInputPlaceholder}
       onChange={handleChangeTextInput}
+      onTouchEnd={handleTouchEnd}
     ></TextInputStyle>
   );
 };

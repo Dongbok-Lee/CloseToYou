@@ -21,13 +21,11 @@ import Closet from "../../../assets/icons/etc/closet.svg";
 
 import { useDoubleClick } from "../../../hooks/useDoubleClick";
 import { useClosetsStore } from "../../../stores/closet";
-import { useUserStore } from "../../../stores/user";
 import { placeholder } from "../../../constants/placeholder";
 
 import { useNavigate } from "react-router-dom";
 const ClosetsPage = () => {
   const { loadClosets, addClosets, removeClosets, editClosets, closets } = useClosetsStore();
-  const { isSuccess } = useUserStore();
 
   const [isDoubleClick, updateTouchTime] = useDoubleClick();
 

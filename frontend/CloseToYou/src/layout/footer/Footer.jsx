@@ -2,26 +2,32 @@ import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import {
-  BookmarkImg,
-  BookmarkText,
-  BookmarkWrapper,
+  FooterContainer,
   ClosetImg,
-  ClosetText,
   ClosetWrapper,
+  ClosetText,
+  ClothesWrapper,
   ClothesImg,
   ClothesText,
-  ClothesWrapper,
-  FooterContainer,
+  BookmarkWrapper,
+  BookmarkImg,
+  BookmarkText,
+  ProfileWrapper,
   ProfileImg,
   ProfileText,
-  ProfileWrapper,
 } from "./FooterStyle";
-import { useTheme } from "@emotion/react";
+
+import ClosetBaiscImg from "../../assets/icons/etc/closet-basic.svg";
+import ClosetFocusImg from "../../assets/icons/etc/closet-focus.svg";
+import ClothesBasicImg from "../../assets/icons/etc/hanger-basic.svg";
+import ClothesFocusImg from "../../assets/icons/etc/hanger-focus.svg";
+import BookmarkBasicImg from "../../assets/icons/etc/bookmark-basic.svg";
+import BookmarkFocusImg from "../../assets/icons/etc/bookmark-focus.svg";
+import ProfileBasicImg from "../../assets/icons/etc/profile-basic.svg";
+import ProfileFocusImg from "../../assets/icons/etc/profile-focus.svg";
 
 const Footer = () => {
   const nav = useNavigate();
-  const theme = useTheme();
-  const { mode } = theme;
 
   let location = useLocation();
 
@@ -29,99 +35,69 @@ const Footer = () => {
 
   useEffect(() => {
     setUrl(location.pathname);
+    console.log(location.pathname);
   }, [location.pathname]);
 
-
-  const handleTouchCloset = (e) => {
+  const handleTouchCloset = e => {
     setTimeout(() => {
       document.activeElement.blur();
       nav("/closets");
     }, 150);
   };
 
-  const handleTouchClothes = (e) => {
+  const handleTouchClothes = e => {
     setTimeout(() => {
       document.activeElement.blur();
       nav("/clothes");
     }, 150);
   };
 
-  const handleTouchBookmark = (e) => {
+  const handleTouchBookmark = e => {
     setTimeout(() => {
       document.activeElement.blur();
       nav("/bookmarks");
-
     }, 150);
   };
 
-  const handleTouchProfile = (e) => {
+  const handleTouchProfile = e => {
     setTimeout(() => {
       document.activeElement.blur();
       nav("/user");
-
     }, 150);
   };
 
   return (
     <FooterContainer>
       <ClosetWrapper tabIndex={0} onTouchStart={handleTouchCloset}>
-        <ClosetImg
-          src={
-            mode === 1
-              ? url.includes("/closets")
-                ? "src/assets/icons/etc/closet-focus-dark.svg"
-                : "src/assets/icons/etc/closet-basic-dark.svg"
-              : url.includes("/closets")
-                ? "src/assets/icons/etc/closet-focus.svg"
-                : "src/assets/icons/etc/closet-basic.svg"
-          }
-          alt="옷장으로 바로가기"
-        />
+        {url.includes("/closets") ? (
+          <ClosetImg src={ClosetFocusImg} alt="옷장으로 바로가기"></ClosetImg>
+        ) : (
+          <ClosetImg src={ClosetBaiscImg} alt="옷장으로 바로가기"></ClosetImg>
+        )}
         <ClosetText url={url}>옷장</ClosetText>
       </ClosetWrapper>
       <ClothesWrapper tabIndex={0} onTouchStart={handleTouchClothes}>
-        <ClothesImg
-          src={
-            mode === 1
-              ? url.includes("/clothes")
-                ? "src/assets/icons/etc/hanger-focus-dark.svg"
-                : "src/assets/icons/etc/hanger-basic-dark.svg"
-              : url.includes("/clothes")
-                ? "src/assets/icons/etc/hanger-focus.svg"
-                : "src/assets/icons/etc/hanger-basic.svg"
-          }
-          alt="옷으로 바로가기"
-        />
+        {url.includes("/clothes") ? (
+          <ClothesImg src={ClothesFocusImg} alt="옷으로 바로가기"></ClothesImg>
+        ) : (
+          <ClothesImg src={ClothesBasicImg} alt="옷으로 바로가기"></ClothesImg>
+        )}
         <ClothesText url={url}>옷</ClothesText>
       </ClothesWrapper>
       <BookmarkWrapper tabIndex={0} onTouchStart={handleTouchBookmark}>
-        <BookmarkImg
-          src={
-            mode === 1
-              ? url.includes("/bookmarks")
-                ? "src/assets/icons/etc/bookmark-focus-dark.svg"
-                : "src/assets/icons/etc/bookmark-basic-dark.svg"
-              : url.includes("/bookmarks")
-                ? "src/assets/icons/etc/bookmark-focus.svg"
-                : "src/assets/icons/etc/bookmark-basic.svg"
-          }
-          alt="북마크로 바로가기"
-        />
+        {url.includes("/bookmarks") ? (
+          <BookmarkImg src={BookmarkFocusImg} alt="북마크로 바로가기"></BookmarkImg>
+        ) : (
+          <BookmarkImg src={BookmarkBasicImg} alt="북마크로 바로가기"></BookmarkImg>
+        )}
         <BookmarkText url={url}>북마크</BookmarkText>
       </BookmarkWrapper>
       <ProfileWrapper tabIndex={0} onTouchStart={handleTouchProfile}>
-        <ProfileImg
-          src={
-            mode === 1
-              ? url.includes("/user") || url.includes("/nickname") || url.includes("/password")
-                ? "src/assets/icons/etc/profile-focus-dark.svg"
-                : "src/assets/icons/etc/profile-basic-dark.svg"
-              : url.includes("/user") || url.includes("/nickname") || url.includes("/password")
-                ? "src/assets/icons/etc/profile-focus.svg"
-                : "src/assets/icons/etc/profile-basic.svg"
-          }
-          alt="프로필로 바로가기"
-        />
+        {url.includes("/user") || url.includes("/nickname") || url.includes("/password") ? (
+          <ProfileImg src={ProfileFocusImg} alt="프로필로 바로가기"></ProfileImg>
+        ) : (
+          <ProfileImg src={ProfileBasicImg} alt="프로필로 바로가기"></ProfileImg>
+        )}
         <ProfileText url={url}>프로필</ProfileText>
       </ProfileWrapper>
     </FooterContainer>

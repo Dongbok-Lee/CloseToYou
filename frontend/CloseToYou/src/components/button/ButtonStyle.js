@@ -9,9 +9,9 @@ const ButtonStyle = styled.button`
   width: 100%;
   height: 3.75rem;
 
-  background-color: rgba(255, 105, 105, 1);
+  background-color: ${props => props.theme.colors.point[props.theme.mode]};
 
-  color: rgba(255, 255, 255, 1);
+  color: ${props => props.theme.colors.background[props.theme.mode]};
 
   text-align: center;
   font-size: 2rem;
@@ -44,7 +44,7 @@ const ButtonStyle = styled.button`
     font-size: 1.75rem;
   `}
 
-  ${({ btnColor }) =>
+    ${({ btnColor }) =>
     btnColor === "white" &&
     `
     border: 2px solid rgba(255, 105, 105, 1);
@@ -54,7 +54,7 @@ const ButtonStyle = styled.button`
     color: rgba(255, 105, 105, 1);
   `}
 
-  ${({ btnColor }) =>
+    ${({ btnColor }) =>
     btnColor === "gray" &&
     `
     border: 2px solid rgba(0, 0, 0, 1);

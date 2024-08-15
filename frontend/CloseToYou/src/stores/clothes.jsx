@@ -13,6 +13,9 @@ export const useClothesStore = create(set => ({
   clothesList: [],
   selectedClothes: null,
   clothes: [],
+  focusedClothesId: null,
+  setFocusedClothesId: id => set({ focusedClothesId: id }),
+  clearFocusedClothesId: () => set({ focusedClothesId: null }),
 
   loadClothesList: async () => {
     const { data, status } = await getClothes();
@@ -55,9 +58,10 @@ export const useClothesStore = create(set => ({
 
   loadClothesByNfc: async nfcId => {
     const { data, status } = await getClothesByNfc(nfcId);
+    console.log("API response data:", data);
     if (status === 200) {
       set({ selectedClothes: data });
-      return data.id;
+      return data.data.clothesId;
     } else {
       throw new Error("옷을 찾을 수 없습니다.");
     }
