@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import {
   createBookmark,
-  createclothesInBookmark,
+  createClothesInBookmark,
   deleteBookmark,
   deleteClothesInBookmark,
   getBookmarkDetail,
@@ -74,7 +74,7 @@ const useBookmarkStore = create(set => ({
   },
 
   addClothesInBookmark: async (bookmarkId, clothesId) => {
-    const { data, status } = await createclothesInBookmark(bookmarkId, clothesId);
+    const { data, status } = await createClothesInBookmark(bookmarkId, clothesId);
     if (status === 200) {
       set({ loading: false });
     } else {
