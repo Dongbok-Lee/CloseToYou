@@ -27,9 +27,9 @@ export default defineConfig({
       },
 
       manifest: {
-        name: "S11P12B201",
-        short_name: "S11P12B201",
-        description: "Close To You",
+        name: "Close To You",
+        short_name: "Close To You",
+        description: "시각 장애인을 위한 스마트 AI 옷장 서비스",
         theme_color: "#ffffff",
       },
 
