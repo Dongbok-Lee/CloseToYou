@@ -32,7 +32,6 @@ const ClosetsPage = () => {
   const [nickname, setNickname] = useState("");
   const [closetCode, setClosetCode] = useState("");
   const [cardIndex, setCardIndex] = useState("");
-  const [isLoad, setIsload] = useState(false);
 
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
@@ -44,8 +43,6 @@ const ClosetsPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       await loadClosets();
-
-      setIsload(true);
     };
 
     fetchData();
@@ -68,7 +65,7 @@ const ClosetsPage = () => {
         setCardIndex("");
       }
     }
-  }, [isOpenModal, cardIndex, isLoad]);
+  }, [isOpenModal, cardIndex]);
 
   const handleTouchCard = index => {
     setCardIndex(index);
