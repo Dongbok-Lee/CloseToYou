@@ -54,10 +54,10 @@ export const useClothesStore = create(set => ({
 
   loadClothesByNfc: async nfcId => {
     const { data, status } = await getClothesByNfc(nfcId);
-    console.log("API response data:", data); // 응답 구조 확인을 위한 로그
+    console.log("API response data:", data);
     if (status === 200) {
       set({ selectedClothes: data });
-      return data.id;
+      return data.data.clothesId;
     } else {
       throw new Error("옷을 찾을 수 없습니다.");
     }
