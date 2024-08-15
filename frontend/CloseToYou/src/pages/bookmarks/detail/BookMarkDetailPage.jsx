@@ -84,7 +84,7 @@ const BookMarkDetailPage = () => {
         container.removeEventListener("scroll", handleScroll);
       }
     };
-  }, [Object.values(bookmark.clothes).length]);
+  }, [[bookmark.clothes].length]);
 
   return (
     <BookMarkDetailPageContainer className="page">
@@ -107,10 +107,10 @@ const BookMarkDetailPage = () => {
         <NoClothesText>등록된 옷이 없습니다.</NoClothesText>
       ) : (
         <SwipeContainer {...handlers} id="clothes-list" ref={listRef}>
-          {Object.values(bookmark.clothes).map((clothing, index) => {
+          {bookmark.clothes.map((clothing, index) => {
             console.log(clothing);
             return (
-              <ClothesCardWrapper key={index} isActive={clothing.clothesId === activeIndex}>
+              <ClothesCardWrapper key={clothing.clothesId} isActive={index === activeIndex}>
                 <ClothesCard
                   handleTouchClothesCard={handleTouchClothesCard}
                   type={clothing.type.toLowerCase()}
