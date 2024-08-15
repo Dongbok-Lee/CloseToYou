@@ -49,7 +49,7 @@ const SignUpPage = () => {
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
   const [isPasswordCorrect, setIsPasswordCorrect] = useState(true);
-  const [isOpenSuccessModal, setIsOpenSuccessModal] = useState(true);
+  const [isOpenSuccessModal, setIsOpenSuccessModal] = useState(false);
 
   const handleTouchSignUpButton = e => {
     e.target.focus();
