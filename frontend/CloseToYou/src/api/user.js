@@ -8,11 +8,6 @@ export const createUser = async (nickname, email, password) => {
       email: email,
       password: password,
     },
-    {
-      headers: {
-        Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-      },
-    },
   );
 
   return response;
@@ -24,11 +19,6 @@ export const createSignIn = async (email, password) => {
     {
       email: email,
       password: password,
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-      },
     },
   );
 
