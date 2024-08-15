@@ -1,8 +1,11 @@
 import HeaderContainer from "./HeaderStyle";
 import BackIcon from "../../assets/icons/etc/back.svg";
 import SearchIcon from "../../assets/icons/etc/search.svg";
+import BackDarkIcon from "../../assets/icons/etc/back-dark.svg";
+import SearchDarkIcon from "../../assets/icons/etc/search-dark.svg";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useTheme } from "@emotion/react";
 
 const icons = {
   back: BackIcon,
@@ -14,7 +17,15 @@ const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const theme = useTheme();
+  const { mode } = useTheme();
+
   useEffect(() => {
+    if (mode === 1) {
+      icons.back = BackDarkIcon;
+      icons.search = SearchDarkIcon;
+    }
+
     const path = location.pathname;
 
     switch (true) {
@@ -26,9 +37,6 @@ const Header = () => {
         break;
       case path === "/closets":
         setTitle("나의 옷장");
-        break;
-      case /^\/closets\/\d+$/.test(path):
-        setTitle("상세보기");
         break;
       case path === "/clothes":
         setTitle("나의 옷");
@@ -68,7 +76,6 @@ const Header = () => {
 
   const handleTouchBackIcon = () => {
     navigate(-1);
-    console.log("뒤록가기");
   };
 
   const handleTouchSearchIcon = () => {
