@@ -2,7 +2,11 @@ import { authClientInstance } from "../utils/http-client.js";
 
 export const getBookmarkList = async () => {
   return await authClientInstance
-    .get("/api/bookmarks")
+    .get("/api/bookmarks", {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+      },
+    })
     .then(res => {
       return res;
     })
@@ -13,7 +17,11 @@ export const getBookmarkList = async () => {
 
 export const deleteBookmark = async bookmarkId => {
   return await authClientInstance
-    .delete("/api/bookmarks/" + bookmarkId)
+    .delete("/api/bookmarks/" + bookmarkId, {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+      },
+    })
     .then(res => {
       return res;
     })
@@ -24,7 +32,15 @@ export const deleteBookmark = async bookmarkId => {
 
 export const createBookmark = async newNickname => {
   return await authClientInstance
-    .post("/api/bookmarks", { nickname: newNickname })
+    .post(
+      "/api/bookmarks",
+      { nickname: newNickname },
+      {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+        },
+      },
+    )
     .then(res => {
       return res;
     })
@@ -35,7 +51,15 @@ export const createBookmark = async newNickname => {
 
 export const patchBookmark = async (bookmarkId, modifiedNickname) => {
   return await authClientInstance
-    .patch("api/bookmarks/" + bookmarkId + "/nickname", { nickname: modifiedNickname })
+    .patch(
+      "api/bookmarks/" + bookmarkId + "/nickname",
+      { nickname: modifiedNickname },
+      {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+        },
+      },
+    )
     .then(res => {
       return res;
     })
@@ -46,7 +70,11 @@ export const patchBookmark = async (bookmarkId, modifiedNickname) => {
 
 export const getBookmarkDetail = async bookmarkId => {
   return await authClientInstance
-    .get("api/bookmarks/" + bookmarkId)
+    .get("api/bookmarks/" + bookmarkId, {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+      },
+    })
     .then(res => {
       return res;
     })
@@ -57,7 +85,11 @@ export const getBookmarkDetail = async bookmarkId => {
 
 export const deleteClothesInBookmark = async (bookmarkId, clothesId) => {
   return await authClientInstance
-    .delete("api/bookmarks/" + bookmarkId + "/delete/" + clothesId)
+    .delete("api/bookmarks/" + bookmarkId + "/delete/" + clothesId, {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+      },
+    })
     .then(res => {
       return res;
     })
@@ -68,7 +100,11 @@ export const deleteClothesInBookmark = async (bookmarkId, clothesId) => {
 
 export const createclothesInBookmark = async (bookmarkId, clothesId) => {
   return await authClientInstance
-    .post("api/bookmarks/" + bookmarkId + "/add/" + clothesId)
+    .post("api/bookmarks/" + bookmarkId + "/add/" + clothesId, {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+      },
+    })
     .then(res => {
       return res;
     })
