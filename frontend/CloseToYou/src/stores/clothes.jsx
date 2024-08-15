@@ -54,6 +54,7 @@ export const useClothesStore = create(set => ({
 
   loadClothesByNfc: async nfcId => {
     const { data, status } = await getClothesByNfc(nfcId);
+    console.log("API response data:", data); // 응답 구조 확인을 위한 로그
     if (status === 200) {
       set({ selectedClothes: data });
       return data.id;
