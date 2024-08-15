@@ -44,13 +44,11 @@ const ClosetsPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (isSuccess) {
-        await loadClosets();
-      }
+      await loadClosets();
     };
 
     fetchData();
-  }, [isSuccess]);
+  }, []);
 
   useEffect(() => {
     if (!isOpenModal) {
@@ -124,7 +122,7 @@ const ClosetsPage = () => {
               Icon={ClosetsCardBasic}
               FocusIcon={ClosetsCardFocus}
               tabIndex={0}
-              isFocused={index == cardIndex}
+              isFocused={index === cardIndex}
             ></Card>
           ))}
         <Card Icon={Plus} tabIndex={0} handleTouch={handleTouchAdd}></Card>
