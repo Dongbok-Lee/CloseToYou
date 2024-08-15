@@ -18,7 +18,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   const theme = useTheme();
-  const { mode } = useTheme();
+  const { mode } = theme;
 
   useEffect(() => {
     if (mode === 1) {
@@ -68,11 +68,11 @@ const Header = () => {
       case path === "/password":
         setTitle("비밀번호 변경");
         break;
-      case path === "/clothes/nfc":
+      case path === "/clothes/nfc" || path === "/bookmarks/nfc":
         setTitle("NFC 태그");
         break;
       default:
-        setTitle("default");
+        setTitle("");
         break;
     }
   }, [location.pathname]);

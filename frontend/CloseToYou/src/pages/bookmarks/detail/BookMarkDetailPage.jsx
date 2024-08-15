@@ -10,13 +10,12 @@ import { FloatingButtonWraper } from "../list/BookMarkListPageStyle.js";
 import Modal from "../../../components/modal/Modal.jsx";
 import {
   ClothesCardWrapper,
-  Nickname,
   NoClothesText,
   SwipeContainer,
 } from "../../clothes/list/ClothesListPageStyle.js";
 import ClothesCard from "../../../components/clothescard/ClothesCard.jsx";
 import { useSwipeable } from "react-swipeable";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDoubleClick } from "../../../hooks/useDoubleClick.js";
 
 const BookMarkDetailPage = () => {
@@ -127,7 +126,8 @@ const BookMarkDetailPage = () => {
         <FloatingButton
           type="add"
           onTouchStart={() => {
-            navigate("/clothes/nfc");
+            console.log(`/bookmarks/nfc/${location.pathname.split("/")[2]}`);
+            navigate(`/bookmarks/nfc/${location.pathname.split("/")[2]}`);
           }}
         />
       </FloatingButtonWraper>
