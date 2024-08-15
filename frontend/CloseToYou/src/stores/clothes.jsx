@@ -12,6 +12,9 @@ export const useClothesStore = create(set => ({
   clothesList: [],
   selectedClothes: null,
   clothes: [],
+  focusedClothesId: null,
+  setFocusedClothesId: id => set({ focusedClothesId: id }),
+  clearFocusedClothesId: () => set({ focusedClothesId: null }),
 
   loadClothesList: async () => {
     const { data, status } = await getClothes();
