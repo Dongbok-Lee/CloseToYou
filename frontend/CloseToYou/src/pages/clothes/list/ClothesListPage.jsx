@@ -24,7 +24,7 @@ const ClothesListPage = () => {
   const listRef = useRef(null);
 
   const navigate = useNavigate();
-  const { clothes, loadClothesList, removeClothesItem } = useClothesStore();
+  const { clothes, loadClothesList, removeClothesItem, setFocusedClothesId } = useClothesStore();
 
   const handleTouchDelete = async () => {
     const activeClothesId = clothes[activeIndex]?.clothesId;
