@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { colors } from '../../constants/colors';
+import { colors } from "../../constants/colors";
 
 export const ButtonContainer = styled.div`
   border-radius: 50%;
@@ -12,9 +12,10 @@ export const ButtonContainer = styled.div`
   background-color: ${props => (props.isDeleteType ? colors.background[0] : colors.point[0])};
   border: 1px solid ${colors.border[0]};
   cursor: pointer;
-  position: absolute;
+  position: fixed;
+  bottom: 5.8rem;
   ${props => (props.isDeleteType ? "left: 1.8rem;" : "right: 1.8rem;")}
-  z-index: 1000;
+  z-index: 999;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
   &:focus {
