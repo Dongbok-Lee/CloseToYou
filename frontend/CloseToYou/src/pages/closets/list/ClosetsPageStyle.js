@@ -81,7 +81,7 @@ export const ClosetSelectWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  gap: 4rem;
+  gap: 3rem;
 
   margin-top: 2rem;
 `;
