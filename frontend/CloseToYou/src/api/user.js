@@ -60,7 +60,7 @@ export const patchHighContrast = async value => {
     .then(res => {
       return res;
     })
-    .then(error => {
+    .catch(error => {
       return error;
     });
 };
