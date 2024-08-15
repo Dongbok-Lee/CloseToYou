@@ -1,11 +1,12 @@
 import { create } from "zustand";
 import {
-  getClothes,
-  getClothesById,
   deleteClothes,
-  patchClothes,
-  getSearchedClothes,
+  getClothes,
+  getClothesByFilter,
+  getClothesById,
   getClothesByNfc,
+  getSearchedClothes,
+  patchClothes,
 } from "../api/clothes";
 
 export const useClothesStore = create(set => ({
@@ -64,6 +65,16 @@ export const useClothesStore = create(set => ({
 
   selectClothesItem: clothes => {
     set({ selectedClothes: clothes });
+  },
+
+  loadClothesByFilter: async (closetId, key, value) => {
+    const { data, status } = await getClothesByFilter(closetId, key, value);
+    if (status === 200) {
+      set({ loading: false });
+      set({ clothesList: data });
+    } else {
+      set({ error: data });
+    }
   },
 }));
 
