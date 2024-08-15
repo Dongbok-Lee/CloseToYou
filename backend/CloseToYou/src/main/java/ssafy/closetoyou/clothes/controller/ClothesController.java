@@ -3,6 +3,7 @@ package ssafy.closetoyou.clothes.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.coyote.Response;
@@ -93,10 +94,14 @@ public class ClothesController {
 
     @Operation(summary = "옷장 및 필터 기반 옷 검색 api")
     @GetMapping("/filter")
-    public ResponseEntity<SuccessResponse<List<ClothesSummary>>> searchClothesBySearchFilter(@Valid @RequestBody ClothesCondition clothesCondition) {
-        List<ClothesSummary> clothesRespons = clothesService.searchClothesByClothesCondition(clothesCondition);
+    public ResponseEntity<SuccessResponse<List<ClothesSummary>>> searchClothesBySearchFilter(@RequestParam(value = "closetId", required = false, defaultValue = "0") Long closetId,
+                                                                                                 @RequestParam(value = "color", required = false) String color,
+                                                                                                 @RequestParam(value = "type", required = false) String type,
+                                                                                                 @RequestParam(value = "pattern", required = false) String pattern) {
+        ClothesCondition clothesCondition = new ClothesCondition(closetId, color, type, pattern);
+        List<ClothesSummary> clothesResponse = clothesService.searchClothesByClothesCondition(clothesCondition);
         return ResponseEntity.ok()
-                .body(new SuccessResponse<>("필터 기반 옷 검색 성공", clothesRespons));
+                .body(new SuccessResponse<>("필터 기반 옷 검색 성공", clothesResponse));
 
     }
 }
