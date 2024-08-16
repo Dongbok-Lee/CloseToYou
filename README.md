@@ -120,7 +120,7 @@ CI/CD `Jenkins`
 | jumpsuite | 0.7708 | 0.6964 | 0.7317 |
 
 
-## 옷 퍁턴 구분
+## 옷 패턴 구분
 
 <img src="https://file.notion.so/f/f/df80fcb2-bab7-4b42-96f7-0674f0c31cbc/cedb48c1-008b-4f5f-b358-1a213584d1d1/image.png?table=block&id=18407f7d-f75f-46cc-83cc-9342c2da5ea9&spaceId=df80fcb2-bab7-4b42-96f7-0674f0c31cbc&expirationTimestamp=1723860000000&signature=C8TYcJQ_TPV81XAUfs0gKF-CxcZsPLROvp6oOW3-hGI&downloadName=image.png" alt="loss 값 기반 성능 지표" width="400">
 
