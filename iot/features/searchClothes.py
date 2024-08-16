@@ -14,16 +14,14 @@ def search():
         text = recognize_speech_from_mic()
         print(text)
         if(text is None):
-            voice="띠링"
-            text_to_speech(voice)
             return
 
         keyword = extract_keyword(text)
 
         if(keyword is not None):
             print(keyword)           
-            data = execute_query("select * from clothes")
-            voice = request_find_clothes( list_to_string(data) + keyword + "의 위치를 출력해줘")
+            data = execute_query('select * from clothes where closet_id = (select closet_id from closets where closet_code = "A1B2C3") and location is not null')
+            voice = request_find_clothes( list_to_string(data) + keyword + "에 해당하는 데이터의  닉네임과 해당 위치를 출력해줘")
             print(voice)
             text_to_speech(voice)
 

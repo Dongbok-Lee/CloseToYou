@@ -32,8 +32,9 @@ def get_color_name(avg_hue, avg_saturation, avg_value):
     else:
         return ["알 수 없는 색상", "UNKNOWN"]
 
-def get_color_properties(image_path, roi_coords):
+def get_color_properties(image_path):
     # 이미지 읽기
+    print(image_path)
     image = cv2.imread(image_path)
 
     # 이미지가 제대로 읽혔는지 확인
@@ -41,9 +42,17 @@ def get_color_properties(image_path, roi_coords):
         print("Error: Could not read image.")
         return None
 
-    # ROI (Region of Interest) 설정
-    x, y, w, h = roi_coords
-    roi = image[y:y+h, x:x+w]
+    # 이미지 크기 가져오기
+    h, w, _ = image.shape
+
+    # 이미지의 가운데 30% 영역 계산
+    start_x = int(w * 0.35)
+    end_x = int(w * 0.65)
+    start_y = int(h * 0.35)
+    end_y = int(h * 0.65)
+
+    # 가운데 30% 영역 설정
+    roi = image[start_y:end_y, start_x:end_x]
 
     # ROI 크기 조정 (옵션, 필요에 따라)
     roi = cv2.resize(roi, (100, 100))
@@ -78,15 +87,15 @@ def get_color_properties(image_path, roi_coords):
 
     return color_properties, color_name
 
-if __name__ == "__main__":
-    # 이미지 경로 설정
-    image_path = "./checkImage.png"
-
-    # ROI 좌표 설정 (x, y, width, height)
-    roi_coords = (50, 50, 200, 200)  # 예시 좌표, 이미지에 맞게 조절
-
-    # 색상 속성 추출 함수 호출 및 결과 배열 반환
-    color_properties, color_name = get_color_properties(image_path, roi_coords)
-    if color_properties:
-        #print("Color Properties Array:", color_properties)
-        print("Detected Color Name:", color_name)
+#if __name__ == "__main__":
+#    # 이미지 경로 설정
+#    image_path = "../captured_image.jpg"
+#
+#    # ROI 좌표 설정 (x, y, width, height)
+#    roi_coords = (50, 50, 200, 200)  # 예시 좌표, 이미지에 맞게 조절
+#
+#    # 색상 속성 추출 함수 호출 및 결과 배열 반환
+#    color_properties, color_name = get_color_properties(image_path)
+#    if color_properties:
+#        print("Color Properties Array:", color_properties)
+#        print("Detected Color Name:", color_name)

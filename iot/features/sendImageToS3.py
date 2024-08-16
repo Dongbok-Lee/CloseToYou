@@ -21,8 +21,15 @@ def upload_to_s3(file_name, bucket, object_name=None):
     if object_name is None:
         object_name = file_name
     try:
-        s3.upload_file(file_name, bucket, object_name)
-        print(f"File {file_name} uploaded to {bucket}/{object_name}")
+        with open(file_name, 'rb') as file_data:
+            s3.put_object(
+                Bucket=bucket,
+                Key=object_name,
+                Body=file_data,
+                ContentDisposition='inline',
+                ContentType='image/jpeg'  # 이미지 유형에 따라 이 값을 조정하세요.
+            )
+        print(f"File {file_name} uploaded to {bucket}/{object_name} with inline Content-Disposition")
     except FileNotFoundError:
         print(f"The file {file_name} was not found")
     except NoCredentialsError:
@@ -46,5 +53,5 @@ def download_from_s3(bucket, object_name, file_name=None):
         print("Credentials not available")
 
 # 예시 사용법
-upload_to_s3('image.jpg', 'closetoyoubucket', 'image.jpg')
-download_from_s3('closetoyoubucket', 'image.jpg', 'image2.jpg')
+#upload_to_s3('image.jpg', 'closetoyoubucket', 'image.jpg')
+#download_from_s3('closetoyoubucket', 'image.jpg', 'image2.jpg')
