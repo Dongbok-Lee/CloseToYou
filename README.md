@@ -89,6 +89,9 @@ CI/CD `Jenkins`
 
 [**✍️기능 명세서**](https://classic-molecule-29c.notion.site/2e3f64a5ddbf4d2c89d8837a53fa8ed9?pvs=4)
 
+# 하드웨어 결과물
+<img src="https://file.notion.so/f/f/df80fcb2-bab7-4b42-96f7-0674f0c31cbc/23d9d736-ed25-48a6-8598-edc96da39674/image.png?table=block&id=d3d3dc5a-617c-412f-b5bc-a54fbb1fd48d&spaceId=df80fcb2-bab7-4b42-96f7-0674f0c31cbc&expirationTimestamp=1723860000000&signature=cbG_uOj852qL6JaOpZPWojy30VIl069Y0OduIXWzNSE&downloadName=image.png" alt="하드웨어 결과물" height="300">
+
 # 🤖 AI 성능 지표
 ## 옷 종류 구분
 
@@ -124,4 +127,12 @@ CI/CD `Jenkins`
 <img src="https://file.notion.so/f/f/df80fcb2-bab7-4b42-96f7-0674f0c31cbc/2f15b560-1a2b-4a6e-9d11-34c860eb4938/image.png?table=block&id=e5faf201-53a1-4a95-a3c7-093a290e52fa&spaceId=df80fcb2-bab7-4b42-96f7-0674f0c31cbc&expirationTimestamp=1723860000000&signature=uhdZpEIogIm2I6R_ICSlOHh7En_3LqG51kCk0baDA-I&downloadName=image.png" alt="confusion matrix 성능 지표" width="400">
 
 
+Accuracy: 0.9310
 
+| Class | Precision | Recall | F1 Score |
+| --- | --- | --- | --- |
+| check | 0.9511 | 0.9262 | 0.9385 |
+| dot | 0.9455 | 0.9366 | 0.9410 |
+| stripe | 0.9060 | 0.8896 | 0.8977 |
+| plants | 0.7681 | 0.7257 | 0.7463 |
+| etc | 0.6406 | 0.7059 | 0.6716 |
