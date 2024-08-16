@@ -11,10 +11,10 @@ def is_solid_color(image_path, hue_threshold=10, saturation_threshold=50, value_
     # 이미지를 RGB로 변환합니다
     image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
-    # 이미지의 중심 부분 추출 (중앙의 30% 영역)
+    # 이미지의 중심 부분 추출 (중앙의 20% 영역)
     h, w, _ = image_rgb.shape
-    start_x, end_x = int(w * 0.35), int(w * 0.65)
-    start_y, end_y = int(h * 0.35), int(h * 0.65)
+    start_x, end_x = int(w * 0.45), int(w * 0.55)
+    start_y, end_y = int(h * 0.45), int(h * 0.55)
     cropped_image = image_rgb[start_y:end_y, start_x:end_x]
 
     # 이미지를 크기를 조정하여 속도 향상
@@ -54,10 +54,11 @@ def is_solid_color(image_path, hue_threshold=10, saturation_threshold=50, value_
     return is_solid_tshirt
 
 # 테스트할 이미지 경로
-image_path = "red.png"
+#image_path = "blue.png"
 
 # 결과 출력
-if is_solid_color(image_path):
-    print("이미지가 무지색입니다.")
-else:
-    print("이미지가 무지색이 아닙니다.")
+#if is_solid_color(image_path):
+#    print("이미지가 무지색입니다.")
+#else:
+#    print("이미지가 무지색이 아닙니다.")
+
