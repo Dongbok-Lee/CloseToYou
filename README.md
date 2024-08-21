@@ -90,7 +90,7 @@ CI/CD `Jenkins`
 [**✍️기능 명세서**](https://classic-molecule-29c.notion.site/2e3f64a5ddbf4d2c89d8837a53fa8ed9?pvs=4)
 
 # 하드웨어 결과물(IoT)
-<img src="readme/iot.pnt" alt="하드웨어 결과물" height="300">
+<img src="readme/iot.png" alt="하드웨어 결과물" height="300">
 
 # 🤖 AI 성능 지표
 ## 옷 종류 구분
