@@ -1,7 +1,7 @@
 # 💛 Close To You 💛
 ## 시각장애인을 위한 스마트 AI 옷장 서비스👨🏼‍🦯
 
-<img src="https://file.notion.so/f/f/df80fcb2-bab7-4b42-96f7-0674f0c31cbc/3b75b215-0d83-4538-8d19-8163d7e2488b/%EC%A0%9C%EB%AA%A9%EC%9D%84-%EC%9E%85%EB%A0%A5%ED%95%B4%EC%A3%BC%EC%84%B8%EC%9A%94_-001.png?table=block&id=c7b63e34-3f47-4511-9dae-c9f603464587&spaceId=df80fcb2-bab7-4b42-96f7-0674f0c31cbc&expirationTimestamp=1723860000000&signature=vPBOSgb68WRlNx1ub6NVvVpujmAhvd2gBBjYsWcgvV8&downloadName=%EC%A0%9C%EB%AA%A9%EC%9D%84-%EC%9E%85%EB%A0%A5%ED%95%B4%EC%A3%BC%EC%84%B8%EC%9A%94_-001.png" alt="서비스 소개 이미지" />
+<img src="readme/service_introduce.png" alt="서비스 소개 이미지" />
 
 # 👋🏻 프로젝트 소개
 
@@ -71,7 +71,7 @@ CI/CD `Jenkins`
 [**🦾백엔드 코딩 컨벤션**](https://classic-molecule-29c.notion.site/50d4e77f80b8448b894b48fb0494a628?pvs=4)
 
 # 🏗️ 시스템 아키텍쳐
-<img src="https://file.notion.so/f/f/df80fcb2-bab7-4b42-96f7-0674f0c31cbc/45a3ef43-644d-4fa7-8c8a-aeb1556f356f/image.png?table=block&id=fabb9ce3-e69e-4495-9e62-eba9ed18cd96&spaceId=df80fcb2-bab7-4b42-96f7-0674f0c31cbc&expirationTimestamp=1723860000000&signature=Md7_PKSuorL-N3cRj4ktR9SOKKEOPHQR6LBeVH3ZrUg&downloadName=image.png" alt="시스템 아키텍쳐" height="300">
+<img src="readme/system_architecture" alt="시스템 아키텍쳐" height="300">
 
 
 # 💡 기획 및 설계
@@ -89,16 +89,16 @@ CI/CD `Jenkins`
 
 [**✍️기능 명세서**](https://classic-molecule-29c.notion.site/2e3f64a5ddbf4d2c89d8837a53fa8ed9?pvs=4)
 
-# 하드웨어 결과물
-<img src="https://file.notion.so/f/f/df80fcb2-bab7-4b42-96f7-0674f0c31cbc/23d9d736-ed25-48a6-8598-edc96da39674/image.png?table=block&id=d3d3dc5a-617c-412f-b5bc-a54fbb1fd48d&spaceId=df80fcb2-bab7-4b42-96f7-0674f0c31cbc&expirationTimestamp=1723860000000&signature=cbG_uOj852qL6JaOpZPWojy30VIl069Y0OduIXWzNSE&downloadName=image.png" alt="하드웨어 결과물" height="300">
+# 하드웨어 결과물(IoT)
+<img src="readme/iot.pnt" alt="하드웨어 결과물" height="300">
 
 # 🤖 AI 성능 지표
 ## 옷 종류 구분
 
-<img src="https://file.notion.so/f/f/df80fcb2-bab7-4b42-96f7-0674f0c31cbc/d635e36a-baf0-4401-9c13-727354fb4e9f/image.png?table=block&id=deff255d-3814-448f-a856-9ab01ed92ac0&spaceId=df80fcb2-bab7-4b42-96f7-0674f0c31cbc&expirationTimestamp=1723860000000&signature=qTuI46tCr26C8Em2VvuKDZu6jqcoIjXIzgV_6NYrFl0&downloadName=image.png" alt="loss 값 기반 성능 지표" width="400">
+<img src="readme/clothes_loss.png" alt="loss 값 기반 성능 지표" width="400">
 
 
-<img src="https://file.notion.so/f/f/df80fcb2-bab7-4b42-96f7-0674f0c31cbc/fc558c20-dbc9-494e-84b0-d4db65fb0442/image.png?table=block&id=17bdd0d5-0f3d-4d7b-8011-226f16ed078e&spaceId=df80fcb2-bab7-4b42-96f7-0674f0c31cbc&expirationTimestamp=1723860000000&signature=tMlDsf4_sMyiC2SDbjyTT3HIhyFWUvW_uu4ivmiPP2I&downloadName=image.png" alt="confusion matrix 성능 지표" width="400">
+<img src="readme/clothes_matrix.png" alt="confusion matrix 성능 지표" width="400">
 
 
 **Accuracy: 0.9405**
@@ -122,9 +122,9 @@ CI/CD `Jenkins`
 
 ## 옷 패턴 구분
 
-<img src="https://file.notion.so/f/f/df80fcb2-bab7-4b42-96f7-0674f0c31cbc/cedb48c1-008b-4f5f-b358-1a213584d1d1/image.png?table=block&id=18407f7d-f75f-46cc-83cc-9342c2da5ea9&spaceId=df80fcb2-bab7-4b42-96f7-0674f0c31cbc&expirationTimestamp=1723860000000&signature=C8TYcJQ_TPV81XAUfs0gKF-CxcZsPLROvp6oOW3-hGI&downloadName=image.png" alt="loss 값 기반 성능 지표" width="400">
+<img src="readme/pattern_loss.png" alt="loss 값 기반 성능 지표" width="400">
 
-<img src="https://file.notion.so/f/f/df80fcb2-bab7-4b42-96f7-0674f0c31cbc/2f15b560-1a2b-4a6e-9d11-34c860eb4938/image.png?table=block&id=e5faf201-53a1-4a95-a3c7-093a290e52fa&spaceId=df80fcb2-bab7-4b42-96f7-0674f0c31cbc&expirationTimestamp=1723860000000&signature=uhdZpEIogIm2I6R_ICSlOHh7En_3LqG51kCk0baDA-I&downloadName=image.png" alt="confusion matrix 성능 지표" width="400">
+<img src="readme/pattern_matrix.png" alt="confusion matrix 성능 지표" width="400">
 
 
 Accuracy: 0.9310
